@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/views/shop/shop_add_new_product_view.dart';
+
 import '/views/auth/forget_password_email_view.dart';
 import '/views/auth/forget_password_reset_view.dart';
 import '/views/auth/login_view.dart';
@@ -74,6 +76,7 @@ class AppRoutes {
   static const String shopProductDetails = '/shopProductDetails';
   static const String shopCart = '/shopCart';
   static const String shopOrders = '/orders';
+  static const String shopAddNewProduct = '/shopAddNewProduct';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -196,6 +199,10 @@ class AppRoutes {
     GetPage(
       name: shopCart,
       page: () => const ShopCartView(),
+    ),
+    GetPage(
+      name: shopAddNewProduct,
+      page: () => const ShopAddNewProductView(),
     ),
 
     // Edit Client Profile
