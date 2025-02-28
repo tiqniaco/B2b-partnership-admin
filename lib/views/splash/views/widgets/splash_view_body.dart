@@ -47,7 +47,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   Future<void> _navigateToNext() async {
     Future.delayed(kSplashDuration, () {
       if (Get.find<AppPreferences>().getUserRole() == "client") {
-        Get.offNamed(AppRoutes.clientHomeLayout);
+        Get.offNamed(AppRoutes.adminHomeLayout);
       } else if (Get.find<AppPreferences>().getUserRole() == "provider") {
         Get.offNamed(AppRoutes.providerHomeLayout);
       } else {

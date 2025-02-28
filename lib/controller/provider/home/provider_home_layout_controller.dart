@@ -1,4 +1,4 @@
-import '/controller/home/home_client_controller.dart';
+import '../../home/admin_home_controller.dart';
 import '/controller/settings/setting_controller.dart';
 import '/views/provider_app/home/provider_home_view.dart';
 import '/views/provider_app/posts/get_service_request.dart';
@@ -67,7 +67,7 @@ class ProviderHomeLayoutController extends GetxController {
   @override
   Future<void> onInit() async {
     await Get.put(SettingController()).getMenuModel().then((value) {
-      Get.put(HomeClientController()).update();
+      Get.put(AdminHomeController()).update();
     });
     convexController.addListener(() {
       onBNavPressed(convexController.index);

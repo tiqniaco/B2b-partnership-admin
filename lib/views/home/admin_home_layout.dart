@@ -4,23 +4,23 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import '/controller/home/home_client_layout_controller.dart';
+import '../../controller/home/admin_home_layout_controller.dart';
 import '/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ClientHomeLayout extends StatefulWidget {
-  const ClientHomeLayout({super.key});
+class AdminHomeLayout extends StatefulWidget {
+  const AdminHomeLayout({super.key});
 
   @override
-  State<ClientHomeLayout> createState() => _ClientHomeLayoutState();
+  State<AdminHomeLayout> createState() => _AdminHomeLayoutState();
 }
 
-class _ClientHomeLayoutState extends State<ClientHomeLayout>
+class _AdminHomeLayoutState extends State<AdminHomeLayout>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeClintLayoutController>(
-      init: HomeClintLayoutController(this),
+    return GetBuilder<AdminHomeLayoutController>(
+      init: AdminHomeLayoutController(this),
       builder: (controller) => Scaffold(
         backgroundColor: backgroundColor,
         body: TabBarView(

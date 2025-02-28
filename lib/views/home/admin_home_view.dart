@@ -1,6 +1,6 @@
 import '/app_routes.dart';
-import '/controller/home/home_client_controller.dart';
-import '/controller/home/home_client_layout_controller.dart';
+import '../../controller/home/admin_home_controller.dart';
+import '../../controller/home/admin_home_layout_controller.dart';
 import '/controller/settings/setting_controller.dart';
 import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
@@ -17,21 +17,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ClientHomeView extends StatefulWidget {
-  const ClientHomeView({super.key});
+class AdminHomeView extends StatefulWidget {
+  const AdminHomeView({super.key});
 
   @override
-  State<ClientHomeView> createState() => _ClientHomeViewState();
+  State<AdminHomeView> createState() => _AdminHomeViewState();
 }
 
-class _ClientHomeViewState extends State<ClientHomeView>
+class _AdminHomeViewState extends State<AdminHomeView>
     with TickerProviderStateMixin {
   final settingController = Get.put(SettingController());
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeClientController());
-    return GetBuilder<HomeClientController>(
-      builder: (HomeClientController controller) {
+    Get.put(AdminHomeController());
+    return GetBuilder<AdminHomeController>(
+      builder: (AdminHomeController controller) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: whiteColor,
@@ -77,7 +77,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SearchWidget(
                   onTap: () {
-                    Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
+                    Get.put(AdminHomeLayoutController(this)).onBNavPressed(2);
                   },
                 ),
               ),

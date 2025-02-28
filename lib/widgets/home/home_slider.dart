@@ -1,4 +1,4 @@
-import '/controller/home/home_client_controller.dart';
+import '../../controller/home/admin_home_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class _HomeSlidersState extends State<HomeSliders> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    Get.put(HomeClientController());
-    return GetBuilder<HomeClientController>(
+    Get.put(AdminHomeController());
+    return GetBuilder<AdminHomeController>(
       id: "slider",
       builder: (controller) {
         if (controller.banners.isEmpty) {

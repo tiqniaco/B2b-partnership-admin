@@ -12,7 +12,7 @@ import 'package:logger/logger.dart';
 
 import '../../core/enums/status_request.dart';
 
-class HomeClientController extends GetxController {
+class AdminHomeController extends GetxController {
   int currentPage = 0;
   List<BannersModel> banners = [];
   List<SpecializeModel> specializations = [];

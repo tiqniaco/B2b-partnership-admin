@@ -54,7 +54,7 @@ class ChangePasswordController extends GetxController {
         },
         (data) {
           AppSnackBars.success(message: data);
-          Get.offAllNamed(AppRoutes.clientHomeLayout);
+          Get.offAllNamed(AppRoutes.adminHomeLayout);
         },
       );
     }

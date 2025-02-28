@@ -76,11 +76,11 @@ class LoginController extends GetxController {
         Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
         Get.find<AppPreferences>().setUserRole(r['role']);
         ApiConstance.token = r['token'];
-        if (r['role'] == 'provider') {
-          Get.offAllNamed(AppRoutes.providerHomeLayout);
-        } else {
-          Get.offAllNamed(AppRoutes.clientHomeLayout);
-        }
+        // if (r['role'] == 'provider') {
+        //  Get.offAllNamed(AppRoutes.providerHomeLayout);
+        // } else {
+        Get.offAllNamed(AppRoutes.adminHomeLayout);
+        // }
 
         update();
       });

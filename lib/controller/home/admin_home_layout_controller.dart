@@ -1,6 +1,6 @@
-import '/controller/home/home_client_controller.dart';
+import 'admin_home_controller.dart';
 import '/controller/settings/setting_controller.dart';
-import '/views/home/client_home_view.dart';
+import '../../views/home/admin_home_view.dart';
 import '/views/orders/orders_view.dart';
 import '/views/save/save_view.dart';
 import '/views/search/search_view.dart';
@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import '/core/localization/app_strings.dart';
 import 'package:get/get.dart';
 
-class HomeClintLayoutController extends GetxController {
+class AdminHomeLayoutController extends GetxController {
   late TabController convexController;
 
-  HomeClintLayoutController(
+  AdminHomeLayoutController(
     TickerProvider vsync,
   ) : convexController = TabController(
           length: 5,
@@ -52,7 +52,7 @@ class HomeClintLayoutController extends GetxController {
   ];
 
   final screens = [
-    ClientHomeView(),
+    AdminHomeView(),
     const OrdersView(),
     const SearchView(),
     const SaveView(),
@@ -67,7 +67,7 @@ class HomeClintLayoutController extends GetxController {
   @override
   Future<void> onInit() async {
     await Get.put(SettingController()).getMenuModel().then((value) {
-      Get.put(HomeClientController()).update();
+      Get.put(AdminHomeController()).update();
     });
     convexController.addListener(() {
       onBNavPressed(convexController.index);
