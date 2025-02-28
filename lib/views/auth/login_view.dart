@@ -113,19 +113,19 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                         Gap(0.02.sh),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have account?".tr,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            Gap(5.w),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     Text(
+                        //       "Don't have account?".tr,
+                        //       style: TextStyle(
+                        //         fontSize: 12.sp,
+                        //         color: Colors.black54,
+                        //       ),
+                        //     ),
+                        //     Gap(5.w),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

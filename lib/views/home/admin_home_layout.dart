@@ -40,50 +40,60 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
           curveSize: 140,
           items: [
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/home.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 0
-                      ? primaryColor
-                      : unSelectedBNavColor),
+              icon: SvgPicture.asset(
+                "assets/svgs/home.svg",
+                height: 20.sp,
+                color: controller.currentIndex == 0
+                    ? primaryColor
+                    : unSelectedBNavColor,
+              ),
               title: "Home",
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/bag2.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 1
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Orders",
+              icon: SvgPicture.asset(
+                "assets/svgs/cart.svg",
+                height: 20.sp,
+                color: controller.currentIndex == 1
+                    ? primaryColor
+                    : unSelectedBNavColor,
+              ),
+              title: "Shop",
             ),
             TabItem(
               icon: Container(
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: primaryColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 6.0, right: 7),
-                    child: SvgPicture.asset("assets/svgs/search.svg",
-                        height: 20.sp, color: Colors.white),
-                  ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: primaryColor,
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                ),
+                child: SvgPicture.asset(
+                  "assets/svgs/report.svg",
+                  height: 12.sp,
+                  color: Colors.white,
                 ),
               ),
-              title: "Search",
+              title: "Report",
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/save.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 3
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Saved",
+              icon: SvgPicture.asset(
+                "assets/svgs/users.svg",
+                height: 20.sp,
+                color: controller.currentIndex == 3
+                    ? primaryColor
+                    : unSelectedBNavColor,
+              ),
+              title: "Users",
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/setting.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 4
-                      ? primaryColor
-                      : unSelectedBNavColor),
+              icon: SvgPicture.asset(
+                "assets/svgs/setting.svg",
+                height: 20.sp,
+                color: controller.currentIndex == 4
+                    ? primaryColor
+                    : unSelectedBNavColor,
+              ),
               title: "Menu",
             ),
           ],
