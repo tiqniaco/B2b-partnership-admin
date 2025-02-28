@@ -1,0 +1,105 @@
+name: b2b_partnership_admin
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_rating_bar: ^4.0.1
+  badges: ^3.1.2
+  cached_network_image: ^3.4.1
+  carousel_slider: ^5.0.0
+  equatable: ^2.0.7
+  firebase_auth: ^5.4.1
+  firebase_core: ^3.10.1
+  firebase_messaging: ^15.2.1
+  flutter_launcher_icons: ^0.14.3
+  flutter_local_notifications: ^18.0.1
+  flutter_native_splash: ^2.4.4
+  flutter_otp_text_field: ^1.4.0+2
+  flutter_pannable_rating_bar: ^2.7.2+1
+  flutter_screenutil: ^5.9.3
+  font_awesome_flutter: ^10.8.0
+  gap: ^3.0.1
+  get: ^4.6.6
+  google_sign_in: ^6.2.2
+  http: ^1.3.0
+  image_picker: ^1.1.2
+  file_picker: ^8.1.7
+  intl: ^0.19.0
+  intl_phone_field: ^3.2.0
+  lottie: ^3.3.1
+  permission_handler: ^11.3.1
+  rename: ^3.0.2
+  smooth_page_indicator: ^1.2.0+3
+  shared_preferences: ^2.4.0
+  url_launcher: ^6.3.1
+  dio: ^5.7.0
+  dartz: ^0.10.1
+  awesome_notifications: ^0.10.0
+  timeago: ^3.2.2
+  connectivity_plus: ^6.1.2
+  googleapis_auth: ^1.6.0
+  easy_loading_button: ^0.3.2
+  timezone: ^0.10.0
+  logger: ^2.5.0
+  skeletonizer: ^1.4.3
+  flutter_svg: ^2.0.17
+  flutter_cached_pdfview: ^0.4.3
+  convex_bottom_bar: ^3.2.0
+  readmore: ^3.0.0
+  widget_zoom: ^0.0.4
+  avatar_glow: ^3.0.1
+  audioplayers: ^6.2.0
+  flutter_sound: ^9.23.1
+  record: ^5.2.1
+  path_provider: ^2.1.5
+  flutter_staggered_grid_view: ^0.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svgs/
+    - assets/lottie/
+    # - assets/fonts/Cairo-Regular.ttf
+
+  fonts:
+    - family: Ibm
+      fonts:
+       - asset: assets/fonts/ibm_plex_sans_arabic_bold.ttf
+         weight: 700
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_semi_bold.ttf
+         weight: 600
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_medium.ttf
+         weight: 500
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_regular.ttf
+         weight: 400
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_light.ttf
+         weight: 300
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_extra_light.ttf
+         weight: 200
+
+       - asset: assets/fonts/ibm_plex_sans_arabic_thin.ttf
+         weight: 100
