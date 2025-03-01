@@ -34,6 +34,7 @@ import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/provider_app/setting/provider_contacts/provider_contacts_view.dart';
 import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
+import 'views/shop/shop_edit_product_view.dart';
 import 'views/shop/shop_product_details_view.dart';
 
 class AppRoutes {
@@ -77,6 +78,7 @@ class AppRoutes {
   static const String shopCart = '/shopCart';
   static const String shopOrders = '/orders';
   static const String shopAddNewProduct = '/shopAddNewProduct';
+  static const String shopEditProduct = '/shopEditProduct';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -203,6 +205,10 @@ class AppRoutes {
     GetPage(
       name: shopAddNewProduct,
       page: () => const ShopAddNewProductView(),
+    ),
+    GetPage(
+      name: shopEditProduct,
+      page: () => const ShopEditProductView(),
     ),
 
     // Edit Client Profile

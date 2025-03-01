@@ -1,6 +1,7 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '/controller/shop/shop_product_details_controller.dart';
 import '/core/functions/translate_database.dart';
-import '/core/global/widgets/custom_loading_button.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
 import '/core/utils/font_manager.dart';
@@ -19,23 +20,28 @@ class ShopProductDetailsView extends StatelessWidget {
     return GetBuilder<ShopProductDetailsController>(
       init: ShopProductDetailsController(),
       builder: (ShopProductDetailsController controller) => Scaffold(
-        appBar: AppBar(),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 15.w,
-            vertical: 10.h,
-          ),
-          height: 0.1.sh,
-          child: Column(
-            children: [
-              CustomLoadingButton(
-                onPressed: () {
-                  return controller.addToCart();
-                },
-                text: "Add To Cart".tr,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(
+                FontAwesomeIcons.trashCan,
+                size: 16.sp,
+                color: redColor,
               ),
-            ],
-          ),
+              onPressed: () {
+                controller.deleteProductDialog();
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                FontAwesomeIcons.pen,
+                size: 16.sp,
+              ),
+              onPressed: () {
+                controller.editProduct();
+              },
+            ),
+          ],
         ),
         body: SafeArea(
           child: SizedBox(
@@ -47,6 +53,14 @@ class ShopProductDetailsView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (controller.isLoading)
+                    FractionallySizedBox(
+                      widthFactor: 1.1,
+                      child: LinearProgressIndicator(
+                        color: primaryColor,
+                        backgroundColor: unSelectedBNavColor,
+                      ),
+                    ),
                   FractionallySizedBox(
                     widthFactor: 1.1,
                     child: Stack(
