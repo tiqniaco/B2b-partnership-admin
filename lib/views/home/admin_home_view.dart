@@ -1,15 +1,8 @@
-import '/app_routes.dart';
-import '../../controller/home/admin_home_controller.dart';
-import '../../controller/home/admin_home_layout_controller.dart';
+import 'package:b2b_partnership_admin/app_routes.dart';
+import 'package:b2b_partnership_admin/controller/home/admin_home_controller.dart';
+
 import '/controller/settings/setting_controller.dart';
-import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
-import '/widgets/home/banner_widget.dart';
-import '/widgets/home/category_widget.dart';
-import '/widgets/home/home_row_widget.dart';
-import '/widgets/home/home_slider.dart';
-import '/widgets/home/provider_widget.dart';
-import '/widgets/home/search_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,224 +65,43 @@ class _AdminHomeViewState extends State<AdminHomeView>
           ),
           body: ListView(
             children: [
-              Gap(25),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: SearchWidget(
-                  onTap: () {
-                    Get.put(AdminHomeLayoutController(this)).onBNavPressed(2);
-                  },
-                ),
-              ),
-              Gap(5),
+              Gap(10.h),
               FractionallySizedBox(
                 widthFactor: 1,
-                child: Divider(),
-              ),
-              Gap(10),
-              CustomServerStatusWidget(
-                  statusRequest: controller.statusRequestBanner,
-                  child: HomeSliders()),
-              Gap(25),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: HomeRowWidget(
-                  title: "Browse categories",
-                  onTap: () {
-                    Get.toNamed(AppRoutes.seeAllCategories,
-                        arguments: {"categories": controller.specializations});
-                  },
+                child: Divider(
+                  thickness: 1,
                 ),
               ),
-              Gap(18),
-              SizedBox(
-                  height: 120.h,
-                  child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestSpecialization,
-                    child: CategoryWidget(
-                        specializations: controller.specializations),
-                  )),
-              Gap(30),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Divider(),
+              Gap(10.h),
+              GridView(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 7 / 6.5),
+                children: [
+                  blockWidget(Colors.orange, "Categories", Icons.category, () {
+                    Get.toNamed(AppRoutes.manageCategory);
+                  }),
+                  blockWidget(Colors.indigo, "Provider Types",
+                      CupertinoIcons.person_2_fill, () {
+                    Get.toNamed(AppRoutes.manageProviderTypes);
+                  }),
+                  blockWidget(Colors.teal, "Locations", CupertinoIcons.map_fill,
+                      () {
+                    Get.toNamed(AppRoutes.manageLocations);
+                  }),
+                  blockWidget(Colors.brown, "Products",
+                      CupertinoIcons.cart_fill, () {}),
+                  blockWidget(
+                      Colors.pink, "Services", CupertinoIcons.cart_fill, () {}),
+                  blockWidget(Colors.cyan, "Categories",
+                      CupertinoIcons.cart_fill, () {})
+                ],
               ),
-              Gap(20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: HomeRowWidget(
-                  title: "Top Rated Providers",
-                  onTap: () {
-                    Get.toNamed(AppRoutes.seeAll, arguments: {
-                      "providers": controller.topProviders,
-                      "title": "Top Rated Provider"
-                    });
-                  },
-                ),
-              ),
-              Gap(10),
-              SizedBox(
-                  height: 235.h,
-                  child: CustomServerStatusWidget(
-                      statusRequest: controller.statusRequestProviders,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: controller.topProviders.length,
-                        separatorBuilder: (context, index) => Gap(20),
-                        itemBuilder: (context, index) => ProviderWidget(
-                          provider: controller.topProviders[index],
-                          toggleFavorite: () {
-                            controller.toggleFavorites(
-                                controller.topProviders[index].providerId!);
-                          },
-                        ),
-                      ))),
-              Gap(10),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Divider(),
-              ),
-              Gap(25),
-              BannerWidget(
-                image: "assets/images/man.jpeg",
-                title: "Need Custom Service?",
-                onPressed: () {
-                  Get.toNamed(AppRoutes.getRequestServices);
-                },
-                description: "you can post your custom services\nrequest",
-                buttonTitle: 'Post Now',
-              ),
-              // ServiceBannerWidget(),
-              Gap(15),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Divider(),
-              ),
-              Gap(45),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: HomeRowWidget(
-                  title: "Egypt Top Rated",
-                  onTap: () {
-                    Get.toNamed(AppRoutes.seeAll, arguments: {
-                      "providers": controller.topEgypt,
-                      "title": "Egypt Top Rated"
-                    });
-                  },
-                ),
-              ),
-              Gap(15),
-              SizedBox(
-                  height: 235.h,
-                  child: CustomServerStatusWidget(
-                      statusRequest: controller.statusRequestProviders,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: controller.topEgypt.length,
-                        separatorBuilder: (context, index) => Gap(20),
-                        itemBuilder: (context, index) => ProviderWidget(
-                          provider: controller.topEgypt[index],
-                          toggleFavorite: () {
-                            controller.toggleFavorites(
-                                controller.topEgypt[index].providerId!);
-                          },
-                        ),
-                      ))),
-              Gap(15),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Divider(),
-              ),
-              Gap(25),
-              BannerWidget(
-                image: "assets/images/job.jpeg",
-                title: "Are you looking for a job?",
-                onPressed: () {
-                  Get.toNamed(AppRoutes.getRequestServices);
-                },
-                description: "See our Employment\nopportunities",
-                buttonTitle: 'View Now',
-              ),
-              //JobBannerWidget(),
-              Gap(55),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: HomeRowWidget(
-                  title: "Saudi Arabia Top Rated",
-                  onTap: () {
-                    Get.toNamed(AppRoutes.seeAll, arguments: {
-                      "providers": controller.topSaudi,
-                      "title": "Saudi Arabia Top Rated"
-                    });
-                  },
-                ),
-              ),
-              Gap(20),
-              SizedBox(
-                  height: 235.h,
-                  child: CustomServerStatusWidget(
-                      statusRequest: controller.statusRequestProviders,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: controller.topSaudi.length,
-                        separatorBuilder: (context, index) => Gap(20),
-                        itemBuilder: (context, index) => ProviderWidget(
-                          provider: controller.topSaudi[index],
-                          toggleFavorite: () {
-                            controller.toggleFavorites(
-                                controller.topSaudi[index].providerId!);
-                          },
-                        ),
-                      ))),
-              Gap(35),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Divider(),
-              ),
-              Gap(25),
-              BannerWidget(
-                image: "assets/images/product.jpeg",
-                title: "Shopping?",
-                onPressed: () {
-                  Get.toNamed(AppRoutes.shop);
-                },
-                description: "Order whatever you need\nfrom the shop",
-                buttonTitle: 'Order Now',
-              ),
-              Gap(45),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: HomeRowWidget(
-                  title: "UAE Top Rated",
-                  onTap: () {
-                    Get.toNamed(AppRoutes.seeAll, arguments: {
-                      "providers": controller.topUAE,
-                      "title": "UAE Top Rated"
-                    });
-                  },
-                ),
-              ),
-              Gap(20),
-              SizedBox(
-                  height: 235.h,
-                  child: CustomServerStatusWidget(
-                      statusRequest: controller.statusRequestProviders,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: controller.topUAE.length,
-                        separatorBuilder: (context, index) => Gap(20),
-                        itemBuilder: (context, index) => ProviderWidget(
-                            provider: controller.topUAE[index],
-                            toggleFavorite: () {
-                              controller.toggleFavorites(
-                                  controller.topUAE[index].providerId!);
-                            }),
-                      ))),
-
               Gap(50)
             ],
           ),
@@ -298,35 +110,47 @@ class _AdminHomeViewState extends State<AdminHomeView>
     );
   }
 
-  containerWidget(Color bgColor, String title) {
-    return Container(
-      height: 130.h,
-      width: 94.h,
-      decoration: BoxDecoration(
-          color: bgColor, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration:
-                BoxDecoration(color: whiteColor, shape: BoxShape.circle),
-            child: Image.asset(
-              "assets/images/job.png",
-              height: 50.h,
-              width: 50.h,
-            ),
+  Widget blockWidget(
+      Color color, String title, IconData icon, Function() onTap) {
+    {
+      return InkWell(
+        onTap: onTap,
+        child: Container(
+          width: 100.h,
+          height: 120.h,
+          padding: EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: color.withAlpha(60),
+            borderRadius: BorderRadius.circular(12),
+            // border: Border.all(color: Colors.grey.withAlpha(80)),
           ),
-          Gap(10),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12.sp,
-              color: blackColor,
-            ),
-          )
-        ],
-      ),
-    );
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    // border: Border.all(color: primaryColor, width: 0.5),
+                    // color: pageColor.withAlpha(60),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: color,
+                    size: 27.sp,
+                  )),
+              Gap(8),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

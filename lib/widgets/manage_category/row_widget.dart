@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class HomeRowWidget extends StatelessWidget {
-  const HomeRowWidget({super.key, required this.title, required this.onTap});
+class RowWidget extends StatelessWidget {
+  const RowWidget({super.key, required this.title, required this.onTap});
   final String title;
   final void Function() onTap;
   @override
@@ -22,17 +22,19 @@ class HomeRowWidget extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "See all",
+                "add more",
                 style: TextStyle(
-                    color: primaryColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.sp),
+                    decoration: TextDecoration.underline,
+                    decorationColor: greyColor,
+                    color: greyColor,
+                    //fontWeight: FontWeight.w500,
+                    fontSize: 14.sp),
               ),
               Gap(10),
               Icon(
-                Icons.arrow_forward_ios,
-                size: 15.sp,
-                color: primaryColor,
+                Icons.add,
+                size: 17.sp,
+                color: greyColor,
               )
             ],
           ),

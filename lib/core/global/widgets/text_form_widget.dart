@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TextformWidget extends StatelessWidget {
-  const TextformWidget({
+class TextFormWidget extends StatelessWidget {
+  const TextFormWidget({
     super.key,
     required this.hintText,
     this.textFormController,
@@ -13,7 +13,8 @@ class TextformWidget extends StatelessWidget {
     this.enabled = true,
     this.onSubmit,
     this.maxLine,
-    //required this.labal,
+    this.contentPadding,
+    //required this.label,
   });
   final Color color;
   final String hintText;
@@ -22,6 +23,7 @@ class TextformWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final bool enabled;
+  final EdgeInsetsGeometry? contentPadding;
   final Function(String? value)? onSubmit;
   final int? maxLine;
   @override
@@ -35,6 +37,7 @@ class TextformWidget extends StatelessWidget {
         onFieldSubmitted: onSubmit,
         onChanged: onSubmit,
         decoration: InputDecoration(
+          contentPadding: contentPadding,
           label: Text(
             hintText,
             style: TextStyle(fontSize: 14.sp),

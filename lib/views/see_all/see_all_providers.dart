@@ -1,6 +1,6 @@
 import '/controller/see_all/see_all_controller.dart';
 import '/core/theme/app_color.dart';
-import '/widgets/home/provider_widget.dart';
+import '../../widgets/manage_category/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
