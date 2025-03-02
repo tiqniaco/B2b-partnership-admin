@@ -8,6 +8,13 @@ enum StoreOrderStatusEnum {
   canceled,
 }
 
+enum StoreOrderStatusWithoutAllEnum {
+  pending,
+  approved,
+  completed,
+  canceled,
+}
+
 extension StoreOrderStatusEnumExtension on StoreOrderStatusEnum {
   String get value {
     switch (this) {
@@ -37,6 +44,21 @@ extension StoreOrderStatusEnumView on StoreOrderStatusEnum {
       case StoreOrderStatusEnum.completed:
         return 'Completed'.tr;
       case StoreOrderStatusEnum.canceled:
+        return 'Cancelled'.tr;
+    }
+  }
+}
+
+extension StoreOrderStatusWithoutAllText on StoreOrderStatusWithoutAllEnum {
+  String get text {
+    switch (this) {
+      case StoreOrderStatusWithoutAllEnum.pending:
+        return 'Pending'.tr;
+      case StoreOrderStatusWithoutAllEnum.approved:
+        return 'Approved'.tr;
+      case StoreOrderStatusWithoutAllEnum.completed:
+        return 'Completed'.tr;
+      case StoreOrderStatusWithoutAllEnum.canceled:
         return 'Cancelled'.tr;
     }
   }

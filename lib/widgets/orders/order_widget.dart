@@ -1,8 +1,9 @@
+import 'package:b2b_partnership_admin/core/theme/text_style.dart';
+
 import '/app_routes.dart';
 import '/core/services/date_time_convertor.dart';
 import '/core/theme/app_color.dart';
 import '/models/order_model.dart';
-import '/widgets/orders/print_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,8 +63,22 @@ class OrderWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  PrintType(
-                    type: orderModel.status,
+                  Container(
+                    height: 27.h,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Get.context!.isTablet ? 6.w : 10.w),
+                    decoration: BoxDecoration(
+                        color: pageColor.withAlpha(80),
+                        borderRadius: BorderRadius.circular(30)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      orderModel.status.capitalizeFirst ?? "",
+                      style: getLightStyle.copyWith(
+                        fontSize: Get.context!.isTablet ? 7.5.sp : null,
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   // IconButton(
                   //   onPressed: () {},
@@ -83,9 +98,11 @@ class OrderWidget extends StatelessWidget {
                   Gap(10),
                   rowWidget(
                     "Date",
-                    DateTimeConvertor.formatDate(
-                      orderModel.createdAt,
-                    ),
+                    orderModel.createdAt == "null"
+                        ? "Invalid Date"
+                        : DateTimeConvertor.formatDate(
+                            orderModel.createdAt,
+                          ),
                     CupertinoIcons.calendar,
                   ),
                   Gap(10),
@@ -95,9 +112,11 @@ class OrderWidget extends StatelessWidget {
                   Gap(10),
                   rowWidget(
                     "Expiry Date",
-                    DateTimeConvertor.formatDate(
-                      orderModel.expirationDate,
-                    ),
+                    orderModel.expirationDate == "null"
+                        ? "Invalid Date"
+                        : DateTimeConvertor.formatDate(
+                            orderModel.expirationDate,
+                          ),
                     CupertinoIcons.clock,
                   ),
                   Gap(10),

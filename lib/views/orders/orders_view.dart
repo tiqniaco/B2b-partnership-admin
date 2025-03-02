@@ -20,7 +20,7 @@ class OrdersView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: whiteColor,
               // automaticallyImplyLeading: false,
-              title: Text("My Orders"),
+              title: Text("All Orders"),
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(
@@ -28,6 +28,7 @@ class OrdersView extends StatelessWidget {
                 vertical: 10.h,
               ),
               child: CustomScrollView(
+                controller: controller.scrollController,
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(

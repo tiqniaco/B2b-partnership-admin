@@ -68,7 +68,7 @@ class ShopView extends StatelessWidget {
                 child: IconButton(
                   tooltip: "Orders".tr,
                   onPressed: () {
-                    Get.toNamed(AppRoutes.shopCart);
+                    Get.toNamed(AppRoutes.shopOrders);
                   },
                   icon: SvgPicture.asset(
                     'assets/svgs/bag2.svg',
