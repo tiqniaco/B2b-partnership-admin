@@ -40,7 +40,7 @@ class ShopEditCategoryController extends GetxController {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
       final result = await CustomRequest<String>(
-        path: ApiConstance.updateCategory(model?.id.toString() ?? ''),
+        path: ApiConstance.updateShopCategory(model?.id.toString() ?? ''),
         data: {
           'name_ar': nameArController.text,
           'name_en': nameEnController.text,

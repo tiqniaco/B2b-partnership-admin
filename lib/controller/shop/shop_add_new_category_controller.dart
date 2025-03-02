@@ -36,7 +36,7 @@ class ShopAddNewCategoryController extends GetxController {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
       final result = await CustomRequest<String>(
-        path: ApiConstance.addCategory,
+        path: ApiConstance.addShopCategory,
         data: {
           'name_ar': nameArController.text,
           'name_en': nameEnController.text,

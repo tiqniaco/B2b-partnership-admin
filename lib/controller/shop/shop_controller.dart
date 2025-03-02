@@ -142,7 +142,9 @@ class ShopController extends GetxController {
 
   Future<void> _deleteCategory(int index) async {
     final result = await CustomRequest<String>(
-      path: ApiConstance.deleteCategory(shopCategories[index].id),
+      path: ApiConstance.deleteShopCategory(
+        shopCategories[index].id.toString(),
+      ),
       fromJson: (json) => json['message'],
     ).sendDeleteRequest();
     result.fold(
