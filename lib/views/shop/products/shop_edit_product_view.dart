@@ -53,19 +53,23 @@ class ShopEditProductView extends StatelessWidget {
                                 border: Border.all(color: greyColor),
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.w,
+                                vertical: 10.h,
+                              ),
                               child: controller.image == null
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.network(
                                         controller.productModel!.image,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                       ),
                                     )
                                   : ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.file(
                                         controller.image!,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                             ),

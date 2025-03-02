@@ -34,7 +34,7 @@ class ShopProductDetailsView extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(
-                FontAwesomeIcons.pen,
+                FontAwesomeIcons.penToSquare,
                 size: 16.sp,
               ),
               onPressed: () {
