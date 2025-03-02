@@ -1,3 +1,6 @@
+import 'package:b2b_partnership_admin/views/manage_categories/manage_categories_view.dart';
+import 'package:b2b_partnership_admin/views/manage_location/manage_location_view.dart';
+import 'package:b2b_partnership_admin/views/manage_provider_typies/manage_provider_types_view.dart';
 import 'package:b2b_partnership_admin/views/shop/shop_add_new_product_view.dart';
 
 import '/views/auth/forget_password_email_view.dart';
@@ -7,12 +10,11 @@ import '/views/auth/o_t_p_view.dart';
 import 'views/home/admin_home_layout.dart';
 import 'views/home/admin_home_view.dart';
 import '/views/orders/orders_view.dart';
-import '/views/provider_app/home/provider_home_layout.dart';
-import '/views/provider_app/home/provider_home_view.dart';
+// import '/views/provider_app/home/provider_home_layout.dart';
+// import '/views/provider_app/home/provider_home_view.dart';
 import '/views/provider_profile/previous_work_view.dart';
 import '/views/provider_profile/provider_profile_view.dart';
 import '/views/see_all/see_all_categories.dart';
-import '/views/see_all/see_all_providers.dart';
 import '/views/service_details_view.dart';
 import '/views/in_category/providers_in_categories.dart';
 import '/views/service_request/add_service_request.dart';
@@ -57,6 +59,11 @@ class AppRoutes {
   static const String adminHomeLayout = '/clientHomeLayout';
   static const String seeAll = '/seeAll';
   static const String seeAllCategories = '/seeAllCategories';
+
+  //admin
+  static const String manageCategory = '/manageCategory';
+  static const String manageProviderTypes = '/manageProviderTypes';
+  static const String manageLocations = '/manageLocations';
 
   //service request
   static const String addServicesRequest = '/addServicesRequest';
@@ -132,21 +139,29 @@ class AppRoutes {
       name: clintHome,
       page: () => AdminHomeView(),
     ),
-    GetPage(
-      name: providerHomeView,
-      page: () => const ProviderHomeView(),
-    ),
-    GetPage(
-      name: providerHomeLayout,
-      page: () => const ProviderHomeLayout(),
-    ),
+    // GetPage(
+    //   name: providerHomeView,
+    //   page: () =>  ProviderHomeView(),
+    // ),
+    // GetPage(
+    //   name: providerHomeLayout,
+    //   page: () =>  ProviderHomeLayout(),
+    // ),
     GetPage(
       name: adminHomeLayout,
       page: () => const AdminHomeLayout(),
     ),
     GetPage(
-      name: seeAll,
-      page: () => const SeeAll(),
+      name: manageCategory,
+      page: () => const ManageCategoriesView(),
+    ),
+    GetPage(
+      name: manageLocations,
+      page: () => const ManageLocationView(),
+    ),
+    GetPage(
+      name: manageProviderTypes,
+      page: () => const ManageProviderTypesView(),
     ),
     GetPage(
       name: seeAllCategories,

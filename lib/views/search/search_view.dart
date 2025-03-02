@@ -1,7 +1,7 @@
 import '/controller/search/search_controller.dart';
 import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
-import '/widgets/home/provider_widget.dart';
+import '../../widgets/manage_category/provider_widget.dart';
 import '/widgets/search/select_city_filter.dart';
 import '/widgets/search/select_country_filter.dart';
 import '/widgets/search/select_specialization_filter.dart';

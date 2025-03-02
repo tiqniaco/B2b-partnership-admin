@@ -6,11 +6,6 @@ class ApiConstance {
   static String token = '';
 
   // global
-  static String countries = 'countries';
-  static String cities = 'governments';
-  static String getProviderTypes = 'provider-types';
-  static String getSpecialization = 'specializations';
-  static String getSupSpecialization = 'sub-specializations';
 
   /// Auth
   static const String login = 'auth/login';
@@ -38,6 +33,40 @@ class ApiConstance {
   static const String getNewServices = 'home/new-services';
   static const String getJobs = 'home/new-jobs';
   static const String search = 'specializations/providers';
+
+  ///  -------------------------------admin-----------------------------
+
+  //-categories
+  static String getSpecialization = 'specializations';
+  static const String addCategory = 'specializations';
+  static String editCategory(int id) => 'specializations/$id/update';
+  static String deleteCategory(int id) => 'specializations/$id';
+
+  //- sub categories
+  static String getSupSpecialization = 'sub-specializations';
+  static const String addSubCategory = 'sub-specializations';
+  static String editSubCategory(String id) => 'sub-specializations/$id/update';
+  static String deleteSubCategory(int id) => 'sub-specializations/$id';
+
+  //- providers types
+  static String getProviderTypes = 'provider-types';
+  static const String addProviderTypes = 'provider-types';
+  static String editProviderTypes(int id) => 'provider-types/$id';
+  static String deleteProviderTypes(int id) => 'provider-types/$id';
+
+  //-countries
+  static String countries = 'countries';
+  static const String addCountry = 'countries';
+  static String editCountry(int id) => 'countries/$id/update';
+  static String deleteCountry(int id) => 'countries/$id';
+
+  //-cities
+  static String cities = 'governments';
+  static const String addCity = 'governments';
+  static String editCity(int id) => 'governments/$id';
+  static String deleteCity(int id) => 'governments/$id';
+
+  ///-------------------------------------------------------
 
   // service request
   static const String addServiceRequest = 'request-services';
