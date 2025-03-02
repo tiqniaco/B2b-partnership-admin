@@ -1,4 +1,4 @@
-import 'package:b2b_partnership_admin/controller/shop/shop_add_new_category_controller.dart';
+import 'package:b2b_partnership_admin/controller/shop/category/shop_add_new_category_controller.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partnership_admin/core/theme/app_color.dart';
 import 'package:flutter/material.dart';

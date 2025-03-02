@@ -1,6 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '/controller/shop/shop_product_details_controller.dart';
+import '../../../controller/shop/products/shop_product_details_controller.dart';
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
