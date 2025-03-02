@@ -1,4 +1,4 @@
-import 'package:b2b_partnership_admin/controller/shop/shop_add_new_product_controller.dart';
+import 'package:b2b_partnership_admin/controller/shop/shop_edit_product_controller.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partnership_admin/core/theme/app_color.dart';
 import 'package:b2b_partnership_admin/core/theme/text_style.dart';
@@ -10,19 +10,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ShopAddNewProductView extends StatelessWidget {
-  const ShopAddNewProductView({super.key});
+class ShopEditProductView extends StatelessWidget {
+  const ShopEditProductView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ShopAddNewProductController>(
-      init: ShopAddNewProductController(),
-      builder: (ShopAddNewProductController controller) {
+    return GetBuilder<ShopEditProductController>(
+      init: ShopEditProductController(),
+      builder: (ShopEditProductController controller) {
         return Scaffold(
             appBar: AppBar(
               backgroundColor: primaryColor,
               title: Text(
-                "Add New Product",
+                "Edit Product",
                 style: TextStyle(
                   color: whiteColor,
                 ),
@@ -54,25 +54,12 @@ class ShopAddNewProductView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: controller.image == null
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.image,
-                                          size: 40.sp,
-                                          color: greyColor,
-                                        ),
-                                        Gap(4.h),
-                                        Text("No image selected"),
-                                        Gap(4.h),
-                                        Text(
-                                          "Click to Select image",
-                                          style: TextStyle(color: greyColor),
-                                        ),
-                                      ],
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        controller.productModel!.image,
+                                        fit: BoxFit.cover,
+                                      ),
                                     )
                                   : ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
@@ -115,7 +102,7 @@ class ShopAddNewProductView extends StatelessWidget {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "Upload product",
+                                                "Change Uploaded product (optional)",
                                                 style: getLightStyle.copyWith(
                                                   color: greyColor,
                                                   fontWeight: FontManager
@@ -293,9 +280,9 @@ class ShopAddNewProductView extends StatelessWidget {
                 children: [
                   CustomLoadingButton(
                     onPressed: () {
-                      return controller.addProduct();
+                      return controller.editProduct();
                     },
-                    text: 'Add',
+                    text: 'Edit Product',
                   ),
                 ],
               ),
