@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class GetProviderPostsServiceController extends GetxController {
+  ScrollController scrollController = ScrollController();
   CountryModel? selectedCountry;
   CityModel? selectedCity;
   SpecializeModel? selectedSpecialization;
@@ -28,11 +29,23 @@ class GetProviderPostsServiceController extends GetxController {
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
 
+  int currentPage = 1;
+  int totalPages = 1;
+
   @override
   Future<void> onInit() async {
-    getServices();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        if (currentPage < totalPages) {
+          currentPage++;
+          getServices();
+        }
+      }
+    });
     await getCountries();
     await getSpecialization();
+    await getServices();
 
     super.onInit();
   }
@@ -117,8 +130,14 @@ class GetProviderPostsServiceController extends GetxController {
     update();
   }
 
-  Future<void> getServices() async {
+  Future<void> getServices({bool refresh = false}) async {
+    if (refresh) {
+      currentPage = 1;
+      totalPages = 1;
+      services.clear();
+    }
     statusRequest = StatusRequest.loading;
+    update();
     final response = await CustomRequest(
         path: ApiConstance.getAllPendingServices,
         data: {
@@ -130,6 +149,8 @@ class GetProviderPostsServiceController extends GetxController {
           if (selectedCity != null) "government_id": selectedCity!.id,
         },
         fromJson: (json) {
+          currentPage = json['current_page'];
+          totalPages = json['last_page'];
           return json['data']
               .map<ServiceRequestModel>(
                   (type) => ServiceRequestModel.fromJson(type))
@@ -141,7 +162,7 @@ class GetProviderPostsServiceController extends GetxController {
     }, (r) {
       services.clear();
       statusRequest = StatusRequest.success;
-      services = r;
+      services.addAll(r);
       if (r.isEmpty) {
         statusRequest = StatusRequest.noData;
       } else {
@@ -208,7 +229,7 @@ class GetProviderPostsServiceController extends GetxController {
     selectedCountry = null;
     selectedSpecialization = null;
     selectedSubSpecialization = null;
-    getServices();
+    getServices(refresh: true);
     update();
   }
 

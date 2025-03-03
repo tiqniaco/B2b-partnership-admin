@@ -1,6 +1,6 @@
 import '/controller/orders/order_item_controller.dart';
 import '/core/functions/translate_database.dart';
-import '/core/global/widgets/custom_loading_button.dart';
+// import '/core/global/widgets/custom_loading_button.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
 import '/core/utils/font_manager.dart';
@@ -20,26 +20,27 @@ class OrderItemView extends StatelessWidget {
       init: OrderItemController(),
       builder: (OrderItemController controller) => Scaffold(
         appBar: AppBar(),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 15.w,
-            vertical: 10.h,
-          ),
-          height: 0.1.sh,
-          child: Column(
-            children: [
-              CustomLoadingButton(
-                backgroundColor: controller.orderStatus == "completed"
-                    ? primaryColor
-                    : greyColor,
-                onPressed: () {
-                  return controller.download();
-                },
-                text: "Download".tr,
-              ),
-            ],
-          ),
-        ),
+        // bottomNavigationBar: Container(
+        //   padding: EdgeInsets.symmetric(
+        //     horizontal: 15.w,
+        //     vertical: 10.h,
+        //   ),
+        //   height: 0.1.sh,
+        //   child: Column(
+        //     children: [
+        //       CustomLoadingButton(
+        //         backgroundColor: controller.orderStatus == "completed"
+        //             ? primaryColor
+        //             : greyColor,
+        //         onPressed: () {
+        //           return controller.download();
+        //         },
+        //         text: "Download".tr,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+
         body: SafeArea(
           child: SizedBox(
             height: 1.sh,

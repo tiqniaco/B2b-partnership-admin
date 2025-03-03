@@ -146,6 +146,7 @@ class ApiConstance {
   // Complaints
   static String addComplaint = 'complaints';
   static String getComplaints = 'complaints';
+  static String getUsersComplaints = 'complaints/users';
 
   // Notifications
   static String getNotifications = 'notifications';

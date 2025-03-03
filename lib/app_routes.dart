@@ -1,3 +1,4 @@
+import 'package:b2b_partnership_admin/views/jobs/jobs_view.dart';
 import 'package:b2b_partnership_admin/views/manage_categories/manage_categories_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_admins_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_clients_view.dart';
@@ -8,6 +9,7 @@ import '/views/auth/forget_password_email_view.dart';
 import '/views/auth/forget_password_reset_view.dart';
 import '/views/auth/login_view.dart';
 import '/views/auth/o_t_p_view.dart';
+import 'views/complaints/complaints_users_view.dart';
 import 'views/home/admin_home_layout.dart';
 import '/views/orders/orders_view.dart';
 
@@ -17,6 +19,7 @@ import '/views/service_details_view.dart';
 import '/views/service_request/add_service_request.dart';
 import '/views/service_request/get_user_service_request.dart';
 import '/views/settings/change_password_view.dart';
+import 'views/posts/clients_service_request_view.dart';
 import 'views/settings/edit_admin_profile_view.dart';
 import '/views/shop/shop_cart_view.dart';
 import '/views/shop/shop_view.dart';
@@ -99,6 +102,7 @@ class AppRoutes {
 
   // Complaints
   static const String complaints = '/complaints';
+  static const String complaintsUsers = '/complaintsUsers';
 
   // Notification
   static const String notification = '/notification';
@@ -116,6 +120,9 @@ class AppRoutes {
 
 // Provider Contacts
   static const String providerContacts = '/providerContacts';
+
+  static const String clientsService = '/clientsService';
+  static const String jobs = '/jobs';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -252,6 +259,10 @@ class AppRoutes {
       name: complaints,
       page: () => const ComplaintsView(),
     ),
+    GetPage(
+      name: complaintsUsers,
+      page: () => const ComplaintsUsersView(),
+    ),
 
     // Notification
     GetPage(
@@ -271,6 +282,16 @@ class AppRoutes {
     GetPage(
       name: orderItem,
       page: () => const OrderItemView(),
+    ),
+
+    // Settings
+    GetPage(
+      name: clientsService,
+      page: () => ClientsServiceRequestView(),
+    ),
+    GetPage(
+      name: jobs,
+      page: () => JobsView(),
     ),
 
     // Edit Provider Profile

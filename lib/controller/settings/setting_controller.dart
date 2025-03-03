@@ -24,6 +24,7 @@ class SettingController extends GetxController {
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
     statusRequest = StatusRequest.loading;
+    update();
     final result = await CustomRequest<AdminMenuModel>(
       path: ApiConstance.getUserMenu(id),
       fromJson: (json) {

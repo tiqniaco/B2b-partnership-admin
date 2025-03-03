@@ -39,9 +39,11 @@ class ComplaintsController extends GetxController {
   File? pickedFile;
   String contentType = 'text';
   List<ComplaintModel> complaints = [];
+  String userId = '';
 
   @override
   void onInit() async {
+    userId = Get.arguments['userId'] ?? '';
     if (Platform.isIOS) {
       recorder = AudioRecorder();
     } else {
@@ -99,6 +101,9 @@ class ComplaintsController extends GetxController {
     }
     final result = await CustomRequest<List<ComplaintModel>>(
       path: ApiConstance.getComplaints,
+      data: {
+        if (userId.isNotEmpty) "user_id": userId,
+      },
       fromJson: (json) {
         return List<ComplaintModel>.from(
           json['data'].map(

@@ -1,10 +1,11 @@
+import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partnership_admin/widgets/request_services/price_offer_widget.dart';
+
 import '/controller/request_services/service_request_details_controller.dart';
 import '/core/constants/app_constants.dart';
 import '/core/functions/translate_database.dart';
-import '/core/global/widgets/custom_server_status_widget.dart';
-import '/core/services/app_prefs.dart';
+
 import '/core/theme/app_color.dart';
-import '/widgets/request_services/price_offer_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -160,76 +161,74 @@ class ServiceRequestDetails extends StatelessWidget {
                         ),
                       ),
                       Gap(20),
-                      Get.find<AppPreferences>().getUserRole() == "client"
-                          ? Column(
-                              children: [
-                                Text(
-                                  "Price Offers",
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Divider(),
-                                CustomServerStatusWidget(
-                                  statusRequest: controller.statusRequest,
-                                  child: ListView.separated(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) =>
-                                          PriceOfferWidget(
-                                            model:
-                                                controller.priceOffers[index],
-                                          ),
-                                      separatorBuilder: (context, index) =>
-                                          Gap(15),
-                                      itemCount: controller.priceOffers.length),
-                                )
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                SizedBox(
-                                  width: 158.w,
-                                  height: 35.h,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          padding: WidgetStatePropertyAll(
-                                              EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 5))),
-                                      onPressed: () {
-                                        controller.addPriceDialog();
-                                      },
-                                      child: Text(
-                                        "Add price offer",
-                                        style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w500),
-                                      )),
-                                ),
-                                Gap(10),
-                                CustomServerStatusWidget(
-                                  statusRequest: controller.statusRequest,
-                                  child: ListView.separated(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) =>
-                                          PriceOfferWidget(
-                                            model: controller
-                                                .providerOffers[index],
-                                          ),
-                                      separatorBuilder: (context, index) =>
-                                          Gap(15),
-                                      itemCount:
-                                          controller.providerOffers.length),
-                                )
-                              ],
-                            )
+                      // Get.find<AppPreferences>().getUserRole() == "client"
+                      //     ?
+                      Column(
+                        children: [
+                          Text(
+                            "Price Offers",
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Divider(),
+                          CustomServerStatusWidget(
+                            statusRequest: controller.statusRequest,
+                            child: ListView.separated(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) =>
+                                    PriceOfferWidget(
+                                      model: controller.priceOffers[index],
+                                    ),
+                                separatorBuilder: (context, index) => Gap(15),
+                                itemCount: controller.priceOffers.length),
+                          )
+                        ],
+                      )
+                      // : Column(
+                      //     children: [
+                      //       SizedBox(
+                      //         width: 158.w,
+                      //         height: 35.h,
+                      //         child: ElevatedButton(
+                      //             style: ButtonStyle(
+                      //                 padding: WidgetStatePropertyAll(
+                      //                     EdgeInsets.symmetric(
+                      //                         horizontal: 10,
+                      //                         vertical: 5))),
+                      //             onPressed: () {
+                      //               controller.addPriceDialog();
+                      //             },
+                      //             child: Text(
+                      //               "Add price offer",
+                      //               style: TextStyle(
+                      //                   fontSize: 15.sp,
+                      //                   fontWeight: FontWeight.w500),
+                      //             )),
+                      //       ),
+                      //       Gap(10),
+                      //       CustomServerStatusWidget(
+                      //         statusRequest: controller.statusRequest,
+                      //         child: ListView.separated(
+                      //             padding:
+                      //                 EdgeInsets.symmetric(vertical: 10),
+                      //             physics: NeverScrollableScrollPhysics(),
+                      //             shrinkWrap: true,
+                      //             itemBuilder: (context, index) =>
+                      //                 PriceOfferWidget(
+                      //                   model: controller
+                      //                       .providerOffers[index],
+                      //                 ),
+                      //             separatorBuilder: (context, index) =>
+                      //                 Gap(15),
+                      //             itemCount:
+                      //                 controller.providerOffers.length),
+                      //       )
+                      //     ],
+                      //   )
                     ],
                   ))
             ],
