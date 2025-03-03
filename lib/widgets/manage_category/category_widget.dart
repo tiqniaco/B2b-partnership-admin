@@ -82,8 +82,7 @@ class CategoryWidget extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           controller.onTapCategory(index);
-                          onTapMoreIcon(specializations[index].id!,
-                              model: specializations[index]);
+                          onTapMoreIcon(model: specializations[index]);
                         },
                         icon: Icon(Icons.more_vert, size: 17.sp))
                   ],
@@ -92,7 +91,7 @@ class CategoryWidget extends StatelessWidget {
     );
   }
 
-  onTapMoreIcon(int id, {required SpecializeModel model}) {
+  onTapMoreIcon({required SpecializeModel model}) {
     return Get.defaultDialog(
         titlePadding: EdgeInsets.zero,
         title: " ".tr,
@@ -114,7 +113,7 @@ class CategoryWidget extends StatelessWidget {
                           onTap: () {
                             Get.back();
                             controller.onEdit(model);
-                            onTapEdit();
+                            onTapEdit(model.id!);
                           },
                           child: Row(
                             children: [
@@ -153,7 +152,7 @@ class CategoryWidget extends StatelessWidget {
                                 ),
                               ),
                               onConfirm: () =>
-                                  controller.deleteSpecialization(id),
+                                  controller.deleteSpecialization(model.id!),
                               textConfirm: "Yes".tr,
                               textCancel: "No".tr,
                               onCancel: () {},
@@ -180,7 +179,7 @@ class CategoryWidget extends StatelessWidget {
                 )));
   }
 
-  onTapEdit() {
+  onTapEdit(int id) {
     return Get.defaultDialog(
         barrierDismissible: false,
         title: "",
@@ -255,7 +254,7 @@ class CategoryWidget extends StatelessWidget {
                     Gap(20.h),
                     CustomLoadingButton(
                       onPressed: () {
-                        return controller.addSpecialization();
+                        return controller.editSpecialization(id);
                       },
                       text: "Save".tr,
                       borderRadius: 10.r,

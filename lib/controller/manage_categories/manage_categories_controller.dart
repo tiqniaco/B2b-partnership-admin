@@ -162,7 +162,7 @@ class ManageCategoriesController extends GetxController {
 
       final response = await CustomRequest(
           files: {
-            if (image != null) "image": imageFile!.path,
+            if (imageFile != null) "image": imageFile!.path,
           },
           data: {
             "name_ar": nameArController.text,

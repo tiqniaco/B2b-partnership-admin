@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ProviderWidget extends StatelessWidget {
-  const ProviderWidget(
+class ProviderWidgetItem extends StatelessWidget {
+  const ProviderWidgetItem(
       {super.key, required this.provider, required this.toggleFavorite});
   final ProviderModel provider;
   final void Function() toggleFavorite;

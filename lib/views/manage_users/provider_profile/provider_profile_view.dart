@@ -1,10 +1,11 @@
-import '/controller/previous_work/provider_profile_controller.dart';
-import '/core/services/app_prefs.dart';
+import 'package:b2b_partnership_admin/widgets/manage_category/job_widget.dart';
+
+import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
 import '/core/theme/app_color.dart';
 import '/widgets/in_category/service_widget_vertical.dart';
-import '/widgets/provider_profile/about_widget.dart';
-import '/widgets/provider_profile/previous_work_widget.dart';
-import '/widgets/provider_profile/review_widget.dart';
+import '../../../widgets/manage_users/provider_profile/about_widget.dart';
+import '../../../widgets/manage_users/provider_profile/previous_work_widget.dart';
+import '../../../widgets/manage_users/provider_profile/review_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -21,46 +22,34 @@ class ProviderProfileView extends StatelessWidget {
     return GetBuilder<ProviderProfileController>(
       builder: (controller) {
         return Scaffold(
-            floatingActionButton: controller.selectedIndex == 3 &&
-                    Get.find<AppPreferences>().getUserRole() == "client"
-                ? FloatingActionButton(
-                    shape: CircleBorder(),
-                    onPressed: () {
-                      controller.addReviewDialog();
-                    },
-                    child: Icon(
-                      Icons.add,
-                      size: 20.sp,
-                    ),
-                  )
-                : SizedBox.shrink(),
             body: SafeArea(
                 child: Center(
-              child: controller.providerModel == null
-                  ? CircularProgressIndicator()
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(20),
-                        _buildHeader(controller),
-                        Gap(15),
-                        _buildTabs(controller),
-                        Expanded(
-                          child: PageView(
-                            controller: controller.pageController,
-                            onPageChanged: controller.onPageChanged,
-                            children: [
-                              ServiceWidgetVertical(
-                                  services: controller.providerServices),
-                              AboutWidget(),
-                              PreviousWork(),
-                              ReviewWidget()
-                            ],
-                          ),
-                        ),
-                      ],
+          child: controller.providerModel == null
+              ? CircularProgressIndicator()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(20),
+                    _buildHeader(controller),
+                    Gap(15),
+                    _buildTabs(controller),
+                    Expanded(
+                      child: PageView(
+                        controller: controller.pageController,
+                        onPageChanged: controller.onPageChanged,
+                        children: [
+                          ServiceWidgetVertical(
+                              services: controller.providerServices),
+                          AboutWidget(),
+                          PreviousWork(),
+                          JobWidget(),
+                          ReviewWidget(),
+                        ],
+                      ),
                     ),
-            )));
+                  ],
+                ),
+        )));
       },
     );
   }
@@ -120,14 +109,15 @@ class ProviderProfileView extends StatelessWidget {
 
   Widget _buildTabs(ProviderProfileController controller) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildTab("Services", 0, controller),
           _buildTab("About", 1, controller),
           _buildTab("Previous work", 2, controller),
-          _buildTab("Reviews", 3, controller),
+          _buildTab("Jobs", 3, controller),
+          _buildTab("Reviews", 4, controller),
         ],
       ),
     );
@@ -138,7 +128,7 @@ class ProviderProfileView extends StatelessWidget {
     return GestureDetector(
       onTap: () => controller.onTabTapped(index),
       child: Container(
-        padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+        padding: EdgeInsets.only(left: 5, bottom: 10, right: 5),
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(

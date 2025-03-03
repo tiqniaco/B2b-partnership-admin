@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_print
 
-import '/controller/provider/my_services/get_my_service_controller.dart';
 import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
 import '/core/network/api_constance.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
-import '/core/utils/app_snack_bars.dart';
 import '/models/service_feature_model.dart';
 import '/models/services_model.dart';
 import 'package:flutter/material.dart';
@@ -197,35 +195,9 @@ class ServiceDetailsController extends GetxController {
     }
   }
 
-  void deleteServiceDialog() {
-    Get.defaultDialog(
-      title: "Delete Service",
-      middleText: "Are you sure you want to delete this service?",
-      textConfirm: "Yes",
-      textCancel: "No",
-      onConfirm: _deleteService,
-    );
-  }
 
-  void _deleteService() async {
-    final result = await CustomRequest<String>(
-      path: ApiConstance.deleteProviderService(service?.data?.id ?? ""),
-      fromJson: (json) {
-        return json["message"];
-      },
-    ).sendDeleteRequest();
-    result.fold(
-      (error) {
-        AppSnackBars.error(message: error.errMsg);
-      },
-      (data) {
-        Get.back();
-        Get.back();
-        Get.put(GetMyServiceController()).getServices();
-        AppSnackBars.success(message: data);
-      },
-    );
-  }
+
+
 }
 
 class ProviderContactMethodWidget extends StatelessWidget {

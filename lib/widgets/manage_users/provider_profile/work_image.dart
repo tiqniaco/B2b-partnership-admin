@@ -1,4 +1,4 @@
-import '/controller/previous_work/previous_work_controller.dart';
+import '../../../controller/manage_users/provider_profile/previous_work_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

@@ -1,4 +1,4 @@
-import '/controller/save/saved_controller.dart';
+import '../manage_users/manage_users_controller.dart';
 import '/models/provider_model.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class SeeAllController extends GetxController {
   }
 
   toggleFavorites(String provId) async {
-    final savedController = SavedController();
+    final savedController = UsersController();
     await savedController.onTapFavorite(provId);
     update();
   }

@@ -1,7 +1,7 @@
-import '/controller/previous_work/previous_work_controller.dart';
+import '../../../controller/manage_users/provider_profile/previous_work_controller.dart';
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
-import '/widgets/provider_profile/work_image.dart';
+import '../../../widgets/manage_users/provider_profile/work_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';

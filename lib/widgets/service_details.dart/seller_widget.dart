@@ -1,4 +1,3 @@
-import '/app_routes.dart';
 import '/controller/service_details_controller.dart';
 import '/core/functions/get_year_date.dart';
 import '/core/functions/translate_database.dart';
@@ -21,62 +20,55 @@ class SellerWidget extends StatelessWidget {
         child: Column(
           children: [
             Gap(20),
-            InkWell(
-              onTap: () {
-                Get.toNamed(AppRoutes.providerProfile, arguments: {
-                  'id': controller.service!.provider!.providerId!
-                });
-              },
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey[200],
-                    radius: 27.sp,
-                    backgroundImage: CachedNetworkImageProvider(
-                        controller.service!.provider!.image!),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.service!.provider!.name!,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.sp),
-                      ),
-                      Gap(8),
-                      Row(
-                        children: [
-                          Text(
-                            'Seller Rating',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          Gap(10),
-                          Text(
-                            controller.service!.provider!.rating!,
-                            style: TextStyle(
-                                color: Colors.orange,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Gap(3),
-                          Icon(
-                            Icons.circle,
-                            size: 3.sp,
-                            color: greyColor,
-                          ),
-                          Gap(3),
-                          Icon(
-                            Icons.star,
-                            size: 15.sp,
-                            color: Colors.orange,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.grey[200],
+                  radius: 27.sp,
+                  backgroundImage: CachedNetworkImageProvider(
+                      controller.service!.provider!.image!),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      controller.service!.provider!.name!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.sp),
+                    ),
+                    Gap(8),
+                    Row(
+                      children: [
+                        Text(
+                          'Seller Rating',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Gap(10),
+                        Text(
+                          controller.service!.provider!.rating!,
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Gap(3),
+                        Icon(
+                          Icons.circle,
+                          size: 3.sp,
+                          color: greyColor,
+                        ),
+                        Gap(3),
+                        Icon(
+                          Icons.star,
+                          size: 15.sp,
+                          color: Colors.orange,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
             Gap(20),
             Container(
@@ -119,7 +111,7 @@ class SellerWidget extends StatelessWidget {
                           english: controller
                               .service!.provider!.specializationNameEn!)),
                       Spacer(),
-                      titleWidget("Specailization"),
+                      titleWidget("Specialization"),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller

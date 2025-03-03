@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import '/controller/save/saved_controller.dart';
+import '../manage_users/manage_users_controller.dart';
 import '/core/crud/custom_request.dart';
 import '/core/network/api_constance.dart';
 import '/core/utils/app_snack_bars.dart';
@@ -302,7 +302,7 @@ class SearchControllerIM extends GetxController {
   }
 
   toggleFavorites(String provId) async {
-    final savedController = SavedController();
+    final savedController = UsersController();
     await savedController.onTapFavorite(provId);
     getProviders();
 

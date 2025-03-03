@@ -250,4 +250,33 @@ class ProviderProfileController extends GetxController {
       });
     }
   }
+
+  void deleteServiceDialog(id) {
+    Get.defaultDialog(
+        title: "Delete Service",
+        middleText: "Are you sure you want to delete this service?",
+        textConfirm: "Yes",
+        textCancel: "No",
+        onConfirm: () {
+          _deleteService(id);
+        });
+  }
+
+  void _deleteService(id) async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.deleteProviderService(id),
+      fromJson: (json) {
+        return json["message"];
+      },
+    ).sendDeleteRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (data) {
+        getServices();
+        AppSnackBars.success(message: data);
+      },
+    );
+  }
 }

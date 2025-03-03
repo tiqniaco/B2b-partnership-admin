@@ -66,6 +66,20 @@ class ApiConstance {
   static String editCity(int id) => 'governments/$id';
   static String deleteCity(int id) => 'governments/$id';
 
+  //-clients
+  static String getClients(int page) => 'clients?page=$page';
+  static String deleteClient(String id) => '/clients/$id';
+
+  //-providers
+  static String getProviders(int page) => 'providers?page=$page';
+  static String deleteProvider(String id) => 'providers/$id';
+
+  //-admins
+  static const String getAdmins = 'admins';
+  static const String addAdmin = 'governments';
+  static String editAdmin(int id) => 'admins/$id/update';
+  static String deleteAdmin(String id) => 'admins/$id';
+
   ///-------------------------------------------------------
 
   // service request

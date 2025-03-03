@@ -1,5 +1,5 @@
-import '/core/functions/translate_database.dart';
-import '/core/theme/app_color.dart';
+import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
+import 'package:b2b_partnership_admin/core/theme/app_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,13 +14,13 @@ class JobWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 20),
         itemCount: 5,
         separatorBuilder: (context, index) => Gap(20),
         itemBuilder: (context, index) => Container(
               width: 250.h,
-              height: 140.h,
+              height: 190.h,
               padding: EdgeInsets.all(18),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),

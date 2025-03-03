@@ -1,13 +1,13 @@
-import '/core/constants/app_constants.dart';
+import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
 
-class ClientModel {
+class AdminModel {
   String? userId;
   String? name;
   String? email;
   String? countryCode;
   String? phone;
   String? image;
-  String? clientId;
+  String? adminId;
   String? countryId;
   String? countryNameAr;
   String? countryNameEn;
@@ -17,14 +17,14 @@ class ClientModel {
   String? createdAt;
   String? updatedAt;
 
-  ClientModel(
+  AdminModel(
       {this.userId,
       this.name,
       this.email,
       this.countryCode,
       this.phone,
       this.image,
-      this.clientId,
+      this.adminId,
       this.countryId,
       this.countryNameAr,
       this.countryNameEn,
@@ -34,14 +34,14 @@ class ClientModel {
       this.createdAt,
       this.updatedAt});
 
-  ClientModel.fromJson(Map<String, dynamic> json) {
+  AdminModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     name = json['name'];
     email = json['email'];
     countryCode = json['country_code'];
     phone = json['phone'];
     image = kBaseImageUrl + (json['image'] ?? "");
-    clientId = json['client_id'];
+    adminId = json['admin_id'];
     countryId = json['country_id'];
     countryNameAr = json['country_name_ar'];
     countryNameEn = json['country_name_en'];
@@ -60,7 +60,7 @@ class ClientModel {
     data['country_code'] = countryCode;
     data['phone'] = phone;
     data['image'] = image;
-    data['client_id'] = clientId;
+    data['admin_id'] = adminId;
     data['country_id'] = countryId;
     data['country_name_ar'] = countryNameAr;
     data['country_name_en'] = countryNameEn;

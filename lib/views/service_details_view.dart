@@ -2,7 +2,6 @@
 
 import '/controller/service_details_controller.dart';
 import '/core/functions/translate_database.dart';
-import '/core/services/app_prefs.dart';
 import '/core/services/date_time_convertor.dart';
 import '/core/theme/app_color.dart';
 import '/widgets/service_details.dart/feature_widget.dart';
@@ -10,7 +9,6 @@ import '/widgets/service_details.dart/seller_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -44,18 +42,10 @@ class ServiceDetailsView extends StatelessWidget {
                       backgroundColor: primaryColor,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text('Book Appointment'),
+                    child: Text('View Contact Method'),
                   ),
                 ),
               ),
-              Gap(10),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    color: Colors.black54,
-                    Icons.chat_outlined,
-                    size: 35.sp,
-                  ))
             ],
           ),
         ),
@@ -120,27 +110,28 @@ class ServiceDetailsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (Get.find<AppPreferences>().getUserRole() ==
-                            "provider" &&
-                        Get.find<AppPreferences>().getUserRoleId() ==
-                            controller.service?.provider?.providerId)
-                      Positioned(
-                        top: 60,
-                        right: 16,
-                        child: CircleAvatar(
-                          backgroundColor: whiteColor,
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.trash,
-                              color: primaryColor,
-                              size: 15.sp,
-                            ),
-                            onPressed: () {
-                              controller.deleteServiceDialog();
-                            },
-                          ),
-                        ),
-                      ),
+
+                    // if (Get.find<AppPreferences>().getUserRole() ==
+                    //         "provider" &&
+                    //     Get.find<AppPreferences>().getUserRoleId() ==
+                    //         controller.service?.provider?.providerId)
+                    //   Positioned(
+                    //     top: 60,
+                    //     right: 16,
+                    //     child: CircleAvatar(
+                    //       backgroundColor: whiteColor,
+                    //       child: IconButton(
+                    //         icon: Icon(
+                    //           FontAwesomeIcons.trash,
+                    //           color: primaryColor,
+                    //           size: 15.sp,
+                    //         ),
+                    //         onPressed: () {
+                    //           controller.deleteServiceDialog();
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ),
                   ],
                 ),
                 Padding(

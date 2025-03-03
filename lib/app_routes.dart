@@ -1,6 +1,9 @@
 import 'package:b2b_partnership_admin/views/manage_categories/manage_categories_view.dart';
+import 'package:b2b_partnership_admin/views/manage_users/manage_admins_view.dart';
+import 'package:b2b_partnership_admin/views/manage_users/manage_clients_view.dart';
 import 'package:b2b_partnership_admin/views/manage_location/manage_location_view.dart';
-import 'package:b2b_partnership_admin/views/manage_provider_typies/manage_provider_types_view.dart';
+import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provider_types_view.dart';
+import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
 import 'package:b2b_partnership_admin/views/shop/shop_add_new_product_view.dart';
 
 import '/views/auth/forget_password_email_view.dart';
@@ -8,15 +11,11 @@ import '/views/auth/forget_password_reset_view.dart';
 import '/views/auth/login_view.dart';
 import '/views/auth/o_t_p_view.dart';
 import 'views/home/admin_home_layout.dart';
-import 'views/home/admin_home_view.dart';
 import '/views/orders/orders_view.dart';
-// import '/views/provider_app/home/provider_home_layout.dart';
-// import '/views/provider_app/home/provider_home_view.dart';
-import '/views/provider_profile/previous_work_view.dart';
-import '/views/provider_profile/provider_profile_view.dart';
-import '/views/see_all/see_all_categories.dart';
+
+import 'views/manage_users/provider_profile/previous_work_view.dart';
+import 'views/manage_users/provider_profile/provider_profile_view.dart';
 import '/views/service_details_view.dart';
-import '/views/in_category/providers_in_categories.dart';
 import '/views/service_request/add_service_request.dart';
 import '/views/service_request/get_user_service_request.dart';
 import '/views/settings/change_password_view.dart';
@@ -34,7 +33,6 @@ import 'views/provider_app/my_services/add_provider_service_view.dart';
 import 'views/provider_app/my_services/edit_provider_service_view.dart';
 import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/provider_app/setting/provider_contacts/provider_contacts_view.dart';
-import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_edit_product_view.dart';
 import 'views/shop/shop_product_details_view.dart';
@@ -61,10 +59,15 @@ class AppRoutes {
   static const String seeAll = '/seeAll';
   static const String seeAllCategories = '/seeAllCategories';
 
-  //admin
+  //admin -----> manage home
   static const String manageCategory = '/manageCategory';
   static const String manageProviderTypes = '/manageProviderTypes';
   static const String manageLocations = '/manageLocations';
+
+  //admin -----> manage users
+  static const String manageClients = '/manageClients';
+  static const String manageProviders = '/manageProviders';
+  static const String manageAdmins = '/manageAdmins';
 
   //service request
   static const String addServicesRequest = '/addServicesRequest';
@@ -138,18 +141,6 @@ class AppRoutes {
     //home
 
     GetPage(
-      name: clintHome,
-      page: () => AdminHomeView(),
-    ),
-    // GetPage(
-    //   name: providerHomeView,
-    //   page: () =>  ProviderHomeView(),
-    // ),
-    // GetPage(
-    //   name: providerHomeLayout,
-    //   page: () =>  ProviderHomeLayout(),
-    // ),
-    GetPage(
       name: adminHomeLayout,
       page: () => const AdminHomeLayout(),
     ),
@@ -165,9 +156,20 @@ class AppRoutes {
       name: manageProviderTypes,
       page: () => const ManageProviderTypesView(),
     ),
+
     GetPage(
-      name: seeAllCategories,
-      page: () => const SeeAllCategories(),
+      name: manageClients,
+      page: () => const ManageClientsView(),
+    ),
+
+    GetPage(
+      name: manageProviders,
+      page: () => const ManageProviderView(),
+    ),
+
+    GetPage(
+      name: manageAdmins,
+      page: () => const ManageAdminsView(),
     ),
 
     // service request
@@ -188,10 +190,6 @@ class AppRoutes {
     GetPage(
       name: serviceDetails,
       page: () => ServiceDetailsView(),
-    ),
-    GetPage(
-      name: providersInCategory,
-      page: () => ProvidersInCategories(),
     ),
 
     // provider
@@ -248,10 +246,6 @@ class AppRoutes {
     GetPage(
       name: notification,
       page: () => const NotificationView(),
-    ),
-    GetPage(
-      name: search,
-      page: () => SearchView(),
     ),
 
     // Order

@@ -1,5 +1,5 @@
 import '/app_routes.dart';
-import '/controller/previous_work/provider_profile_controller.dart';
+import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
 import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';

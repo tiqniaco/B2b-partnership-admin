@@ -1,5 +1,6 @@
 import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/home/admin_home_controller.dart';
+import 'package:b2b_partnership_admin/widgets/block_widget.dart';
 
 import '/controller/settings/setting_controller.dart';
 import '/core/theme/app_color.dart';
@@ -105,52 +106,12 @@ class _AdminHomeViewState extends State<AdminHomeView>
               Gap(50)
             ],
           ),
+        
+        
         );
       },
     );
   }
 
-  Widget blockWidget(
-      Color color, String title, IconData icon, Function() onTap) {
-    {
-      return InkWell(
-        onTap: onTap,
-        child: Container(
-          width: 100.h,
-          height: 120.h,
-          padding: EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            color: color.withAlpha(60),
-            borderRadius: BorderRadius.circular(12),
-            // border: Border.all(color: Colors.grey.withAlpha(80)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    // border: Border.all(color: primaryColor, width: 0.5),
-                    // color: pageColor.withAlpha(60),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: color,
-                    size: 27.sp,
-                  )),
-              Gap(8),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-  }
+ 
 }

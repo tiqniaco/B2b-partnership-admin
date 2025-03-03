@@ -1,4 +1,4 @@
-import '/controller/previous_work/provider_profile_controller.dart';
+import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
 import '/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

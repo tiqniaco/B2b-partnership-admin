@@ -1,4 +1,4 @@
-import '/controller/save/saved_controller.dart';
+import '../manage_users/manage_users_controller.dart';
 import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
 import '/core/network/api_constance.dart';
@@ -87,7 +87,7 @@ class ProvidersInCategoryController extends GetxController {
   }
 
   toggleFavorites(String provId) async {
-    final savedController = SavedController();
+    final savedController = UsersController();
     await savedController.onTapFavorite(provId);
     getProviders();
     update();

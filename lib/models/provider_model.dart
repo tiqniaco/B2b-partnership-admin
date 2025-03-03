@@ -84,7 +84,7 @@ class ProviderModel {
     email = json['email'];
     countryCode = json['country_code'];
     phone = json['phone'];
-    image = kBaseImageUrl + json['image'];
+    image = kBaseImageUrl + (json['image']??"");
     providerId = json['provider_id'];
     commercialRegister = kBaseImageUrl + json['commercial_register'];
     taxCard = kBaseImageUrl + json['tax_card'];

@@ -49,15 +49,14 @@ class ProviderTypeWidget extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Get.defaultDialog(
-                          title: 'Delete City',
+                          title: 'Delete Type',
                           titleStyle: TextStyle(fontSize: 13.sp),
                           middleText:
-                              'Are you sure you want to\ndelete this city?',
+                              'Are you sure you want to\ndelete this type?',
                           textConfirm: 'Yes',
                           textCancel: 'No',
                           onConfirm: () {
                             controller.deleteProviderType(type.id!);
-                            Get.back();
                           },
                         );
                         // city(city.id!);

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 import '../../core/enums/status_request.dart';
 
-class SavedController extends GetxController {
+class UsersController extends GetxController {
   List<ProviderModel> favorites = [];
   StatusRequest statusRequestProviders = StatusRequest.loading;
 

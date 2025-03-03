@@ -3,8 +3,7 @@ import 'package:b2b_partnership_admin/views/shop/shop_view.dart';
 import 'admin_home_controller.dart';
 import '/controller/settings/setting_controller.dart';
 import '../../views/home/admin_home_view.dart';
-import '/views/save/save_view.dart';
-import '/views/search/search_view.dart';
+import '../../views/manage_users/users_view.dart';
 import '/views/settings/settings_view.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +25,8 @@ class AdminHomeLayoutController extends GetxController {
   final screens = [
     AdminHomeView(),
     const ShopView(),
-    const SearchView(),
-    const SaveView(),
+    Container(),
+    const UsersView(),
     const SettingsView(),
   ];
 
