@@ -129,10 +129,16 @@ class ApiConstance {
   static String addToCart = "store/carts";
   static String checkout = "store/orders";
   static String getOrders = 'store/orders';
+  static String getAdminOrders = 'store/admin-orders';
   static String getOrderDetails(String id) => 'store/orders/$id';
+  static String updateOrderStatus(String id) => 'store/orders/$id';
   static String addProduct = "store/products";
   static String deleteProduct(String id) => "store/products/$id";
   static String updateProduct(String id) => "store/products/$id/update";
+
+  static String addShopCategory = "store/categories";
+  static String deleteShopCategory(String id) => "store/categories/$id";
+  static String updateShopCategory(String id) => "store/categories/$id/update";
 
   // Client Profile
   static String updateClientProfile(String id) => 'clients/$id/update';

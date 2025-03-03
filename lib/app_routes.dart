@@ -34,8 +34,10 @@ import 'views/provider_app/my_services/edit_provider_service_view.dart';
 import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/provider_app/setting/provider_contacts/provider_contacts_view.dart';
 import 'views/service_request/service_request_details.dart';
-import 'views/shop/shop_edit_product_view.dart';
-import 'views/shop/shop_product_details_view.dart';
+import 'views/shop/categories/shop_add_new_category_view.dart';
+import 'views/shop/categories/shop_edit_category_view.dart';
+import 'views/shop/products/shop_edit_product_view.dart';
+import 'views/shop/products/shop_product_details_view.dart';
 
 class AppRoutes {
   /// Base routes
@@ -89,6 +91,8 @@ class AppRoutes {
   static const String shopOrders = '/orders';
   static const String shopAddNewProduct = '/shopAddNewProduct';
   static const String shopEditProduct = '/shopEditProduct';
+  static const String shopAddNewCategory = '/shopAddNewCategory';
+  static const String shopEditCategory = '/shopEditCategory';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -222,6 +226,14 @@ class AppRoutes {
     GetPage(
       name: shopEditProduct,
       page: () => const ShopEditProductView(),
+    ),
+    GetPage(
+      name: shopAddNewCategory,
+      page: () => const ShopAddNewCategoryView(),
+    ),
+    GetPage(
+      name: shopEditCategory,
+      page: () => const ShopEditCategoryView(),
     ),
 
     // Edit Client Profile

@@ -68,7 +68,7 @@ class ShopView extends StatelessWidget {
                 child: IconButton(
                   tooltip: "Orders".tr,
                   onPressed: () {
-                    Get.toNamed(AppRoutes.shopCart);
+                    Get.toNamed(AppRoutes.shopOrders);
                   },
                   icon: SvgPicture.asset(
                     'assets/svgs/bag2.svg',
@@ -86,7 +86,7 @@ class ShopView extends StatelessWidget {
             children: [
               if (controller.showCategories)
                 SizedBox(
-                  width: 0.22.sw,
+                  width: 0.25.sw,
                   height: 1.sh,
                   child: CustomServerStatusWidget(
                     statusRequest: controller.categoriesStatus,
@@ -99,7 +99,9 @@ class ShopView extends StatelessWidget {
                           ),
                           child: InkWell(
                             borderRadius: BorderRadius.circular(8.r),
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(AppRoutes.shopAddNewCategory);
+                            },
                             child: Container(
                               padding: EdgeInsets.all(10.w),
                               decoration: BoxDecoration(
@@ -139,55 +141,83 @@ class ShopView extends StatelessWidget {
                               horizontal: 4.w,
                             ),
                             itemBuilder: (context, index) {
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(8.r),
-                                splashColor: primaryColor.withAlpha(10),
-                                onTap: () {
-                                  controller.onTapCategory(index);
-                                },
-                                child: SizedBox(
-                                  height: 70.h,
-                                  child: Column(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 18.r,
-                                        backgroundColor:
-                                            primaryColor.withAlpha(10),
-                                        child: CustomNetworkImage(
-                                          imageUrl: controller
-                                              .shopCategories[index].image,
-                                          // shape: BoxShape.circle,
-                                        ),
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    splashColor: primaryColor.withAlpha(10),
+                                    onTap: () {
+                                      controller.onTapCategory(index);
+                                    },
+                                    child: SizedBox(
+                                      height: 50.h,
+                                      child: Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 18.r,
+                                            backgroundColor:
+                                                primaryColor.withAlpha(10),
+                                            child: CustomNetworkImage(
+                                              imageUrl: controller
+                                                  .shopCategories[index].image,
+                                              // shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          Gap(5.h),
+                                          Text(
+                                            translateDatabase(
+                                              arabic: controller
+                                                  .shopCategories[index].nameAr,
+                                              english: controller
+                                                  .shopCategories[index].nameEn,
+                                            ),
+                                            style: getLightStyle.copyWith(
+                                              fontWeight: controller
+                                                          .selectedCategory ==
+                                                      controller
+                                                          .shopCategories[index]
+                                                  ? FontManager.boldFontWeight
+                                                  : FontManager
+                                                      .regularFontWeight,
+                                              color: controller
+                                                          .selectedCategory ==
+                                                      controller
+                                                          .shopCategories[index]
+                                                  ? primaryColor
+                                                  : greyColor,
+                                              fontSize: 9.5.sp,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Gap(5.h),
-                                      Text(
-                                        translateDatabase(
-                                          arabic: controller
-                                              .shopCategories[index].nameAr,
-                                          english: controller
-                                              .shopCategories[index].nameEn,
-                                        ),
-                                        style: getLightStyle.copyWith(
-                                          fontWeight: controller
-                                                      .selectedCategory ==
-                                                  controller
-                                                      .shopCategories[index]
-                                              ? FontManager.boldFontWeight
-                                              : FontManager.regularFontWeight,
-                                          color: controller.selectedCategory ==
-                                                  controller
-                                                      .shopCategories[index]
-                                              ? primaryColor
-                                              : greyColor,
-                                          fontSize: 9.5.sp,
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  TextButton.icon(
+                                    onPressed: () {
+                                      Get.toNamed(
+                                        AppRoutes.shopEditCategory,
+                                        arguments: {
+                                          'model':
+                                              controller.shopCategories[index],
+                                        },
+                                      );
+                                    },
+                                    icon: const Icon(
+                                        FontAwesomeIcons.penToSquare),
+                                    label: const Text('Edit'),
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () {
+                                      controller.deleteCategoryDialog(index);
+                                    },
+                                    icon: const Icon(FontAwesomeIcons.trash),
+                                    label: const Text('Delete'),
+                                  ),
+                                ],
                               );
                             },
-                            separatorBuilder: (context, index) => Gap(10.h),
+                            separatorBuilder: (context, index) => Gap(20.h),
                             itemCount: controller.shopCategories.length,
                           ),
                         ),

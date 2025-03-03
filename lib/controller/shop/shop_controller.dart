@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+
 import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
 import '/core/network/api_constance.dart';
@@ -123,5 +125,34 @@ class ShopController extends GetxController {
     currentPage = 1;
     getShopProducts(firstTime: true);
     update();
+  }
+
+  void deleteCategoryDialog(int index) {
+    Get.defaultDialog(
+      title: "Delete Category",
+      middleText: "Are you sure you want to delete this category?",
+      textCancel: "Cancel",
+      textConfirm: "Delete",
+      onConfirm: () {
+        _deleteCategory(index);
+        Get.back();
+      },
+    );
+  }
+
+  Future<void> _deleteCategory(int index) async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.deleteShopCategory(
+        shopCategories[index].id.toString(),
+      ),
+      fromJson: (json) => json['message'],
+    ).sendDeleteRequest();
+    result.fold(
+      (error) => AppSnackBars.warning(message: error.errMsg),
+      (data) {
+        AppSnackBars.success(message: data);
+        getShopCategories();
+      },
+    );
   }
 }

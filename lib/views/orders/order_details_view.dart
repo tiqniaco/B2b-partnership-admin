@@ -1,3 +1,6 @@
+import 'package:b2b_partnership_admin/core/enums/store_order_status_enum.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
+
 import '/app_routes.dart';
 import '/controller/orders/order_details_controller.dart';
 import '/core/global/widgets/custom_server_status_widget.dart';
@@ -45,9 +48,11 @@ class OrderDetailsView extends StatelessWidget {
                             Gap(10.h),
                             OrderDetailsItemWidget(
                               title: "Order Date: ",
-                              value: DateTimeConvertor.formatDate(
-                                controller.model?.data.createdAt ?? "",
-                              ),
+                              value: controller.model?.data.createdAt == "null"
+                                  ? "Invalid Date"
+                                  : DateTimeConvertor.formatDate(
+                                      controller.model?.data.createdAt ?? "",
+                                    ),
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
@@ -61,6 +66,106 @@ class OrderDetailsView extends StatelessWidget {
                               title: "Order Total: ",
                               value:
                                   "${controller.model?.data.totalPrice.toString() ?? ""}\$",
+                            ),
+                            Gap(10.h),
+                            Container(
+                              padding: EdgeInsets.all(10.w),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: borderColor),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Change Order Status:",
+                                    style: getMediumStyle.copyWith(
+                                      fontWeight: FontManager.boldFontWeight,
+                                    ),
+                                  ),
+                                  Gap(24.w),
+                                  Expanded(
+                                    child: DropdownButtonFormField<
+                                        StoreOrderStatusWithoutAllEnum>(
+                                      isExpanded: true,
+                                      value: controller.status,
+                                      decoration: InputDecoration(
+                                        enabled: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 12.h, horizontal: 12.w),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7.r),
+                                          borderSide: const BorderSide(
+                                            color: blackColor,
+                                            width: 1,
+                                          ),
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(
+                                            color: pageColor,
+                                            width: 1.5,
+                                          ),
+                                        ),
+                                        label: Text(
+                                          'Select Status',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17.sp,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ),
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_outlined,
+                                        size: 23.sp,
+                                        color: greyColor,
+                                      ),
+                                      items: StoreOrderStatusWithoutAllEnum
+                                          .values
+                                          .map(
+                                        (item) {
+                                          return DropdownMenuItem<
+                                              StoreOrderStatusWithoutAllEnum>(
+                                            value: item,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    item.name.capitalizeFirst ??
+                                                        "",
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color: greyColor
+                                                          .withAlpha(160),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ).toList(),
+                                      onChanged: (value) {
+                                        controller.onChangeStatus(value!);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Gap(10.h),
+                            CustomLoadingButton(
+                              onPressed: () {
+                                return controller.updateOrderStatus();
+                              },
+                              text: 'Update Status',
                             ),
                             Gap(10.h),
                           ],
