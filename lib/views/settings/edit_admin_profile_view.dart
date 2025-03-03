@@ -1,14 +1,11 @@
-import '/controller/provider/setting/provider_setting_edit_profile_controller.dart';
+import '../../controller/settings/edit_admin_profile_controller.dart';
 import '/core/enums/status_request.dart';
 import '/core/global/widgets/custom_loading_button.dart';
 import '/core/global/widgets/custom_network_image.dart';
 import '/core/theme/app_color.dart';
 import '/widgets/auth/auth_text_form.dart';
-import '/widgets/auth/select_provider_widget.dart';
 import '/widgets/select_city_widget.dart';
 import '/widgets/select_country_widget.dart';
-import '/widgets/select_specialization_widget.dart';
-import '/widgets/select_sup_specialization_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,32 +13,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class EditProviderProfileView extends StatelessWidget {
-  const EditProviderProfileView({super.key});
+class EditAdminProfileView extends StatelessWidget {
+  const EditAdminProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProviderSettingEditProfileController>(
-      init: ProviderSettingEditProfileController(),
-      builder: (ProviderSettingEditProfileController controller) {
+    return GetBuilder<EditAdminProfileController>(
+      init: EditAdminProfileController(),
+      builder: (EditAdminProfileController controller) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Edit Provider Profile"),
+              title: const Text("Edit Admin Profile"),
             ),
             body: controller.statusRequestCity == StatusRequest.loading ||
                     controller.statusRequestCountry == StatusRequest.loading ||
-                    controller.statusRequestProviderType ==
-                        StatusRequest.loading ||
-                    controller.statusRequestSpecialization ==
-                        StatusRequest.loading ||
-                    controller.statusRequestSupSpecialization ==
-                        StatusRequest.loading ||
                     controller.model == null
                 ? Center(child: const CircularProgressIndicator())
                 : CustomScrollView(
                     slivers: [
                       SliverFillRemaining(
-                        child: SingleChildScrollView(
+                        child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 12.w,
                             vertical: 12.h,
@@ -136,19 +127,6 @@ class EditProviderProfileView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(20.h),
-                                AuthTextForm(
-                                  lable: "Bio".tr,
-                                  minLines: 4,
-                                  maxLines: 10,
-                                  preicon: CupertinoIcons.person,
-                                  hintText:
-                                      "Description of the Company ....".tr,
-                                  textFormController: controller.bioController,
-                                  validator: (val) {
-                                    return controller.validUserData(val);
-                                  },
-                                ),
-                                Gap(20.h),
                                 Row(
                                   children: [
                                     Expanded(
@@ -234,149 +212,11 @@ class EditProviderProfileView extends StatelessWidget {
                                             BorderSide(color: blackColor)),
                                   ),
                                 ),
-                                Gap(20.h),
-                                SelectProviderWidget(
-                                  providerTypes: controller.providerTypes,
-                                  value: controller.selectedProviderType,
-                                  onChanged: (value) {
-                                    controller.onProviderTypeChanged(value);
-                                  },
-                                ),
-                                Gap(20.h),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: SelectSpecializationWidget(
-                                        value:
-                                            controller.selectedSpecialization,
-                                        models: controller.specializations,
-                                        onChanged: (val) {
-                                          controller.onSpecializeChanged(val);
-                                        },
-                                      ),
-                                    ),
-                                    Gap(8.w),
-                                    Expanded(
-                                      child: SelectSupSpecializationWidget(
-                                        value: controller
-                                            .selectedSubSpecialization,
-                                        models: controller.subSpecializations,
-                                        onChanged: (val) {
-                                          controller
-                                              .onSubSpecializeChanged(val);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Gap(20.h),
-                                AuthTextForm(
-                                  enabled: false,
-                                  lable: "Commercial Register".tr,
-                                  preicon: CupertinoIcons.person,
-                                  hintText: "No file selected   ".tr,
-                                  textFormController:
-                                      controller.commercialController,
-                                  validator: (val) {
-                                    return controller.validUserData(val);
-                                  },
-                                  sufix: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 10),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (controller.commercePdfFile != null)
-                                          InkWell(
-                                            onTap: () {
-                                              controller.removeFile("c");
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 23.sp,
-                                            ),
-                                          ),
-                                        Gap(5),
-                                        SizedBox(
-                                          width: 80.h,
-                                          child: ElevatedButton(
-                                              onPressed: () {
-                                                controller.pickPDF("c");
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30))),
-                                              child: Text(
-                                                "Upload",
-                                                style:
-                                                    TextStyle(fontSize: 12.sp),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Gap(20),
-                                AuthTextForm(
-                                  enabled: false,
-                                  lable: "Tax Card".tr,
-                                  preicon: CupertinoIcons.person,
-                                  hintText: "No file selected   ".tr,
-                                  textFormController:
-                                      controller.taxCartController,
-                                  validator: (val) {
-                                    return controller.validUserData(val);
-                                  },
-                                  sufix: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (controller.taxPdfFile != null)
-                                          InkWell(
-                                            onTap: () {
-                                              //print("hi");
-                                              controller.removeFile("t");
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 23.sp,
-                                            ),
-                                          ),
-                                        Gap(5),
-                                        SizedBox(
-                                          width: 80.h,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  //padding: EdgeInsets.symmetric(horizontal: 10),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30))),
-                                              onPressed: () {
-                                                controller.pickPDF(
-                                                  "t",
-                                                );
-                                              },
-                                              child: Text(
-                                                "Upload",
-                                                style:
-                                                    TextStyle(fontSize: 12.sp),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Gap(20),
                               ],
                             ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
             bottomNavigationBar: BottomAppBar(

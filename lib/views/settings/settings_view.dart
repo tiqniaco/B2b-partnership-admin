@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/core/utils/assets_data.dart';
+
 import '/app_routes.dart';
 import '/controller/settings/setting_controller.dart';
 import '/core/functions/logout.dart';
@@ -17,9 +19,9 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SettingController());
     return Scaffold(
       body: GetBuilder<SettingController>(
+        init: SettingController(),
         builder: (controller) => Stack(
           children: [
             SafeArea(
@@ -53,6 +55,19 @@ class SettingsView extends StatelessWidget {
                                               controller
                                                   .menuModel!.data!.image!,
                                               fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Container(
+                                                  color: Colors.grey[200],
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 10.w,
+                                                  ),
+                                                  child: Image.asset(
+                                                    AssetsData.manIconImage,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
                                         ),
@@ -115,11 +130,11 @@ class SettingsView extends StatelessWidget {
                                       Get.toNamed(AppRoutes.getRequestServices);
                                     }),
                                     boxWidget(
-                                        Icons.shopping_cart_outlined,
+                                        FontAwesomeIcons.basketShopping,
                                         Colors.blue,
                                         controller.menuModel!.shoppingCount
                                             .toString(),
-                                        "Shopping", () {
+                                        "Orders", () {
                                       Get.toNamed(AppRoutes.shop);
                                     }),
                                     boxWidget(
@@ -127,7 +142,7 @@ class SettingsView extends StatelessWidget {
                                         Colors.green,
                                         controller.menuModel!.servicesCount
                                             .toString(),
-                                        "Post Services", () {
+                                        "Client Services", () {
                                       Get.toNamed(AppRoutes.getRequestServices);
                                     }),
                                     boxWidget(
@@ -208,7 +223,7 @@ class SettingsView extends StatelessWidget {
                                       "Edit Profile",
                                       () {
                                         Get.toNamed(
-                                          AppRoutes.editProviderProfile,
+                                          AppRoutes.editAdminProfile,
                                           arguments: {
                                             'model': controller.menuModel!.data,
                                           },

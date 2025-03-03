@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class SettingController extends GetxController {
-  ClientMenuModel? menuModel;
+  AdminMenuModel? menuModel;
   StatusRequest statusRequest = StatusRequest.loading;
   bool removeAccountLoading = false;
 
@@ -24,10 +24,10 @@ class SettingController extends GetxController {
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
     statusRequest = StatusRequest.loading;
-    final result = await CustomRequest<ClientMenuModel>(
-      path: ApiConstance.getClientMenu(id),
+    final result = await CustomRequest<AdminMenuModel>(
+      path: ApiConstance.getUserMenu(id),
       fromJson: (json) {
-        return ClientMenuModel.fromJson(json);
+        return AdminMenuModel.fromJson(json);
       },
     ).sendGetRequest();
     result.fold((l) {

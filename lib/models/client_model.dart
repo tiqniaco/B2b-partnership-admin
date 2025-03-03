@@ -1,6 +1,6 @@
 import '/core/constants/app_constants.dart';
 
-class ClientModel {
+class AdminModel {
   String? userId;
   String? name;
   String? email;
@@ -17,7 +17,7 @@ class ClientModel {
   String? createdAt;
   String? updatedAt;
 
-  ClientModel(
+  AdminModel(
       {this.userId,
       this.name,
       this.email,
@@ -34,7 +34,7 @@ class ClientModel {
       this.createdAt,
       this.updatedAt});
 
-  ClientModel.fromJson(Map<String, dynamic> json) {
+  AdminModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     name = json['name'];
     email = json['email'];

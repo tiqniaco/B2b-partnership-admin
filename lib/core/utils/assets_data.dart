@@ -25,6 +25,7 @@ class AssetsData {
   static const String defaultImage = '${_baseImagesPath}default.jpg';
   static const String moneyImage = '${_baseImagesPath}money.png';
   static const String alarmImage = '${_baseImagesPath}alarm.png';
+  static const String manIconImage = '${_baseImagesPath}man_icon.png';
 
   /// SVGs
   static const String _baseSVGsPath = 'assets/svgs/';

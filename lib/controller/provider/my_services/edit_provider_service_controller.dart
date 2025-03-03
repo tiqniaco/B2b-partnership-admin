@@ -13,8 +13,8 @@ import '/models/service_feature_model.dart';
 import '/models/services_model.dart';
 import '/models/specialize_model.dart';
 import '/models/sub_specialize_model.dart';
-import '/views/provider_app/my_services/widgets/edit_provider_service_details_widget.dart';
-import '/views/provider_app/my_services/widgets/edit_provider_service_features_widget.dart';
+// import '/views/provider_app/my_services/widgets/edit_provider_service_details_widget.dart';
+// import '/views/provider_app/my_services/widgets/edit_provider_service_features_widget.dart';
 import '/widgets/request_services/build_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,8 +67,8 @@ class EditProviderServiceController extends GetxController {
   ];
 
   tabBarViews(EditProviderServiceController controller) => [
-        EditProviderServiceDetailsWidget(controller: controller),
-        EditProviderServiceFeaturesWidget(controller: controller),
+        // EditProviderServiceDetailsWidget(controller: controller),
+        // EditProviderServiceFeaturesWidget(controller: controller),
       ];
 
   @override

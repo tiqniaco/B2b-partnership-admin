@@ -1,5 +1,6 @@
 import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/home/admin_home_controller.dart';
+import 'package:b2b_partnership_admin/core/utils/assets_data.dart';
 import 'package:b2b_partnership_admin/widgets/block_widget.dart';
 
 import '/controller/settings/setting_controller.dart';
@@ -55,8 +56,18 @@ class _AdminHomeViewState extends State<AdminHomeView>
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
                     imageUrl: settingController.menuModel?.data?.image ?? "",
-                    errorWidget: (context, url, error) =>
-                        Icon(CupertinoIcons.person),
+                    errorWidget: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[200],
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                        ),
+                        child: Image.asset(
+                          AssetsData.manIconImage,
+                          fit: BoxFit.contain,
+                        ),
+                      );
+                    },
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -106,12 +117,8 @@ class _AdminHomeViewState extends State<AdminHomeView>
               Gap(50)
             ],
           ),
-        
-        
         );
       },
     );
   }
-
- 
 }

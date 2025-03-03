@@ -24,7 +24,7 @@ class ApiConstance {
   static const String deleteAccount = 'auth/delete-account';
 
   //client
-  static String getClientMenu(String id) => '/clients/$id';
+  static String getUserMenu(String id) => 'admins/$id';
 
   // home
   static const String getBanners = 'banners';
@@ -140,8 +140,8 @@ class ApiConstance {
   static String deleteShopCategory(String id) => "store/categories/$id";
   static String updateShopCategory(String id) => "store/categories/$id/update";
 
-  // Client Profile
-  static String updateClientProfile(String id) => 'clients/$id/update';
+  // Admin Profile
+  static String updateAdminProfile(String id) => 'admins/$id/update';
 
   // Complaints
   static String addComplaint = 'complaints';
