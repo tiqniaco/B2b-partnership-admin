@@ -13,6 +13,7 @@ import 'views/complaints/complaints_users_view.dart';
 import 'views/home/admin_home_layout.dart';
 import '/views/orders/orders_view.dart';
 
+import 'views/jobs/job_details_view.dart';
 import 'views/manage_users/provider_profile/previous_work_view.dart';
 import 'views/manage_users/provider_profile/provider_profile_view.dart';
 import '/views/service_details_view.dart';
@@ -123,6 +124,7 @@ class AppRoutes {
 
   static const String clientsService = '/clientsService';
   static const String jobs = '/jobs';
+  static const String jobDetails = '/jobDetails';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -292,6 +294,10 @@ class AppRoutes {
     GetPage(
       name: jobs,
       page: () => JobsView(),
+    ),
+    GetPage(
+      name: jobDetails,
+      page: () => const JobDetailsView(),
     ),
 
     // Edit Provider Profile

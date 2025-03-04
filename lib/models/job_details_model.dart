@@ -1,4 +1,5 @@
 import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
+import 'package:b2b_partnership_admin/core/enums/jobs_contract_type_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class JobDetailsModel extends Equatable {
@@ -7,7 +8,7 @@ class JobDetailsModel extends Equatable {
   final String description;
   final String skills;
   final String experience;
-  final String contractType;
+  final JobsContractTypeEnum contractType;
   final String expiryDate;
   final String gender;
   final String salary;
@@ -111,7 +112,9 @@ class JobDetailsModel extends Equatable {
         description: json["description"].toString(),
         skills: json["skills"].toString(),
         experience: json["experience"].toString(),
-        contractType: json["contract_type"].toString(),
+        contractType: JobsContractTypeEnum.values.firstWhere(
+          (element) => element.value == json["contract_type"],
+        ),
         expiryDate: json["expiry_date"].toString(),
         gender: json["gender"].toString(),
         salary: json["salary"].toString(),
