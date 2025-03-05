@@ -1,9 +1,10 @@
-import '/core/theme/app_color.dart';
-import '/widgets/provider/posts/select_city_post.dart';
-import '/widgets/provider/posts/select_country_post.dart';
-import '/widgets/provider/posts/select_specialization_post.dart';
-import '/widgets/provider/posts/select_sup_specialization_post.dart';
-import '/widgets/request_services/provider_freelance_item.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partnership_admin/core/theme/app_color.dart';
+import 'package:b2b_partnership_admin/widgets/provider/posts/select_city_post.dart';
+import 'package:b2b_partnership_admin/widgets/provider/posts/select_country_post.dart';
+import 'package:b2b_partnership_admin/widgets/provider/posts/select_specialization_post.dart';
+import 'package:b2b_partnership_admin/widgets/provider/posts/select_sup_specialization_post.dart';
+import 'package:b2b_partnership_admin/widgets/request_services/provider_freelance_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -11,76 +12,96 @@ import 'package:get/get.dart';
 
 import '../../../controller/provider/posts/get_provider_posts_service_controller.dart';
 
-class GetServiceRequest extends StatelessWidget {
-  GetServiceRequest({super.key});
+class ClientsServiceRequestView extends StatelessWidget {
+  ClientsServiceRequestView({super.key});
   final controller = Get.put(GetProviderPostsServiceController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<GetProviderPostsServiceController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gap(70),
-              Text("FILTERS",
-                  style: TextStyle(
-                      color: blackColor,
-                      letterSpacing: 4,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp)),
-              Gap(3),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SafeArea(
+        child: GetBuilder<GetProviderPostsServiceController>(
+          builder: (controller) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    filterWidget(() {
-                      showCategorySheet(context);
-                    }, "Category", Icons.category_outlined),
-                    Gap(10),
-                    filterWidget(() {
-                      showLocationSheet(context);
-                    }, "Location", Icons.location_on_outlined),
-                    Gap(10),
-                    filterWidget(() {
-                      controller.resetFunction();
-                    }, "Reset", Icons.refresh_outlined),
+                    IconButton(
+                      onPressed: () => Get.back(),
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        size: 16.sp,
+                        color: blackColor,
+                      ),
+                    ),
+                    Text(
+                      "FILTERS",
+                      style: TextStyle(
+                        color: blackColor,
+                        letterSpacing: 4,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Gap(15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    Text("${controller.services.length}",
-                        style: TextStyle(
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.sp)),
-                    Gap(10),
-                    Text("Freelance Service",
-                        style: TextStyle(
-                            color: blackColor,
-                            // fontWeight: FontWeight.w500,
-                            fontSize: 15.sp)),
-                  ],
+                Gap(3),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      filterWidget(() {
+                        showCategorySheet(context);
+                      }, "Category", Icons.category_outlined),
+                      Gap(10),
+                      filterWidget(() {
+                        showLocationSheet(context);
+                      }, "Location", Icons.location_on_outlined),
+                      Gap(10),
+                      filterWidget(() {
+                        controller.resetFunction();
+                      }, "Reset", Icons.refresh_outlined),
+                    ],
+                  ),
                 ),
-              ),
-              Gap(5),
-              Expanded(
+                Gap(15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      Text("${controller.services.length}",
+                          style: TextStyle(
+                              color: blackColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.sp)),
+                      Gap(10),
+                      Text("Freelance Service",
+                          style: TextStyle(
+                              color: blackColor,
+                              // fontWeight: FontWeight.w500,
+                              fontSize: 15.sp)),
+                    ],
+                  ),
+                ),
+                Gap(5),
+                Expanded(
+                    child: CustomServerStatusWidget(
+                  statusRequest: controller.statusRequest,
                   child: ListView.separated(
-                separatorBuilder: (context, index) => Gap(25),
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                itemCount: controller.services.length,
-                itemBuilder: (context, index) => ProviderFreelanceItem(
-                  model: controller.services[index],
-                ),
-              )),
-            ],
+                    controller: controller.scrollController,
+                    separatorBuilder: (context, index) => Gap(25),
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    itemCount: controller.services.length,
+                    itemBuilder: (context, index) => ProviderFreelanceItem(
+                      model: controller.services[index],
+                    ),
+                  ),
+                )),
+              ],
+            ),
           ),
         ),
       ),
@@ -192,7 +213,7 @@ class GetServiceRequest extends StatelessWidget {
                           Gap(20),
                           Expanded(
                             child: buttonWidget("Apply Filter", () {
-                              locationController.getServices();
+                              locationController.getServices(refresh: true);
                             }, true),
                           )
                         ],
@@ -256,7 +277,7 @@ class GetServiceRequest extends StatelessWidget {
                           Gap(20),
                           Expanded(
                             child: buttonWidget("Apply Filter", () {
-                              categoryController.getServices();
+                              categoryController.getServices(refresh: true);
                             }, true),
                           )
                         ],

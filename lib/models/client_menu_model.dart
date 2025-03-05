@@ -1,15 +1,15 @@
 import '/models/client_model.dart';
 
-class ClientMenuModel {
+class AdminMenuModel {
   String? status;
   String? message;
   int? jobsCount;
   int? shoppingCount;
   int? servicesCount;
   int? complaintsCount;
-  ClientModel? data;
+  AdminModel? data;
 
-  ClientMenuModel(
+  AdminMenuModel(
       {this.status,
       this.message,
       this.jobsCount,
@@ -18,14 +18,14 @@ class ClientMenuModel {
       this.complaintsCount,
       this.data});
 
-  ClientMenuModel.fromJson(Map<String, dynamic> json) {
+  AdminMenuModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     jobsCount = json['jobsCount'];
     shoppingCount = json['shoppingCount'];
     servicesCount = json['servicesCount'];
     complaintsCount = json['complaintsCount'];
-    data = json['data'] != null ? ClientModel.fromJson(json['data']) : null;
+    data = json['data'] != null ? AdminModel.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {

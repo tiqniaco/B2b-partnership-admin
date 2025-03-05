@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
-class EditClientProfileController extends GetxController {
+class EditAdminProfileController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -31,11 +31,11 @@ class EditClientProfileController extends GetxController {
   StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
 
-  ClientModel? model;
+  AdminModel? model;
 
   @override
   Future<void> onInit() async {
-    model = Get.arguments['model'] as ClientModel;
+    model = Get.arguments['model'] as AdminModel;
     await getCountries();
     selectedCountry = countries.firstWhere(
       (element) => element.id.toString() == model?.countryId,
@@ -136,7 +136,7 @@ class EditClientProfileController extends GetxController {
       final id = Get.find<AppPreferences>().getUserRoleId();
 
       final result = await CustomRequest<String>(
-        path: ApiConstance.updateClientProfile(id),
+        path: ApiConstance.updateAdminProfile(id),
         fromJson: (json) {
           return json['message'];
         },

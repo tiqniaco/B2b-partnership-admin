@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class ClientWidget extends StatelessWidget {
   ClientWidget({super.key, required this.clients});
-  final List<ClientModel> clients;
+  final List<AdminModel> clients;
 
   final controller = Get.put(ManageClientsController());
   @override
