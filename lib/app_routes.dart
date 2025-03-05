@@ -4,7 +4,7 @@ import 'package:b2b_partnership_admin/views/manage_users/manage_clients_view.dar
 import 'package:b2b_partnership_admin/views/manage_location/manage_location_view.dart';
 import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provider_types_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
-import 'package:b2b_partnership_admin/views/shop/shop_add_new_product_view.dart';
+import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
 
 import '/views/auth/forget_password_email_view.dart';
 import '/views/auth/forget_password_reset_view.dart';
