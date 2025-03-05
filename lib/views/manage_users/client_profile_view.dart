@@ -13,8 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ProviderProfileView extends StatelessWidget {
-  const ProviderProfileView({super.key});
+class ClientProfileView extends StatelessWidget {
+  const ClientProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {

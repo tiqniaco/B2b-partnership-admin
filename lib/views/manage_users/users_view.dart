@@ -41,16 +41,18 @@ class UsersView extends StatelessWidget {
                       crossAxisSpacing: 20,
                       childAspectRatio: 7 / 6.5),
                   children: [
-                    blockWidget(Colors.pink[900]!, "Clients",
-                        CupertinoIcons.person_2_fill, () {
+                    blockWidget(
+                        Colors.pink, "Clients", CupertinoIcons.person_2_fill,
+                        () {
                       Get.toNamed(AppRoutes.manageClients);
                     }),
-                    blockWidget(Colors.lime[900]!, "Providers",
-                        FontAwesomeIcons.userTie, () {
+                    blockWidget(
+                        Colors.orange, "Providers", FontAwesomeIcons.userTie,
+                        () {
                       Get.toNamed(AppRoutes.manageProviders);
                     }),
-                    blockWidget(Colors.brown[900]!, "Admins",
-                        Icons.admin_panel_settings, () {
+                    blockWidget(
+                        Colors.brown, "Admins", Icons.admin_panel_settings, () {
                       Get.toNamed(AppRoutes.manageAdmins);
                     }),
                   ],

@@ -32,7 +32,6 @@ class ManageClientsController extends GetxController {
       statusRequest = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
-      Get.back();
       getClients();
     });
     update();

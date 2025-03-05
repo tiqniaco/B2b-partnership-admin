@@ -19,7 +19,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-class ProviderProfileController extends GetxController {
+class ClientProfileController extends GetxController {
   late PageController pageController;
   int selectedIndex = 0;
   ProviderModel? providerModel;
@@ -50,9 +50,9 @@ class ProviderProfileController extends GetxController {
 
   void addReviewDialog() {
     Get.dialog(
-      GetBuilder<ProviderProfileController>(
-        init: ProviderProfileController(),
-        builder: (ProviderProfileController controller) {
+      GetBuilder<ClientProfileController>(
+        init: ClientProfileController(),
+        builder: (ClientProfileController controller) {
           return AlertDialog(
             title: const Text('Add Review'),
             content: Form(

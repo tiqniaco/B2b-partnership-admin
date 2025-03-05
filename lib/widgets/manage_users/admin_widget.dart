@@ -76,7 +76,7 @@ class AdminWidget extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "+${admins[index].countryCode!}${admins[index].phone!}",
+                                  admins[index].phone!,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 10.sp,

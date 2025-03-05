@@ -6,6 +6,7 @@ import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
 import 'package:b2b_partnership_admin/models/admins_model.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '/core/crud/custom_request.dart';
@@ -19,8 +20,10 @@ class ManageAdminsController extends GetxController {
   List<AdminModel> admins = [];
   StatusRequest statusRequestAdmins = StatusRequest.loading;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController nameArController = TextEditingController();
-  TextEditingController nameEnController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   File? imageFile;
   String? image;
 
@@ -61,35 +64,35 @@ class ManageAdminsController extends GetxController {
   addAdmin() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      if (imageFile == null) {
-        AppSnackBars.error(message: "image is required".tr);
-      } else {
-        statusRequestAdmins = StatusRequest.loading;
-
-        final response = await CustomRequest(
-            files: {
-              "image": imageFile!.path,
-            },
-            data: {
-              "name_ar": nameArController.text,
-              "name_en": nameEnController.text
-            },
-            path: ApiConstance.addCategory,
-            fromJson: (json) {
-              return json['data'];
-            }).sendPostRequest();
-        response.fold((l) {
-          statusRequestAdmins = StatusRequest.error;
-          Logger().e(l.errMsg);
-        }, (r) {
-          Get.back();
-          getAdmins();
-          nameArController.clear();
-          nameEnController.clear();
-          imageFile = null;
-        });
-        update();
-      }
+      statusRequestAdmins = StatusRequest.loading;
+      final response = await CustomRequest(
+          files: {
+            if (imageFile != null) "image": imageFile!.path,
+          },
+          data: {
+            "name": nameController.text,
+            "email": emailController.text,
+            "phone": phoneController.text,
+            "password": passwordController.text,
+            "role": "admin",
+          },
+          path: ApiConstance.register,
+          fromJson: (json) {
+            return json['data'];
+          }).sendPostRequest();
+      response.fold((l) {
+        AppSnackBars.error(message: l.errMsg);
+        Logger().e(l.errMsg);
+      }, (r) {
+        Get.back();
+        getAdmins();
+        nameController.clear();
+        emailController.clear();
+        phoneController.clear();
+        passwordController.clear();
+        imageFile = null;
+      });
+      update();
     } else {
       print("not valid");
     }
@@ -106,7 +109,6 @@ class ManageAdminsController extends GetxController {
       statusRequestAdmins = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
-      Get.back();
       getAdmins();
     });
     update();

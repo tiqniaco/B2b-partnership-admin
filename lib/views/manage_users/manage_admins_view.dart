@@ -99,14 +99,6 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "ADD NEW ADMIN",
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 17.sp,
-                          ),
-                        ),
-                        Gap(5),
                         Center(
                           child: GestureDetector(
                             onTap: controller.galleryImage,
@@ -115,14 +107,14 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                                     borderRadius: BorderRadius.circular(70),
                                     child: Image.file(
                                       controller.imageFile!,
-                                      height: 90.h,
-                                      width: 90.h,
+                                      height: 70.h,
+                                      width: 70.h,
                                       fit: BoxFit.cover,
                                     ),
                                   )
                                 : Container(
-                                    height: 90.h,
-                                    width: 90.h,
+                                    height: 70.h,
+                                    width: 70.h,
                                     decoration: BoxDecoration(
                                       color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(70),
@@ -138,7 +130,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                         TextFormWidget(
                           enabled: true,
                           contentPadding: EdgeInsets.all(15),
-                          textFormController: controller.nameEnController,
+                          textFormController: controller.nameController,
                           validator: (val) {
                             return controller.validUserData(val);
                           },
@@ -148,7 +140,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                         TextFormWidget(
                           enabled: true,
                           contentPadding: EdgeInsets.all(15),
-                          textFormController: controller.nameEnController,
+                          textFormController: controller.emailController,
                           validator: (val) {
                             return controller.validUserData(val);
                           },
@@ -158,11 +150,21 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                         TextFormWidget(
                           enabled: true,
                           contentPadding: EdgeInsets.all(15),
-                          textFormController: controller.nameArController,
+                          textFormController: controller.phoneController,
                           validator: (val) {
                             return controller.validUserData(val);
                           },
                           hintText: 'phone',
+                        ),
+                        Gap(10.h),
+                        TextFormWidget(
+                          enabled: true,
+                          contentPadding: EdgeInsets.all(15),
+                          textFormController: controller.passwordController,
+                          validator: (val) {
+                            return controller.validUserData(val);
+                          },
+                          hintText: 'password',
                         ),
                         Gap(10.h),
                         CustomLoadingButton(

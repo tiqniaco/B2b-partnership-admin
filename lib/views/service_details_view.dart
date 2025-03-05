@@ -222,15 +222,8 @@ class ServiceDetailsView extends StatelessWidget {
                                         .toString(),
                                     style: TextStyle(
                                         color: Colors.green,
-                                        fontSize: 18.sp,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold),
-                                  ),
-                                  Gap(7),
-                                  Text(
-                                    'Date',
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
-                                    ),
                                   ),
                                 ],
                               ),

@@ -1,8 +1,10 @@
 import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
 import 'package:b2b_partnership_admin/core/enums/status_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
+import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
 import 'package:b2b_partnership_admin/models/job_details_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class JobsController extends GetxController {
@@ -60,5 +62,37 @@ class JobsController extends GetxController {
       }
       update();
     });
+  }
+
+  void deleteJobsDialog(id) {
+    Get.defaultDialog(
+        title: "Delete Job",
+        titleStyle: TextStyle(fontSize: 15.sp),
+        middleText: "Are you sure you want to\ndelete this job?",
+        textConfirm: "Yes",
+        textCancel: "No",
+        onConfirm: () {
+          _deleteJobs(id);
+        });
+  }
+
+  void _deleteJobs(id) async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.deleteJob(id),
+      fromJson: (json) {
+        return json["message"];
+      },
+    ).sendDeleteRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (data) {
+        Get.back();
+        jobs.clear();
+        getJobs();
+        AppSnackBars.success(message: data);
+      },
+    );
   }
 }
