@@ -40,7 +40,6 @@ import 'views/orders/order_item_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/categories/shop_add_new_category_view.dart';
 import 'views/shop/categories/shop_edit_category_view.dart';
-import 'views/shop/products/shop_add_new_product_view.dart';
 import 'views/shop/products/shop_edit_product_view.dart';
 import 'views/shop/products/shop_product_details_view.dart';
 
