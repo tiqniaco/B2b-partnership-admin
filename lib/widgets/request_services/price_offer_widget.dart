@@ -89,8 +89,8 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                                         borderRadius:
                                             BorderRadius.circular(5)))),
                             onPressed: () {
-                              controller
-                                  .acceptPriceOffers(model.requestOfferId!);
+                              // controller
+                              // .acceptPriceOffers(model.requestOfferId!);
                             },
                             child: Text(
                               "Accept",
@@ -116,7 +116,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                           )),
                       IconButton(
                           onPressed: () {
-                            controller.deleteOffer(model.requestOfferId!);
+                            //controller.deleteOffer(model.requestOfferId!);
                           },
                           icon: Icon(Icons.close))
                     ],

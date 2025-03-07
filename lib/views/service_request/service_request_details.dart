@@ -188,47 +188,6 @@ class ServiceRequestDetails extends StatelessWidget {
                           )
                         ],
                       )
-                      // : Column(
-                      //     children: [
-                      //       SizedBox(
-                      //         width: 158.w,
-                      //         height: 35.h,
-                      //         child: ElevatedButton(
-                      //             style: ButtonStyle(
-                      //                 padding: WidgetStatePropertyAll(
-                      //                     EdgeInsets.symmetric(
-                      //                         horizontal: 10,
-                      //                         vertical: 5))),
-                      //             onPressed: () {
-                      //               controller.addPriceDialog();
-                      //             },
-                      //             child: Text(
-                      //               "Add price offer",
-                      //               style: TextStyle(
-                      //                   fontSize: 15.sp,
-                      //                   fontWeight: FontWeight.w500),
-                      //             )),
-                      //       ),
-                      //       Gap(10),
-                      //       CustomServerStatusWidget(
-                      //         statusRequest: controller.statusRequest,
-                      //         child: ListView.separated(
-                      //             padding:
-                      //                 EdgeInsets.symmetric(vertical: 10),
-                      //             physics: NeverScrollableScrollPhysics(),
-                      //             shrinkWrap: true,
-                      //             itemBuilder: (context, index) =>
-                      //                 PriceOfferWidget(
-                      //                   model: controller
-                      //                       .providerOffers[index],
-                      //                 ),
-                      //             separatorBuilder: (context, index) =>
-                      //                 Gap(15),
-                      //             itemCount:
-                      //                 controller.providerOffers.length),
-                      //       )
-                      //     ],
-                      //   )
                     ],
                   ))
             ],

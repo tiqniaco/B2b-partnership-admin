@@ -15,7 +15,7 @@ class ServiceWidgetVertical extends StatelessWidget {
     super.key,
     required this.services,
   });
-  final List<ServiceModelData> services;
+  final List<ServiceRequestModel> services;
 
   @override
   Widget build(BuildContext context) {

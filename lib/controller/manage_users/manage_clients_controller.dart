@@ -10,7 +10,7 @@ import 'package:logger/logger.dart';
 import '../../core/enums/status_request.dart';
 
 class ManageClientsController extends GetxController {
-  List<AdminModel> clients = [];
+  List<ClientModel> clients = [];
 
   StatusRequest statusRequest = StatusRequest.loading;
 
@@ -44,7 +44,7 @@ class ManageClientsController extends GetxController {
         path: ApiConstance.getClients(1),
         fromJson: (json) {
           return json['data']
-              .map<AdminModel>((e) => AdminModel.fromJson(e))
+              .map<ClientModel>((e) => ClientModel.fromJson(e))
               .toList();
         }).sendGetRequest();
     response.fold((l) {

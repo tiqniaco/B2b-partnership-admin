@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 
 class ServicesInCategoryController extends GetxController {
   StatusRequest statusRequestServices = StatusRequest.loading;
-  List<ServiceModelData> services = [];
+  List<ServiceRequestModel> services = [];
   late SpecializeModel specialization;
   List<SubSpecializeModel> subSpecializations = [];
   late SubSpecializeModel selectedSubSpecialization;
@@ -30,8 +30,8 @@ class ServicesInCategoryController extends GetxController {
             selectedSubSpecialization.id.toString()),
         fromJson: (json) {
           return json["data"]
-              .map<ServiceModelData>(
-                  (service) => ServiceModelData.fromJson(service))
+              .map<ServiceRequestModel>(
+                  (service) => ServiceRequestModel.fromJson(service))
               .toList();
         }).sendGetRequest();
     response.fold((l) {

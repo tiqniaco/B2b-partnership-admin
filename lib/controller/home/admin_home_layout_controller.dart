@@ -1,3 +1,4 @@
+import 'package:b2b_partnership_admin/views/manage_users/waiting_provider_view.dart';
 import 'package:b2b_partnership_admin/views/shop/shop_view.dart';
 
 import 'admin_home_controller.dart';
@@ -25,7 +26,7 @@ class AdminHomeLayoutController extends GetxController {
   final screens = [
     AdminHomeView(),
     const ShopView(),
-    Container(),
+    WaitingProviderView(),
     const UsersView(),
     const SettingsView(),
   ];

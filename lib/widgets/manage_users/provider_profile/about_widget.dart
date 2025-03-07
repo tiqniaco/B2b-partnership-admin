@@ -30,7 +30,9 @@ class AboutWidget extends StatelessWidget {
                   CupertinoIcons.person),
               Gap(15),
 
-              titleWidget("Phone", controller.providerModel!.phone!,
+              titleWidget(
+                  "Phone",
+                  "+${controller.providerModel!.countryCode!}${controller.providerModel!.phone!}",
                   CupertinoIcons.phone),
               Gap(15),
               titleWidget(

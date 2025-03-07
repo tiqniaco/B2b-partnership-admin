@@ -6,7 +6,7 @@ import '/models/services_model.dart';
 import 'package:get/get.dart';
 
 class GetMyServiceController extends GetxController {
-  List<ServiceModelData> providerServices = [];
+  List<ServiceRequestModel> providerServices = [];
 
   StatusRequest statusRequestServices = StatusRequest.loading;
   StatusRequest statusRequest = StatusRequest.loading;
@@ -25,8 +25,8 @@ class GetMyServiceController extends GetxController {
             Get.find<AppPreferences>().getUserRoleId()),
         fromJson: (json) {
           return json["data"]
-              .map<ServiceModelData>(
-                  (service) => ServiceModelData.fromJson(service))
+              .map<ServiceRequestModel>(
+                  (service) => ServiceRequestModel.fromJson(service))
               .toList();
         }).sendGetRequest();
     response.fold((l) {

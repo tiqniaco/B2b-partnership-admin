@@ -69,6 +69,8 @@ class ApiConstance {
   //-clients
   static String getClients(int page) => 'clients?page=$page';
   static String deleteClient(String id) => '/clients/$id';
+  static String getOneClient(String id) => 'clients/$id';
+  static String deletePost(String id) => 'request-services/$id';
 
   //-providers
   static String getProviders(int page) => 'providers?page=$page';
@@ -77,6 +79,8 @@ class ApiConstance {
   static String deleteJob(String id) => 'jobs/$id';
   static String deleteReview(int id) => 'provider-service-reviews/$id';
   static String getProviderJob = 'provider-jobs';
+  static String getWaitingProvider = 'admin/waiting-providers';
+  static String approveProviderProvider = 'admin/accept-provider';
 
   //-admins
   static const String getAdmins = 'admins';

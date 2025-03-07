@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'package:b2b_partnership_admin/models/admin_model.dart';
 import 'package:b2b_partnership_admin/models/provider_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/core/crud/custom_request.dart';
 import '/core/network/api_constance.dart';
@@ -11,9 +12,8 @@ import 'package:logger/logger.dart';
 
 import '../../core/enums/status_request.dart';
 
-class ManageProviderController extends GetxController {
+class WaitingProvidersController extends GetxController {
   List<ProviderModel> providers = [];
-  List<AdminModel> admins = [];
   StatusRequest statusRequest = StatusRequest.loading;
 
   @override
@@ -23,7 +23,19 @@ class ManageProviderController extends GetxController {
     super.onInit();
   }
 
-  deleteProvider(String id) async {
+  void deleteProviderDialog(id) {
+    Get.defaultDialog(
+        title: "Delete Provider",
+        titleStyle: TextStyle(fontSize: 14.sp),
+        middleText: "Are you sure you want to\ndelete this provider?",
+        textConfirm: "Yes",
+        textCancel: "No",
+        onConfirm: () {
+          _deleteProvider(id);
+        });
+  }
+
+  _deleteProvider(String id) async {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.deleteProvider(id),
@@ -40,10 +52,28 @@ class ManageProviderController extends GetxController {
     update();
   }
 
+  acceptProvider(String id) async {
+    statusRequest = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.approveProviderProvider,
+        data: {"provider_id": id},
+        fromJson: (json) {
+          return json['data'];
+        }).sendPostRequest();
+    response.fold((l) {
+      statusRequest = StatusRequest.error;
+      Logger().e(l.errMsg);
+    }, (r) {
+      Get.back();
+      getProvider();
+    });
+    update();
+  }
+
   Future<void> getProvider() async {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getProviders(1),
+        path: ApiConstance.getWaitingProvider,
         fromJson: (json) {
           return json['data']
               .map<ProviderModel>((e) => ProviderModel.fromJson(e))

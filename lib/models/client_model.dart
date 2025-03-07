@@ -1,6 +1,6 @@
-import '/core/constants/app_constants.dart';
+import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
 
-class AdminModel {
+class ClientModel {
   String? userId;
   String? name;
   String? email;
@@ -16,8 +16,9 @@ class AdminModel {
   String? governmentNameEn;
   String? createdAt;
   String? updatedAt;
+  String? providerId;
 
-  AdminModel(
+  ClientModel(
       {this.userId,
       this.name,
       this.email,
@@ -32,9 +33,10 @@ class AdminModel {
       this.governmentNameAr,
       this.governmentNameEn,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.providerId});
 
-  AdminModel.fromJson(Map<String, dynamic> json) {
+  ClientModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     name = json['name'];
     email = json['email'];
@@ -50,6 +52,7 @@ class AdminModel {
     governmentNameEn = json['government_name_en'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    providerId = json['provider_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +72,7 @@ class AdminModel {
     data['government_name_en'] = governmentNameEn;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['provider_id'] = providerId;
     return data;
   }
 }

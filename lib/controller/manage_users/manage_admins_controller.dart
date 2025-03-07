@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
-import 'package:b2b_partnership_admin/models/admins_model.dart';
+import 'package:b2b_partnership_admin/models/admin_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

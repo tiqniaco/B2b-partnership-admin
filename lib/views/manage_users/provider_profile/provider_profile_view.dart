@@ -89,7 +89,8 @@ class ProviderProfileView extends StatelessWidget {
                   RatingBar.builder(
                     ignoreGestures: true,
                     itemSize: 17.sp,
-                    initialRating: 3,
+                    initialRating:
+                        double.parse(controller.providerModel!.rating!),
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: false,

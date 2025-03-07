@@ -1,4 +1,4 @@
-import '/models/client_model.dart';
+import 'package:b2b_partnership_admin/models/admin_model.dart';
 
 class AdminMenuModel {
   String? status;

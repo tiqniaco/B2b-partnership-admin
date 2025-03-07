@@ -1,5 +1,6 @@
 import 'package:b2b_partnership_admin/views/jobs/jobs_view.dart';
 import 'package:b2b_partnership_admin/views/manage_categories/manage_categories_view.dart';
+import 'package:b2b_partnership_admin/views/manage_users/client_profile_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_admins_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_clients_view.dart';
 import 'package:b2b_partnership_admin/views/manage_location/manage_location_view.dart';
@@ -74,6 +75,7 @@ class AppRoutes {
   static const String manageClients = '/manageClients';
   static const String manageProviders = '/manageProviders';
   static const String manageAdmins = '/manageAdmins';
+  static const String clientProfileView = '/clientProfileView';
 
   //service request
   static const String addServicesRequest = '/addServicesRequest';
@@ -173,6 +175,11 @@ class AppRoutes {
     GetPage(
       name: manageClients,
       page: () => const ManageClientsView(),
+    ),
+
+    GetPage(
+      name: clientProfileView,
+      page: () => const ClientProfileView(),
     ),
 
     GetPage(

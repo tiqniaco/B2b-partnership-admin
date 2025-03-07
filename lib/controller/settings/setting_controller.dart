@@ -4,7 +4,7 @@ import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
 import '/core/network/api_constance.dart';
 import '/core/services/app_prefs.dart';
-import '/models/client_menu_model.dart';
+import '../../models/admin_menu_model.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';

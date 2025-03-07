@@ -28,10 +28,11 @@ class ProviderProfileController extends GetxController {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest statusRequestJobs = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
   StatusRequest statusRequestPerviousWork = StatusRequest.loading;
-  List<ServiceModelData> providerServices = [];
+  List<ServiceRequestModel> providerServices = [];
   List<ProviderPerviousWorkModel> previousWork = [];
   List<ReviewModel> reviews = [];
   List<JobDetailsModel> jobs = [];
@@ -251,8 +252,8 @@ class ProviderProfileController extends GetxController {
         path: ApiConstance.getProviderServices(provId),
         fromJson: (json) {
           return json["data"]
-              .map<ServiceModelData>(
-                  (service) => ServiceModelData.fromJson(service))
+              .map<ServiceRequestModel>(
+                  (service) => ServiceRequestModel.fromJson(service))
               .toList();
         }).sendGetRequest();
     response.fold((l) {
@@ -352,7 +353,7 @@ class ProviderProfileController extends GetxController {
 
 // ------ jobs
   Future<void> getJobs() async {
-    statusRequestServices = StatusRequest.loading;
+    statusRequestJobs = StatusRequest.loading;
     final response = await CustomRequest(
         data: {"provider_id": providerModel!.providerId},
         path: ApiConstance.getProviderJob,
@@ -363,11 +364,11 @@ class ProviderProfileController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestServices = StatusRequest.error;
+      statusRequestJobs = StatusRequest.error;
     }, (r) {
       jobs.clear();
       jobs = r;
-      statusRequestServices =
+      statusRequestJobs =
           r.isEmpty ? StatusRequest.noData : StatusRequest.success;
     });
     update();

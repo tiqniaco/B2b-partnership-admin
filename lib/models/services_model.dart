@@ -4,7 +4,7 @@ import '/models/provider_model.dart';
 class ServiceModel {
   String? status;
   String? message;
-  ServiceModelData? data;
+  ServiceRequestModel? data;
   ProviderModel? provider;
 
   ServiceModel({this.status, this.message, this.data, this.provider});
@@ -12,8 +12,9 @@ class ServiceModel {
   ServiceModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data =
-        json['data'] != null ? ServiceModelData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? ServiceRequestModel.fromJson(json['data'])
+        : null;
     provider = json['provider'] != null
         ? ProviderModel.fromJson(json['provider'])
         : null;
@@ -33,7 +34,7 @@ class ServiceModel {
   }
 }
 
-class ServiceModelData {
+class ServiceRequestModel {
   String? id;
   String? providerId;
   String? nameAr;
@@ -61,7 +62,7 @@ class ServiceModelData {
   String? createdAt;
   String? updatedAt;
 
-  ServiceModelData(
+  ServiceRequestModel(
       {this.id,
       this.providerId,
       this.nameAr,
@@ -89,7 +90,7 @@ class ServiceModelData {
       this.createdAt,
       this.updatedAt});
 
-  ServiceModelData.fromJson(Map<String, dynamic> json) {
+  ServiceRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
     providerId = json['provider_id'];
     nameAr = json['name_ar'];

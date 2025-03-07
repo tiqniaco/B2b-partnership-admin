@@ -52,9 +52,7 @@ class ServiceRequestDetailsController extends GetxController {
     model = Get.arguments['model'];
     scrollController.addListener(scrollFunction);
     getPriceOffers();
-    if (Get.find<AppPreferences>().getUserRole() == "provider") {
-      getProviderOffers();
-    }
+
     super.onInit();
   }
 
