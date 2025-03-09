@@ -26,7 +26,7 @@ class ShopProductDetailsView extends StatelessWidget {
               icon: Icon(
                 FontAwesomeIcons.trashCan,
                 size: 16.sp,
-                color: redColor,
+                color: blackColor,
               ),
               onPressed: () {
                 controller.deleteProductDialog();

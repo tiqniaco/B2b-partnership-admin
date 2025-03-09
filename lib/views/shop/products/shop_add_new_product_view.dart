@@ -66,7 +66,7 @@ class ShopAddNewProductView extends StatelessWidget {
                                           color: greyColor,
                                         ),
                                         Gap(4.h),
-                                        Text("No image selected"),
+                                        Text("No cover image selected"),
                                         Gap(4.h),
                                         Text(
                                           "Click to Select image",

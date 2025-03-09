@@ -95,7 +95,7 @@ class _AdminHomeViewState extends State<AdminHomeView>
                     crossAxisSpacing: 20,
                     childAspectRatio: 7 / 6.5),
                 children: [
-                  blockWidget(Colors.orange, "Categories", Icons.category, () {
+                  blockWidget(Colors.pink, "Categories", Icons.category, () {
                     Get.toNamed(AppRoutes.manageCategory);
                   }),
                   blockWidget(Colors.indigo, "Provider Types",
@@ -106,12 +106,12 @@ class _AdminHomeViewState extends State<AdminHomeView>
                       () {
                     Get.toNamed(AppRoutes.manageLocations);
                   }),
-                  blockWidget(Colors.brown, "Products",
-                      CupertinoIcons.cart_fill, () {}),
-                  blockWidget(
-                      Colors.pink, "Services", CupertinoIcons.cart_fill, () {}),
-                  blockWidget(Colors.cyan, "Categories",
-                      CupertinoIcons.cart_fill, () {})
+                  // blockWidget(Colors.brown, "Products",
+                  //     CupertinoIcons.cart_fill, () {}),
+                  // blockWidget(
+                  //     Colors.pink, "Services", CupertinoIcons.cart_fill, () {}),
+                  // blockWidget(Colors.cyan, "Categories",
+                  //     CupertinoIcons.cart_fill, () {})
                 ],
               ),
               Gap(50)

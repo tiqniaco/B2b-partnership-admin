@@ -86,7 +86,7 @@ class ServiceRequestModel {
     subSpecializationNameAr = json['sub_specialization_name_ar'];
     subSpecializationNameEn = json['sub_specialization_name_en'];
     countryId = json['country_id'];
-    countryFlag = kBaseImageUrl + json['country_flag'];
+    countryFlag = json['country_flag'];
     countryCode = json['country_code'];
     countryNameAr = json['country_name_ar'];
     countryNameEn = json['country_name_en'];

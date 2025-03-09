@@ -206,7 +206,7 @@ class FreelanceItem extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                             errorWidget: (context, url, error) =>
-                                Text("${services[index].image}"),
+                                Text(" error image"),
                           ),
                         ),
                     ],

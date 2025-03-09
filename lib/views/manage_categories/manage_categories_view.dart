@@ -187,7 +187,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                       },
                       hintText: 'Name in Arabic',
                     ),
-                    Gap(20.h),
+                    Gap(10.h),
                     CustomLoadingButton(
                       onPressed: () {
                         return controller.addSubSpecialization();
@@ -196,7 +196,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                       borderRadius: 10.r,
                       backgroundColor: primaryColor.withAlpha(100),
                     ),
-                    Gap(15.h),
+                    Gap(10.h),
                     InkWell(
                       onTap: () {
                         Get.back();
@@ -233,103 +233,102 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
               key: controller.formKey,
               child: Container(
                 padding: EdgeInsets.all(20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Add New Category",
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 17.sp,
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Add New Category",
+                          style: TextStyle(
+                            color: blackColor,
+                            fontSize: 17.sp,
+                          ),
                         ),
-                      ),
-                      Gap(10),
-                      Center(
-                        child: GestureDetector(
-                          onTap: controller.galleryImage,
-                          child: controller.imageFile != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(70),
-                                  child: Image.file(
-                                    controller.imageFile!,
+                        Gap(10),
+                        Center(
+                          child: GestureDetector(
+                            onTap: controller.galleryImage,
+                            child: controller.imageFile != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(70),
+                                    child: Image.file(
+                                      controller.imageFile!,
+                                      height: 100.h,
+                                      width: 100.h,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
                                     height: 100.h,
                                     width: 100.h,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Container(
-                                  height: 100.h,
-                                  width: 100.h,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(70),
-                                  ),
-                                  child: Icon(
-                                    Icons.image,
-                                    size: 35.sp,
-                                    color: Colors.grey,
-                                  )),
-                        ),
-                      ),
-                      Gap(20.h),
-                      TextFormWidget(
-                        enabled: true,
-                        contentPadding: EdgeInsets.all(15),
-                        textFormController: controller.nameEnController,
-                        validator: (val) {
-                          return controller.validUserData(val);
-                        },
-                        hintText: 'Name in English',
-                      ),
-                      Gap(10.h),
-                      TextFormWidget(
-                        enabled: true,
-                        contentPadding: EdgeInsets.all(15),
-                        textFormController: controller.nameArController,
-                        validator: (val) {
-                          return controller.validUserData(val);
-                        },
-                        hintText: 'Name in Arabic',
-                      ),
-                      Gap(20.h),
-                      CustomLoadingButton(
-                        onPressed: () {
-                          return controller.addSpecialization();
-                        },
-                        text: "Add".tr,
-                        borderRadius: 10.r,
-                        backgroundColor: primaryColor.withAlpha(100),
-                      ),
-                      Gap(10.h),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 35.h,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: greyColor,
-                            borderRadius: BorderRadius.circular(10.r),
-                            //  border: Border.all(color: greyColor),
-                          ),
-                          child: Text(
-                            "Cancel",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(70),
+                                    ),
+                                    child: Icon(
+                                      Icons.image,
+                                      size: 35.sp,
+                                      color: Colors.grey,
+                                    )),
                           ),
                         ),
-                      ),
-                    ]),
+                        Gap(15.h),
+                        TextFormWidget(
+                          enabled: true,
+                          contentPadding: EdgeInsets.all(15),
+                          textFormController: controller.nameEnController,
+                          validator: (val) {
+                            return controller.validUserData(val);
+                          },
+                          hintText: 'Name in English',
+                        ),
+                        Gap(10.h),
+                        TextFormWidget(
+                          enabled: true,
+                          contentPadding: EdgeInsets.all(15),
+                          textFormController: controller.nameArController,
+                          validator: (val) {
+                            return controller.validUserData(val);
+                          },
+                          hintText: 'Name in Arabic',
+                        ),
+                        Gap(10.h),
+                        CustomLoadingButton(
+                          onPressed: () {
+                            return controller.addSpecialization();
+                          },
+                          text: "Add".tr,
+                          borderRadius: 10.r,
+                          backgroundColor: primaryColor.withAlpha(100),
+                        ),
+                        Gap(10.h),
+                        InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 35.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: greyColor,
+                              borderRadius: BorderRadius.circular(10.r),
+                              //  border: Border.all(color: greyColor),
+                            ),
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ]),
+                ),
               ),
             ),
           );
         });
   }
-
-
-
 }

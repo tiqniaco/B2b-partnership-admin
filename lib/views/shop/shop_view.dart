@@ -30,7 +30,8 @@ class ShopView extends StatelessWidget {
             title: Row(
               children: [
                 SizedBox(
-                  width: 0.5.sw,
+                  height: 35.h,
+                  width: 0.62.sw,
                   child: TextFormField(
                     controller: controller.searchController,
                     style: getRegularStyle,
@@ -50,19 +51,19 @@ class ShopView extends StatelessWidget {
                     },
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    controller.getShopProducts(firstTime: true);
-                  },
-                  icon: Icon(
-                    CupertinoIcons.search,
-                    color: blackColor,
-                  ),
-                ),
               ],
             ),
             backgroundColor: whiteColor,
             actions: [
+              IconButton(
+                onPressed: () {
+                  controller.getShopProducts(firstTime: true);
+                },
+                icon: Icon(
+                  CupertinoIcons.search,
+                  color: blackColor,
+                ),
+              ),
               Container(
                 margin: EdgeInsetsDirectional.only(end: 8.w),
                 child: IconButton(
@@ -73,10 +74,10 @@ class ShopView extends StatelessWidget {
                   icon: SvgPicture.asset(
                     'assets/svgs/bag2.svg',
                     colorFilter: ColorFilter.mode(
-                      primaryColor,
+                      blackColor,
                       BlendMode.srcIn,
                     ),
-                    width: 25.w,
+                    width: 23.w,
                   ),
                 ),
               ),
@@ -141,23 +142,29 @@ class ShopView extends StatelessWidget {
                               horizontal: 4.w,
                             ),
                             itemBuilder: (context, index) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  InkWell(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    splashColor: primaryColor.withAlpha(10),
-                                    onTap: () {
-                                      controller.onTapCategory(index);
-                                    },
-                                    child: SizedBox(
-                                      height: 50.h,
+                              return Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: controller.selectedCategory ==
+                                          controller.shopCategories[index]
+                                      ? primaryColor.withAlpha(10)
+                                      : whiteColor,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    InkWell(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      splashColor: primaryColor.withAlpha(20),
+                                      onTap: () {
+                                        controller.onTapCategory(index);
+                                      },
                                       child: Column(
                                         children: [
                                           CircleAvatar(
                                             radius: 18.r,
-                                            backgroundColor:
-                                                primaryColor.withAlpha(10),
+                                            backgroundColor: transparentColor,
                                             child: CustomNetworkImage(
                                               imageUrl: controller
                                                   .shopCategories[index].image,
@@ -173,51 +180,57 @@ class ShopView extends StatelessWidget {
                                                   .shopCategories[index].nameEn,
                                             ),
                                             style: getLightStyle.copyWith(
-                                              fontWeight: controller
-                                                          .selectedCategory ==
-                                                      controller
-                                                          .shopCategories[index]
-                                                  ? FontManager.boldFontWeight
-                                                  : FontManager
-                                                      .regularFontWeight,
-                                              color: controller
-                                                          .selectedCategory ==
-                                                      controller
-                                                          .shopCategories[index]
-                                                  ? primaryColor
-                                                  : greyColor,
-                                              fontSize: 9.5.sp,
+                                              fontWeight:
+                                                  FontManager.regularFontWeight,
+                                              color: blackColor,
+                                              fontSize: 9.8.sp,
                                             ),
                                           )
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  TextButton.icon(
-                                    onPressed: () {
-                                      Get.toNamed(
-                                        AppRoutes.shopEditCategory,
-                                        arguments: {
-                                          'model':
-                                              controller.shopCategories[index],
-                                        },
-                                      );
-                                    },
-                                    icon: const Icon(
-                                        FontAwesomeIcons.penToSquare),
-                                    label: const Text('Edit'),
-                                  ),
-                                  TextButton.icon(
-                                    onPressed: () {
-                                      controller.deleteCategoryDialog(index);
-                                    },
-                                    icon: const Icon(FontAwesomeIcons.trash),
-                                    label: const Text('Delete'),
-                                  ),
-                                ],
+                                    Gap(10),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                AppRoutes.shopEditCategory,
+                                                arguments: {
+                                                  'model': controller
+                                                      .shopCategories[index],
+                                                },
+                                              );
+                                            },
+                                            child: Icon(
+                                              FontAwesomeIcons.penToSquare,
+                                              size: 15.sp,
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              controller
+                                                  .deleteCategoryDialog(index);
+                                            },
+                                            child: Icon(FontAwesomeIcons.trash,
+                                                size: 15.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
-                            separatorBuilder: (context, index) => Gap(20.h),
+                            separatorBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Divider(),
+                            ),
                             itemCount: controller.shopCategories.length,
                           ),
                         ),

@@ -53,10 +53,11 @@ class SelectCountryWidget extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-                Image.network(
+                Text(
                   item.flag!,
-                  width: 23.h,
-                  fit: BoxFit.cover,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                  ),
                 ),
                 SizedBox(width: 8.w),
                 Expanded(

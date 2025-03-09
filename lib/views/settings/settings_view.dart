@@ -155,7 +155,7 @@ class SettingsView extends StatelessWidget {
                                             Colors.green,
                                             controller.menuModel!.servicesCount
                                                 .toString(),
-                                            "Client Services", () {
+                                            "Posts", () {
                                           Get.toNamed(
                                             AppRoutes.clientsService,
                                           );

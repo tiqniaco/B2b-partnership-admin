@@ -31,7 +31,7 @@ class CategoryWidget extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
-            mainAxisExtent: 180,
+            mainAxisExtent: 170,
           ),
           itemBuilder: (context, index) => InkWell(
                 onTap: () {
@@ -41,7 +41,7 @@ class CategoryWidget extends StatelessWidget {
                   children: [
                     Container(
                       width: 100.h,
-                      height: 130.h,
+                      height: 135.h,
                       padding: EdgeInsets.all(18),
                       decoration: BoxDecoration(
                           color: controller.selectedIndex == index

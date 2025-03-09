@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
-
+import 'package:b2b_partnership_admin/core/local_data/countries.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
 import 'package:b2b_partnership_admin/models/city_model.dart';
 import 'package:b2b_partnership_admin/models/country_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '/core/crud/custom_request.dart';
 import '/core/network/api_constance.dart';
@@ -29,8 +27,8 @@ class ManageLocationController extends GetxController {
 
   TextEditingController nameArController = TextEditingController();
   TextEditingController nameEnController = TextEditingController();
-  File? imageFile;
-  String? image;
+
+  Country? newCountry;
 
   @override
   Future<void> onInit() async {
@@ -39,18 +37,19 @@ class ManageLocationController extends GetxController {
     super.onInit();
   }
 
-  onEdit(CountryModel model) {
-    nameArController.text = model.nameAr!;
-    nameEnController.text = model.nameEn!;
-    image = model.flag!;
-
+  onChangedCountry(Country? country) {
+    newCountry = country;
+    print(newCountry!.code);
+    print(newCountry!.minLength);
+    print(newCountry!.maxLength);
+    print(newCountry!.name);
+    print(newCountry!.nameTranslations['ar']);
     update();
   }
 
-  onEditCancel() {
-    nameArController.clear();
-    nameEnController.clear();
-    image = "";
+  onAddCancel() {
+    Get.back();
+    newCountry = null;
     update();
   }
 
@@ -78,28 +77,6 @@ class ManageLocationController extends GetxController {
     }
   }
 
-  galleryImage() async {
-    XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    imageFile = File(xfile!.path);
-    Get.defaultDialog(
-        content: SizedBox(
-          width: 300,
-          height: 300,
-          child: Image.file(
-            imageFile!,
-            fit: BoxFit.cover,
-          ),
-        ),
-        onCancel: () {
-          imageFile = null;
-          update();
-        },
-        onConfirm: () {
-          Get.back();
-        });
-    update();
-  }
-
   deleteCountry(int id) async {
     statusRequestCountry = StatusRequest.loading;
     final response = await CustomRequest(
@@ -118,57 +95,20 @@ class ManageLocationController extends GetxController {
   }
 
   addCountry() async {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-      if (imageFile == null) {
-        AppSnackBars.error(message: "image is required".tr);
-      } else {
-        statusRequestCountry = StatusRequest.loading;
-
-        final response = await CustomRequest(
-            files: {
-              "image": imageFile!.path,
-            },
-            data: {
-              "name_ar": nameArController.text,
-              "name_en": nameEnController.text
-            },
-            path: ApiConstance.addCountry,
-            fromJson: (json) {
-              return json['data'];
-            }).sendPostRequest();
-        response.fold((l) {
-          statusRequestCountry = StatusRequest.error;
-          Logger().e(l.errMsg);
-        }, (r) {
-          Get.back();
-          getCountries();
-          nameArController.clear();
-          nameEnController.clear();
-          imageFile = null;
-        });
-        update();
-      }
+    if (newCountry == null) {
+      AppSnackBars.error(message: "Please select a country".tr);
     } else {
-      print("not valid");
-    }
-  }
-
-  editCountry(int id) async {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-
       statusRequestCountry = StatusRequest.loading;
 
       final response = await CustomRequest(
-          files: {
-            if (image != null) "image": imageFile!.path,
-          },
           data: {
-            "name_ar": nameArController.text,
-            "name_en": nameEnController.text
+            "name_ar": newCountry!.nameTranslations['ar'],
+            "name_en": newCountry!.name,
+            "code": newCountry!.dialCode,
+            "flag": newCountry!.flag,
+            "phone_length": newCountry!.minLength,
           },
-          path: ApiConstance.editCountry(id),
+          path: ApiConstance.addCountry,
           fromJson: (json) {
             return json['data'];
           }).sendPostRequest();
@@ -178,13 +118,8 @@ class ManageLocationController extends GetxController {
       }, (r) {
         Get.back();
         getCountries();
-        nameArController.clear();
-        nameEnController.clear();
-        imageFile = null;
       });
       update();
-    } else {
-      print("not valid");
     }
   }
 

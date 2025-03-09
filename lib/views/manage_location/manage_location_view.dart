@@ -1,9 +1,10 @@
 import 'package:b2b_partnership_admin/controller/manage_location/manage_location_controller.dart';
+import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/text_form_widget.dart';
+import 'package:b2b_partnership_admin/core/local_data/countries.dart';
 import 'package:b2b_partnership_admin/widgets/manage_location/city_widget.dart';
 import 'package:b2b_partnership_admin/widgets/manage_location/country_widget.dart';
-
 import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
 import '../../widgets/manage_category/row_widget.dart';
@@ -233,96 +234,103 @@ class _ManageLocationViewState extends State<ManageLocationView>
             builder: (con) => Form(
               key: controller.formKey,
               child: Container(
+                height: 400.h,
                 padding: EdgeInsets.all(20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Add New Country",
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 17.sp,
-                        ),
-                      ),
-                      Gap(10),
-                      GestureDetector(
-                        onTap: controller.galleryImage,
-                        child: controller.imageFile != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  controller.imageFile!,
-                                  height: 70.h,
-                                  width: 100.h,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : Container(
-                                height: 70.h,
-                                width: 100.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Icon(
-                                  Icons.image,
-                                  size: 35.sp,
-                                  color: Colors.grey,
-                                )),
-                      ),
-                      Gap(20.h),
-                      TextFormWidget(
-                        enabled: true,
-                        contentPadding: EdgeInsets.all(15),
-                        textFormController: controller.nameEnController,
-                        validator: (val) {
-                          return controller.validUserData(val);
-                        },
-                        hintText: 'Name in English',
-                      ),
-                      Gap(10.h),
-                      TextFormWidget(
-                        enabled: true,
-                        contentPadding: EdgeInsets.all(15),
-                        textFormController: controller.nameArController,
-                        validator: (val) {
-                          return controller.validUserData(val);
-                        },
-                        hintText: 'Name in Arabic',
-                      ),
-                      Gap(20.h),
-                      CustomLoadingButton(
-                        onPressed: () {
-                          return controller.addCountry();
-                        },
-                        text: "Add".tr,
-                        borderRadius: 10.r,
-                        backgroundColor: primaryColor.withAlpha(100),
-                      ),
-                      Gap(10.h),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 35.h,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: greyColor,
-                            borderRadius: BorderRadius.circular(10.r),
-                            //  border: Border.all(color: greyColor),
-                          ),
-                          child: Text(
-                            "Cancel",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold),
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Add New Country",
+                          style: TextStyle(
+                            color: blackColor,
+                            fontSize: 17.sp,
                           ),
                         ),
-                      ),
-                    ]),
+                        Gap(15.h),
+                        DropdownButton<Country>(
+                          isExpanded: true,
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            color: Colors.black,
+                          ),
+                          elevation: 5,
+                          iconEnabledColor: primaryColor,
+                          hint: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Choose Country'.tr,
+                                style: TextStyle(fontSize: 20.sp)),
+                          ),
+                          value: controller.newCountry,
+                          items: countriesLocalList.map((country) {
+                            return DropdownMenuItem<Country>(
+                              value: country,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    country.flag,
+                                    style: TextStyle(
+                                      fontSize: 19.sp,
+                                    ),
+                                  ),
+                                  Gap(10.w),
+                                  Expanded(
+                                    child: Text(
+                                      translateDatabase(
+                                        arabic: country.nameTranslations['ar']!,
+                                        english: country.name,
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            controller.onChangedCountry(value);
+                          },
+                        ),
+                        Gap(50.h),
+                        CustomLoadingButton(
+                          onPressed: () {
+                            return controller.addCountry();
+                          },
+                          text: "Add".tr,
+                          borderRadius: 10.r,
+                          backgroundColor: primaryColor.withAlpha(100),
+                        ),
+                        Gap(10.h),
+                        InkWell(
+                          onTap: () {
+                            con.onAddCancel();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 35.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: greyColor,
+                              borderRadius: BorderRadius.circular(10.r),
+                              //  border: Border.all(color: greyColor),
+                            ),
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ]),
+                ),
               ),
             ),
           );

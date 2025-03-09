@@ -42,7 +42,7 @@ class UsersView extends StatelessWidget {
                       childAspectRatio: 7 / 6.5),
                   children: [
                     blockWidget(
-                        Colors.pink, "Clients", CupertinoIcons.person_2_fill,
+                        Colors.green, "Clients", CupertinoIcons.person_2_fill,
                         () {
                       Get.toNamed(AppRoutes.manageClients);
                     }),

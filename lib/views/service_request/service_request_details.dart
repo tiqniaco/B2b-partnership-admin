@@ -37,6 +37,11 @@ class ServiceRequestDetails extends StatelessWidget {
                         height: 160.h,
                         width: double.infinity,
                         fit: BoxFit.cover,
+                        errorWidget: (context, url, error) => Center(
+                          child: Text(
+                            "No Image",
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -131,10 +136,7 @@ class ServiceRequestDetails extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CachedNetworkImage(
-                                  imageUrl: controller.model.countryFlag!,
-                                  height: 20.h,
-                                ),
+                                Text(controller.model.countryFlag!),
                                 Gap(10),
                                 Text(
                                     translateDatabase(

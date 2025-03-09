@@ -33,7 +33,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                           arguments: {"id": services[index].id});
                     },
                     child: Container(
-                      height: 116.h,
+                      height: 123.h,
                       padding: EdgeInsets.all(18),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
@@ -70,104 +70,110 @@ class ServiceWidgetVertical extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Gap(10),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          translateDatabase(
-                                              arabic: services[index]
-                                                  .specializationNameAr!,
-                                              english: services[index]
-                                                  .specializationNameEn!),
-                                          style: TextStyle(
-                                              fontSize: 12.sp,
-                                              color: greyColor,
-                                              fontWeight: FontWeight.w500),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                        ),
-                                        Gap(8.h),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        WidgetStatePropertyAll(
-                                                      Colors.green,
-                                                    ),
-                                                    padding:
-                                                        WidgetStatePropertyAll(
-                                                      EdgeInsets.symmetric(
-                                                        horizontal: 10,
+                                    SizedBox(
+                                      height: 30.h,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            translateDatabase(
+                                                arabic: services[index]
+                                                    .specializationNameAr!,
+                                                english: services[index]
+                                                    .specializationNameEn!),
+                                            style: TextStyle(
+                                                fontSize: 12.sp,
+                                                color: greyColor,
+                                                fontWeight: FontWeight.w500),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                          Gap(8.h),
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          WidgetStatePropertyAll(
+                                                        Colors.green,
                                                       ),
-                                                    ),
-                                                    shape:
-                                                        WidgetStatePropertyAll(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          5,
+                                                      padding:
+                                                          WidgetStatePropertyAll(
+                                                        EdgeInsets.symmetric(
+                                                          horizontal: 10,
+                                                        ),
+                                                      ),
+                                                      shape:
+                                                          WidgetStatePropertyAll(
+                                                        RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                            5,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  onPressed: () {
-                                                    controller
-                                                        .deleteServiceDialog(
-                                                            services[index].id);
-                                                  },
-                                                  child: Text(
-                                                    "Delete",
-                                                    style: TextStyle(
-                                                        fontSize: 11.sp),
-                                                  ),
-                                                ),
-                                              ),
-                                              Gap(4.w),
-                                              Expanded(
-                                                flex: 1,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    padding:
-                                                        WidgetStatePropertyAll(
-                                                            EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        10)),
-                                                    shape:
-                                                        WidgetStatePropertyAll(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
+                                                    onPressed: () {
+                                                      controller
+                                                          .deleteServiceDialog(
+                                                              services[index]
+                                                                  .id);
+                                                    },
+                                                    child: Text(
+                                                      "Delete",
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp),
                                                     ),
                                                   ),
-                                                  onPressed: () {
-                                                    Get.toNamed(
-                                                      AppRoutes.serviceDetails,
-                                                      arguments: {
-                                                        "id":
-                                                            services[index].id,
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Text(
-                                                    "View",
-                                                    style: TextStyle(
-                                                        fontSize: 11.sp),
+                                                ),
+                                                Gap(4.w),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      padding:
+                                                          WidgetStatePropertyAll(
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          10)),
+                                                      shape:
+                                                          WidgetStatePropertyAll(
+                                                        RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      Get.toNamed(
+                                                        AppRoutes
+                                                            .serviceDetails,
+                                                        arguments: {
+                                                          "id": services[index]
+                                                              .id,
+                                                        },
+                                                      );
+                                                    },
+                                                    child: Text(
+                                                      "View",
+                                                      style: TextStyle(
+                                                          fontSize: 11.sp),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),

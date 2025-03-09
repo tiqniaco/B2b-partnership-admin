@@ -1,4 +1,3 @@
-import '/core/constants/app_constants.dart';
 
 class CountryModel {
   int? id;
@@ -24,7 +23,7 @@ class CountryModel {
     id = json['id'];
     nameAr = json['name_ar'];
     nameEn = json['name_en'];
-    flag = kBaseImageUrl + json['flag'];
+    flag = json['flag'];
     code = json['code'];
     phoneLength = json['phone_length'];
     createdAt = json['created_at'];

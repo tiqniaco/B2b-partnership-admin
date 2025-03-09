@@ -1,11 +1,8 @@
 import 'package:b2b_partnership_admin/controller/manage_location/manage_location_controller.dart';
-import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
-import 'package:b2b_partnership_admin/core/global/widgets/text_form_widget.dart';
 import 'package:b2b_partnership_admin/models/country_model.dart';
 
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -33,7 +30,8 @@ class CountryWidget extends StatelessWidget {
                     child: Container(
                       // width: 100.h,
                       // height: 130.h,
-                      padding: EdgeInsets.all(10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                       decoration: BoxDecoration(
                           color: controller.selectedId == country.id
                               ? primaryColor.withAlpha(40)
@@ -44,9 +42,11 @@ class CountryWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          CachedNetworkImage(
-                            imageUrl: country.flag!,
-                            height: 25.h,
+                          Text(
+                            country.flag!,
+                            style: TextStyle(
+                              fontSize: 23.sp,
+                            ),
                           ),
                           Gap(10.w),
                           Text(
@@ -161,30 +161,6 @@ class CountryWidget extends StatelessWidget {
                           ),
                         ),
                         Gap(20.h),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                            controller.onEdit(model);
-                            onTapEdit();
-                          },
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.edit,
-                                size: 20.sp,
-                              ),
-                              Gap(10.w),
-                              Text(
-                                "Edit".tr,
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: blackColor,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Gap(10.h),
                         Divider(),
                         Gap(10.h),
                         InkWell(
@@ -230,114 +206,114 @@ class CountryWidget extends StatelessWidget {
                 )));
   }
 
-  onTapEdit() {
-    return Get.defaultDialog(
-        barrierDismissible: false,
-        title: "",
-        titlePadding: EdgeInsets.zero,
-        content: GetBuilder<ManageLocationController>(
-          builder: (con) => Form(
-            key: controller.formKey,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Edit Category",
-                      style: TextStyle(
-                        color: blackColor,
-                        fontSize: 17.sp,
-                      ),
-                    ),
-                    Gap(10),
-                    Center(
-                      child: GestureDetector(
-                        onTap: controller.galleryImage,
-                        child: controller.imageFile != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(70),
-                                child: Image.file(
-                                  controller.imageFile!,
-                                  height: 100.h,
-                                  width: 100.h,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : SizedBox(
-                                // height: 100.h,
-                                // width: 100.h,
-                                child: ClipRRect(
-                                borderRadius: BorderRadius.circular(70),
-                                child: CachedNetworkImage(
-                                  imageUrl: controller.image!,
-                                  height: 100.h,
-                                  width: 100.h,
-                                  fit: BoxFit.cover,
-                                  errorWidget: (context, url, error) => Icon(
-                                      Icons.image,
-                                      size: 50.sp,
-                                      color: Colors.grey.shade700),
-                                ),
-                              )),
-                      ),
-                    ),
-                    Gap(20.h),
-                    TextFormWidget(
-                      enabled: true,
-                      contentPadding: EdgeInsets.all(15),
-                      textFormController: controller.nameEnController,
-                      validator: (val) {
-                        return controller.validUserData(val);
-                      },
-                      hintText: 'Name in English',
-                    ),
-                    Gap(10.h),
-                    TextFormWidget(
-                      enabled: true,
-                      contentPadding: EdgeInsets.all(15),
-                      textFormController: controller.nameArController,
-                      validator: (val) {
-                        return controller.validUserData(val);
-                      },
-                      hintText: 'Name in Arabic',
-                    ),
-                    Gap(20.h),
-                    CustomLoadingButton(
-                      onPressed: () {
-                        return controller.addCountry();
-                      },
-                      text: "Save".tr,
-                      borderRadius: 10.r,
-                      backgroundColor: primaryColor.withAlpha(100),
-                    ),
-                    Gap(10.h),
-                    InkWell(
-                      onTap: () {
-                        controller.onEditCancel();
-                        Get.back();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 35.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: greyColor,
-                          borderRadius: BorderRadius.circular(10.r),
-                          //  border: Border.all(color: greyColor),
-                        ),
-                        child: Text(
-                          "Cancel",
-                          style: TextStyle(
-                              color: whiteColor,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
-        ));
-  }
+  // onTapEdit() {
+  //   return Get.defaultDialog(
+  //       barrierDismissible: false,
+  //       title: "",
+  //       titlePadding: EdgeInsets.zero,
+  //       content: GetBuilder<ManageLocationController>(
+  //         builder: (con) => Form(
+  //           key: controller.formKey,
+  //           child: Container(
+  //             padding: EdgeInsets.all(20),
+  //             child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     "Edit Category",
+  //                     style: TextStyle(
+  //                       color: blackColor,
+  //                       fontSize: 17.sp,
+  //                     ),
+  //                   ),
+  //                   Gap(10),
+  //                   Center(
+  //                     child: GestureDetector(
+  //                       onTap: controller.galleryImage,
+  //                       child: controller.imageFile != null
+  //                           ? ClipRRect(
+  //                               borderRadius: BorderRadius.circular(70),
+  //                               child: Image.file(
+  //                                 controller.imageFile!,
+  //                                 height: 100.h,
+  //                                 width: 100.h,
+  //                                 fit: BoxFit.cover,
+  //                               ),
+  //                             )
+  //                           : SizedBox(
+  //                               // height: 100.h,
+  //                               // width: 100.h,
+  //                               child: ClipRRect(
+  //                               borderRadius: BorderRadius.circular(70),
+  //                               child: CachedNetworkImage(
+  //                                 imageUrl: controller.image!,
+  //                                 height: 100.h,
+  //                                 width: 100.h,
+  //                                 fit: BoxFit.cover,
+  //                                 errorWidget: (context, url, error) => Icon(
+  //                                     Icons.image,
+  //                                     size: 50.sp,
+  //                                     color: Colors.grey.shade700),
+  //                               ),
+  //                             )),
+  //                     ),
+  //                   ),
+  //                   Gap(20.h),
+  //                   TextFormWidget(
+  //                     enabled: true,
+  //                     contentPadding: EdgeInsets.all(15),
+  //                     textFormController: controller.nameEnController,
+  //                     validator: (val) {
+  //                       return controller.validUserData(val);
+  //                     },
+  //                     hintText: 'Name in English',
+  //                   ),
+  //                   Gap(10.h),
+  //                   TextFormWidget(
+  //                     enabled: true,
+  //                     contentPadding: EdgeInsets.all(15),
+  //                     textFormController: controller.nameArController,
+  //                     validator: (val) {
+  //                       return controller.validUserData(val);
+  //                     },
+  //                     hintText: 'Name in Arabic',
+  //                   ),
+  //                   Gap(20.h),
+  //                   CustomLoadingButton(
+  //                     onPressed: () {
+  //                       return controller.addCountry();
+  //                     },
+  //                     text: "Save".tr,
+  //                     borderRadius: 10.r,
+  //                     backgroundColor: primaryColor.withAlpha(100),
+  //                   ),
+  //                   Gap(10.h),
+  //                   InkWell(
+  //                     onTap: () {
+  //                       controller.onEditCancel();
+  //                       Get.back();
+  //                     },
+  //                     child: Container(
+  //                       alignment: Alignment.center,
+  //                       height: 35.h,
+  //                       width: double.infinity,
+  //                       decoration: BoxDecoration(
+  //                         color: greyColor,
+  //                         borderRadius: BorderRadius.circular(10.r),
+  //                         //  border: Border.all(color: greyColor),
+  //                       ),
+  //                       child: Text(
+  //                         "Cancel",
+  //                         style: TextStyle(
+  //                             color: whiteColor,
+  //                             fontSize: 15.sp,
+  //                             fontWeight: FontWeight.bold),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ]),
+  //           ),
+  //         ),
+  //       ));
+  // }
 }
