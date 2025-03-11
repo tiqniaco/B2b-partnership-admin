@@ -30,12 +30,12 @@ class _ManageProviderViewState extends State<ManageProviderView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage",
+                  "Manage".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Gap(5.w),
                 Text(
-                  "Provider",
+                  "Providers".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],

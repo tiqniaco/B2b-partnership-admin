@@ -36,15 +36,15 @@ class _ComplaintsUsersViewState extends State<ComplaintsUsersView>
           length: 2,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text("Complaints"),
+              title: Text("Complaints".tr),
               bottom: TabBar(
                 controller: tabController,
                 tabs: [
                   Tab(
-                    text: "Clients",
+                    text: "Clients".tr,
                   ),
                   Tab(
-                    text: "Providers",
+                    text: "Providers".tr,
                   ),
                 ],
               ),
@@ -114,12 +114,12 @@ class UserComplaintsListWidget extends StatelessWidget {
             ),
             onPressed: () {
               Get.defaultDialog(
-                title: "Phone",
+                title: "Phone".tr,
                 content: Text(
                   "+${users[index].countryCode + users[index].phone}",
                 ),
-                textCancel: "Close",
-                textConfirm: "Call",
+                textCancel: "Close".tr,
+                textConfirm: "Call".tr,
                 onConfirm: () {
                   launchUrlString(
                     "tel:+${users[index].countryCode + users[index].phone}",

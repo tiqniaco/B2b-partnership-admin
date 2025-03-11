@@ -20,7 +20,7 @@ class OrdersView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: whiteColor,
               // automaticallyImplyLeading: false,
-              title: Text("All Orders"),
+              title: Text("All Orders".tr),
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(

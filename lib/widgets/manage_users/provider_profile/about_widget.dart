@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/app_routes.dart';
+
 import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
@@ -26,35 +28,35 @@ class AboutWidget extends StatelessWidget {
                 thickness: 3,
               ),
               Gap(10),
-              titleWidget("Name", controller.providerModel!.name!,
+              titleWidget("Name".tr, controller.providerModel!.name!,
                   CupertinoIcons.person),
               Gap(15),
 
               titleWidget(
-                  "Phone",
+                  "Phone".tr,
                   "+${controller.providerModel!.countryCode!}${controller.providerModel!.phone!}",
                   CupertinoIcons.phone),
               Gap(15),
               titleWidget(
-                  "Department",
+                  "Department".tr,
                   "${translateDatabase(arabic: controller.providerModel!.specializationNameAr!, english: controller.providerModel!.specializationNameEn!)}",
                   CupertinoIcons.rectangle_3_offgrid),
               Gap(15),
               titleWidget(
-                  "Specialization",
+                  "Specialization".tr,
                   "${translateDatabase(arabic: controller.providerModel!.subSpecializationNameAr!, english: controller.providerModel!.subSpecializationNameEn!)}",
                   Icons.account_tree_outlined),
               Gap(15),
-              titleWidget("Email", controller.providerModel!.email!,
+              titleWidget("Email".tr, controller.providerModel!.email!,
                   CupertinoIcons.mail),
               Gap(15),
               titleWidget(
-                  "From",
+                  "From".tr,
                   "${translateDatabase(arabic: controller.providerModel!.countryNameAr!, english: controller.providerModel!.countryNameEn!)}",
                   CupertinoIcons.map_pin_ellipse),
               Gap(15),
               titleWidget(
-                  "City",
+                  "City".tr,
                   "${translateDatabase(arabic: controller.providerModel!.governmentNameAr!, english: controller.providerModel!.governmentNameEn!)}",
                   Icons.location_city),
               Gap(20),
@@ -62,11 +64,33 @@ class AboutWidget extends StatelessWidget {
                 children: [
                   Gap(10),
                   Text(
-                    "Commercial Papers: ",
+                    "${"Commercial Papers".tr}: ",
                     style: TextStyle(
                         fontSize: 13.sp,
                         color: blackColor,
                         fontWeight: FontWeight.w500),
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.pdfView, arguments: {
+                        "file": controller.providerModel!.commercialRegister
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View".tr,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: primaryColor,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Gap(5.w),
+                        Icon(Icons.arrow_circle_right_outlined,
+                            size: 20.sp, color: primaryColor)
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -85,7 +109,7 @@ class AboutWidget extends StatelessWidget {
                     child: PDF().cachedFromUrl(
                       controller.providerModel!.commercialRegister!,
                       placeholder: (progress) =>
-                          Center(child: Text('loading...')),
+                          Center(child: Text('loading...'.tr)),
                       errorWidget: (error) =>
                           Center(child: Text(error.toString())),
                     ),
@@ -97,11 +121,33 @@ class AboutWidget extends StatelessWidget {
                 children: [
                   Gap(10),
                   Text(
-                    "Tax Papers: ",
+                    "${"Tax Papers".tr}: ",
                     style: TextStyle(
                         fontSize: 13.sp,
                         color: blackColor,
                         fontWeight: FontWeight.w500),
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.pdfView, arguments: {
+                        "file": controller.providerModel!.taxCard
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View".tr,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: primaryColor,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Gap(5.w),
+                        Icon(Icons.arrow_circle_right_outlined,
+                            size: 20.sp, color: primaryColor)
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -120,7 +166,7 @@ class AboutWidget extends StatelessWidget {
                     child: PDF().cachedFromUrl(
                       controller.providerModel!.taxCard!,
                       placeholder: (progress) =>
-                          Center(child: Text('loading...')),
+                          Center(child: Text('loading...'.tr)),
                       errorWidget: (error) =>
                           Center(child: Text(error.toString())),
                     ),

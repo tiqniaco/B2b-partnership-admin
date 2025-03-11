@@ -100,7 +100,26 @@ class AdminWidget extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: () {
-                                controller.deleteAdmin(admins[index].adminId!);
+                                Get.defaultDialog(
+                                  titlePadding:
+                                      EdgeInsets.symmetric(vertical: 10),
+                                  title: "Delete Admin".tr,
+                                  contentPadding: EdgeInsets.only(bottom: 15.h),
+                                  content: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    child: Text(
+                                      "Are you sure to delete?".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 16.sp),
+                                    ),
+                                  ),
+                                  onConfirm: () => controller
+                                      .deleteAdmin(admins[index].adminId!),
+                                  textConfirm: "Yes".tr,
+                                  textCancel: "No".tr,
+                                  onCancel: () {},
+                                );
                               },
                               child: Icon(Icons.remove_circle,
                                   color: primaryColor, size: 25.sp)),

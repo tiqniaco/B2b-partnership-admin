@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/core/crud/custom_request.dart';
 import '/core/network/api_constance.dart';
 import '/core/utils/app_snack_bars.dart';
@@ -11,7 +14,11 @@ void removeAccountDialog({
 }) {
   Get.defaultDialog(
     title: "Remove Account".tr,
-    middleText: "Are you sure you want to remove your account?".tr,
+    content: Text(
+      "Are you sure you want to remove your account?".tr,
+      style: TextStyle(fontSize: 15.sp),
+      textAlign: TextAlign.center,
+    ),
     textCancel: "No".tr,
     textConfirm: "Yes".tr,
     onConfirm: () {

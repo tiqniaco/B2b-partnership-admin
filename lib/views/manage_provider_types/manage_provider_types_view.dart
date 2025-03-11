@@ -33,11 +33,11 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage!!",
+                  "Manage!!".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Text(
-                  "Provider Types",
+                  "Provider Types".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],
@@ -56,7 +56,7 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: RowWidget(
-                  title: "Types",
+                  title: "Types".tr,
                   onTap: () {
                     onAddType();
                   },
@@ -67,7 +67,6 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
                 statusRequest: controller.statusRequest,
                 child: ProviderTypeWidget(
                   types: controller.types,
-                  
                 ),
               ),
               Gap(50)
@@ -104,7 +103,7 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in English',
+                      hintText: 'Name in English'.tr,
                     ),
                     Gap(10.h),
                     TextFormWidget(
@@ -114,7 +113,7 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in Arabic',
+                      hintText: 'Name in Arabic'.tr,
                     ),
                     Gap(20.h),
                     CustomLoadingButton(
@@ -139,7 +138,7 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Text(
-                          "Cancel",
+                          "Cancel".tr,
                           style: TextStyle(
                               color: whiteColor,
                               fontSize: 15.sp,
@@ -153,6 +152,5 @@ class _ManageProviderTypesViewState extends State<ManageProviderTypesView>
         });
   }
 
-  
 
 }

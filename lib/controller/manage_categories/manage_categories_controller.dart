@@ -51,6 +51,7 @@ class ManageCategoriesController extends GetxController {
     nameArController.clear();
     nameEnController.clear();
     image = "";
+    imageFile = null;
     update();
   }
 

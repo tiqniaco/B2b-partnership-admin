@@ -55,14 +55,7 @@ class OTPView extends StatelessWidget {
                       filled: true,
 
                       fieldWidth: 0.128.sw,
-                      // styles: [
-                      //   getSemiBoldStyle,
-                      //   getSemiBoldStyle,
-                      //   getSemiBoldStyle,
-                      //   getSemiBoldStyle,
-                      //   getSemiBoldStyle,
-                      //   getSemiBoldStyle,
-                      // ],
+
                       contentPadding: EdgeInsets.zero,
                       borderRadius: BorderRadius.circular(10),
                       showFieldAsBox: true,

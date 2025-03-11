@@ -16,7 +16,7 @@ class OrderFilter extends StatelessWidget {
       return Row(
         children: [
           Text(
-            "Order",
+            "Order".tr,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15.sp),
           ),
           Gap(7),

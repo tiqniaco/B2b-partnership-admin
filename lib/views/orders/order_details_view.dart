@@ -40,14 +40,14 @@ class OrderDetailsView extends StatelessWidget {
                         child: Column(
                           children: [
                             OrderDetailsItemWidget(
-                              title: "Order Status: ",
-                              value: controller
-                                      .model?.data.status.capitalizeFirst ??
-                                  "",
+                              title: "${"Order Status".tr}: ",
+                              value:
+                                  "${controller.model?.data.status.capitalizeFirst}"
+                                      .tr,
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Date: ",
+                              title: "${"Order Date".tr}: ",
                               value: controller.model?.data.createdAt == "null"
                                   ? "Invalid Date"
                                   : DateTimeConvertor.formatDate(
@@ -56,14 +56,14 @@ class OrderDetailsView extends StatelessWidget {
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Expiration Date: ",
+                              title: "${"Order Expiration Date".tr}: ",
                               value: DateTimeConvertor.formatDate(
                                 controller.model?.data.expirationDate ?? "",
                               ),
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Total: ",
+                              title: "${"Order Total".tr}: ",
                               value:
                                   "${controller.model?.data.totalPrice.toString() ?? ""}\$",
                             ),
@@ -77,7 +77,7 @@ class OrderDetailsView extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Change Order Status:",
+                                    "${"Change Order Status".tr}:",
                                     style: getMediumStyle.copyWith(
                                       fontWeight: FontManager.boldFontWeight,
                                     ),
@@ -109,7 +109,7 @@ class OrderDetailsView extends StatelessWidget {
                                           ),
                                         ),
                                         label: Text(
-                                          'Select Status',
+                                          'Select Status'.tr,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 17.sp,
@@ -133,8 +133,8 @@ class OrderDetailsView extends StatelessWidget {
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    item.name.capitalizeFirst ??
-                                                        "",
+                                                    "${item.name.capitalizeFirst}"
+                                                        .tr,
                                                     style: TextStyle(
                                                       fontSize: 12.sp,
                                                       color: greyColor
@@ -165,9 +165,13 @@ class OrderDetailsView extends StatelessWidget {
                               onPressed: () {
                                 return controller.updateOrderStatus();
                               },
-                              text: 'Update Status',
+                              text: 'Update Status'.tr,
                             ),
                             Gap(10.h),
+                            Text("Client Data".tr),
+                            Gap(10.h),
+                            // dataItem("Name".tr,
+                            //     "${controller.model.?.name ?? ""}"),
                           ],
                         ),
                       ),
@@ -177,7 +181,7 @@ class OrderDetailsView extends StatelessWidget {
                           children: [
                             Divider(),
                             Text(
-                              "Order Items:",
+                              "${"Order Items".tr}:",
                               style: getSemiBoldStyle.copyWith(
                                 fontWeight: FontManager.boldFontWeight,
                                 color: primaryColor,
@@ -216,6 +220,31 @@ class OrderDetailsView extends StatelessWidget {
                   ),
                 ),
         ),
+      ),
+    );
+  }
+
+  dataItem(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 9.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              "$title:",
+              style: getMediumStyle.copyWith(
+                fontWeight: FontManager.semiBoldFontWeight,
+              ),
+            ),
+          ),
+          Text(
+            value,
+            style: getMediumStyle.copyWith(
+              fontWeight: FontManager.semiBoldFontWeight,
+              color: primaryColor,
+            ),
+          ),
+        ],
       ),
     );
   }

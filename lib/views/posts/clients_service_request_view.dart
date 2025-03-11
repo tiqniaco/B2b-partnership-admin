@@ -36,7 +36,7 @@ class ClientsServiceRequestView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "FILTERS",
+                      "FILTERS".tr,
                       style: TextStyle(
                         color: blackColor,
                         letterSpacing: 4,
@@ -54,15 +54,15 @@ class ClientsServiceRequestView extends StatelessWidget {
                     children: [
                       filterWidget(() {
                         showCategorySheet(context);
-                      }, "Category", Icons.category_outlined),
+                      }, "Category".tr, Icons.category_outlined),
                       Gap(10),
                       filterWidget(() {
                         showLocationSheet(context);
-                      }, "Location", Icons.location_on_outlined),
+                      }, "Location".tr, Icons.location_on_outlined),
                       Gap(10),
                       filterWidget(() {
                         controller.resetFunction();
-                      }, "Reset", Icons.refresh_outlined),
+                      }, "Reset".tr, Icons.refresh_outlined),
                     ],
                   ),
                 ),
@@ -77,7 +77,7 @@ class ClientsServiceRequestView extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 16.sp)),
                       Gap(10),
-                      Text("Freelance Service",
+                      Text("Freelance Service".tr,
                           style: TextStyle(
                               color: blackColor,
                               // fontWeight: FontWeight.w500,

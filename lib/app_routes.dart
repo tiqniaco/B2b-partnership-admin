@@ -6,6 +6,7 @@ import 'package:b2b_partnership_admin/views/manage_users/manage_clients_view.dar
 import 'package:b2b_partnership_admin/views/manage_location/manage_location_view.dart';
 import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provider_types_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
+import 'package:b2b_partnership_admin/views/manage_users/provider_profile/paper_pdf_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
 
 import '/views/auth/forget_password_email_view.dart';
@@ -74,6 +75,7 @@ class AppRoutes {
   //admin -----> manage users
   static const String manageClients = '/manageClients';
   static const String manageProviders = '/manageProviders';
+  static const String pdfView = '/pdfView';
   static const String manageAdmins = '/manageAdmins';
   static const String clientProfileView = '/clientProfileView';
 
@@ -186,7 +188,10 @@ class AppRoutes {
       name: manageProviders,
       page: () => const ManageProviderView(),
     ),
-
+    GetPage(
+      name: pdfView,
+      page: () => const PaperPdfView(),
+    ),
     GetPage(
       name: manageAdmins,
       page: () => const ManageAdminsView(),

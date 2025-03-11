@@ -102,8 +102,27 @@ class ProviderWidget extends StatelessWidget {
                             ),
                             InkWell(
                                 onTap: () {
-                                  controller.deleteProvider(
-                                      providers[index].providerId!);
+                                  Get.defaultDialog(
+                                    titlePadding:
+                                        EdgeInsets.symmetric(vertical: 10),
+                                    title: "Delete Provider".tr,
+                                    contentPadding:
+                                        EdgeInsets.only(bottom: 15.h),
+                                    content: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: Text(
+                                        "Are you sure to delete?".tr,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16.sp),
+                                      ),
+                                    ),
+                                    onConfirm: () => controller.deleteProvider(
+                                        providers[index].providerId!),
+                                    textConfirm: "Yes".tr,
+                                    textCancel: "No".tr,
+                                    onCancel: () {},
+                                  );
                                 },
                                 child: Icon(Icons.remove_circle,
                                     color: primaryColor, size: 25.sp)),

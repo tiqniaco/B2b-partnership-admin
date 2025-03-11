@@ -145,7 +145,7 @@ class CategoryWidget extends StatelessWidget {
                               content: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  "Are you sure you want to delete this category?"
+                                  "Are you sure to delete?"
                                       .tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 16.sp),
@@ -193,7 +193,7 @@ class CategoryWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Edit Category",
+                      "Edit Category".tr,
                       style: TextStyle(
                         color: blackColor,
                         fontSize: 17.sp,
@@ -239,7 +239,7 @@ class CategoryWidget extends StatelessWidget {
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in English',
+                      hintText: 'Name in English'.tr,
                     ),
                     Gap(10.h),
                     TextFormWidget(
@@ -249,7 +249,7 @@ class CategoryWidget extends StatelessWidget {
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in Arabic',
+                      hintText: 'Name in Arabic'.tr,
                     ),
                     Gap(20.h),
                     CustomLoadingButton(
@@ -276,7 +276,7 @@ class CategoryWidget extends StatelessWidget {
                           //  border: Border.all(color: greyColor),
                         ),
                         child: Text(
-                          "Cancel",
+                          "Cancel".tr,
                           style: TextStyle(
                               color: whiteColor,
                               fontSize: 15.sp,

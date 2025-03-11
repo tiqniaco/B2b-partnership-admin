@@ -44,6 +44,8 @@ class PreviousWorkView extends StatelessWidget {
                           fontSize: 15.sp,
                           fontWeight: FontWeight.normal,
                         ),
+                        trimExpandedText: "See more".tr,
+                        trimCollapsedText: "See less".tr,
                       ),
                       Gap(15),
                     ],

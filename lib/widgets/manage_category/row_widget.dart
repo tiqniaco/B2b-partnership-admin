@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import '/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +24,7 @@ class RowWidget extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "add more",
+                "add more".tr,
                 style: TextStyle(
                     decoration: TextDecoration.underline,
                     decorationColor: greyColor,

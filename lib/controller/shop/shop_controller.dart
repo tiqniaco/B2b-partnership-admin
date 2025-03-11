@@ -1,4 +1,5 @@
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
@@ -130,7 +131,8 @@ class ShopController extends GetxController {
   void deleteCategoryDialog(int index) {
     Get.defaultDialog(
       title: "Delete Category",
-      middleText: "Are you sure you want to delete this category?",
+      titleStyle: TextStyle(fontSize: 15.sp),
+      middleText: "Are you sure you want to\ndelete this category?",
       textCancel: "Cancel",
       textConfirm: "Delete",
       onConfirm: () {

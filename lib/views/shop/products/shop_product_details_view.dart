@@ -155,7 +155,7 @@ class ShopProductDetailsView extends StatelessWidget {
                   ),
                   Gap(20.h),
                   Text(
-                    "Description:".tr,
+                    "${"Description".tr}:".tr,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontManager.semiBoldFontWeight,
@@ -172,6 +172,8 @@ class ShopProductDetailsView extends StatelessWidget {
                       fontSize: 15.sp,
                       fontWeight: FontWeight.normal,
                     ),
+                    trimCollapsedText: "See more".tr,
+                    trimExpandedText: "See less".tr,
                   ),
                   Gap(20.h),
                 ],

@@ -2,6 +2,9 @@
 
 // import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/core/theme/app_color.dart';
 
 import '../../app_routes.dart';
@@ -13,7 +16,12 @@ import '/core/services/app_prefs.dart';
 Future<void> logoutDialog() async {
   Get.defaultDialog<bool>(
     title: 'Logout?'.tr,
-    middleText: 'Are you sure you want to logout?'.tr,
+     content: Text(
+     'Are you sure you want to logout?'.tr,
+      style: TextStyle(fontSize: 15.sp),
+      textAlign: TextAlign.center,
+    ),
+   
     textConfirm: 'Yes'.tr,
     confirmTextColor: whiteColor,
     textCancel: 'No'.tr,

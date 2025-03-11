@@ -40,7 +40,7 @@ class ForgetPasswordResetView extends StatelessWidget {
                         textFormController: controller.newPasswordController,
                         lable: "New Password".tr,
                         preicon: CupertinoIcons.lock,
-                        hintText: 'New password'.tr,
+                        hintText: 'New Password'.tr,
                         obscureText: controller.newPasswordObscure,
                         onTapIconsuf: controller.changeNewPasswordVisibility,
                         suficon: controller.newPasswordObscure

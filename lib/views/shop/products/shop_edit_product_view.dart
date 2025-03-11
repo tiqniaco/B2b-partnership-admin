@@ -22,7 +22,7 @@ class ShopEditProductView extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: primaryColor,
               title: Text(
-                "Edit Product",
+                "Edit Product".tr,
                 style: TextStyle(
                   color: whiteColor,
                 ),
@@ -106,7 +106,8 @@ class ShopEditProductView extends StatelessWidget {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "Change Uploaded product (optional)",
+                                                "Change Uploaded product (optional)"
+                                                    .tr,
                                                 style: getLightStyle.copyWith(
                                                   color: greyColor,
                                                   fontWeight: FontManager
@@ -123,7 +124,7 @@ class ShopEditProductView extends StatelessWidget {
                                           ),
                                           Gap(8.h),
                                           Text(
-                                            "Accepted files: pdf, doc, docx, xls, xlsx, csv, txt, zip, rar, ppt, pptx, jpg, jpeg, png, gif, svg",
+                                            "${"Accepted files".tr}: pdf, doc, docx, xls, xlsx, csv, txt, zip, rar, ppt, pptx, jpg, jpeg, png, gif, svg",
                                             style: getLightStyle.copyWith(
                                               color: greyColor,
                                               fontWeight:
@@ -164,37 +165,37 @@ class ShopEditProductView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Gap(16.h),
+                          Gap(26.h),
                           TextFormField(
                             controller: controller.titleArController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Title (Arabic)",
-                              hintText: "enter title (Arabic)",
+                              labelText: "Title (Arabic)".tr,
+                              hintText: "enter title (Arabic)".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter title (Arabic)";
+                                return "Please enter title (Arabic)".tr;
                               }
                               return null;
                             },
                           ),
-                          Gap(10.h),
+                          Gap(20.h),
                           TextFormField(
                             controller: controller.titleEnController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Title (English)",
-                              hintText: "enter title (English)",
+                              labelText: "Title (English)".tr,
+                              hintText: "enter title (English)".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter title (English)";
+                                return "Please enter title (English)".tr;
                               }
                               return null;
                             },
                           ),
-                          Gap(10.h),
+                          Gap(20.h),
                           TextFormField(
                             controller: controller.priceController,
                             inputFormatters: [
@@ -206,17 +207,17 @@ class ShopEditProductView extends StatelessWidget {
                             ],
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: "Price",
-                              hintText: "enter price",
+                              labelText: "Price".tr,
+                              hintText: "enter price".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter price";
+                                return "Please enter price".tr;
                               }
                               return null;
                             },
                           ),
-                          Gap(10.h),
+                          Gap(20.h),
                           TextFormField(
                             controller: controller.discountController,
                             keyboardType: TextInputType.number,
@@ -228,46 +229,46 @@ class ShopEditProductView extends StatelessWidget {
                               ),
                             ],
                             decoration: InputDecoration(
-                              labelText: "Discount %",
-                              hintText: "enter discount",
+                              labelText: "Discount %".tr,
+                              hintText: "enter discount".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter discount";
+                                return "Please enter discount".tr;
                               }
                               return null;
                             },
                           ),
-                          Gap(10.h),
+                          Gap(20.h),
                           TextFormField(
                             minLines: null,
                             maxLines: null,
                             controller: controller.descriptionEnController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Description (English)",
-                              hintText: "enter description (English)",
+                              labelText: "Description (English)".tr,
+                              hintText: "enter description (English)".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter description (English)";
+                                return "Please enter description (English)".tr;
                               }
                               return null;
                             },
                           ),
-                          Gap(10.h),
+                          Gap(20.h),
                           TextFormField(
                             minLines: null,
                             maxLines: null,
                             keyboardType: TextInputType.text,
                             controller: controller.descriptionArController,
                             decoration: InputDecoration(
-                              labelText: "Description (Arabic)",
-                              hintText: "enter description (Arabic)",
+                              labelText: "Description (Arabic)".tr,
+                              hintText: "enter description (Arabic)".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter description (Arabic)";
+                                return "Please enter description (Arabic)".tr;
                               }
                               return null;
                             },
@@ -286,7 +287,7 @@ class ShopEditProductView extends StatelessWidget {
                     onPressed: () {
                       return controller.editProduct();
                     },
-                    text: 'Edit Product',
+                    text: 'Edit Product'.tr,
                   ),
                 ],
               ),

@@ -39,7 +39,7 @@ class ChangePasswordView extends StatelessWidget {
                       textFormController: controller.oldPasswordController,
                       lable: "Old Password".tr,
                       preicon: CupertinoIcons.lock,
-                      hintText: 'Old password'.tr,
+                      hintText: 'Old Password'.tr,
                       obscureText: controller.oldPasswordObscure,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -59,7 +59,7 @@ class ChangePasswordView extends StatelessWidget {
                       textFormController: controller.newPasswordController,
                       lable: "New Password".tr,
                       preicon: CupertinoIcons.lock,
-                      hintText: 'New password'.tr,
+                      hintText: 'New Password'.tr,
                       obscureText: controller.newPasswordObscure,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -79,7 +79,7 @@ class ChangePasswordView extends StatelessWidget {
                       textFormController: controller.confirmPasswordController,
                       lable: "Confirm Password".tr,
                       preicon: CupertinoIcons.lock,
-                      hintText: 'Confirm password'.tr,
+                      hintText: 'Confirm Password'.tr,
                       obscureText: controller.confirmPasswordObscure,
                       validator: (value) {
                         if (value!.isEmpty) {

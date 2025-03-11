@@ -72,7 +72,7 @@ class OrderWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30)),
                     alignment: Alignment.center,
                     child: Text(
-                      orderModel.status.capitalizeFirst ?? "",
+                      "${orderModel.status.capitalizeFirst}".tr,
                       style: getLightStyle.copyWith(
                         fontSize: Get.context!.isTablet ? 7.5.sp : null,
                         color: whiteColor,
@@ -97,7 +97,7 @@ class OrderWidget extends StatelessWidget {
                 children: [
                   Gap(10),
                   rowWidget(
-                    "Date",
+                    "Date".tr,
                     orderModel.createdAt == "null"
                         ? "Invalid Date"
                         : DateTimeConvertor.formatDate(
@@ -111,7 +111,7 @@ class OrderWidget extends StatelessWidget {
                   ),
                   Gap(10),
                   rowWidget(
-                    "Expiry Date",
+                    "Expiry Date".tr,
                     orderModel.expirationDate == "null"
                         ? "Invalid Date"
                         : DateTimeConvertor.formatDate(
@@ -125,7 +125,7 @@ class OrderWidget extends StatelessWidget {
                   ),
                   Gap(10),
                   rowWidget(
-                    "Billed",
+                    "Billed".tr,
                     "${orderModel.totalPrice} \$",
                     CupertinoIcons.money_dollar_circle,
                   )

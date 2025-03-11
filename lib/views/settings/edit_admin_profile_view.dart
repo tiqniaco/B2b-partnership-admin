@@ -20,7 +20,7 @@ class EditAdminProfileView extends StatelessWidget {
       builder: (EditAdminProfileController controller) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Edit Admin Profile"),
+              title: Text("Edit Profile".tr),
             ),
             body: CustomScrollView(
               slivers: [
@@ -96,7 +96,7 @@ class EditAdminProfileView extends StatelessWidget {
                           ),
                           Gap(20.h),
                           AuthTextForm(
-                            lable: "Full Name".tr,
+                            lable: "Name".tr,
                             preicon: CupertinoIcons.person,
                             hintText: "Enter your full name".tr,
                             textFormController: controller.nameController,

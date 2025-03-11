@@ -15,7 +15,8 @@ class ShopEditCategoryView extends StatelessWidget {
       init: ShopEditCategoryController(),
       builder: (ShopEditCategoryController controller) => Scaffold(
         appBar: AppBar(
-          title: const Text('Edit Category'),
+          backgroundColor: whiteColor,
+          title: Text('Edit Category'.tr),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -57,12 +58,12 @@ class ShopEditCategoryView extends StatelessWidget {
                           ),
                   ),
                 ),
-                Gap(16.h),
+                Gap(26.h),
                 TextFormField(
                   controller: controller.nameArController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name (Arabic)",
+                    labelText: "Name in Arabic".tr,
                     hintText: "enter name (Arabic)",
                   ),
                   validator: (value) {
@@ -72,12 +73,12 @@ class ShopEditCategoryView extends StatelessWidget {
                     return null;
                   },
                 ),
-                Gap(10.h),
+                Gap(20.h),
                 TextFormField(
                   controller: controller.nameEnController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name (English)",
+                    labelText: "Name in English".tr,
                     hintText: "enter name (English)",
                   ),
                   validator: (value) {
