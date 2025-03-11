@@ -172,10 +172,6 @@ class OrderDetailsView extends StatelessWidget {
                               text: 'Update Status'.tr,
                             ),
                             Gap(10.h),
-                            Text("Client Data".tr),
-                            Gap(10.h),
-                            // dataItem("Name".tr,
-                            //     "${controller.model.?.name ?? ""}"),
                           ],
                         ),
                       ),
@@ -290,11 +286,11 @@ class OrderDetailsView extends StatelessWidget {
             ),
 
             // ✅ Client ID
-            _buildInfoRow(
-              icon: Icons.perm_identity,
-              label: "Client ID",
-              value: client.clientId ?? "N/A",
-            ),
+            // _buildInfoRow(
+            //   icon: Icons.perm_identity,
+            //   label: "Client ID",
+            //   value: client.clientId ?? "N/A",
+            // ),
 
             // ✅ Country
             _buildInfoRow(
@@ -362,31 +358,6 @@ class OrderDetailsView extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  dataItem(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              "$title:",
-              style: getMediumStyle.copyWith(
-                fontWeight: FontManager.semiBoldFontWeight,
-              ),
-            ),
-          ),
-          Text(
-            value,
-            style: getMediumStyle.copyWith(
-              fontWeight: FontManager.semiBoldFontWeight,
-              color: primaryColor,
-            ),
-          ),
-        ],
       ),
     );
   }
