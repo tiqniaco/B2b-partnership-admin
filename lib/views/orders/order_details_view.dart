@@ -25,7 +25,15 @@ class OrderDetailsView extends StatelessWidget {
       init: OrderDetailsController(),
       builder: (OrderDetailsController controller) => Scaffold(
         appBar: AppBar(
-          title: Text("#${controller.orderId}"),
+          backgroundColor: primaryColor,
+          iconTheme: IconThemeData(color: whiteColor),
+          titleSpacing: 0,
+          title: Text(
+            "#${controller.orderId}",
+            style: TextStyle(
+              color: whiteColor,
+            ),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
