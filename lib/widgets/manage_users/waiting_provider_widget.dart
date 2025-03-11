@@ -132,7 +132,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                                               .providerId!);
                                                 },
                                                 child: Text(
-                                                  "Reject",
+                                                  "Reject".tr,
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -172,7 +172,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                                           .providerId!);
                                                 },
                                                 child: Text(
-                                                  "Accept",
+                                                  "Accept".tr,
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,

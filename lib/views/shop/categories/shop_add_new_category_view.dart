@@ -15,7 +15,8 @@ class ShopAddNewCategoryView extends StatelessWidget {
       init: ShopAddNewCategoryController(),
       builder: (ShopAddNewCategoryController controller) => Scaffold(
         appBar: AppBar(
-          title: const Text('Add New Category'),
+          backgroundColor: whiteColor,
+          title: Text('Add New Category'.tr),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -47,10 +48,10 @@ class ShopAddNewCategoryView extends StatelessWidget {
                                 color: greyColor,
                               ),
                               Gap(4.h),
-                              Text("No image selected"),
+                              Text("No image selected".tr),
                               Gap(4.h),
                               Text(
-                                "Click to Select image",
+                                "Click to Select image".tr,
                                 style: TextStyle(color: greyColor),
                               ),
                             ],
@@ -64,32 +65,32 @@ class ShopAddNewCategoryView extends StatelessWidget {
                           ),
                   ),
                 ),
-                Gap(16.h),
+                Gap(26.h),
                 TextFormField(
                   controller: controller.nameArController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name (Arabic)",
-                    hintText: "enter name (Arabic)",
+                    labelText: "Name in Arabic".tr,
+                    hintText: "enter name (Arabic)".tr,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter name (Arabic)";
+                      return "Please enter name (Arabic)".tr;
                     }
                     return null;
                   },
                 ),
-                Gap(10.h),
+                Gap(20.h),
                 TextFormField(
                   controller: controller.nameEnController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name (English)",
-                    hintText: "enter name (English)",
+                    labelText: "Name in English".tr,
+                    hintText: "enter name (English)".tr,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter name (English)";
+                      return "Please enter name (English)".tr;
                     }
                     return null;
                   },

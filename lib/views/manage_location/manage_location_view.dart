@@ -34,11 +34,11 @@ class _ManageLocationViewState extends State<ManageLocationView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage!!",
+                  "Manage!!".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Text(
-                  "Countries & Cities",
+                  "Countries & Cities".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],
@@ -57,7 +57,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: RowWidget(
-                  title: "Countries",
+                  title: "Countries".tr,
                   onTap: () {
                     onAddCountry();
                   },
@@ -85,7 +85,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "See less",
+                              "See less".tr,
                               style: TextStyle(
                                   color: primaryColor, fontSize: 14.sp),
                             ),
@@ -107,7 +107,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "See more",
+                              "See more".tr,
                               style: TextStyle(
                                   color: primaryColor, fontSize: 14.sp),
                             ),
@@ -129,7 +129,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: RowWidget(
-                  title: "Cities",
+                  title: "Cities".tr,
                   onTap: () {
                     onAddCity();
                   },
@@ -163,7 +163,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Add New City",
+                      "Add New City".tr,
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 17.sp,
@@ -177,7 +177,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in English',
+                      hintText: 'Name in English'.tr,
                     ),
                     Gap(10.h),
                     TextFormWidget(
@@ -187,7 +187,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in Arabic',
+                      hintText: 'Name in Arabic'.tr,
                     ),
                     Gap(20.h),
                     CustomLoadingButton(
@@ -212,7 +212,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Text(
-                          "Cancel",
+                          "Cancel".tr,
                           style: TextStyle(
                               color: whiteColor,
                               fontSize: 15.sp,
@@ -241,7 +241,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Add New Country",
+                          "Add New Country".tr,
                           style: TextStyle(
                             color: blackColor,
                             fontSize: 17.sp,
@@ -321,7 +321,7 @@ class _ManageLocationViewState extends State<ManageLocationView>
                               //  border: Border.all(color: greyColor),
                             ),
                             child: Text(
-                              "Cancel",
+                              "Cancel".tr,
                               style: TextStyle(
                                   color: whiteColor,
                                   fontSize: 15.sp,

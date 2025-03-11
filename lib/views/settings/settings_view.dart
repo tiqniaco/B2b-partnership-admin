@@ -135,7 +135,7 @@ class SettingsView extends StatelessWidget {
                                           Colors.amber,
                                           controller.menuModel!.jobsCount
                                               .toString(),
-                                          "Jobs",
+                                          "Jobs".tr,
                                           () {
                                             Get.toNamed(AppRoutes.jobs);
                                           },
@@ -145,7 +145,7 @@ class SettingsView extends StatelessWidget {
                                           Colors.blue,
                                           controller.menuModel!.shoppingCount
                                               .toString(),
-                                          "Orders",
+                                          "Orders".tr,
                                           () {
                                             Get.toNamed(AppRoutes.shopOrders);
                                           },
@@ -155,7 +155,7 @@ class SettingsView extends StatelessWidget {
                                             Colors.green,
                                             controller.menuModel!.servicesCount
                                                 .toString(),
-                                            "Posts", () {
+                                            "Posts".tr, () {
                                           Get.toNamed(
                                             AppRoutes.clientsService,
                                           );
@@ -166,7 +166,7 @@ class SettingsView extends StatelessWidget {
                                             controller
                                                 .menuModel!.complaintsCount
                                                 .toString(),
-                                            "Complaints", () {
+                                            "Complaints".tr, () {
                                           Get.toNamed(
                                               AppRoutes.complaintsUsers);
                                         })
@@ -186,13 +186,13 @@ class SettingsView extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Personal information",
+                                          "Personal Information".tr,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 17.sp),
                                         ),
                                         Gap(20),
-                                        rowWidget("Email",
+                                        rowWidget("Email".tr,
                                             controller.menuModel!.data!.email!),
                                         FractionallySizedBox(
                                           widthFactor: 10,
@@ -201,7 +201,7 @@ class SettingsView extends StatelessWidget {
                                           ),
                                         ),
                                         rowWidget(
-                                            "City",
+                                            "City".tr,
                                             translateDatabase(
                                                 arabic: controller.menuModel!
                                                     .data!.governmentNameAr!,
@@ -214,7 +214,7 @@ class SettingsView extends StatelessWidget {
                                           ),
                                         ),
                                         rowWidget(
-                                            "Country",
+                                            "Country".tr,
                                             translateDatabase(
                                                 arabic: controller.menuModel!
                                                     .data!.countryNameAr!,
@@ -230,7 +230,7 @@ class SettingsView extends StatelessWidget {
                                         ),
                                         Gap(20),
                                         Text(
-                                          "Other Services",
+                                          "Other Services".tr,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 17.sp),
@@ -238,7 +238,7 @@ class SettingsView extends StatelessWidget {
                                         Gap(20),
                                         rowWithArrow(
                                           CupertinoIcons.person,
-                                          "Edit Profile",
+                                          "Edit Profile".tr,
                                           () {
                                             Get.toNamed(
                                               AppRoutes.editAdminProfile,
@@ -268,7 +268,7 @@ class SettingsView extends StatelessWidget {
                                         Gap(8),
                                         rowWithArrow(
                                           CupertinoIcons.padlock,
-                                          "Change Password",
+                                          "Change Password".tr,
                                           () {
                                             Get.toNamed(
                                                 AppRoutes.changePassword);
@@ -284,7 +284,7 @@ class SettingsView extends StatelessWidget {
                                         Gap(8),
                                         rowWithArrow(
                                           CupertinoIcons.delete_simple,
-                                          "Remove Account",
+                                          "Remove Account".tr,
                                           () {
                                             removeAccountDialog(
                                               removeAccountLoading: controller
@@ -303,7 +303,7 @@ class SettingsView extends StatelessWidget {
                                         Gap(8),
                                         rowWithArrow(
                                           Icons.logout_rounded,
-                                          "Logout",
+                                          "Logout".tr,
                                           () {
                                             logoutDialog();
                                           },

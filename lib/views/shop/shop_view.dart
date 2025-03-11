@@ -147,7 +147,7 @@ class ShopView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: controller.selectedCategory ==
                                           controller.shopCategories[index]
-                                      ? primaryColor.withAlpha(10)
+                                      ? greyColor.withAlpha(40)
                                       : whiteColor,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
@@ -156,7 +156,7 @@ class ShopView extends StatelessWidget {
                                   children: [
                                     InkWell(
                                       borderRadius: BorderRadius.circular(8.r),
-                                      splashColor: primaryColor.withAlpha(20),
+                                      //splashColor: primaryColor.withAlpha(20),
                                       onTap: () {
                                         controller.onTapCategory(index);
                                       },

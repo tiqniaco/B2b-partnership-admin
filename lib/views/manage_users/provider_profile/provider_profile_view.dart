@@ -1,3 +1,4 @@
+import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partnership_admin/widgets/manage_users/provider_profile/job_list_widget.dart';
 
 import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
@@ -38,8 +39,11 @@ class ProviderProfileView extends StatelessWidget {
                         controller: controller.pageController,
                         onPageChanged: controller.onPageChanged,
                         children: [
-                          ServiceWidgetVertical(
-                              services: controller.providerServices),
+                          CustomServerStatusWidget(
+                            statusRequest: controller.statusRequestServices,
+                            child: ServiceWidgetVertical(
+                                services: controller.providerServices),
+                          ),
                           AboutWidget(),
                           PreviousWork(),
                           JobListWidget(),
@@ -148,4 +152,6 @@ class ProviderProfileView extends StatelessWidget {
       ),
     );
   }
+
+
 }

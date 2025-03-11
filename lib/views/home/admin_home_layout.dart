@@ -4,6 +4,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../controller/home/admin_home_layout_controller.dart';
 import '/core/theme/app_color.dart';
@@ -48,7 +49,7 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
                     ? primaryColor
                     : unSelectedBNavColor,
               ),
-              title: "Home",
+              title: "Home".tr,
             ),
             TabItem(
               icon: SvgPicture.asset(
@@ -58,7 +59,7 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
                     ? primaryColor
                     : unSelectedBNavColor,
               ),
-              title: "Shop",
+              title: "Shop".tr,
             ),
             TabItem(
               icon: Container(
@@ -85,7 +86,7 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
                     ? primaryColor
                     : unSelectedBNavColor,
               ),
-              title: "Users",
+              title: "Users".tr,
             ),
             TabItem(
               icon: SvgPicture.asset(
@@ -95,7 +96,7 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
                     ? primaryColor
                     : unSelectedBNavColor,
               ),
-              title: "Menu",
+              title: "Menu".tr,
             ),
           ],
           initialActiveIndex: controller.currentIndex,

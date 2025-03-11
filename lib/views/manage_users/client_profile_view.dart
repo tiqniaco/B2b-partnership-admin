@@ -84,11 +84,8 @@ class ClientProfileView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildTab("About", 0, controller),
-          _buildTab("Services", 1, controller),
-          // _buildTab("Previous work", 2, controller),
-          // _buildTab("Jobs", 3, controller),
-          // _buildTab("Reviews", 4, controller),
+          _buildTab("About".tr, 0, controller),
+          _buildTab("Services".tr, 1, controller),
         ],
       ),
     );

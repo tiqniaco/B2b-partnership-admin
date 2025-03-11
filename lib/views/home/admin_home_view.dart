@@ -36,7 +36,7 @@ class _AdminHomeViewState extends State<AdminHomeView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome!",
+                  "Welcome!".tr,
                   style: TextStyle(fontSize: 13.sp, color: greyColor),
                 ),
                 Text(
@@ -95,23 +95,18 @@ class _AdminHomeViewState extends State<AdminHomeView>
                     crossAxisSpacing: 20,
                     childAspectRatio: 7 / 6.5),
                 children: [
-                  blockWidget(Colors.pink, "Categories", Icons.category, () {
+                  blockWidget(Colors.pink, "Work Categories".tr, Icons.category,
+                      () {
                     Get.toNamed(AppRoutes.manageCategory);
                   }),
-                  blockWidget(Colors.indigo, "Provider Types",
+                  blockWidget(Colors.indigo, "Provider Types".tr,
                       CupertinoIcons.person_2_fill, () {
                     Get.toNamed(AppRoutes.manageProviderTypes);
                   }),
-                  blockWidget(Colors.teal, "Locations", CupertinoIcons.map_fill,
-                      () {
+                  blockWidget(
+                      Colors.teal, "Locations".tr, CupertinoIcons.map_fill, () {
                     Get.toNamed(AppRoutes.manageLocations);
                   }),
-                  // blockWidget(Colors.brown, "Products",
-                  //     CupertinoIcons.cart_fill, () {}),
-                  // blockWidget(
-                  //     Colors.pink, "Services", CupertinoIcons.cart_fill, () {}),
-                  // blockWidget(Colors.cyan, "Categories",
-                  //     CupertinoIcons.cart_fill, () {})
                 ],
               ),
               Gap(50)

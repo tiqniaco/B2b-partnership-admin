@@ -33,11 +33,11 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage!!",
+                  "Manage!!".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Text(
-                  "Category & Subcategory",
+                  "Category & Subcategory".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],
@@ -56,7 +56,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: RowWidget(
-                  title: "Categories",
+                  title: "Categories".tr,
                   onTap: () {
                     onAddCategory();
                   },
@@ -83,7 +83,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "See less",
+                            "See less".tr,
                             style:
                                 TextStyle(color: primaryColor, fontSize: 14.sp),
                           ),
@@ -105,7 +105,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "See more",
+                            "See more".tr,
                             style:
                                 TextStyle(color: primaryColor, fontSize: 14.sp),
                           ),
@@ -127,7 +127,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: RowWidget(
-                  title: "Sub Categories",
+                  title: "Sub Categories".tr,
                   onTap: () {
                     onAddSubCategory();
                   },
@@ -161,7 +161,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Add New Sub Category",
+                      "Add New Sub Category".tr,
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 17.sp,
@@ -175,7 +175,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in English',
+                      hintText: 'Name in English'.tr,
                     ),
                     Gap(10.h),
                     TextFormWidget(
@@ -185,7 +185,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                       validator: (val) {
                         return controller.validUserData(val);
                       },
-                      hintText: 'Name in Arabic',
+                      hintText: 'Name in Arabic'.tr,
                     ),
                     Gap(10.h),
                     CustomLoadingButton(
@@ -210,7 +210,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Text(
-                          "Cancel",
+                          "Cancel".tr,
                           style: TextStyle(
                               color: whiteColor,
                               fontSize: 15.sp,
@@ -238,7 +238,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Add New Category",
+                          "Add New Category".tr,
                           style: TextStyle(
                             color: blackColor,
                             fontSize: 17.sp,
@@ -280,7 +280,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'Name in English',
+                          hintText: 'Name in English'.tr,
                         ),
                         Gap(10.h),
                         TextFormWidget(
@@ -290,7 +290,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'Name in Arabic',
+                          hintText: 'Name in Arabic'.tr,
                         ),
                         Gap(10.h),
                         CustomLoadingButton(
@@ -316,7 +316,7 @@ class _ManageCategoriesViewState extends State<ManageCategoriesView>
                               //  border: Border.all(color: greyColor),
                             ),
                             child: Text(
-                              "Cancel",
+                              "Cancel".tr,
                               style: TextStyle(
                                   color: whiteColor,
                                   fontSize: 15.sp,

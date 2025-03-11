@@ -3,6 +3,8 @@ import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
 import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/controller/shop/shop_cart_controller.dart';
 import '/models/shop_product_model.dart';
@@ -25,7 +27,8 @@ class ShopProductDetailsController extends GetxController {
   Future<void> deleteProductDialog() async {
     await Get.defaultDialog(
       title: "Delete Product",
-      middleText: "Are you sure you want to delete this product?",
+      titleStyle: TextStyle(fontSize: 15.sp),
+      middleText: "Are you sure you want to\ndelete this product?",
       textConfirm: "Yes",
       textCancel: "No",
       onConfirm: _deleteProduct,

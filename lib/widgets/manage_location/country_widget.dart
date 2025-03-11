@@ -28,8 +28,6 @@ class CountryWidget extends StatelessWidget {
                       controller.onTapCountry(country);
                     },
                     child: Container(
-                      // width: 100.h,
-                      // height: 130.h,
                       padding:
                           EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                       decoration: BoxDecoration(
@@ -74,73 +72,6 @@ class CountryWidget extends StatelessWidget {
                 }).toList(),
               ),
             ));
-
-    // builder: (controller) => GridView.builder(
-    //     shrinkWrap: true,
-    //     physics: const NeverScrollableScrollPhysics(),
-    //     padding: EdgeInsets.symmetric(horizontal: 20),
-    //     scrollDirection: Axis.vertical,
-    //     itemCount: length, // countries.length,
-    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //       crossAxisCount: 3,
-    //       mainAxisSpacing: 10,
-    //       crossAxisSpacing: 10,
-    //       mainAxisExtent: 180,
-    //     ),
-    //     itemBuilder: (context, index) => InkWell(
-    //           onTap: () {
-    //             controller.onTapCategory(index);
-    //           },
-    //           child: Container(
-    //             width: 100.h,
-    //             height: 130.h,
-    //             padding: EdgeInsets.all(18),
-    //             decoration: BoxDecoration(
-    //                 color: controller.selectedIndex == index
-    //                     ? primaryColor.withAlpha(60)
-    //                     : pageColor.withAlpha(60),
-    //                 borderRadius: BorderRadius.circular(12),
-    //                 border: Border.all(color: Colors.grey.withAlpha(80))),
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.end,
-    //               children: [
-    //                 Container(
-    //                   padding: EdgeInsets.all(15),
-    //                   decoration: BoxDecoration(
-    //                       shape: BoxShape.circle,
-    //                       // border: Border.all(color: primaryColor, width: 0.5),
-    //                       color: controller.selectedIndex == index
-    //                           ? whiteColor.withAlpha(200)
-    //                           : pageColor.withAlpha(60)),
-    //                   child: CachedNetworkImage(
-    //                     imageUrl: countries[index].flag!,
-    //                     height: 32.h,
-    //                   ),
-    //                 ),
-    //                 Gap(8),
-    //                 Text(
-    //                   translateDatabase(
-    //                       arabic: countries[index].nameAr!,
-    //                       english: countries[index].nameEn!),
-    //                   textAlign: TextAlign.center,
-    //                   style: TextStyle(
-    //                       fontSize: 12.sp, fontWeight: FontWeight.w400),
-    //                   maxLines: 2,
-    //                   overflow: TextOverflow.ellipsis,
-    //                 ),
-    //                 IconButton(
-    //                     onPressed: () {
-    //                       controller.onTapCategory(index);
-    //                       onTapMoreIcon(countries[index].id!,
-    //                           model: countries[index]);
-    //                     },
-    //                     icon: Icon(Icons.more_vert, size: 17.sp))
-    //               ],
-    //             ),
-    //           ),
-    //         )),
-
-    //);
   }
 
   onTapMoreIcon(int id, {required CountryModel model}) {
@@ -168,12 +99,12 @@ class CountryWidget extends StatelessWidget {
                             Get.back();
                             Get.defaultDialog(
                               titlePadding: EdgeInsets.symmetric(vertical: 10),
-                              title: "Delete Category".tr,
+                              title: "Delete Country".tr,
                               contentPadding: EdgeInsets.only(bottom: 15.h),
                               content: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  "Are you sure you want to delete this category?"
+                                  "Are you sure to delete?"
                                       .tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 16.sp),
@@ -205,115 +136,4 @@ class CountryWidget extends StatelessWidget {
                       ]),
                 )));
   }
-
-  // onTapEdit() {
-  //   return Get.defaultDialog(
-  //       barrierDismissible: false,
-  //       title: "",
-  //       titlePadding: EdgeInsets.zero,
-  //       content: GetBuilder<ManageLocationController>(
-  //         builder: (con) => Form(
-  //           key: controller.formKey,
-  //           child: Container(
-  //             padding: EdgeInsets.all(20),
-  //             child: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     "Edit Category",
-  //                     style: TextStyle(
-  //                       color: blackColor,
-  //                       fontSize: 17.sp,
-  //                     ),
-  //                   ),
-  //                   Gap(10),
-  //                   Center(
-  //                     child: GestureDetector(
-  //                       onTap: controller.galleryImage,
-  //                       child: controller.imageFile != null
-  //                           ? ClipRRect(
-  //                               borderRadius: BorderRadius.circular(70),
-  //                               child: Image.file(
-  //                                 controller.imageFile!,
-  //                                 height: 100.h,
-  //                                 width: 100.h,
-  //                                 fit: BoxFit.cover,
-  //                               ),
-  //                             )
-  //                           : SizedBox(
-  //                               // height: 100.h,
-  //                               // width: 100.h,
-  //                               child: ClipRRect(
-  //                               borderRadius: BorderRadius.circular(70),
-  //                               child: CachedNetworkImage(
-  //                                 imageUrl: controller.image!,
-  //                                 height: 100.h,
-  //                                 width: 100.h,
-  //                                 fit: BoxFit.cover,
-  //                                 errorWidget: (context, url, error) => Icon(
-  //                                     Icons.image,
-  //                                     size: 50.sp,
-  //                                     color: Colors.grey.shade700),
-  //                               ),
-  //                             )),
-  //                     ),
-  //                   ),
-  //                   Gap(20.h),
-  //                   TextFormWidget(
-  //                     enabled: true,
-  //                     contentPadding: EdgeInsets.all(15),
-  //                     textFormController: controller.nameEnController,
-  //                     validator: (val) {
-  //                       return controller.validUserData(val);
-  //                     },
-  //                     hintText: 'Name in English',
-  //                   ),
-  //                   Gap(10.h),
-  //                   TextFormWidget(
-  //                     enabled: true,
-  //                     contentPadding: EdgeInsets.all(15),
-  //                     textFormController: controller.nameArController,
-  //                     validator: (val) {
-  //                       return controller.validUserData(val);
-  //                     },
-  //                     hintText: 'Name in Arabic',
-  //                   ),
-  //                   Gap(20.h),
-  //                   CustomLoadingButton(
-  //                     onPressed: () {
-  //                       return controller.addCountry();
-  //                     },
-  //                     text: "Save".tr,
-  //                     borderRadius: 10.r,
-  //                     backgroundColor: primaryColor.withAlpha(100),
-  //                   ),
-  //                   Gap(10.h),
-  //                   InkWell(
-  //                     onTap: () {
-  //                       controller.onEditCancel();
-  //                       Get.back();
-  //                     },
-  //                     child: Container(
-  //                       alignment: Alignment.center,
-  //                       height: 35.h,
-  //                       width: double.infinity,
-  //                       decoration: BoxDecoration(
-  //                         color: greyColor,
-  //                         borderRadius: BorderRadius.circular(10.r),
-  //                         //  border: Border.all(color: greyColor),
-  //                       ),
-  //                       child: Text(
-  //                         "Cancel",
-  //                         style: TextStyle(
-  //                             color: whiteColor,
-  //                             fontSize: 15.sp,
-  //                             fontWeight: FontWeight.bold),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ]),
-  //           ),
-  //         ),
-  //       ));
-  // }
 }

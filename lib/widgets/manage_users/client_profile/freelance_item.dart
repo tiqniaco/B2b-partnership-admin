@@ -149,7 +149,7 @@ class FreelanceItem extends StatelessWidget {
                                                 services[index].id!);
                                           },
                                           child: Text(
-                                            "Remove",
+                                            "Delete".tr,
                                             style: TextStyle(
                                                 fontSize: 11.sp,
                                                 fontWeight: FontWeight.bold),
@@ -180,7 +180,7 @@ class FreelanceItem extends StatelessWidget {
                                                 });
                                           },
                                           child: Text(
-                                            "Show Service",
+                                            "Show Service".tr,
                                             style: TextStyle(
                                                 fontSize: 11.sp,
                                                 fontWeight: FontWeight.bold),

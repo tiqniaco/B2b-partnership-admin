@@ -97,8 +97,30 @@ class ClientWidget extends StatelessWidget {
                             ),
                             InkWell(
                                 onTap: () {
-                                  controller
-                                      .deleteClient(clients[index].clientId!);
+                                  Get.defaultDialog(
+                                    titlePadding:
+                                        EdgeInsets.symmetric(vertical: 10),
+                                    title: "Delete Client".tr,
+                                    contentPadding:
+                                        EdgeInsets.only(bottom: 15.h),
+                                    content: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: Text(
+                                        "Are you sure to delete?".tr,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16.sp),
+                                      ),
+                                    ),
+                                    onConfirm: () => controller
+                                        .deleteClient(clients[index].clientId!),
+                                    textConfirm: "Yes".tr,
+                                    textCancel: "No".tr,
+                                    onCancel: () {},
+                                  );
+                                
+                                
+                                
                                 },
                                 child: Icon(Icons.remove_circle,
                                     color: primaryColor, size: 25.sp)),

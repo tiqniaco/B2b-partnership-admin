@@ -49,10 +49,10 @@ class CityWidget extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Get.defaultDialog(
-                          title: 'Delete City',
+                          title: 'Delete City'.tr,
                           titleStyle: TextStyle(fontSize: 13.sp),
                           middleText:
-                              'Are you sure you want to\ndelete this city?',
+                              'Are you sure to delete?'.tr,
                           textConfirm: 'Yes',
                           textCancel: 'No',
                           onConfirm: () {
@@ -61,7 +61,6 @@ class CityWidget extends StatelessWidget {
                             Get.back();
                           },
                         );
-                        // city(city.id!);
                       },
                       child: Icon(Icons.remove_circle,
                           color: primaryColor, size: 20.sp)),

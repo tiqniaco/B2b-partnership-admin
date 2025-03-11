@@ -49,10 +49,10 @@ class ProviderTypeWidget extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Get.defaultDialog(
-                          title: 'Delete Type',
+                          title: 'Delete Type'.tr,
                           titleStyle: TextStyle(fontSize: 13.sp),
                           middleText:
-                              'Are you sure you want to\ndelete this type?',
+                              "Are you sure to delete?".tr,
                           textConfirm: 'Yes',
                           textCancel: 'No',
                           onConfirm: () {

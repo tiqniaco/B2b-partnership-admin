@@ -22,8 +22,6 @@ class SubCategoryWidget extends StatelessWidget {
           runSpacing: 10.h,
           children: subSpecializations.map((subSpecialization) {
             return Container(
-              // width: MediaQuery.of(context).size.width * 0.4,
-              // height: 100.h,
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
                 color: whiteColor,
@@ -49,10 +47,9 @@ class SubCategoryWidget extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Get.defaultDialog(
-                          title: 'Delete Sub Category',
+                          title: 'Delete Sub Category'.tr,
                           titleStyle: TextStyle(fontSize: 13.sp),
-                          middleText:
-                              'Are you sure you want to delete\nthis sub category?',
+                          middleText: "Are you sure to delete?".tr,
                           textConfirm: 'Yes',
                           textCancel: 'No',
                           onConfirm: () {
@@ -61,7 +58,6 @@ class SubCategoryWidget extends StatelessWidget {
                             Get.back();
                           },
                         );
-                        // SubSpecialization(subSpecialization.id!);
                       },
                       child: Icon(Icons.remove_circle,
                           color: primaryColor, size: 20.sp)),

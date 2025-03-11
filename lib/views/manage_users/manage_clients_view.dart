@@ -31,12 +31,12 @@ class _ManageClientsViewState extends State<ManageClientsView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage",
+                  "Manage".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Gap(5.w),
                 Text(
-                  "Clients",
+                  "Clients".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],

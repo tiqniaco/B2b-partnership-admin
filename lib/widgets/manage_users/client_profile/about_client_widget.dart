@@ -23,27 +23,27 @@ class AboutClientWidget extends StatelessWidget {
               Divider(),
               Gap(10),
               titleWidget(
-                "Name",
+                "Name".tr,
                 controller.clientModel!.name!,
               ),
               Gap(15),
               titleWidget(
-                "Phone",
+                "Phone".tr,
                 '+${controller.clientModel!.countryCode!}${controller.clientModel!.phone!}',
               ),
               Gap(15),
               titleWidget(
-                "Email",
+                "Email".tr,
                 controller.clientModel!.email!,
               ),
               Gap(15),
               titleWidget(
-                "From",
+                "From".tr,
                 "${translateDatabase(arabic: controller.clientModel!.countryNameAr!, english: controller.clientModel!.countryNameEn!)}",
               ),
               Gap(15),
               titleWidget(
-                "City",
+                "City".tr,
                 "${translateDatabase(arabic: controller.clientModel!.governmentNameAr!, english: controller.clientModel!.governmentNameEn!)}",
               ),
             ],

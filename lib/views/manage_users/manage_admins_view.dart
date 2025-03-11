@@ -33,12 +33,12 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Manage",
+                  "Manage".tr,
                   style: TextStyle(fontSize: 15.sp, color: greyColor),
                 ),
                 Gap(5.w),
                 Text(
-                  "Admins",
+                  "Admins".tr,
                   style: TextStyle(fontSize: 15.sp),
                 ),
               ],
@@ -51,12 +51,13 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                 child: Row(
                   children: [
                     Text(
-                      "add more +",
+                      "add more".tr,
                       style: TextStyle(
                           color: blackColor,
                           fontSize: 14.sp,
                           decoration: TextDecoration.underline),
                     ),
+                    Icon(Icons.add),
                     Gap(15.w),
                   ],
                 ),
@@ -134,7 +135,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'Name',
+                          hintText: 'Name'.tr,
                         ),
                         Gap(10.h),
                         TextFormWidget(
@@ -144,7 +145,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'Email',
+                          hintText: 'Email'.tr,
                         ),
                         Gap(10.h),
                         TextFormWidget(
@@ -154,7 +155,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'phone',
+                          hintText: 'Phone'.tr,
                         ),
                         Gap(10.h),
                         TextFormWidget(
@@ -164,7 +165,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                           validator: (val) {
                             return controller.validUserData(val);
                           },
-                          hintText: 'password',
+                          hintText: 'Password'.tr,
                         ),
                         Gap(10.h),
                         CustomLoadingButton(
@@ -190,7 +191,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                               //  border: Border.all(color: greyColor),
                             ),
                             child: Text(
-                              "Cancel",
+                              "Cancel".tr,
                               style: TextStyle(
                                   color: whiteColor,
                                   fontSize: 15.sp,

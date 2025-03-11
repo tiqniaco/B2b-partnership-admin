@@ -53,32 +53,32 @@ class JobWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Company: ${model.name}",
+                        "${"Company".tr}: ${model.name}",
                         style: getRegularStyle.copyWith(
                           fontWeight: FontManager.mediumFontWeight,
                         ),
                       ),
                       Gap(5.h),
                       Text(
-                        "Job Title: ${model.title}",
+                        "${"Job Title".tr}: ${model.title}",
                         style: getRegularStyle.copyWith(
                           fontWeight: FontManager.mediumFontWeight,
                         ),
                       ),
                       Gap(5.h),
                       Text(
-                        "Contract Type: ${model.contractType.name}",
+                        "${"Contract Type".tr}: ${model.contractType.name}",
                         style: getLightStyle,
                       ),
                       Gap(5.h),
                       Text(
-                        "Expiry Date: ${model.expiryDate}",
+                        "${"Expiry Date".tr}: ${model.expiryDate}",
                         style: getLightStyle,
                       ),
                       if (model.salary != "null") ...[
                         Gap(5.h),
                         Text(
-                          "Salary: ${model.salary}",
+                          "${"Salary".tr}: ${model.salary}",
                           style: getLightStyle,
                         )
                       ],
