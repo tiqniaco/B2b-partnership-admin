@@ -1,5 +1,7 @@
 import 'package:b2b_partnership_admin/core/enums/store_order_status_enum.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
+import 'package:b2b_partnership_admin/models/client_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '/app_routes.dart';
 import '/controller/orders/order_details_controller.dart';
@@ -23,7 +25,15 @@ class OrderDetailsView extends StatelessWidget {
       init: OrderDetailsController(),
       builder: (OrderDetailsController controller) => Scaffold(
         appBar: AppBar(
-          title: Text("#${controller.orderId}"),
+          backgroundColor: primaryColor,
+          iconTheme: IconThemeData(color: whiteColor),
+          titleSpacing: 0,
+          title: Text(
+            "#${controller.orderId}",
+            style: TextStyle(
+              color: whiteColor,
+            ),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -39,6 +49,8 @@ class OrderDetailsView extends StatelessWidget {
                       SliverToBoxAdapter(
                         child: Column(
                           children: [
+                            _buildClientInfo(controller.model!.client),
+                            Gap(10.h),
                             OrderDetailsItemWidget(
                               title: "${"Order Status".tr}: ",
                               value:
@@ -168,10 +180,6 @@ class OrderDetailsView extends StatelessWidget {
                               text: 'Update Status'.tr,
                             ),
                             Gap(10.h),
-                            Text("Client Data".tr),
-                            Gap(10.h),
-                            // dataItem("Name".tr,
-                            //     "${controller.model.?.name ?? ""}"),
                           ],
                         ),
                       ),
@@ -224,27 +232,140 @@ class OrderDetailsView extends StatelessWidget {
     );
   }
 
-  dataItem(String title, String value) {
+  // ✅ Client Information UI
+  Widget _buildClientInfo(ClientModel client) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ✅ Profile Image & Name
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage:
+                      client.image != null && client.image!.isNotEmpty
+                          ? NetworkImage(client.image!)
+                          : const AssetImage("assets/images/default_user.png")
+                              as ImageProvider,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    client.name ?? "Unknown",
+                    style: getMediumStyle.copyWith(
+                      fontWeight: FontManager.boldFontWeight,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+
+            // ✅ Email with Mail Launcher
+            _buildInfoRow(
+              icon: Icons.email,
+              label: "Email",
+              value: client.email ?? "No Email",
+              isClickable: client.email != null,
+              onTap: () {
+                if (client.email != null) {
+                  launchUrl(Uri.parse("mailto:${client.email}"));
+                }
+              },
+            ),
+
+            // ✅ Phone with Call Launcher
+            _buildInfoRow(
+              icon: Icons.phone,
+              label: "Phone",
+              value: "+${client.countryCode} ${client.phone ?? "No Phone"}",
+              isClickable: client.phone != null,
+              onTap: () {
+                if (client.phone != null) {
+                  launchUrl(
+                      Uri.parse("tel:${client.countryCode}${client.phone}"));
+                }
+              },
+            ),
+
+            // ✅ Client ID
+            // _buildInfoRow(
+            //   icon: Icons.perm_identity,
+            //   label: "Client ID",
+            //   value: client.clientId ?? "N/A",
+            // ),
+
+            // ✅ Country
+            _buildInfoRow(
+              icon: Icons.flag,
+              label: "Country",
+              value: client.countryNameEn ?? "N/A",
+            ),
+
+            // ✅ Government
+            _buildInfoRow(
+              icon: Icons.location_city,
+              label: "City",
+              value: client.governmentNameEn ?? "N/A",
+            ),
+
+            // ✅ Created At
+            _buildInfoRow(
+              icon: Icons.calendar_today,
+              label: "Joined On",
+              value: client.createdAt ?? "N/A",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+// 🔹 Reusable Info Row
+  Widget _buildInfoRow({
+    required IconData icon,
+    required String label,
+    required String value,
+    bool isClickable = false,
+    VoidCallback? onTap,
+  }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              "$title:",
-              style: getMediumStyle.copyWith(
-                fontWeight: FontManager.semiBoldFontWeight,
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: InkWell(
+        onTap: isClickable ? onTap : null,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 20.sp,
+              color: Colors.grey[700],
+            ),
+            SizedBox(width: 10.w),
+            Text(
+              "$label: ",
+              style: getLightStyle.copyWith(
+                fontWeight: FontWeight.w600,
               ),
             ),
-          ),
-          Text(
-            value,
-            style: getMediumStyle.copyWith(
-              fontWeight: FontManager.semiBoldFontWeight,
-              color: primaryColor,
+            Expanded(
+              child: Text(
+                value,
+                style: TextStyle(
+                  color: isClickable ? primaryColor : blackColor,
+                  decoration: isClickable ? TextDecoration.underline : null,
+                  decorationThickness: 0.5,
+                  decorationColor: blackColor,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

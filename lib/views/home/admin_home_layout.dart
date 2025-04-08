@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../controller/home/admin_home_layout_controller.dart';
 import '/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
