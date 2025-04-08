@@ -26,7 +26,7 @@ const purpleColor = Color(0xff7b6caf);
 //const redColor = Color(0xffd15136);
 const pinkColor = Color(0xffea908f);
 const pageColor = Color.fromARGB(255, 224, 220, 220);
-const greenColor = Color(0xff7e8d36);
+const greenColor = Colors.green;
 const blueColor = Colors.blue;
 // my colors   //  #B59C65
 const testBackg = Color(0xffD1E2F5);

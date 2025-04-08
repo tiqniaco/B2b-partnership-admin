@@ -12,6 +12,8 @@ class ShopProductModel extends Equatable {
   final String discount;
   final String image;
   final String categoryId;
+  final String termsAndConditionsEn;
+  final String termsAndConditionsAr;
   final String createdAt;
   final String updatedAt;
 
@@ -26,13 +28,15 @@ class ShopProductModel extends Equatable {
     required this.discount,
     required this.image,
     required this.categoryId,
+    required this.termsAndConditionsEn,
+    required this.termsAndConditionsAr,
     required this.createdAt,
     required this.updatedAt,
   });
 
   factory ShopProductModel.fromJson(Map<String, dynamic> json) =>
       ShopProductModel(
-        id: int.parse(json["id"].toString()),
+        id: json["id"],
         titleAr: json["title_ar"].toString(),
         titleEn: json["title_en"].toString(),
         descriptionAr: json["description_ar"].toString(),
@@ -42,6 +46,8 @@ class ShopProductModel extends Equatable {
         file: kBaseImageUrl + json["file"].toString(),
         image: kBaseImageUrl + json["image"].toString(),
         categoryId: json["category_id"].toString(),
+        termsAndConditionsEn: json["terms_and_conditions_en"].toString(),
+        termsAndConditionsAr: json["terms_and_conditions_ar"].toString(),
         createdAt: json["created_at"].toString(),
         updatedAt: json["updated_at"].toString(),
       );
@@ -58,6 +64,8 @@ class ShopProductModel extends Equatable {
         discount,
         image,
         categoryId,
+        termsAndConditionsEn,
+        termsAndConditionsAr,
         createdAt,
         updatedAt,
       ];

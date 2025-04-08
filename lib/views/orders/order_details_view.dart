@@ -202,7 +202,7 @@ class OrderDetailsView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return ShopProductItemWidget(
                             product: controller.model!.items[index],
-                            showCategories: false,
+                           
                             onTap: () {
                               Get.toNamed(
                                 AppRoutes.orderItem,

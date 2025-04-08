@@ -1,18 +1,16 @@
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '/app_routes.dart';
-import '/controller/shop/shop_controller.dart';
-import '/core/functions/translate_database.dart';
-import '/core/global/widgets/custom_network_image.dart';
-import '/core/global/widgets/custom_server_status_widget.dart';
-import '/core/theme/app_color.dart';
-import '/core/theme/text_style.dart';
-import '/core/utils/font_manager.dart';
-import '/widgets/shop/shop_item_product_widget.dart';
+import 'package:b2b_partnership_admin/app_routes.dart';
+import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
+import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_network_image.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partnership_admin/core/theme/app_color.dart';
+import 'package:b2b_partnership_admin/core/theme/text_style.dart';
+import 'package:b2b_partnership_admin/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -26,27 +24,41 @@ class ShopView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            titleSpacing: 16.w,
+            titleSpacing: 5.w,
+            toolbarHeight: context.isTablet ? 50.h : null,
             title: Row(
               children: [
                 SizedBox(
-                  height: 35.h,
-                  width: 0.62.sw,
+                  width: context.isTablet ? 0.4.sw : 0.5.sw,
                   child: TextFormField(
                     controller: controller.searchController,
                     style: getRegularStyle,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.getShopProducts();
+                        },
+                        icon: Icon(
+                          CupertinoIcons.search,
+                          size: context.isTablet ? 13.w : 18.w,
+                          color: blackColor,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: context.isTablet ? 10.h : 0,
+                        horizontal: context.isTablet ? 10.w : 20.w,
+                      ),
                       hintText: 'Search...'.tr,
                       hintStyle: getRegularStyle,
                       border: InputBorder.none,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: greyColor),
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
                     ),
                     onFieldSubmitted: (value) {
                       if (value.isNotEmpty) {
-                        controller.getShopProducts(firstTime: true);
+                        controller.getShopProducts();
                       }
                     },
                   ),
@@ -81,235 +93,11 @@ class ShopView extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
-          body: Row(
-            children: [
-              if (controller.showCategories)
-                SizedBox(
-                  width: 0.25.sw,
-                  height: 1.sh,
-                  child: CustomServerStatusWidget(
-                    statusRequest: controller.categoriesStatus,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 6.w,
-                            vertical: 10.h,
-                          ),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(8.r),
-                            onTap: () {
-                              Get.toNamed(AppRoutes.shopAddNewCategory);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10.w),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.r),
-                                border: Border.all(color: primaryColor),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    FontAwesomeIcons.plus,
-                                    color: primaryColor,
-                                    size: 20.sp,
-                                  ),
-                                  Gap(5.h),
-                                  Text(
-                                    'Add Category'.tr,
-                                    style: TextStyle(
-                                      color: blackColor,
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    maxLines: 2,
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Gap(8.h),
-                        Expanded(
-                          child: ListView.separated(
-                            scrollDirection: Axis.vertical,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.h,
-                              horizontal: 4.w,
-                            ),
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: controller.selectedCategory ==
-                                          controller.shopCategories[index]
-                                      ? greyColor.withAlpha(40)
-                                      : whiteColor,
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    InkWell(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                      //splashColor: primaryColor.withAlpha(20),
-                                      onTap: () {
-                                        controller.onTapCategory(index);
-                                      },
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 18.r,
-                                            backgroundColor: transparentColor,
-                                            child: CustomNetworkImage(
-                                              imageUrl: controller
-                                                  .shopCategories[index].image,
-                                              // shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                          Gap(5.h),
-                                          Text(
-                                            translateDatabase(
-                                              arabic: controller
-                                                  .shopCategories[index].nameAr,
-                                              english: controller
-                                                  .shopCategories[index].nameEn,
-                                            ),
-                                            style: getLightStyle.copyWith(
-                                              fontWeight:
-                                                  FontManager.regularFontWeight,
-                                              color: blackColor,
-                                              fontSize: 9.8.sp,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Gap(10),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Get.toNamed(
-                                                AppRoutes.shopEditCategory,
-                                                arguments: {
-                                                  'model': controller
-                                                      .shopCategories[index],
-                                                },
-                                              );
-                                            },
-                                            child: Icon(
-                                              FontAwesomeIcons.penToSquare,
-                                              size: 15.sp,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              controller
-                                                  .deleteCategoryDialog(index);
-                                            },
-                                            child: Icon(FontAwesomeIcons.trash,
-                                                size: 15.sp),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Divider(),
-                            ),
-                            itemCount: controller.shopCategories.length,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              Stack(
-                children: [
-                  PositionedDirectional(
-                    start: 0,
-                    top: 0,
-                    bottom: 0,
-                    end: 0,
-                    child: VerticalDivider(
-                      thickness: 2.w,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(8.r),
-                      onTap: () {
-                        controller.changeShowCategories();
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        color: primaryColor,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.r),
-                          child: Icon(
-                            controller.showCategories
-                                ? Icons.arrow_back_ios_new
-                                : Icons.arrow_forward_ios_outlined,
-                            color: whiteColor,
-                            size: 16.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: CustomServerStatusWidget(
-                  statusRequest: controller.productsStatus,
-                  child: GridView.builder(
-                    padding: EdgeInsets.all(10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10.w,
-                      mainAxisSpacing: 15.h,
-                      childAspectRatio: 1 / 1.2,
-                    ),
-                    itemCount: controller.shopProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = controller.shopProducts[index];
-                      return ShopProductItemWidget(
-                        product: product,
-                        showCategories: controller.showCategories,
-                        onTap: () {
-                          Get.toNamed(
-                            AppRoutes.shopProductDetails,
-                            arguments: {
-                              "product": product,
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ),
+              Gap(10.w)
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: primaryColor,
+            backgroundColor: Colors.green,
             shape: CircleBorder(),
             onPressed: () {
               Get.toNamed(
@@ -325,6 +113,217 @@ class ShopView extends StatelessWidget {
               color: whiteColor,
               size: 20.sp,
             ),
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 125.h,
+                child: CustomServerStatusWidget(
+                  statusRequest: controller.categoriesStatus,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.all(10),
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return InkWell(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.shopAddNewCategory);
+                          },
+                          child: Material(
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(5.r),
+                            child: SizedBox(
+                              width: 100.w,
+                              height: 100.h,
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(5.r),
+                                    child: Image.asset(
+                                      "assets/images/rr.png",
+                                      fit: BoxFit.fitHeight,
+                                      width: 140.w,
+                                      height: 110.h,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.w,
+                                    height: 110.h,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.r),
+                                        color: blackColor.withAlpha(50)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20.0,
+                                        left: 20.0,
+                                        right: 20.0,
+                                        bottom: 10.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 25.sp,
+                                        ),
+                                        Gap(8.h),
+                                        Text(
+                                          'Add Category'.tr,
+                                          style: TextStyle(
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: whiteColor),
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return InkWell(
+                          onTap: () {
+                            controller.onTapCategory(index - 1);
+                          },
+                          child: SizedBox(
+                            width: 100.w,
+                            height: 110.h,
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  child: CustomNetworkImage(
+                                    imageUrl: controller
+                                        .shopCategories[index - 1].image,
+                                    width: 100.w,
+                                    height: 110.h,
+                                  ),
+                                ),
+                                Container(
+                                  width: 100.w,
+                                  height: 110.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.r),
+                                      color: blackColor.withAlpha(140)),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    //mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                AppRoutes.shopEditCategory,
+                                                arguments: {
+                                                  'model': controller
+                                                      .shopCategories[index],
+                                                },
+                                              );
+                                            },
+                                            child: Icon(
+                                              FontAwesomeIcons.solidPenToSquare,
+                                              size: 17.sp,
+                                              color: whiteColor,
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              controller
+                                                  .deleteCategoryDialog(index);
+                                            },
+                                            child: Icon(FontAwesomeIcons.trash,
+                                                color: whiteColor, size: 17.sp),
+                                          ),
+                                        ],
+                                      ),
+                                      Gap(10.h),
+                                      Spacer(),
+                                      Text(
+                                        translateDatabase(
+                                          arabic: controller
+                                              .shopCategories[index - 1].nameAr,
+                                          english: controller
+                                              .shopCategories[index - 1].nameEn,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: whiteColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    separatorBuilder: (context, index) => Gap(5.w),
+                    itemCount: controller.shopCategories.length + 1,
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                child: Text(
+                  "Training bags".tr,
+                  style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: blackColor),
+                ),
+              ),
+              Expanded(
+                child: CustomServerStatusWidget(
+                  statusRequest: controller.productsStatus,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (context, index) => Gap(20.h),
+                    padding: EdgeInsets.all(10),
+                    itemCount: controller.shopProducts.length,
+                    itemBuilder: (context, index) {
+                      final product = controller.shopProducts[index];
+                      return ShopProductItemWidget(
+                        product: product,
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.shopProductDetails,
+                            arguments: {
+                              "product": product,
+                              "productId": product.id.toString(),
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Gap(40)
+            ],
           ),
         );
       },

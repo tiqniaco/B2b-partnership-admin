@@ -6,6 +6,11 @@ class ApiConstance {
   static String token = '';
 
   // global
+  static String countries = 'countries';
+  static String cities = 'governments';
+  static String getProviderTypes = 'provider-types';
+  static String getSpecialization = 'specializations';
+  static String getSupSpecialization = 'sub-specializations';
 
   /// Auth
   static const String login = 'auth/login';
@@ -22,9 +27,10 @@ class ApiConstance {
   static const String sendOTP = 'send-otp';
   static const String verifyOTP = 'verify-otp';
   static const String deleteAccount = 'auth/delete-account';
+  static const String getVerifyCode = 'auth/get-verify-code';
 
   //client
-  static String getUserMenu(String id) => 'admins/$id';
+  static String getClientMenu(String id) => '/clients/$id';
 
   // home
   static const String getBanners = 'banners';
@@ -33,62 +39,6 @@ class ApiConstance {
   static const String getNewServices = 'home/new-services';
   static const String getJobs = 'home/new-jobs';
   static const String search = 'specializations/providers';
-
-  ///  -------------------------------admin-----------------------------
-
-  //-categories
-  static String getSpecialization = 'specializations';
-  static const String addCategory = 'specializations';
-  static String editCategory(int id) => 'specializations/$id/update';
-  static String deleteCategory(int id) => 'specializations/$id';
-
-  //- sub categories
-  static String getSupSpecialization = 'sub-specializations';
-  static const String addSubCategory = 'sub-specializations';
-  static String editSubCategory(String id) => 'sub-specializations/$id/update';
-  static String deleteSubCategory(int id) => 'sub-specializations/$id';
-
-  //- providers types
-  static String getProviderTypes = 'provider-types';
-  static const String addProviderTypes = 'provider-types';
-  static String editProviderTypes(int id) => 'provider-types/$id';
-  static String deleteProviderTypes(int id) => 'provider-types/$id';
-
-  //-countries
-  static String countries = 'countries';
-  static const String addCountry = 'countries';
-  static String editCountry(int id) => 'countries/$id/update';
-  static String deleteCountry(int id) => 'countries/$id';
-
-  //-cities
-  static String cities = 'governments';
-  static const String addCity = 'governments';
-  static String editCity(int id) => 'governments/$id';
-  static String deleteCity(int id) => 'governments/$id';
-
-  //-clients
-  static String getClients(int page) => 'clients?page=$page';
-  static String deleteClient(String id) => '/clients/$id';
-  static String getOneClient(String id) => 'clients/$id';
-  static String deletePost(String id) => 'request-services/$id';
-
-  //-providers
-  static String getProviders(int page) => 'providers?page=$page';
-  static String deleteProvider(String id) => 'providers/$id';
-  static String deletePreviousWork(String id) => 'provider-previous-works/$id';
-  static String deleteJob(String id) => 'jobs/$id';
-  static String deleteReview(int id) => 'provider-service-reviews/$id';
-  static String getProviderJob = 'provider-jobs';
-  static String getWaitingProvider = 'admin/waiting-providers';
-  static String approveProviderProvider = 'admin/accept-provider';
-
-  //-admins
-  static const String getAdmins = 'admins';
-  static const String addAdmin = 'governments';
-  static String editAdmin(int id) => 'admins/$id/update';
-  static String deleteAdmin(String id) => 'admins/$id';
-
-  ///-------------------------------------------------------
 
   // service request
   static const String addServiceRequest = 'request-services';
@@ -109,7 +59,6 @@ class ApiConstance {
   //provider
   static String getProviderProfileDetails(String id) => 'providers/$id';
   static String getProviderServices(String id) => 'providers/$id/services';
-  // static String getJobsInProvider(String ) => 'providers/$id/services';
   static String getProviderMenu(String id) => 'providers/$id';
   static String getServicesInCategory(String id) =>
       'specializations/$id/services';
@@ -123,49 +72,33 @@ class ApiConstance {
   static String addProviderService = "provider-service";
   static String updateProviderService(String id) =>
       "provider-service/$id/update";
+  static String providerSwitchAccount = "auth/switch-provider-account";
+  static String clientSwitchAccount = "auth/switch-client-account";
 
   // favorite
   static String getUserFavorite = 'favorite-providers';
   static String toggleFavorite = 'toggle-favorite';
 
   // shop app
-  static String shopProductDetails(String id) => 'store/products/$id';
 
   static String shopCategories = 'store/categories';
   static String shopProducts = 'store/products';
+  static String topRatedProducts = 'store/top-selling-products';
+  static String shopProductDetails(String id) => 'store/products/$id';
   static String shopCart = "store/carts";
   static String deleteCartItem(int id) => "store/carts/$id";
   static String clearCart = "store/cart/clear";
   static String addToCart = "store/carts";
   static String checkout = "store/orders";
   static String getOrders = 'store/orders';
-  static String getAdminOrders = 'store/admin-orders';
   static String getOrderDetails(String id) => 'store/orders/$id';
-  static String updateOrderStatus(String id) => 'store/orders/$id';
-  static String addProduct = "store/products";
 
-  static String addDescription = "store/product-description-contents";
-  static String editDescription(id) => "store/product-description-contents/$id";
-  static String deleteDescription(id) =>
-      "store/product-description-contents/$id";
-  static String addSession = "store/product-description-titles";
-  static String editSession(id) => "store/product-description-titles/$id";
-  static String deleteSession(id) => "store/product-description-titles/$id";
-
-  static String deleteProduct(String id) => "store/products/$id";
-  static String updateProduct(String id) => "store/products/$id/update";
-
-  static String addShopCategory = "store/categories";
-  static String deleteShopCategory(String id) => "store/categories/$id";
-  static String updateShopCategory(String id) => "store/categories/$id/update";
-
-  // Admin Profile
-  static String updateAdminProfile(String id) => 'admins/$id/update';
+  // Client Profile
+  static String updateClientProfile(String id) => 'clients/$id/update';
 
   // Complaints
   static String addComplaint = 'complaints';
   static String getComplaints = 'complaints';
-  static String getUsersComplaints = 'complaints/users';
 
   // Notifications
   static String getNotifications = 'notifications';
@@ -183,5 +116,22 @@ class ApiConstance {
       "provider/$providerId/contacts";
   static const String addOrUpdateProviderContacts = "provider-contacts";
 
+  // Jobs
   static const String jobs = "jobs";
+  static String deleteJob(String id) => 'jobs/$id';
+  static String jobApplication = 'job-application';
+  static String getProviderJobs = 'provider-jobs';
+  static String addNewJob = 'jobs';
+  static String editJob(String id) => 'jobs/$id';
+
+  // Client Job Applications
+  static String clientJobApplications = 'client/job-application';
+
+  // Provider Job Applications
+  static String providerJobApplications = 'job-applications';
+
+  static String searchJobApplications = "job-applications/search";
+
+  static String changeJobApplicationStatus(String id) =>
+      "job-applications/$id/update-status";
 }

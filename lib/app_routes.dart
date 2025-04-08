@@ -8,6 +8,7 @@ import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provide
 import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/provider_profile/paper_pdf_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
+import 'package:b2b_partnership_admin/views/shop/products/shop_product_details_view.dart';
 
 import '/views/auth/forget_password_email_view.dart';
 import '/views/auth/forget_password_reset_view.dart';
@@ -35,15 +36,11 @@ import 'views/complaints/complaints_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
-// import 'views/provider_app/my_services/add_provider_service_view.dart';
-// import 'views/provider_app/my_services/edit_provider_service_view.dart';
-// import 'views/provider_app/setting/edit_provider_profile_view.dart';
-// import 'views/provider_app/setting/provider_contacts/provider_contacts_view.dart';
+
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/categories/shop_add_new_category_view.dart';
 import 'views/shop/categories/shop_edit_category_view.dart';
 import 'views/shop/products/shop_edit_product_view.dart';
-import 'views/shop/products/shop_product_details_view.dart';
 
 class AppRoutes {
   /// Base routes
@@ -242,11 +239,11 @@ class AppRoutes {
     ),
     GetPage(
       name: shopAddNewProduct,
-      page: () => const ShopAddNewProductView(),
+      page: () =>  ShopAddNewProductView(),
     ),
     GetPage(
       name: shopEditProduct,
-      page: () => const ShopEditProductView(),
+      page: () => ShopEditProductView(),
     ),
     GetPage(
       name: shopAddNewCategory,

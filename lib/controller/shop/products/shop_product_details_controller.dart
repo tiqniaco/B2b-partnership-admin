@@ -1,8 +1,10 @@
 import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
 import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
+import 'package:b2b_partnership_admin/core/enums/status_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,13 +13,46 @@ import '/models/shop_product_model.dart';
 import 'package:get/get.dart';
 
 class ShopProductDetailsController extends GetxController {
+  StatusRequest statusRequest = StatusRequest.success;
+  List<ProductDescriptionModel> descriptions = [];
   late ShopProductModel product;
   bool isLoading = false;
 
   @override
   void onInit() {
     product = Get.arguments['product'] as ShopProductModel;
+    getProductDetails();
     super.onInit();
+  }
+
+  Future<void> getProductDetails() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<Map<String, dynamic>>(
+      path: ApiConstance.shopProductDetails(product.id.toString()),
+      fromJson: (json) {
+        return json;
+      },
+    ).sendGetRequest();
+
+    result.fold(
+      (l) {
+        AppSnackBars.error(message: l.errMsg);
+        statusRequest = StatusRequest.error;
+        update();
+      },
+      (data) {
+        print(data);
+        product = ShopProductModel.fromJson(data['data']);
+        descriptions = List<ProductDescriptionModel>.from(
+          data['descriptions'].map(
+            (e) => ProductDescriptionModel.fromJson(e),
+          ),
+        );
+        statusRequest = StatusRequest.success;
+        update();
+      },
+    );
   }
 
   Future<void> addToCart() async {
@@ -64,7 +99,13 @@ class ShopProductDetailsController extends GetxController {
   void editProduct() {
     Get.toNamed(
       AppRoutes.shopEditProduct,
-      arguments: {'product': product},
+      arguments: {'product': product, 'sessions': descriptions},
     );
+  }
+
+  callBackFun(int index, bool isExpanded) {
+    descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
+
+    update();
   }
 }
