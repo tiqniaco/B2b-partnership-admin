@@ -23,7 +23,6 @@ class ShopController extends GetxController {
 
   bool showCategories = true;
 
-
   void changeShowCategories() {
     showCategories = !showCategories;
     update();
@@ -44,7 +43,6 @@ class ShopController extends GetxController {
 
     super.onInit();
   }
-
 
   Future<void> getShopCategories() async {
     categoriesStatus = StatusRequest.loading;
@@ -91,6 +89,7 @@ class ShopController extends GetxController {
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.shopProducts,
         data: {
+          if (searchController.text.isNotEmpty) 'search': searchController.text,
           'category_id': selectedCategory!.id,
           'page': currentPage,
           if (searchController.text.isNotEmpty) 'search': searchController.text,

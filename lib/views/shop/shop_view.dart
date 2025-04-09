@@ -58,6 +58,8 @@ class ShopView extends StatelessWidget {
                     ),
                     onFieldSubmitted: (value) {
                       if (value.isNotEmpty) {
+                        controller.getShopProducts(firstTime: true);
+                      } else {
                         controller.getShopProducts();
                       }
                     },

@@ -234,4 +234,29 @@ const Map<String, String> en = {
   "Clear Filter": "Clear Filter",
   "Apply Filter": "Apply Filter",
   "Category Filter:": "Category Filter:",
+
+  // New
+  "Training bags": "Training bags",
+  "Terms & Conditions (English)": "Terms & Conditions (English)",
+  "enter terms & conditions (English)": "enter terms & conditions (English)",
+  "Please enter terms & conditions (English)":
+      "Please enter terms & conditions (English)",
+  "Terms & Conditions (Arabic)": "Terms & Conditions (Arabic)",
+  "enter terms & conditions (Arabic)": "enter terms & conditions (Arabic)",
+  "Please enter terms & conditions (Arabic)":
+      "Please enter terms & conditions (Arabic)",
+  'Options:': 'Options:',
+  "Add new content": "Add new content",
+  "Training bag Price : ": "Training bag Price : ",
+  "About the training bag": "About the training bag",
+  "Terms and condition": "Terms and condition",
+  "ORDERS FILTER": "ORDERS FILTER",
+  "Edit Whatsapp Number": "Edit Whatsapp Number",
+  "All Categories": "All Categories",
+  'Select Category': 'Select Category',
+  "All sub Categories": "All sub Categories",
+  'Select Sub Category': 'Select Sub Category',
+  "All Countries": "All Countries",
+  'Select Country': 'Select Country',
+  "Price Offers": "Price Offers",
 };

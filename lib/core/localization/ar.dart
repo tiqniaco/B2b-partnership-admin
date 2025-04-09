@@ -239,4 +239,28 @@ const Map<String, String> ar = {
   "Clear Filter": "مسح الفلتر",
   "Apply Filter": "تطبيق الفلتر",
   "Category Filter:": "فلتر التصنيف :",
+
+  // New
+  "Terms & Conditions (English)": "الشروط والأحكام (بالإنجليزية)",
+  "enter terms & conditions (English)": "أدخل الشروط والأحكام (بالإنجليزية)",
+  "Please enter terms & conditions (English)":
+      "يرجى إدخال الشروط والأحكام (بالإنجليزية)",
+  "Terms & Conditions (Arabic)": "الشروط والأحكام (بالعربية)",
+  "enter terms & conditions (Arabic)": "أدخل الشروط والأحكام (بالعربية)",
+  "Please enter terms & conditions (Arabic)":
+      "يرجى إدخال الشروط والأحكام (بالعربية)",
+  "Options:": "الخيارات:",
+  "Add new content": "إضافة محتوى جديد",
+  "Training bag Price : ": "سعر الحقيبة التدريبية : ",
+  "About the training bag": "عن الحقيبة التدريبية",
+  "Terms and condition": "الشروط والأحكام",
+  "ORDERS FILTER": "تصفية الطلبات",
+  "Edit Whatsapp Number": "تعديل رقم الواتساب",
+  "All Categories": "جميع التصنيفات",
+  "Select Category": "اختر التصنيف",
+  "All sub Categories": "جميع التصنيفات الفرعية",
+  "Select Sub Category": "اختر التصنيف الفرعي",
+  "All Countries": "جميع الدول",
+  "Select Country": "اختر الدولة",
+  "Price Offers": "عروض الأسعار"
 };

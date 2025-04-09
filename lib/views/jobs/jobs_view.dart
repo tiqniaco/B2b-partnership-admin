@@ -27,7 +27,7 @@ class JobsView extends StatelessWidget {
                   elevation: 0,
                   titleSpacing: 0,
                   title: Text(
-                    "Jobs".toUpperCase(),
+                    "Jobs".tr.toUpperCase(),
                     style: getSemiBoldStyle.copyWith(
                       letterSpacing: 1.5.w,
                     ),

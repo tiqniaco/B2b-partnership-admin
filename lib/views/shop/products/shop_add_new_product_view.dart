@@ -462,7 +462,9 @@ class ShopAddNewProductView extends StatelessWidget {
                                                                       Icons
                                                                           .add),
                                                                   title: Text(
-                                                                      "Add new content"),
+                                                                    "Add new content"
+                                                                        .tr,
+                                                                  ),
                                                                 ),
                                                                 ListTile(
                                                                   onTap: () {
@@ -474,7 +476,8 @@ class ShopAddNewProductView extends StatelessWidget {
                                                                       Icons
                                                                           .delete),
                                                                   title: Text(
-                                                                      "delete"),
+                                                                    "delete".tr,
+                                                                  ),
                                                                 ),
                                                                 // ListTile(
                                                                 //   onTap: () {

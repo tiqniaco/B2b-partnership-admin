@@ -190,7 +190,7 @@ class ClientsServiceRequestView extends StatelessWidget {
                     ),
                     Gap(6),
                     Text(
-                      "Location Filter:",
+                      "Location Filter:".tr,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
@@ -206,13 +206,13 @@ class ClientsServiceRequestView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: buttonWidget("Clear Filter", () {
+                            child: buttonWidget("Clear Filter".tr, () {
                               locationController.resetLocation();
                             }, false),
                           ),
                           Gap(20),
                           Expanded(
-                            child: buttonWidget("Apply Filter", () {
+                            child: buttonWidget("Apply Filter".tr, () {
                               locationController.getServices(refresh: true);
                             }, true),
                           )
@@ -256,7 +256,7 @@ class ClientsServiceRequestView extends StatelessWidget {
                     ),
                     Gap(6),
                     Text(
-                      "Category Filter:",
+                      "Category Filter:".tr,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
@@ -270,15 +270,23 @@ class ClientsServiceRequestView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: buttonWidget("Clear Filter", () {
-                              categoryController.resetCategory();
-                            }, false),
+                            child: buttonWidget(
+                              "Clear Filter".tr,
+                              () {
+                                categoryController.resetCategory();
+                              },
+                              false,
+                            ),
                           ),
                           Gap(20),
                           Expanded(
-                            child: buttonWidget("Apply Filter", () {
-                              categoryController.getServices(refresh: true);
-                            }, true),
+                            child: buttonWidget(
+                              "Apply Filter".tr,
+                              () {
+                                categoryController.getServices(refresh: true);
+                              },
+                              true,
+                            ),
                           )
                         ],
                       ),

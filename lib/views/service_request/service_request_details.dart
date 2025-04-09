@@ -46,22 +46,21 @@ class ServiceRequestDetails extends StatelessWidget {
                     ),
                   ],
                   SizedBox.shrink(),
-                  Positioned(
-                      top: 30.h,
-                      left: 10.h,
-                      child: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: CircleAvatar(
-                            radius: 20.r,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                              ),
-                            )),
-                      )),
+                  PositionedDirectional(
+                    top: 30.h,
+                    start: 10.h,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: CircleAvatar(
+                        radius: 20.r,
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               if (controller.model.image == null) Gap(50),
@@ -168,7 +167,7 @@ class ServiceRequestDetails extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "Price Offers",
+                            "Price Offers".tr,
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,

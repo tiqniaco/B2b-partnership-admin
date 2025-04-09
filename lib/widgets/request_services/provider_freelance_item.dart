@@ -129,7 +129,7 @@ class ProviderFreelanceItem extends StatelessWidget {
                                       arguments: {"model": model});
                                 },
                                 child: Text(
-                                  "Show Service",
+                                  "Show Service".tr,
                                   style: TextStyle(
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.bold),

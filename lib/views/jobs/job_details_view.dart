@@ -21,20 +21,20 @@ class JobDetailsView extends StatelessWidget {
         init: JobDetailsController(),
         builder: (JobDetailsController controller) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {},
-              icon: Icon(
-                FontAwesomeIcons.briefcase,
-                color: whiteColor,
-              ),
-              label: Text(
-                "Apply Now".tr,
-                style: getLightStyle.copyWith(
-                  color: whiteColor,
-                  fontWeight: FontManager.semiBoldFontWeight,
-                ),
-              ),
-            ),
+            // floatingActionButton: FloatingActionButton.extended(
+            //   onPressed: () {},
+            //   icon: Icon(
+            //     FontAwesomeIcons.briefcase,
+            //     color: whiteColor,
+            //   ),
+            //   label: Text(
+            //     "Apply Now".tr,
+            //     style: getLightStyle.copyWith(
+            //       color: whiteColor,
+            //       fontWeight: FontManager.semiBoldFontWeight,
+            //     ),
+            //   ),
+            // ),
             body: SafeArea(
               top: false,
               child: CustomScrollView(
