@@ -199,18 +199,12 @@ class OrderDetailsView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SliverGrid.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10.h,
-                          crossAxisSpacing: 10.w,
-                          childAspectRatio: 1 / 1.2,
-                        ),
+                      SliverList.separated(
+                        separatorBuilder: (context, index) => Gap(20),
                         itemCount: controller.model?.items.length ?? 0,
                         itemBuilder: (context, index) {
                           return ShopProductItemWidget(
                             product: controller.model!.items[index],
-                           
                             onTap: () {
                               Get.toNamed(
                                 AppRoutes.orderItem,

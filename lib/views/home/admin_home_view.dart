@@ -84,6 +84,11 @@ class _AdminHomeViewState extends State<AdminHomeView>
                   thickness: 1,
                 ),
               ),
+              // TextButton(
+              //     onPressed: () {
+              //       Get.find<AppPreferences>().clear();
+              //     },
+              //     child: Text("clear")),
               Gap(10.h),
               GridView(
                 padding: EdgeInsets.symmetric(horizontal: 20),

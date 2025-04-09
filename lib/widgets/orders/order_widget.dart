@@ -1,4 +1,5 @@
 import 'package:b2b_partnership_admin/core/theme/text_style.dart';
+import 'package:b2b_partnership_admin/widgets/orders/print_type.dart';
 
 import '/app_routes.dart';
 import '/core/services/date_time_convertor.dart';
@@ -20,119 +21,116 @@ class OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Get.toNamed(
-          AppRoutes.orderDetails,
-          arguments: {
-            "id": orderModel.id.toString(),
-          },
-        );
-      },
-      child: Container(
-        //padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: primaryColor)),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10.w),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                border: Border(bottom: BorderSide(color: borderColor)),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    "#",
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+      child: InkWell(
+        onTap: () {
+          Get.toNamed(
+            AppRoutes.orderDetails,
+            arguments: {
+              "id": orderModel.id.toString(),
+            },
+          );
+        },
+        child: Material(
+          elevation: 0.3,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            //padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color.fromARGB(255, 255, 252, 252),
+              border: Border.all(color: borderColor),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 9.h,
                   ),
-                  Text(
-                    orderModel.id.toString(),
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Spacer(),
-                  Container(
-                    height: 27.h,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Get.context!.isTablet ? 6.w : 10.w),
-                    decoration: BoxDecoration(
-                        color: pageColor.withAlpha(80),
-                        borderRadius: BorderRadius.circular(30)),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "${orderModel.status.capitalizeFirst}".tr,
-                      style: getLightStyle.copyWith(
-                        fontSize: Get.context!.isTablet ? 7.5.sp : null,
-                        color: whiteColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  decoration: BoxDecoration(
+                    // color: primaryColor,
+                    // gradient: LinearGradient(
+                    //   begin: Alignment.topCenter,
+                    //   end: Alignment.bottomCenter,
+                    //   colors: [
+                    //     const Color.fromARGB(255, 117, 1, 1), // Your base color
+                    //     primaryColor,
+                    //     lightColor, // A lighter, more vibrant red
+                    //   ],
+                    // ),
+                    border: Border(bottom: BorderSide(color: borderColor)),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
                     ),
                   ),
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(
-                  //     Icons.more_vert,
-                  //     color: whiteColor,
-                  //   ),
-                  // )
-                  Gap(4.w),
-                ],
-              ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "#",
+                        style: getMediumStyle.copyWith(
+                            color: blackColor, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        orderModel.id.toString(),
+                        style: getRegularStyle.copyWith(
+                          color: blackColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
+                      PrintType(
+                        type: orderModel.status,
+                      ),
+                      Gap(4.w),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 10),
+                  child: Column(
+                    children: [
+                      Gap(8),
+                      rowWidget(
+                        "Date".tr,
+                        orderModel.createdAt != "null"
+                            ? DateTimeConvertor.formatDate(
+                                orderModel.createdAt,
+                              )
+                            : "Invalid Date",
+                        CupertinoIcons.calendar,
+                      ),
+                      Gap(8),
+                      // Divider(
+                      //   color: borderColor,
+                      // ),
+                      // Gap(8),
+                      // rowWidget(
+                      //   "Expiry Date".tr,
+                      //   DateTimeConvertor.formatDate(
+                      //     orderModel.expirationDate!,
+                      //   ),
+                      //   CupertinoIcons.clock,
+                      // ),
+                      // Gap(8),
+                      Divider(
+                        color: borderColor,
+                      ),
+                      Gap(8),
+                      rowWidget(
+                        "Billed".tr,
+                        "${orderModel.totalPrice} \$",
+                        CupertinoIcons.money_dollar_circle,
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  Gap(10),
-                  rowWidget(
-                    "Date".tr,
-                    orderModel.createdAt == "null"
-                        ? "Invalid Date"
-                        : DateTimeConvertor.formatDate(
-                            orderModel.createdAt,
-                          ),
-                    CupertinoIcons.calendar,
-                  ),
-                  Gap(10),
-                  Divider(
-                    color: borderColor,
-                  ),
-                  Gap(10),
-                  rowWidget(
-                    "Expiry Date".tr,
-                    orderModel.expirationDate == "null"
-                        ? "Invalid Date"
-                        : DateTimeConvertor.formatDate(
-                            orderModel.expirationDate,
-                          ),
-                    CupertinoIcons.clock,
-                  ),
-                  Gap(10),
-                  Divider(
-                    color: borderColor,
-                  ),
-                  Gap(10),
-                  rowWidget(
-                    "Billed".tr,
-                    "${orderModel.totalPrice} \$",
-                    CupertinoIcons.money_dollar_circle,
-                  )
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
@@ -143,15 +141,18 @@ class OrderWidget extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 16.sp,
+          size: 16.r,
         ),
         Gap(8.w),
         Text(
           title,
-          style: TextStyle(fontSize: 14.sp),
+          style: getRegularStyle,
         ),
         Spacer(),
-        Text(value, style: TextStyle(fontSize: 13.sp)),
+        Text(
+          value,
+          style: getRegularStyle,
+        ),
       ],
     );
   }

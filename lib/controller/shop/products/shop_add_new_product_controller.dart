@@ -183,7 +183,6 @@ class ShopAddNewProductController extends GetxController {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
 
-      // Step 1: build the base data map
       Map<String, dynamic> data = {
         'category_id': categoryId,
         'title_ar': titleArController.text,
@@ -194,7 +193,6 @@ class ShopAddNewProductController extends GetxController {
         'discount': double.parse(discountController.text),
       };
 
-      // Step 2: add description list to the map
       for (int i = 0; i < descriptions.length; i++) {
         data['description_titles[$i][title_ar]'] = descriptions[i].titleAr;
         data['description_titles[$i][title_en]'] = descriptions[i].titleEn;
@@ -229,56 +227,6 @@ class ShopAddNewProductController extends GetxController {
       );
     }
   }
-
-  // Future<void> addProduct() async {
-  //   if (image == null || file == null) {
-  //     formKey.currentState?.validate();
-  //     AppSnackBars.warning(message: "Please select an image and a file");
-  //     return;
-  //   }
-  //   if (formKey.currentState?.validate() ?? false) {
-  //     formKey.currentState!.save();
-  //     final result = await CustomRequest<String>(
-  //       path: ApiConstance.addProduct,
-  //       data: {
-  //         'category_id': categoryId,
-  //         'title_ar': titleArController.text,
-  //         'title_en': titleEnController.text,
-  //         'description_ar': descriptionArController.text,
-  //         'description_en': descriptionEnController.text,
-  //         'price': double.parse(priceController.text),
-  //         'discount': double.parse(discountController.text),
-  //         for (int i = 0; i < descriptions.length; i++)
-  //           {
-  //             'description_titles[$i][title_ar]': descriptions[i].titleAr,
-  //             'description_titles[$i][title_en]': descriptions[i].titleAr,
-  //             for (int j = 0; j < descriptions[i].contents!.length; j++)
-  //               'description_titles[$i][contents][$j][content_en]':
-  //                   descriptions[i].contents![j].contentEn,
-  //             'description_titles[$i][contents][$j][content_ar]':
-  //                 descriptions[i].contents![j].contentAr,
-  //           }
-  //       },
-  //       files: {
-  //         if (image != null) "image": image?.path ?? '',
-  //         if (file != null) "file": file?.path ?? '',
-  //       },
-  //       fromJson: (json) {
-  //         return json['message'];
-  //       },
-  //     ).sendPostRequest();
-  //     result.fold(
-  //       (error) {
-  //         AppSnackBars.error(message: error.errMsg);
-  //       },
-  //       (response) {
-  //         Get.back();
-  //         AppSnackBars.success(message: "Product added successfully");
-  //         Get.put(ShopController()).getShopProducts(firstTime: true);
-  //       },
-  //     );
-  //   }
-  // }
 
   @override
   void onClose() {

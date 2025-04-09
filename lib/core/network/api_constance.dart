@@ -159,6 +159,9 @@ class ApiConstance {
   static String deleteShopCategory(String id) => "store/categories/$id";
   static String updateShopCategory(String id) => "store/categories/$id/update";
 
+  static String editWhatsapp = "store/contact-us";
+  static String whatsContact = 'store/contact-us';
+
   // Admin Profile
   static String updateAdminProfile(String id) => 'admins/$id/update';
 

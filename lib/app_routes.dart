@@ -7,6 +7,7 @@ import 'package:b2b_partnership_admin/views/manage_location/manage_location_view
 import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provider_types_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/provider_profile/paper_pdf_view.dart';
+import 'package:b2b_partnership_admin/views/settings/edit_whatsapp.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_product_details_view.dart';
 
@@ -98,6 +99,7 @@ class AppRoutes {
   static const String shopEditProduct = '/shopEditProduct';
   static const String shopAddNewCategory = '/shopAddNewCategory';
   static const String shopEditCategory = '/shopEditCategory';
+  static const String editWhatsapp = '/editWhatsapp';
 
   // Edit Client Profile
   static const String editAdminProfile = '/editClientProfile';
@@ -239,7 +241,7 @@ class AppRoutes {
     ),
     GetPage(
       name: shopAddNewProduct,
-      page: () =>  ShopAddNewProductView(),
+      page: () => ShopAddNewProductView(),
     ),
     GetPage(
       name: shopEditProduct,
@@ -252,6 +254,10 @@ class AppRoutes {
     GetPage(
       name: shopEditCategory,
       page: () => const ShopEditCategoryView(),
+    ),
+    GetPage(
+      name: editWhatsapp,
+      page: () => const EditWhatsapp(),
     ),
 
     // Edit Client Profile

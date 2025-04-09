@@ -237,11 +237,11 @@ class SettingsView extends StatelessWidget {
                                         ),
                                         Gap(20),
                                         rowWithArrow(
-                                          CupertinoIcons.person,
-                                          "Edit Profile".tr,
+                                          CupertinoIcons.phone,
+                                          "Edit Whatsapp Number".tr,
                                           () {
                                             Get.toNamed(
-                                              AppRoutes.editAdminProfile,
+                                              AppRoutes.editWhatsapp,
                                               arguments: {
                                                 'model':
                                                     controller.menuModel!.data,
@@ -257,7 +257,19 @@ class SettingsView extends StatelessWidget {
                                           ),
                                         ),
                                         Gap(8),
-                                        LanguageWidget(),
+                                        rowWithArrow(
+                                          CupertinoIcons.person,
+                                          "Edit Profile".tr,
+                                          () {
+                                            Get.toNamed(
+                                              AppRoutes.editAdminProfile,
+                                              arguments: {
+                                                'model':
+                                                    controller.menuModel!.data,
+                                              },
+                                            );
+                                          },
+                                        ),
                                         Gap(8),
                                         FractionallySizedBox(
                                           widthFactor: 10,
@@ -308,6 +320,16 @@ class SettingsView extends StatelessWidget {
                                             logoutDialog();
                                           },
                                         ),
+                                        Gap(8),
+                                        FractionallySizedBox(
+                                          widthFactor: 10,
+                                          child: Divider(
+                                            color: borderColor,
+                                          ),
+                                        ),
+                                        Gap(8),
+                                        LanguageWidget(),
+                                        Gap(8),
                                       ],
                                     ),
                                   ],

@@ -1,4 +1,3 @@
-import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -47,41 +46,41 @@ class ShopProductDetailsView extends StatelessWidget {
                 ),
               ],
             ),
-            bottomNavigationBar: Container(
-              padding: EdgeInsets.only(
-                  left: 20.w, right: 20.w, bottom: 20.h, top: 15),
-              height: 0.11.sh,
-              width: 1.sw,
-              child: Row(
-                children: [
-                  // Container(
-                  //   padding: EdgeInsets.all(12),
-                  //   decoration: BoxDecoration(
-                  //       border: Border.all(color: greyColor.withAlpha(100)),
-                  //       color: whiteColor,
-                  //       borderRadius: BorderRadius.circular(8.r)),
-                  //   child: Icon(
-                  //     CupertinoIcons.cart_fill,
-                  //     color: greenColor,
-                  //     size: context.isTablet ? 20.w : 25.sp,
-                  //   ),
-                  // ),
-                  Gap(8.w),
-                  Expanded(
-                    child: CustomLoadingButton(
-                      borderRadius: 10.r,
-                      onPressed: () {
-                        return controller.addToCart();
-                      },
-                      backgroundColor: controller.descriptions.isEmpty
-                          ? greyColor
-                          : primaryColor,
-                      text: "Add To Cart".tr,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // bottomNavigationBar: Container(
+            //   padding: EdgeInsets.only(
+            //       left: 20.w, right: 20.w, bottom: 20.h, top: 15),
+            //   height: 0.11.sh,
+            //   width: 1.sw,
+            //   child: Row(
+            //     children: [
+            //       // Container(
+            //       //   padding: EdgeInsets.all(12),
+            //       //   decoration: BoxDecoration(
+            //       //       border: Border.all(color: greyColor.withAlpha(100)),
+            //       //       color: whiteColor,
+            //       //       borderRadius: BorderRadius.circular(8.r)),
+            //       //   child: Icon(
+            //       //     CupertinoIcons.cart_fill,
+            //       //     color: greenColor,
+            //       //     size: context.isTablet ? 20.w : 25.sp,
+            //       //   ),
+            //       // ),
+            //       Gap(8.w),
+            //       Expanded(
+            //         child: CustomLoadingButton(
+            //           borderRadius: 10.r,
+            //           onPressed: () {
+            //             return controller.addToCart();
+            //           },
+            //           backgroundColor: controller.descriptions.isEmpty
+            //               ? greyColor
+            //               : primaryColor,
+            //           text: "Add To Cart".tr,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             body: SafeArea(
               child: CustomServerStatusWidget(
                 statusRequest: controller.statusRequest,
@@ -310,14 +309,6 @@ class ShopProductDetailsView extends StatelessWidget {
                             ),
                           ],
                         ),
-
-                        // Text(
-                        //   "Training package data",
-                        //   style: TextStyle(
-                        //       fontSize: 15.sp,
-                        //       fontWeight: FontWeight.bold,
-                        //       color: whiteColor),
-                        // ),
                       ),
                       Gap(20.h),
                       Container(

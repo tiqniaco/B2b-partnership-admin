@@ -23,6 +23,7 @@ class ShopController extends GetxController {
 
   bool showCategories = true;
 
+
   void changeShowCategories() {
     showCategories = !showCategories;
     update();
@@ -43,6 +44,7 @@ class ShopController extends GetxController {
 
     super.onInit();
   }
+
 
   Future<void> getShopCategories() async {
     categoriesStatus = StatusRequest.loading;
