@@ -34,15 +34,18 @@ class DateTimeConvertor {
     return timeOfDay.format(Get.context!).toString();
   }
 
-  static String timeAgo(
-    String dateTime,
-  ) {
+  static String timeAgo(String dateTime) {
     // Parse the input date string
     DateTime parsedDate = DateTime.parse(dateTime).add(
       const Duration(hours: 2),
     );
 
+    // Register Arabic messages if locale is 'ar'
+    if (Get.locale?.languageCode == 'ar') {
+      timeago.setLocaleMessages('ar', timeago.ArMessages());
+    }
+
     // Format and return the relative time
-    return timeago.format(parsedDate, locale: Get.locale!.languageCode);
+    return timeago.format(parsedDate, locale: Get.locale?.languageCode);
   }
 }
