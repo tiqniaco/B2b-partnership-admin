@@ -27,9 +27,9 @@ class SelectSpecializationPost extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          hintText: "All Categories",
+          hintText: "All Categories".tr,
           label: Text(
-            'Select Category',
+            'Select Category'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
