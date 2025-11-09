@@ -104,6 +104,7 @@ class AdminWidget extends StatelessWidget {
                                   titlePadding:
                                       EdgeInsets.symmetric(vertical: 10),
                                   title: "Delete Admin".tr,
+                                  titleStyle: TextStyle(fontSize: 16.r),
                                   contentPadding: EdgeInsets.only(bottom: 15.h),
                                   content: Container(
                                     padding:

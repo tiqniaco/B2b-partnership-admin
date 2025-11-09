@@ -18,7 +18,7 @@ class SubSpecializeModel {
     id = json['id'];
     nameAr = json['name_ar'];
     nameEn = json['name_en'];
-    parentId = json['parent_id'];
+    parentId = json['parent_id'].toString();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

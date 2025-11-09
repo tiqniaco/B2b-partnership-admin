@@ -22,7 +22,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProviderServiceController extends GetxController {
-  ServiceRequestModel? service;
+  ServiceModelData? service;
   final formKey = GlobalKey<FormState>();
   final TextEditingController governmentIdController = TextEditingController();
   final TextEditingController subSpecializationIdController =

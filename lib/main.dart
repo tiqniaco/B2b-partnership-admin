@@ -20,5 +20,5 @@ void main() async {
 
   await initialServices();
   tz.initializeTimeZones();
-  runApp(const MedicalCenterApp());
+  runApp(const B2BApp());
 }

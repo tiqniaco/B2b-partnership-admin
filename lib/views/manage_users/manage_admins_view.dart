@@ -199,6 +199,7 @@ class _ManageAdminsViewState extends State<ManageAdminsView>
                             ),
                           ),
                         ),
+                        Gap(100),
                       ]),
                 ),
               ),

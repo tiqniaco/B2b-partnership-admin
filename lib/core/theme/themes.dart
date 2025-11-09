@@ -125,7 +125,7 @@ class AppThemes {
 
         /// Define the default card theme.
         cardColor: whiteColor,
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: whiteColor,
           elevation: 3,
           shape: RoundedRectangleBorder(
@@ -162,3 +162,12 @@ class AppThemes {
         ),
       );
 }
+
+BorderRadiusGeometry customBorderRadius = BorderRadiusDirectional.only(
+  topStart: Radius.circular(10.r),
+  bottomEnd: Radius.circular(10.r),
+);
+
+BorderRadiusGeometry customOneRadius = BorderRadiusDirectional.only(
+  topEnd: Radius.circular(10.r),
+);

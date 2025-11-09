@@ -1,10 +1,11 @@
 import 'package:b2b_partnership_admin/controller/manage_users/provider_profile/provider_profile_controller.dart';
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_network_image.dart';
 
 import '/app_routes.dart';
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
 import '/models/services_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -15,7 +16,7 @@ class ServiceWidgetVertical extends StatelessWidget {
     super.key,
     required this.services,
   });
-  final List<ServiceRequestModel> services;
+  final List<ServiceModelData> services;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                     },
                     child: Container(
                       height: 123.h,
-                      padding: EdgeInsets.all(18),
+                      padding: EdgeInsets.all(14),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.grey.withAlpha(80))),
@@ -45,7 +46,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: CachedNetworkImage(
+                                child: CustomNetworkImage(
                                   imageUrl: services[index].image!,
                                   height: 90.h,
                                   width: 75.h,
@@ -61,10 +62,14 @@ class ServiceWidgetVertical extends StatelessWidget {
                                   children: [
                                     Text(
                                       services[index].description!,
-                                      textAlign: TextAlign.center,
+                                      textDirection: containsArabic(
+                                              services[index].description!)
+                                          ? TextDirection.rtl
+                                          : TextDirection.ltr,
+                                      textAlign: TextAlign.start,
                                       style: TextStyle(
                                           color: Colors.black54,
-                                          fontSize: 15.sp,
+                                          fontSize: 14.r,
                                           fontWeight: FontWeight.w600),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -90,62 +95,71 @@ class ServiceWidgetVertical extends StatelessWidget {
                                       children: [
                                         Expanded(
                                           flex: 1,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                Colors.green,
-                                              ),
-                                              padding: WidgetStatePropertyAll(
-                                                EdgeInsets.symmetric(
-                                                  horizontal: 10,
+                                          child: SizedBox(
+                                            height: 25.h,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStatePropertyAll(
+                                                  Colors.green,
                                                 ),
-                                              ),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                    5,
+                                                padding: WidgetStatePropertyAll(
+                                                  EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                  ),
+                                                ),
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      5,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            onPressed: () {
-                                              controller.deleteServiceDialog(
-                                                  services[index].id);
-                                            },
-                                            child: Text(
-                                              "Delete".tr,
-                                              style: TextStyle(fontSize: 11.sp),
+                                              onPressed: () {
+                                                controller.deleteServiceDialog(
+                                                    services[index].id);
+                                              },
+                                              child: Text(
+                                                "Delete".tr,
+                                                style:
+                                                    TextStyle(fontSize: 11.sp),
+                                              ),
                                             ),
                                           ),
                                         ),
                                         Gap(4.w),
                                         Expanded(
                                           flex: 1,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding: WidgetStatePropertyAll(
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 10)),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
+                                          child: SizedBox(
+                                            height: 25.h,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                padding: WidgetStatePropertyAll(
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10)),
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            onPressed: () {
-                                              Get.toNamed(
-                                                AppRoutes.serviceDetails,
-                                                arguments: {
-                                                  "id": services[index].id,
-                                                },
-                                              );
-                                            },
-                                            child: Text(
-                                              "View".tr,
-                                              style: TextStyle(fontSize: 11.sp),
+                                              onPressed: () {
+                                                Get.toNamed(
+                                                  AppRoutes.serviceDetails,
+                                                  arguments: {
+                                                    "id": services[index].id,
+                                                  },
+                                                );
+                                              },
+                                              child: Text(
+                                                "View".tr,
+                                                style:
+                                                    TextStyle(fontSize: 11.sp),
+                                              ),
                                             ),
                                           ),
                                         ),

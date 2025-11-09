@@ -65,28 +65,13 @@ class ShopAddNewCategoryView extends StatelessWidget {
                           ),
                   ),
                 ),
-                Gap(26.h),
-                TextFormField(
-                  controller: controller.nameArController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Name in Arabic".tr,
-                    hintText: "enter name (Arabic)".tr,
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please enter name (Arabic)".tr;
-                    }
-                    return null;
-                  },
-                ),
-                Gap(20.h),
+                Gap(20),
                 TextFormField(
                   controller: controller.nameEnController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name in English".tr,
-                    hintText: "enter name (English)".tr,
+                    labelText: "Name".tr,
+                    hintText: "enter name".tr,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {

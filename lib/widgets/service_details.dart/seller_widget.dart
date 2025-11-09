@@ -1,7 +1,9 @@
-import '/controller/service_details_controller.dart';
-import '/core/functions/get_year_date.dart';
-import '/core/functions/translate_database.dart';
-import '/core/theme/app_color.dart';
+import 'package:b2b_partnership_admin/controller/service_details_controller.dart';
+import 'package:b2b_partnership_admin/core/functions/get_year_date.dart';
+import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
+import 'package:b2b_partnership_admin/core/theme/app_color.dart';
+import 'package:b2b_partnership_admin/core/theme/text_style.dart';
+import 'package:b2b_partnership_admin/widgets/manage_users/provider_profile/about_content_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,55 +22,64 @@ class SellerWidget extends StatelessWidget {
         child: Column(
           children: [
             Gap(20),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.grey[200],
-                  radius: 27.sp,
-                  backgroundImage: CachedNetworkImageProvider(
-                      controller.service!.provider!.image!),
-                ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      controller.service!.provider!.name!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.sp),
-                    ),
-                    Gap(8),
-                    Row(
-                      children: [
-                        Text(
-                          'Seller Rating'.tr,
-                          style: TextStyle(color: Colors.black54),
+            InkWell(
+              // onTap: () {
+              //   Get.toNamed(AppRoutes.providerProfile, arguments: {
+              //     'id': controller.service!.provider!.providerId
+              //   });
+              // },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.grey[200],
+                    radius: 27.r,
+                    backgroundImage: CachedNetworkImageProvider(
+                        controller.service!.provider!.image),
+                  ),
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        controller.service!.provider!.name,
+                        style: getMediumStyle.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                        Gap(10),
-                        Text(
-                          controller.service!.provider!.rating!,
-                          style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Gap(3),
-                        Icon(
-                          Icons.circle,
-                          size: 3.sp,
-                          color: greyColor,
-                        ),
-                        Gap(3),
-                        Icon(
-                          Icons.star,
-                          size: 15.sp,
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                      Gap(8),
+                      Row(
+                        children: [
+                          Text(
+                            'Seller Rating'.tr,
+                            style: getLightStyle.copyWith(
+                              color: Colors.black54,
+                            ),
+                          ),
+                          Gap(10),
+                          Text(
+                            controller.service!.provider!.rating,
+                            style: getMediumStyle.copyWith(
+                                color: Colors.orange,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Gap(3),
+                          Icon(
+                            Icons.circle,
+                            size: 3.r,
+                            color: greyColor,
+                          ),
+                          Gap(3),
+                          Icon(
+                            Icons.star,
+                            size: 15.r,
+                            color: Colors.orange,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             Gap(20),
             Container(
@@ -89,35 +100,35 @@ class SellerWidget extends StatelessWidget {
                       titleWidget("From".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
-                          arabic: controller.service!.provider!.countryNameAr!,
+                          arabic: controller.service!.provider!.countryNameAr,
                           english:
-                              controller.service!.provider!.countryNameEn!)),
+                              controller.service!.provider!.countryNameEn)),
                       Spacer(),
-                      titleWidget("Seller Since".tr),
+                      titleWidget("Provider type".tr),
                       Gap(10),
-                      valueWidget(
-                          getYear(controller.service!.provider!.createdAt!)
-                              .toString()),
+                      valueWidget(translateDatabase(
+                          arabic:
+                              controller.service!.provider!.providerTypeNameAr,
+                          english: controller
+                              .service!.provider!.providerTypeNameEn)),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("Department".tr),
+                      titleWidget("City".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
-                          arabic: controller
-                              .service!.provider!.specializationNameAr!,
-                          english: controller
-                              .service!.provider!.specializationNameEn!)),
+                          arabic:
+                              controller.service!.provider!.governmentNameAr,
+                          english:
+                              controller.service!.provider!.governmentNameEn)),
                       Spacer(),
-                      titleWidget("Specialization".tr),
+                      titleWidget("Seller Since".tr),
                       Gap(10),
-                      valueWidget(translateDatabase(
-                          arabic: controller
-                              .service!.provider!.subSpecializationNameAr!,
-                          english: controller
-                              .service!.provider!.subSpecializationNameEn!)),
+                      valueWidget(
+                          getYear(controller.service!.provider!.createdAt)
+                              .toString()),
                     ],
                   )
                 ],
@@ -127,20 +138,5 @@ class SellerWidget extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget titleWidget(String title) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 15.sp, color: Colors.black54),
-    );
-  }
-
-  Widget valueWidget(String value) {
-    return Text(
-      value,
-      style: TextStyle(
-          fontSize: 16.sp, color: blackColor, fontWeight: FontWeight.w500),
-    );
   }
 }

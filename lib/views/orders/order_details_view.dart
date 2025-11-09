@@ -1,5 +1,4 @@
-import 'package:b2b_partnership_admin/core/enums/store_order_status_enum.dart';
-import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
+import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/models/client_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -52,13 +51,6 @@ class OrderDetailsView extends StatelessWidget {
                             _buildClientInfo(controller.model!.client),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "${"Order Status".tr}: ",
-                              value:
-                                  "${controller.model?.data.status.capitalizeFirst}"
-                                      .tr,
-                            ),
-                            Gap(10.h),
-                            OrderDetailsItemWidget(
                               title: "${"Order Date".tr}: ",
                               value: controller.model?.data.createdAt == "null"
                                   ? "Invalid Date"
@@ -78,106 +70,6 @@ class OrderDetailsView extends StatelessWidget {
                               title: "${"Order Total".tr}: ",
                               value:
                                   "${controller.model?.data.totalPrice.toString() ?? ""}\$",
-                            ),
-                            Gap(10.h),
-                            Container(
-                              padding: EdgeInsets.all(10.w),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: borderColor),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "${"Change Order Status".tr}:",
-                                    style: getMediumStyle.copyWith(
-                                      fontWeight: FontManager.boldFontWeight,
-                                    ),
-                                  ),
-                                  Gap(24.w),
-                                  Expanded(
-                                    child: DropdownButtonFormField<
-                                        StoreOrderStatusWithoutAllEnum>(
-                                      isExpanded: true,
-                                      value: controller.status,
-                                      decoration: InputDecoration(
-                                        enabled: true,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 12.h, horizontal: 12.w),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7.r),
-                                          borderSide: const BorderSide(
-                                            color: blackColor,
-                                            width: 1,
-                                          ),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                          borderSide: const BorderSide(
-                                            color: pageColor,
-                                            width: 1.5,
-                                          ),
-                                        ),
-                                        label: Text(
-                                          'Select Status'.tr,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 17.sp,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      ),
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_outlined,
-                                        size: 23.sp,
-                                        color: greyColor,
-                                      ),
-                                      items: StoreOrderStatusWithoutAllEnum
-                                          .values
-                                          .map(
-                                        (item) {
-                                          return DropdownMenuItem<
-                                              StoreOrderStatusWithoutAllEnum>(
-                                            value: item,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    "${item.name.capitalizeFirst}"
-                                                        .tr,
-                                                    style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      color: greyColor
-                                                          .withAlpha(160),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ).toList(),
-                                      onChanged: (value) {
-                                        controller.onChangeStatus(value!);
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Gap(10.h),
-                            CustomLoadingButton(
-                              onPressed: () {
-                                return controller.updateOrderStatus();
-                              },
-                              text: 'Update Status'.tr,
                             ),
                             Gap(10.h),
                           ],
@@ -218,6 +110,9 @@ class OrderDetailsView extends StatelessWidget {
                           );
                         },
                       ),
+                      SliverToBoxAdapter(
+                        child: Gap(30),
+                      )
                     ],
                   ),
                 ),
@@ -229,18 +124,18 @@ class OrderDetailsView extends StatelessWidget {
   // ✅ Client Information UI
   Widget _buildClientInfo(ClientModel client) {
     return Card(
-      elevation: 3,
+      elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ✅ Profile Image & Name
             Row(
               children: [
                 CircleAvatar(
-                  radius: 30,
+                  radius: 24.r,
+                  backgroundColor: greyCart,
                   backgroundImage:
                       client.image != null && client.image!.isNotEmpty
                           ? NetworkImage(client.image!)
@@ -252,18 +147,16 @@ class OrderDetailsView extends StatelessWidget {
                   child: Text(
                     client.name ?? "Unknown",
                     style: getMediumStyle.copyWith(
-                      fontWeight: FontManager.boldFontWeight,
-                    ),
+                        fontWeight: FontManager.boldFontWeight, fontSize: 16.r),
                   ),
                 ),
               ],
             ),
             const Divider(),
 
-            // ✅ Email with Mail Launcher
             _buildInfoRow(
               icon: Icons.email,
-              label: "Email",
+              label: "Email".tr,
               value: client.email ?? "No Email",
               isClickable: client.email != null,
               onTap: () {
@@ -273,10 +166,9 @@ class OrderDetailsView extends StatelessWidget {
               },
             ),
 
-            // ✅ Phone with Call Launcher
             _buildInfoRow(
               icon: Icons.phone,
-              label: "Phone",
+              label: "Phone".tr,
               value: "+${client.countryCode} ${client.phone ?? "No Phone"}",
               isClickable: client.phone != null,
               onTap: () {
@@ -287,31 +179,27 @@ class OrderDetailsView extends StatelessWidget {
               },
             ),
 
-            // ✅ Client ID
-            // _buildInfoRow(
-            //   icon: Icons.perm_identity,
-            //   label: "Client ID",
-            //   value: client.clientId ?? "N/A",
-            // ),
-
-            // ✅ Country
             _buildInfoRow(
               icon: Icons.flag,
-              label: "Country",
-              value: client.countryNameEn ?? "N/A",
+              label: "Country".tr,
+              value: translateDatabase(
+                      arabic: client.countryNameAr!,
+                      english: client.countryNameEn!) ??
+                  "N/A",
             ),
 
-            // ✅ Government
             _buildInfoRow(
               icon: Icons.location_city,
-              label: "City",
-              value: client.governmentNameEn ?? "N/A",
+              label: "City".tr,
+              value: translateDatabase(
+                      arabic: client.governmentNameAr!,
+                      english: client.governmentNameEn!) ??
+                  "N/A",
             ),
 
-            // ✅ Created At
             _buildInfoRow(
               icon: Icons.calendar_today,
-              label: "Joined On",
+              label: "Joined On".tr,
               value: client.createdAt ?? "N/A",
             ),
           ],
@@ -336,7 +224,7 @@ class OrderDetailsView extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 20.sp,
+              size: 20.r,
               color: Colors.grey[700],
             ),
             SizedBox(width: 10.w),
@@ -346,6 +234,7 @@ class OrderDetailsView extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            Gap(8),
             Expanded(
               child: Text(
                 value,

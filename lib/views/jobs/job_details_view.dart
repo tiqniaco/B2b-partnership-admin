@@ -1,6 +1,8 @@
 import 'package:b2b_partnership_admin/controller/jobs/job_details_controller.dart';
 import 'package:b2b_partnership_admin/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
 import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
+import 'package:b2b_partnership_admin/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partnership_admin/core/theme/app_color.dart';
 import 'package:b2b_partnership_admin/core/theme/text_style.dart';
 import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
@@ -21,20 +23,20 @@ class JobDetailsView extends StatelessWidget {
         init: JobDetailsController(),
         builder: (JobDetailsController controller) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {},
-              icon: Icon(
-                FontAwesomeIcons.briefcase,
-                color: whiteColor,
-              ),
-              label: Text(
-                "Apply Now".tr,
-                style: getLightStyle.copyWith(
-                  color: whiteColor,
-                  fontWeight: FontManager.semiBoldFontWeight,
-                ),
-              ),
-            ),
+            // floatingActionButton: FloatingActionButton.extended(
+            //   onPressed: () {},
+            //   icon: Icon(
+            //     FontAwesomeIcons.briefcase,
+            //     color: whiteColor,
+            //   ),
+            //   label: Text(
+            //     "Apply Now".tr,
+            //     style: getLightStyle.copyWith(
+            //       color: whiteColor,
+            //       fontWeight: FontManager.semiBoldFontWeight,
+            //     ),
+            //   ),
+            // ),
             body: SafeArea(
               top: false,
               child: CustomScrollView(
@@ -58,8 +60,8 @@ class JobDetailsView extends StatelessWidget {
                       background: Stack(
                         fit: StackFit.expand,
                         children: [
-                          Image.network(
-                            controller.jobDetailsModel?.image ?? "",
+                          CustomNetworkImage(
+                            imageUrl: controller.jobDetailsModel?.image ?? "",
                             fit: BoxFit.cover,
                           ),
                           Container(
@@ -210,19 +212,27 @@ class JobDetailsView extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8.h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(
-          icon,
-          color: primaryColor,
-          size: 20.sp,
+        leading: Column(
+          children: [
+            Icon(
+              icon,
+              color: primaryColor,
+              size: 16.r,
+            ),
+          ],
         ),
         title: Text(
           title,
-          style: getRegularStyle.copyWith(
-            fontWeight: FontManager.boldFontWeight,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12.r,
+            color: blackColor,
           ),
         ),
         subtitle: ReadMoreText(
           value,
+          textDirection:
+              containsArabic(value) ? TextDirection.rtl : TextDirection.ltr,
           style: getRegularStyle,
           trimLines: 4,
           colorClickableText: primaryColor,
@@ -231,10 +241,12 @@ class JobDetailsView extends StatelessWidget {
           trimExpandedText: 'See less'.tr,
         ),
         trailing: isShowArrow
-            ? IconButton(
-                onPressed: onTap,
-                icon: Icon(
-                  FontAwesomeIcons.globe,
+            ? InkWell(
+                onTap: onTap,
+                child: Icon(
+                  Get.locale == Locale('ar')
+                      ? Icons.arrow_forward_ios
+                      : Icons.arrow_back_ios,
                   color: primaryColor,
                   size: 16.sp,
                 ),

@@ -55,7 +55,7 @@ class EditWhatsapp extends StatelessWidget {
                 onPressed: () {
                   return controller.updateWhats();
                 },
-                text: "Update".tr,
+                text: "Save".tr,
               ),
             ));
       },

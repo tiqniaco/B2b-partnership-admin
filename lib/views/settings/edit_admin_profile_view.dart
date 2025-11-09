@@ -137,7 +137,7 @@ class EditAdminProfileView extends StatelessWidget {
                 onPressed: () {
                   return controller.updateProfile();
                 },
-                text: "Update".tr,
+                text: "Save".tr,
               ),
             ));
       },

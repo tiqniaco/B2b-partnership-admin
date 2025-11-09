@@ -51,4 +51,4 @@ const String kDatabaseColumnStatus = 'status';
 
 /// Other Constants
 const String kBaseImageUrl =
-    "https://tiqnia.com/Apps/b2b_partenership/laravel/public/";
+    "https://b2bpartnership.com/public/"; //'https://tiqnia.com/Apps/b2b_partenership/laravel/public/'; //

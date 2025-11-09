@@ -16,8 +16,8 @@ import 'package:logger/logger.dart';
 
 class ServiceRequestDetailsController extends GetxController {
   late ServiceRequestModel model;
-  List<ModelData> priceOffers = [];
-  List<ModelData> providerOffers = [];
+  List<PriceOfferModel> priceOffers = [];
+  List<PriceOfferModel> providerOffers = [];
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -173,7 +173,10 @@ class ServiceRequestDetailsController extends GetxController {
           path: ApiConstance.getServicePriceOffer,
           data: {"request_service_id": model.id!, "page": currentPage + 1},
           fromJson: (json) {
-            return PriceOfferModel.fromJson(json);
+            return json["data"]
+                .map<PriceOfferModel>(
+                    (offer) => PriceOfferModel.fromJson(offer))
+                .toList();
           }).sendGetRequest();
       response.fold((l) {
         statusRequest = StatusRequest.error;
@@ -181,14 +184,14 @@ class ServiceRequestDetailsController extends GetxController {
       }, (r) {
         priceOffers.clear();
 
-        priceOffers = r.data!;
-        if (r.data!.isEmpty) {
+        priceOffers = r;
+        if (r.isEmpty) {
           statusRequest = StatusRequest.noData;
         } else {
           statusRequest = StatusRequest.success;
         }
-        totalPage = r.lastPage!;
-        currentPage = r.currentPage!;
+        // totalPage = r.lastPage!;
+        // currentPage = r.currentPage!;
       });
 
       isPageLoading = false;
@@ -204,7 +207,7 @@ class ServiceRequestDetailsController extends GetxController {
         fromJson: (json) {
           //  print(json);
           return json["data"]
-              .map<ModelData>((offer) => ModelData.fromJson(offer))
+              .map<PriceOfferModel>((offer) => PriceOfferModel.fromJson(offer))
               .toList();
           // return PriceOfferModel.fromJson(json['data']);
         }).sendPostRequest();

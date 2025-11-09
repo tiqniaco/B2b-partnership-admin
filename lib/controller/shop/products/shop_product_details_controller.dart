@@ -4,6 +4,7 @@ import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
 import 'package:b2b_partnership_admin/core/enums/status_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:b2b_partnership_admin/models/bag_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import 'package:get/get.dart';
 class ShopProductDetailsController extends GetxController {
   StatusRequest statusRequest = StatusRequest.success;
   List<ProductDescriptionModel> descriptions = [];
+  List<BagContentModel> contents = [];
   late ShopProductModel product;
   bool isLoading = false;
 
@@ -34,7 +36,6 @@ class ShopProductDetailsController extends GetxController {
         return json;
       },
     ).sendGetRequest();
-
     result.fold(
       (l) {
         AppSnackBars.error(message: l.errMsg);
@@ -42,13 +43,19 @@ class ShopProductDetailsController extends GetxController {
         update();
       },
       (data) {
-        print(data);
         product = ShopProductModel.fromJson(data['data']);
         descriptions = List<ProductDescriptionModel>.from(
           data['descriptions'].map(
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
+
+        contents = List<BagContentModel>.from(
+          data['bagContents'].map(
+            (e) => BagContentModel.fromJson(e),
+          ),
+        );
+
         statusRequest = StatusRequest.success;
         update();
       },
@@ -61,11 +68,11 @@ class ShopProductDetailsController extends GetxController {
 
   Future<void> deleteProductDialog() async {
     await Get.defaultDialog(
-      title: "Delete Product",
-      titleStyle: TextStyle(fontSize: 15.sp),
-      middleText: "Are you sure you want to\ndelete this product?",
-      textConfirm: "Yes",
-      textCancel: "No",
+      title: "Delete Product".tr,
+      titleStyle: TextStyle(fontSize: 15.r),
+      middleText: "Are you sure you want to\ndelete this product?".tr,
+      textConfirm: "Yes".tr,
+      textCancel: "No".tr,
       onConfirm: _deleteProduct,
     );
   }

@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
 import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:b2b_partnership_admin/models/bag_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:file_picker/file_picker.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
 class ShopAddNewProductController extends GetxController {
   String categoryId = '';
@@ -25,7 +28,11 @@ class ShopAddNewProductController extends GetxController {
   final termsAndConditionsArController = TextEditingController();
   File? image;
   File? file;
+  File? bagFile;
   List<ProductDescriptionModel> descriptions = [];
+  List<BagContentModel> bagContent = [];
+  List<BagContentModel> allContents = [];
+
   final sessionDescriptionArController = TextEditingController();
   final sessionDescriptionEnController = TextEditingController();
   final sessionTitleArController = TextEditingController();
@@ -34,13 +41,56 @@ class ShopAddNewProductController extends GetxController {
   @override
   void onInit() {
     categoryId = Get.arguments["categoryId"] ?? "";
+    getBagContents();
     super.onInit();
   }
 
-  addSession() {
+  Future<void> getBagContents() async {
+    // addContentRequest = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<List<BagContentModel>>(
+        path: ApiConstance.getAllContents,
+        fromJson: (json) {
+          final List<BagContentModel> categories = List<BagContentModel>.from(
+            json['data'].map((x) => BagContentModel.fromJson(x)),
+          );
+
+          return categories;
+        }).sendGetRequest();
+
+    result.fold(
+      (error) {
+        Logger().e(error.errMsg);
+        // addContentRequest = StatusRequest.error;
+        update();
+      },
+      (data) {
+        allContents = data;
+
+        // if (data.isEmpty) {
+
+        // } else {
+        //   Get.back();
+
+        // }
+        update();
+      },
+    );
+  }
+
+  void addBagContent(int index) {
+    bagContent.add(allContents[index]);
+    update();
+  }
+
+  void deleteBagContent(BagContentModel content) {
+    bagContent.removeWhere((element) => element == content);
+    update();
+  }
+
+  void addSession() {
     descriptions.add(ProductDescriptionModel(
-      //  id: stepId,
-      titleEn: sessionTitleArController.text,
+      titleEn: sessionTitleEnController.text,
       titleAr: sessionTitleEnController.text,
       contents: [],
     ));
@@ -50,9 +100,9 @@ class ShopAddNewProductController extends GetxController {
     update();
   }
 
-  addDescription(index) {
+  void addDescription(index) {
     descriptions[index].contents!.add(ProductDescriptionContentModel(
-          contentAr: sessionDescriptionArController.text,
+          contentAr: sessionDescriptionEnController.text,
           contentEn: sessionDescriptionEnController.text,
         ));
     Get.back();
@@ -116,13 +166,13 @@ class ShopAddNewProductController extends GetxController {
     );
   }
 
-  onCancelAddSession() {
+  void onCancelAddSession() {
     Get.back();
     sessionTitleArController.clear();
     sessionTitleEnController.clear();
   }
 
-  onCancelAddDescription() {
+  void onCancelAddDescription() {
     Get.back();
     sessionDescriptionArController.clear();
     sessionDescriptionEnController.clear();
@@ -139,7 +189,7 @@ class ShopAddNewProductController extends GetxController {
     update();
   }
 
-  callBackFun(int index, bool isExpanded) {
+  void callBackFun(int index, bool isExpanded) {
     descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
     update();
   }
@@ -173,37 +223,72 @@ class ShopAddNewProductController extends GetxController {
     update();
   }
 
+  Future<void> selectBagFile() async {
+    final filePicker = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'pdf',
+        'doc',
+        'docx',
+        'xls',
+        'xlsx',
+        'csv',
+        'txt',
+        'zip',
+        'rar',
+        'ppt',
+        'pptx',
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+      ],
+    );
+
+    if (filePicker != null && filePicker.files.isNotEmpty) {
+      bagFile = File(filePicker.files.single.path ?? '');
+    }
+    update();
+  }
+
   Future<void> addProduct() async {
+    print('file path:                  ${bagFile?.path}');
     if (image == null) {
       formKey.currentState?.validate();
       AppSnackBars.warning(message: "Please select an image and a file");
       return;
     }
-
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
-
       Map<String, dynamic> data = {
         'category_id': categoryId,
-        'title_ar': titleArController.text,
+        'title_ar': titleEnController.text,
         'title_en': titleEnController.text,
-        'description_ar': descriptionArController.text,
+        'description_ar': descriptionEnController.text,
         'description_en': descriptionEnController.text,
         'price': double.parse(priceController.text),
         'discount': double.parse(discountController.text),
+        "terms_and_conditions_en": termsAndConditionsEnController.text,
+        "terms_and_conditions_ar": termsAndConditionsEnController.text
       };
 
       for (int i = 0; i < descriptions.length; i++) {
-        data['description_titles[$i][title_ar]'] = descriptions[i].titleAr;
+        data['description_titles[$i][title_ar]'] = descriptions[i].titleEn;
         data['description_titles[$i][title_en]'] = descriptions[i].titleEn;
 
         for (int j = 0; j < descriptions[i].contents!.length; j++) {
           data['description_titles[$i][contents][$j][content_ar]'] =
-              descriptions[i].contents![j].contentAr;
+              descriptions[i].contents![j].contentEn;
           data['description_titles[$i][contents][$j][content_en]'] =
               descriptions[i].contents![j].contentEn;
         }
       }
+
+      for (int j = 0; j < bagContent.length; j++) {
+        data['bag_contents_ids[$j]'] = bagContent[j].id;
+      }
+      log(data.toString());
 
       final result = await CustomRequest<String>(
         path: ApiConstance.addProduct,
@@ -211,6 +296,7 @@ class ShopAddNewProductController extends GetxController {
         files: {
           if (image != null) "image": image?.path ?? '',
           if (file != null) "file": file?.path ?? '',
+          if (bagFile != null) "demo_file": bagFile?.path ?? '',
         },
         fromJson: (json) => json['message'],
       ).sendPostRequest();

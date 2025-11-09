@@ -5,6 +5,7 @@ import 'package:b2b_partnership_admin/core/theme/app_color.dart';
 import 'package:b2b_partnership_admin/core/theme/text_style.dart';
 import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -119,7 +120,7 @@ class ShopEditProductView extends StatelessWidget {
                                               Gap(8.w),
                                               Icon(
                                                 Icons.cloud_upload,
-                                                size: 20.sp,
+                                                size: 20.r,
                                                 color: greyColor,
                                               ),
                                             ],
@@ -131,7 +132,7 @@ class ShopEditProductView extends StatelessWidget {
                                               color: greyColor,
                                               fontWeight:
                                                   FontManager.regularFontWeight,
-                                              fontSize: 10.sp,
+                                              fontSize: 10.r,
                                             ),
                                             textAlign: TextAlign.center,
                                             maxLines: 3,
@@ -167,32 +168,74 @@ class ShopEditProductView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Gap(26.h),
-                          TextFormField(
-                            controller: controller.titleArController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Title (Arabic)".tr,
-                              hintText: "enter title (Arabic)".tr,
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter title (Arabic)".tr;
-                              }
-                              return null;
-                            },
+                          Gap(12.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Bag Contents".tr,
+                                style: TextStyle(
+                                  fontSize: 18.r,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    onTapAddBagContent();
+                                  },
+                                  child: Icon(Icons.add_circle_rounded,
+                                      size: 28.r, color: primaryColor)),
+                            ],
                           ),
-                          Gap(20.h),
+                          Gap(16),
+                          GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    mainAxisSpacing: 32,
+                                    childAspectRatio:
+                                        context.isTablet ? 1.7 : 0.89),
+                            itemBuilder: (context, index) => Column(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      controller.deleteBagContent(
+                                          controller.contents[index].id);
+                                    },
+                                    child: Icon(FontAwesomeIcons.xmark,
+                                        size: 20.sp, color: primaryColor)),
+                                CachedNetworkImage(
+                                  imageUrl: controller.contents[index].image!,
+                                  height: context.isTablet ? 130 : 70,
+                                ),
+                                Gap(8),
+                                Text(
+                                    translateDatabase(
+                                        arabic:
+                                            controller.contents[index].nameAr!,
+                                        english:
+                                            controller.contents[index].nameEn!),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 14.r,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                            shrinkWrap: true,
+                            itemCount: controller.contents.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                          ),
+                          Gap(26),
                           TextFormField(
                             controller: controller.titleEnController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Title (English)".tr,
-                              hintText: "enter title (English)".tr,
+                              labelText: "Title".tr,
+                              hintText: "enter title".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter title (English)".tr;
+                                return "Please enter title".tr;
                               }
                               return null;
                             },
@@ -248,48 +291,12 @@ class ShopEditProductView extends StatelessWidget {
                             controller: controller.descriptionEnController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Description (English)".tr,
-                              hintText: "enter description (English)".tr,
+                              labelText: "Description".tr,
+                              hintText: "enter description".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter description (English)".tr;
-                              }
-                              return null;
-                            },
-                          ),
-                          Gap(20.h),
-                          TextFormField(
-                            minLines: null,
-                            maxLines: null,
-                            keyboardType: TextInputType.text,
-                            controller: controller.descriptionArController,
-                            decoration: InputDecoration(
-                              labelText: "Description (Arabic)".tr,
-                              hintText: "enter description (Arabic)".tr,
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter description (Arabic)".tr;
-                              }
-                              return null;
-                            },
-                          ),
-                          Gap(20.h),
-                          TextFormField(
-                            minLines: null,
-                            maxLines: null,
-                            keyboardType: TextInputType.text,
-                            controller:
-                                controller.termsAndConditionsArController,
-                            decoration: InputDecoration(
-                              labelText: "Terms & Conditions (Arabic)".tr,
-                              hintText: "enter terms & conditions (Arabic)".tr,
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter terms & conditions (Arabic)"
-                                    .tr;
+                                return "Please enter description".tr;
                               }
                               return null;
                             },
@@ -302,17 +309,17 @@ class ShopEditProductView extends StatelessWidget {
                             controller:
                                 controller.termsAndConditionsEnController,
                             decoration: InputDecoration(
-                              labelText: "Terms & Conditions (English)".tr,
-                              hintText: "enter terms & conditions (English)".tr,
+                              labelText: "Terms & Conditions".tr,
+                              hintText: "enter terms & conditions".tr,
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Please enter terms & conditions (English)"
-                                    .tr;
+                                return "Please enter terms & conditions".tr;
                               }
                               return null;
                             },
                           ),
+
                           Gap(20.h),
                           Container(
                             width: double.infinity,
@@ -328,7 +335,7 @@ class ShopEditProductView extends StatelessWidget {
                                     Text(
                                       "Training Sessions".tr,
                                       style: TextStyle(
-                                        fontSize: 18.sp,
+                                        fontSize: 18.r,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       textAlign: TextAlign.start,
@@ -413,7 +420,7 @@ class ShopEditProductView extends StatelessWidget {
                                                           english:
                                                               item.titleEn!),
                                                       style: TextStyle(
-                                                        fontSize: 16.sp,
+                                                        fontSize: 16.r,
                                                         color: blackColor,
                                                       ),
                                                     ),
@@ -448,7 +455,8 @@ class ShopEditProductView extends StatelessWidget {
                                                                       Icons
                                                                           .add),
                                                                   title: Text(
-                                                                      "Add new content"),
+                                                                      "Add new content"
+                                                                          .tr),
                                                                 ),
                                                                 ListTile(
                                                                   onTap: () {
@@ -460,7 +468,8 @@ class ShopEditProductView extends StatelessWidget {
                                                                       Icons
                                                                           .delete),
                                                                   title: Text(
-                                                                      "delete"),
+                                                                      "delete"
+                                                                          .tr),
                                                                 ),
                                                                 ListTile(
                                                                   onTap: () {
@@ -474,7 +483,8 @@ class ShopEditProductView extends StatelessWidget {
                                                                       Icons
                                                                           .edit),
                                                                   title: Text(
-                                                                      "Edit"),
+                                                                      "Edit"
+                                                                          .tr),
                                                                 ),
                                                               ],
                                                             ));
@@ -484,7 +494,7 @@ class ShopEditProductView extends StatelessWidget {
                                                         color: const Color
                                                             .fromARGB(
                                                             221, 15, 15, 15),
-                                                        size: 17.sp,
+                                                        size: 17.r,
                                                       )),
                                                 ],
                                               ),
@@ -513,7 +523,7 @@ class ShopEditProductView extends StatelessWidget {
                                                           top: 8.0),
                                                   child: Icon(
                                                     Icons.check_circle,
-                                                    size: 17.sp,
+                                                    size: 17.r,
                                                     color: greenColor,
                                                   ),
                                                 ),
@@ -528,7 +538,7 @@ class ShopEditProductView extends StatelessWidget {
                                                             .contents![i]
                                                             .contentEn!),
                                                     style: TextStyle(
-                                                      fontSize: 16.sp,
+                                                      fontSize: 13.r,
                                                       color: blackColor,
                                                     ),
                                                   ),
@@ -567,7 +577,8 @@ class ShopEditProductView extends StatelessWidget {
                                                                     Icons
                                                                         .delete),
                                                                 title: Text(
-                                                                    "delete"),
+                                                                    "delete"
+                                                                        .tr),
                                                               ),
                                                               ListTile(
                                                                 onTap: () {
@@ -582,7 +593,7 @@ class ShopEditProductView extends StatelessWidget {
                                                                 leading: Icon(
                                                                     Icons.edit),
                                                                 title: Text(
-                                                                    "Edit"),
+                                                                    "Edit".tr),
                                                               ),
                                                             ],
                                                           ));
@@ -593,7 +604,7 @@ class ShopEditProductView extends StatelessWidget {
                                                               top: 8.0),
                                                       child: Icon(
                                                         Icons.settings,
-                                                        size: 15.sp,
+                                                        size: 15.r,
                                                       ),
                                                     ))
                                               ],
@@ -631,6 +642,53 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
+  onTapAddBagContent() {
+    return Get.defaultDialog(
+      title: 'Click to Add new Content'.tr,
+      titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
+      titleStyle: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
+      content: SizedBox(
+        height: 200.h,
+        width: 250.w,
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 8),
+          itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              controller.addContent(controller.allContents[index]);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: controller.allContents
+                          .contains(controller.allContents[index])
+                      ? primaryColor.withAlpha(30)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Column(
+                children: [
+                  Image.network(
+                    controller.allContents[index].image!,
+                    height: 80,
+                  ),
+                  Gap(8),
+                  Text(
+                      translateDatabase(
+                          arabic: controller.allContents[index].nameAr!,
+                          english: controller.allContents[index].nameEn!),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 12.sp, fontWeight: FontWeight.bold))
+                ],
+              ),
+            ),
+          ),
+          itemCount: controller.allContents.length,
+        ),
+      ),
+    );
+  }
+
   onTapAddSession() {
     return Get.defaultDialog(
       title: 'Add new Session'.tr,
@@ -643,17 +701,16 @@ class ShopEditProductView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              controller: controller.sessionTitleArController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Title (Arabic)'),
+              controller: controller.sessionTitleEnController,
+              decoration: InputDecoration(hintText: 'Enter Title'.tr),
             ),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: controller.sessionTitleEnController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Title (English)'),
-            ),
-            Gap(20.h),
+            // TextFormField(
+            //   controller: controller.sessionTitleEnController,
+            //   decoration:
+            //       const InputDecoration(hintText: 'Enter Title (English)'),
+            // ),
+            // Gap(20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -696,16 +753,15 @@ class ShopEditProductView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextFormField(
-              controller: controller.sessionTitleArController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Title (Arabic)'),
-            ),
-            const SizedBox(height: 20),
+            // TextFormField(
+            //   controller: controller.sessionTitleArController,
+            //   decoration:
+            //       const InputDecoration(hintText: 'Enter Title'),
+            // ),
+            // const SizedBox(height: 20),
             TextFormField(
               controller: controller.sessionTitleEnController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Title (English)'),
+              decoration: InputDecoration(hintText: 'Enter Title'.tr),
             ),
             Gap(20.h),
             Row(
@@ -741,7 +797,7 @@ class ShopEditProductView extends StatelessWidget {
 
   onTapAddDescription(stepId) {
     return Get.defaultDialog(
-      title: 'Add Content',
+      title: 'Add Content'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
       titleStyle: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
       contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -751,17 +807,10 @@ class ShopEditProductView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              controller: controller.sessionDescriptionArController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter description (Arabic)'),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
               controller: controller.sessionDescriptionEnController,
-              decoration: const InputDecoration(
-                  hintText: 'Enter description (English)'),
+              decoration: InputDecoration(hintText: 'Enter description'.tr),
             ),
-            Gap(20.h),
+            Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -805,17 +854,10 @@ class ShopEditProductView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              controller: controller.sessionDescriptionArController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Content (Arabic)'),
+              controller: controller.sessionDescriptionEnController,
+              decoration: InputDecoration(hintText: 'Enter description'.tr),
             ),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: controller.sessionDescriptionEnController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Content (English)'),
-            ),
-            Gap(20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

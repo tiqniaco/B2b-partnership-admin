@@ -56,7 +56,7 @@ class ProviderWidget extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
                                 child: CachedNetworkImage(
-                                  imageUrl: providers[index].image!,
+                                  imageUrl: providers[index].image,
                                   height: 40.h,
                                   width: 40.h,
                                   fit: BoxFit.cover,
@@ -74,7 +74,7 @@ class ProviderWidget extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    providers[index].name!,
+                                    providers[index].name,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 16.sp,
@@ -84,7 +84,7 @@ class ProviderWidget extends StatelessWidget {
                                   ),
                                   PannableRatingBar(
                                     rate:
-                                        double.parse(providers[index].rating!),
+                                        double.parse(providers[index].rating),
                                     items: List.generate(
                                         5,
                                         (index) => RatingWidget(
@@ -118,7 +118,7 @@ class ProviderWidget extends StatelessWidget {
                                       ),
                                     ),
                                     onConfirm: () => controller.deleteProvider(
-                                        providers[index].providerId!),
+                                        providers[index].providerId),
                                     textConfirm: "Yes".tr,
                                     textCancel: "No".tr,
                                     onCancel: () {},

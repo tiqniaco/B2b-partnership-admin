@@ -172,7 +172,7 @@ class ManageLocationController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        queryParameters: {"country_id": selectedCountry.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((type) => CityModel.fromJson(type))

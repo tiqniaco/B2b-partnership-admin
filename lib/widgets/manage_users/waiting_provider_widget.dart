@@ -60,7 +60,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15),
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                            controller.providers[index].image!,
+                                            controller.providers[index].image,
                                         height: 68.h,
                                         width: 65.h,
                                         fit: BoxFit.cover,
@@ -81,7 +81,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          controller.providers[index].name!,
+                                          controller.providers[index].name,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 16.sp,
@@ -90,7 +90,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          "${translateDatabase(arabic: controller.providers[index].governmentNameAr!, english: controller.providers[index].governmentNameEn!)}, ${translateDatabase(arabic: controller.providers[index].countryNameAr!, english: controller.providers[index].countryNameEn!)}",
+                                          "${translateDatabase(arabic: controller.providers[index].governmentNameAr, english: controller.providers[index].governmentNameEn)}, ${translateDatabase(arabic: controller.providers[index].countryNameAr, english: controller.providers[index].countryNameEn)}",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 12.sp,
@@ -129,7 +129,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                                       .deleteProviderDialog(
                                                           controller
                                                               .providers[index]
-                                                              .providerId!);
+                                                              .providerId);
                                                 },
                                                 child: Text(
                                                   "Reject".tr,
@@ -169,7 +169,7 @@ class WaitingProviderWidget extends StatelessWidget {
                                                   controller.acceptProvider(
                                                       controller
                                                           .providers[index]
-                                                          .providerId!);
+                                                          .providerId);
                                                 },
                                                 child: Text(
                                                   "Accept".tr,

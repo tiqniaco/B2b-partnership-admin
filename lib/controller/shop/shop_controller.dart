@@ -23,7 +23,6 @@ class ShopController extends GetxController {
 
   bool showCategories = true;
 
-
   void changeShowCategories() {
     showCategories = !showCategories;
     update();
@@ -45,7 +44,6 @@ class ShopController extends GetxController {
     super.onInit();
   }
 
-
   Future<void> getShopCategories() async {
     categoriesStatus = StatusRequest.loading;
     update();
@@ -56,7 +54,6 @@ class ShopController extends GetxController {
               List<ShopCategoryModel>.from(
             json['data'].map((x) => ShopCategoryModel.fromJson(x)),
           );
-
           return categories;
         }).sendGetRequest();
 
@@ -68,7 +65,6 @@ class ShopController extends GetxController {
       },
       (data) {
         shopCategories = data;
-
         if (data.isEmpty) {
           categoriesStatus = StatusRequest.noData;
         } else {
@@ -90,7 +86,7 @@ class ShopController extends GetxController {
     }
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.shopProducts,
-        data: {
+        queryParameters: {
           'category_id': selectedCategory!.id,
           'page': currentPage,
           if (searchController.text.isNotEmpty) 'search': searchController.text,
@@ -132,11 +128,11 @@ class ShopController extends GetxController {
 
   void deleteCategoryDialog(int index) {
     Get.defaultDialog(
-      title: "Delete Category",
-      titleStyle: TextStyle(fontSize: 15.sp),
-      middleText: "Are you sure you want to\ndelete this category?",
-      textCancel: "Cancel",
-      textConfirm: "Delete",
+      title: "Delete Category".tr,
+      titleStyle: TextStyle(fontSize: 15.r),
+      middleText: "Are you sure you want to\ndelete this category?".tr,
+      textCancel: "Cancel".tr,
+      textConfirm: "Delete".tr,
       onConfirm: () {
         _deleteCategory(index);
         Get.back();

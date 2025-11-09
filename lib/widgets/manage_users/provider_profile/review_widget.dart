@@ -1,3 +1,4 @@
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
 
 import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
@@ -73,7 +74,10 @@ class ReviewWidget extends StatelessWidget {
                           ),
                           Text(
                             review.review!,
-                            style: TextStyle(fontSize: 13.sp),
+                            textDirection: containsArabic(review.review!)
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                            style: TextStyle(fontSize: 13.r),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           )

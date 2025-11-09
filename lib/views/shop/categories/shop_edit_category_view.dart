@@ -58,28 +58,28 @@ class ShopEditCategoryView extends StatelessWidget {
                           ),
                   ),
                 ),
-                Gap(26.h),
-                TextFormField(
-                  controller: controller.nameArController,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Name in Arabic".tr,
-                    hintText: "enter name (Arabic)",
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please enter name (Arabic)";
-                    }
-                    return null;
-                  },
-                ),
-                Gap(20.h),
+                // Gap(26.h),
+                // TextFormField(
+                //   controller: controller.nameArController,
+                //   keyboardType: TextInputType.text,
+                //   decoration: InputDecoration(
+                //     labelText: "Name in Arabic".tr,
+                //     hintText: "enter name (Arabic)",
+                //   ),
+                //   validator: (value) {
+                //     if (value!.isEmpty) {
+                //       return "Please enter name (Arabic)";
+                //     }
+                //     return null;
+                //   },
+                // ),
+                Gap(20),
                 TextFormField(
                   controller: controller.nameEnController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: "Name in English".tr,
-                    hintText: "enter name (English)",
+                    labelText: "Name".tr,
+                    hintText: "enter name".tr,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -95,7 +95,7 @@ class ShopEditCategoryView extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           child: CustomLoadingButton(
             onPressed: () {
-              return controller.addNewCategory();
+              return controller.editCategory();
             },
             text: "Edit".tr,
           ),

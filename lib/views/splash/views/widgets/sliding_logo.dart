@@ -16,9 +16,12 @@ class SlidingLogo extends StatelessWidget {
       builder: (context, _) {
         return SlideTransition(
           position: slidingAnimation,
-          child: Image.asset(
-            AssetsData.logoImage,
-            width: MediaQuery.of(context).size.width * 0.7,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              AssetsData.logoImage,
+              width: MediaQuery.of(context).size.width * 0.7,
+            ),
           ),
         );
       },

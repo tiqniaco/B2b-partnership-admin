@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
@@ -5,6 +6,7 @@ import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
 import 'package:b2b_partnership_admin/core/enums/status_request.dart';
 import 'package:b2b_partnership_admin/core/network/api_constance.dart';
 import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
+import 'package:b2b_partnership_admin/models/bag_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:b2b_partnership_admin/models/shop_product_model.dart';
@@ -13,17 +15,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
 class ShopEditProductController extends GetxController {
   StatusRequest statusRequest = StatusRequest.success;
+  StatusRequest addContentRequest = StatusRequest.success;
   ShopProductModel? productModel;
   List<ProductDescriptionModel> descriptions = [];
+  List<BagContentModel> contents = [];
+  List<BagContentModel> allContents = [];
   final formKey = GlobalKey<FormState>();
   final sessionFormKeyEdit = GlobalKey<FormState>();
   final sessionFormKeyAdd = GlobalKey<FormState>();
   final descriptionFormKeyEdit = GlobalKey<FormState>();
   final descriptionFormKeyAdd = GlobalKey<FormState>();
   final stepFormKey = GlobalKey<FormState>();
+  late final String bagFile;
+  late final String bagImage;
   final titleArController = TextEditingController();
   final titleEnController = TextEditingController();
   final descriptionEnController = TextEditingController();
@@ -42,6 +50,7 @@ class ShopEditProductController extends GetxController {
   @override
   void onInit() {
     productModel = Get.arguments['product'];
+
     titleArController.text = productModel?.titleAr ?? "";
     titleEnController.text = productModel?.titleEn ?? "";
     descriptionEnController.text = productModel?.descriptionEn ?? "";
@@ -53,7 +62,7 @@ class ShopEditProductController extends GetxController {
     termsAndConditionsArController.text =
         productModel?.termsAndConditionsAr ?? "";
     getProductDetails();
-
+    getBagContents();
     super.onInit();
   }
 
@@ -114,13 +123,18 @@ class ShopEditProductController extends GetxController {
         update();
       },
       (data) {
-        print(data);
-        // product = ShopProductModel.fromJson(data['data']);
         descriptions = List<ProductDescriptionModel>.from(
           data['descriptions'].map(
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
+
+        contents = List<BagContentModel>.from(
+          data['bagContents'].map(
+            (e) => BagContentModel.fromJson(e),
+          ),
+        );
+
         statusRequest = StatusRequest.success;
         update();
       },
@@ -135,19 +149,28 @@ class ShopEditProductController extends GetxController {
   Future<void> editProduct() async {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
+
+      print(titleEnController.text);
+      print(descriptionEnController.text);
+      print(priceController.text);
+      print(discountController.text);
+      
+
       final result = await CustomRequest<String>(
         path: ApiConstance.updateProduct(productModel?.id.toString() ?? ''),
         data: {
-          'title_ar': titleArController.text,
+          'title_ar': titleEnController.text,
           'title_en': titleEnController.text,
-          'description_ar': descriptionArController.text,
+          'description_ar': descriptionEnController.text,
           'description_en': descriptionEnController.text,
           'price': double.parse(priceController.text),
           'discount': double.parse(discountController.text),
+          "terms_and_conditions_en": termsAndConditionsEnController.text,
+          "terms_and_conditions_ar": termsAndConditionsEnController.text
         },
         files: {
-          if (image != null) "image": image?.path ?? '',
-          if (file != null) "file": file?.path ?? '',
+          if (image != null) "image": image!.path,
+          if (file != null) "file": file!.path,
         },
         fromJson: (json) {
           return json['message'];
@@ -157,6 +180,7 @@ class ShopEditProductController extends GetxController {
       result.fold(
         (error) {
           AppSnackBars.error(message: error.errMsg);
+          log(error.errMsg);
         },
         (response) {
           Get.back();
@@ -166,6 +190,81 @@ class ShopEditProductController extends GetxController {
         },
       );
     }
+  }
+
+  ///====================================================
+  Future<void> deleteBagContent(id) async {
+    final result = await CustomRequest<String>(
+            path: ApiConstance.deleteContents(id),
+            fromJson: (json) {
+              return json['message'];
+            },
+            data: {"product_id": productModel!.id, "bag_content_id": id})
+        .sendDeleteRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (response) {
+        AppSnackBars.success(message: "content deleted successfully");
+        getProductDetails();
+      },
+    );
+  }
+
+  Future<void> getBagContents() async {
+    addContentRequest = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<List<BagContentModel>>(
+        path: ApiConstance.getAllContents,
+        fromJson: (json) {
+          final List<BagContentModel> categories = List<BagContentModel>.from(
+            json['data'].map((x) => BagContentModel.fromJson(x)),
+          );
+
+          return categories;
+        }).sendGetRequest();
+
+    result.fold(
+      (error) {
+        Logger().e(error.errMsg);
+        addContentRequest = StatusRequest.error;
+        update();
+      },
+      (data) {
+        allContents = data;
+
+        if (data.isEmpty) {
+          addContentRequest = StatusRequest.noData;
+        } else {
+          addContentRequest = StatusRequest.success;
+        }
+        update();
+      },
+    );
+  }
+
+  Future<void> addContent(BagContentModel allContent) async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.addBagContents,
+      data: {
+        'bag_content_id': allContent.id,
+        'product_id': productModel!.id,
+      },
+      fromJson: (json) {
+        return json['message'];
+      },
+    ).sendPostRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (response) {
+        Get.back();
+        AppSnackBars.success(message: "Content added successfully");
+        getProductDetails();
+      },
+    );
   }
 
   ///============================================
@@ -178,8 +277,8 @@ class ShopEditProductController extends GetxController {
         path: ApiConstance.addDescription,
         data: {
           'title_id': stepId,
-          'content_ar': sessionDescriptionArController.text,
-          'content_en': sessionDescriptionArController.text,
+          'content_ar': sessionDescriptionEnController.text,
+          'content_en': sessionDescriptionEnController.text,
         },
         fromJson: (json) {
           return json['message'];
@@ -251,7 +350,7 @@ class ShopEditProductController extends GetxController {
   }
 
   onTapEditDescription(ProductDescriptionContentModel model) {
-    sessionDescriptionArController.text = model.contentAr!;
+    sessionDescriptionArController.text = model.contentEn!;
     sessionDescriptionEnController.text = model.contentEn!;
   }
 
@@ -261,8 +360,8 @@ class ShopEditProductController extends GetxController {
       final result = await CustomRequest<String>(
         path: ApiConstance.editDescription(id),
         data: {
-          'content_ar': sessionDescriptionArController.text,
-          'content_en': sessionDescriptionArController.text,
+          'content_ar': sessionDescriptionEnController.text,
+          'content_en': sessionDescriptionEnController.text,
         },
         fromJson: (json) {
           return json['message'];
@@ -305,7 +404,7 @@ class ShopEditProductController extends GetxController {
       final result = await CustomRequest<String>(
         path: ApiConstance.addSession,
         data: {
-          'title_ar': sessionTitleArController.text,
+          'title_ar': sessionTitleEnController.text,
           'title_en': sessionTitleEnController.text,
           'product_id': productModel!.id,
         },
@@ -335,7 +434,7 @@ class ShopEditProductController extends GetxController {
       final result = await CustomRequest<String>(
         path: ApiConstance.editSession(id),
         data: {
-          'title_ar': sessionTitleArController.text,
+          'title_ar': sessionTitleEnController.text,
           'title_en': sessionTitleEnController.text,
         },
         fromJson: (json) {

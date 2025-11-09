@@ -35,7 +35,7 @@ class ProviderWidgetItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
-                    imageUrl: provider.image!,
+                    imageUrl: provider.image,
                     height: 70.h,
                     width: 85.h,
                     fit: BoxFit.cover,
@@ -45,7 +45,7 @@ class ProviderWidgetItem extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      provider.name!,
+                      provider.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
@@ -55,7 +55,7 @@ class ProviderWidgetItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     PannableRatingBar(
-                      rate: double.parse(provider.rating!),
+                      rate: double.parse(provider.rating),
                       items: List.generate(
                           5,
                           (index) => RatingWidget(
@@ -69,7 +69,7 @@ class ProviderWidgetItem extends StatelessWidget {
                       onHover: (value) {},
                     ),
                     Text(
-                      provider.bio!,
+                      provider.bio,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black54,

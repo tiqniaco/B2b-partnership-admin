@@ -18,7 +18,7 @@ class CityModel {
     id = json['id'];
     nameAr = json['name_ar'];
     nameEn = json['name_en'];
-    countryId = json['country_id'];
+    countryId = json['country_id'].toString();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

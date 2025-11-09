@@ -1,4 +1,5 @@
 import 'package:b2b_partnership_admin/models/client_model.dart';
+import 'package:b2b_partnership_admin/models/job_details_model.dart';
 import 'package:b2b_partnership_admin/models/service_request_model.dart';
 
 import '/core/crud/custom_request.dart';
@@ -16,21 +17,24 @@ class ClientProfileController extends GetxController {
   int selectedIndex = 0;
   ClientModel? clientModel;
   late String clientId;
+  late String userId;
   int rating = 0;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
-  StatusRequest statusRequestReview = StatusRequest.loading;
+  StatusRequest statusRequestJobs = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
-  StatusRequest statusRequestPerviousWork = StatusRequest.loading;
   List<ServiceRequestModel> posts = [];
+  List<JobDetailsModel> jobs = [];
 
   @override
   onInit() async {
     super.onInit();
     pageController = PageController(initialPage: selectedIndex);
     clientId = Get.arguments['id'];
+    userId = Get.arguments['userId'];
     await getClient();
+    getJobs();
     getServices();
   }
 
@@ -74,7 +78,7 @@ class ClientProfileController extends GetxController {
   Future<void> getServices() async {
     statusRequestServices = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getClientServiceRequest(clientId),
+        path: ApiConstance.getClientServiceRequest(userId),
         fromJson: (json) {
           return json["data"]
               .map<ServiceRequestModel>(
@@ -82,6 +86,7 @@ class ClientProfileController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
+      Logger().e(l.errMsg);
       statusRequestServices = StatusRequest.error;
     }, (r) {
       posts.clear();
@@ -94,11 +99,11 @@ class ClientProfileController extends GetxController {
 
   void deleteServiceDialog(id) {
     Get.defaultDialog(
-        title: "Delete Post",
+        title: "Delete Post".tr,
         titleStyle: TextStyle(fontSize: 15.sp),
-        middleText: "Are you sure you want to\ndelete this post?",
-        textConfirm: "Yes",
-        textCancel: "No",
+        middleText: "Are you sure you want to\ndelete this post?".tr,
+        textConfirm: "Yes".tr,
+        textCancel: "No".tr,
         onConfirm: () {
           _deleteService(id);
         });
@@ -118,6 +123,61 @@ class ClientProfileController extends GetxController {
       (data) {
         Get.back();
         getServices();
+        AppSnackBars.success(message: data);
+      },
+    );
+  }
+
+// jobs
+  Future<void> getJobs() async {
+    statusRequestJobs = StatusRequest.loading;
+    final response = await CustomRequest(
+        queryParameters: {"provider_id": userId},
+        path: ApiConstance.getProviderJob,
+        fromJson: (json) {
+          return json["data"]
+              .map<JobDetailsModel>(
+                  (service) => JobDetailsModel.fromJson(service))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestJobs = StatusRequest.error;
+    }, (r) {
+      jobs.clear();
+      jobs = r;
+      statusRequestJobs =
+          r.isEmpty ? StatusRequest.noData : StatusRequest.success;
+    });
+    update();
+  }
+
+  void deleteJobsDialog(id) {
+    Get.defaultDialog(
+        title: "Delete Job".tr,
+        titleStyle: TextStyle(fontSize: 15.sp),
+        middleText: "Are you sure you want to\ndelete this job?".tr,
+        textConfirm: "Yes".tr,
+        textCancel: "No".tr,
+        onConfirm: () {
+          _deleteJobs(id);
+        });
+  }
+
+  void _deleteJobs(id) async {
+    final result = await CustomRequest<String>(
+      data: {"provider_id": userId},
+      path: ApiConstance.deleteJob(id),
+      fromJson: (json) {
+        return json["message"];
+      },
+    ).sendDeleteRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (data) {
+        Get.back();
+        getJobs();
         AppSnackBars.success(message: data);
       },
     );

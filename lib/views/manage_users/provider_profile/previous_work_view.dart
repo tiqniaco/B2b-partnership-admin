@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
+
 import '../../../controller/manage_users/provider_profile/previous_work_controller.dart';
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
@@ -34,12 +36,19 @@ class PreviousWorkView extends StatelessWidget {
                         translateDatabase(
                             arabic: controller.model.titleAr!,
                             english: controller.model.titleEn!),
+                        textDirection: containsArabic(controller.model.titleEn!)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18.sp),
+                            fontWeight: FontWeight.w500, fontSize: 18.r),
                       ),
                       Gap(10),
                       ReadMoreText(
                         "${controller.model.description!} ",
+                        textDirection:
+                            containsArabic(controller.model.description!)
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.normal,

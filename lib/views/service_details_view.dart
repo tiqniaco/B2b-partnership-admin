@@ -1,7 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
+
 import '/controller/service_details_controller.dart';
-import '/core/functions/translate_database.dart';
 import '/core/services/date_time_convertor.dart';
 import '/core/theme/app_color.dart';
 import '/widgets/service_details.dart/feature_widget.dart';
@@ -25,12 +26,13 @@ class ServiceDetailsView extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 35),
+          padding:
+              const EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 55),
           child: Row(
             children: [
               Expanded(
                 child: Container(
-                  height: 63,
+                  height: 50,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(15)),
@@ -89,7 +91,11 @@ class ServiceDetailsView extends StatelessWidget {
                       top: 50,
                       left: 16,
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        icon: Icon(
+                            Get.locale == Locale('ar')
+                                ? Icons.arrow_forward_ios
+                                : Icons.arrow_back_ios,
+                            color: Colors.white),
                         onPressed: () {
                           Get.back();
                         },
@@ -119,7 +125,10 @@ class ServiceDetailsView extends StatelessWidget {
                       children: [
                         Gap(10),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            controller
+                                .watchVideo(controller.service!.data!.video!);
+                          },
                           child: Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 17, vertical: 12),
@@ -138,9 +147,13 @@ class ServiceDetailsView extends StatelessWidget {
                         ),
                         SizedBox(height: 13),
                         Text(
-                          translateDatabase(
-                              arabic: controller.service!.data!.nameAr!,
-                              english: controller.service!.data!.nameEn!),
+                          controller.service!.data!.nameEn!
+                          // )
+                          ,
+                          textDirection:
+                              containsArabic(controller.service!.data!.nameEn!)
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
                           style: TextStyle(
                               fontSize: 17.sp, fontWeight: FontWeight.bold),
                         ),
@@ -151,10 +164,10 @@ class ServiceDetailsView extends StatelessWidget {
                               radius: 17.sp,
                               backgroundColor: Colors.grey[200],
                               backgroundImage: CachedNetworkImageProvider(
-                                  controller.service!.provider!.image!),
+                                  controller.service!.provider!.image),
                             ),
                             SizedBox(width: 10),
-                            Text(controller.service!.provider!.name!),
+                            Text(controller.service!.provider!.name),
                           ],
                         ),
                         SizedBox(height: 25),
@@ -179,7 +192,7 @@ class ServiceDetailsView extends StatelessWidget {
                                         .toString(),
                                     style: TextStyle(
                                         color: Colors.green,
-                                        fontSize: 16.sp,
+                                        fontSize: 16.r,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -302,6 +315,10 @@ class ServiceDetailsView extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   controller.service!.data!.overview!,
+                                  textDirection: containsArabic(
+                                          controller.service!.data!.overview!)
+                                      ? TextDirection.rtl
+                                      : TextDirection.ltr,
                                   style: TextStyle(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w500),

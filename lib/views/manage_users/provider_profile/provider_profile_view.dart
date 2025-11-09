@@ -1,4 +1,5 @@
 import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partnership_admin/widgets/manage_users/provider_profile/freelance_provider_item.dart';
 import 'package:b2b_partnership_admin/widgets/manage_users/provider_profile/job_list_widget.dart';
 
 import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
@@ -47,6 +48,7 @@ class ProviderProfileView extends StatelessWidget {
                           AboutWidget(),
                           PreviousWork(),
                           JobListWidget(),
+                          FreelanceProviderItem(services: controller.posts),
                           ReviewWidget(),
                         ],
                       ),
@@ -71,18 +73,18 @@ class ProviderProfileView extends StatelessWidget {
             radius: 33.r,
             backgroundColor: Colors.grey[200],
             backgroundImage:
-                CachedNetworkImageProvider(controller.providerModel!.image!),
+                CachedNetworkImageProvider(controller.providerModel!.image),
           ),
           Gap(10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(controller.providerModel!.name!,
+              Text(controller.providerModel!.name,
                   style:
                       TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Text(controller.providerModel!.rating!,
+                  Text(controller.providerModel!.rating,
                       style: TextStyle(
                           color: greyColor,
                           fontSize: 15.sp,
@@ -94,7 +96,7 @@ class ProviderProfileView extends StatelessWidget {
                     ignoreGestures: true,
                     itemSize: 17.sp,
                     initialRating:
-                        double.parse(controller.providerModel!.rating!),
+                        double.parse(controller.providerModel!.rating),
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: false,
@@ -115,15 +117,19 @@ class ProviderProfileView extends StatelessWidget {
   Widget _buildTabs(ProviderProfileController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildTab("Services", 0, controller),
-          _buildTab("About", 1, controller),
-          _buildTab("Previous work", 2, controller),
-          _buildTab("Jobs", 3, controller),
-          _buildTab("Reviews", 4, controller),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildTab("Services", 0, controller),
+            _buildTab("About", 1, controller),
+            _buildTab("Previous work", 2, controller),
+            _buildTab("Jobs", 3, controller),
+            _buildTab("Posts", 4, controller),
+            _buildTab("Reviews", 5, controller),
+          ],
+        ),
       ),
     );
   }
@@ -133,6 +139,7 @@ class ProviderProfileView extends StatelessWidget {
     return GestureDetector(
       onTap: () => controller.onTabTapped(index),
       child: Container(
+        margin: EdgeInsets.only(left: 4, right: 4),
         padding: EdgeInsets.only(left: 5, bottom: 10, right: 5),
         decoration: BoxDecoration(
             border: Border(
@@ -152,6 +159,4 @@ class ProviderProfileView extends StatelessWidget {
       ),
     );
   }
-
-
 }

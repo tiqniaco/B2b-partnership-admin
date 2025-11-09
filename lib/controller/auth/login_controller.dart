@@ -65,22 +65,23 @@ class LoginController extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
-        AppSnackBars.success(message: r['message']);
-        statusRequest = StatusRequest.success;
-        subscribeTopics(
-          r['user_id'],
-          r['role'],
-        );
-        Get.find<AppPreferences>().setToken(r['token']);
-        Get.find<AppPreferences>().setUserId(r['user_id'].toString());
-        Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
-        Get.find<AppPreferences>().setUserRole(r['role']);
-        ApiConstance.token = r['token'];
-        // if (r['role'] == 'provider') {
-        //  Get.offAllNamed(AppRoutes.providerHomeLayout);
-        // } else {
-        Get.offAllNamed(AppRoutes.adminHomeLayout);
-        // }
+        if (r['role'] == 'admin') {
+          AppSnackBars.success(message: r['message']);
+          statusRequest = StatusRequest.success;
+          subscribeTopics(
+            r['user_id'],
+            r['role'],
+          );
+          Get.find<AppPreferences>().setToken(r['token']);
+          Get.find<AppPreferences>().setUserId(r['user_id'].toString());
+          Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+          Get.find<AppPreferences>().setUserRole(r['role']);
+          ApiConstance.token = r['token'];
+          Get.offAllNamed(AppRoutes.adminHomeLayout);
+        }else{
+           AppSnackBars.error(message: "account not found".tr);
+        }
+
 
         update();
       });

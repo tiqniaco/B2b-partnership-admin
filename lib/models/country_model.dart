@@ -1,4 +1,3 @@
-
 class CountryModel {
   int? id;
   String? nameAr;
@@ -25,7 +24,7 @@ class CountryModel {
     nameEn = json['name_en'];
     flag = json['flag'];
     code = json['code'];
-    phoneLength = json['phone_length'];
+    phoneLength = json['phone_length'].toString();
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }

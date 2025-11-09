@@ -21,11 +21,11 @@ class ReviewModel {
   ReviewModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     review = json['review'];
-    rating = json['rating'];
+    rating = json['rating'].toString();
     name = json['name'];
     email = json['email'];
     image = json['image'];
-    userId = json['user_id'];
+    userId = json['user_id'].toString();
     createdAt = json['created_at'];
   }
 

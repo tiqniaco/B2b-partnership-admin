@@ -42,7 +42,7 @@ class EditWhatsappController extends GetxController {
       },
       (data) {
         whatsAppStatus = StatusRequest.success;
-        print(data);
+       
         numberController.text = data['whatsapp'];
         update();
       },

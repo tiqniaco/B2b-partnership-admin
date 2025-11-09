@@ -1,10 +1,10 @@
-import '/core/constants/app_constants.dart';
-import '/models/provider_model.dart';
+import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
+import 'package:b2b_partnership_admin/models/provider_model.dart';
 
 class ServiceModel {
   String? status;
   String? message;
-  ServiceRequestModel? data;
+  ServiceModelData? data;
   ProviderModel? provider;
 
   ServiceModel({this.status, this.message, this.data, this.provider});
@@ -12,9 +12,8 @@ class ServiceModel {
   ServiceModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null
-        ? ServiceRequestModel.fromJson(json['data'])
-        : null;
+    data =
+        json['data'] != null ? ServiceModelData.fromJson(json['data']) : null;
     provider = json['provider'] != null
         ? ProviderModel.fromJson(json['provider'])
         : null;
@@ -34,7 +33,7 @@ class ServiceModel {
   }
 }
 
-class ServiceRequestModel {
+class ServiceModelData {
   String? id;
   String? providerId;
   String? nameAr;
@@ -62,7 +61,7 @@ class ServiceRequestModel {
   String? createdAt;
   String? updatedAt;
 
-  ServiceRequestModel(
+  ServiceModelData(
       {this.id,
       this.providerId,
       this.nameAr,
@@ -90,28 +89,28 @@ class ServiceRequestModel {
       this.createdAt,
       this.updatedAt});
 
-  ServiceRequestModel.fromJson(Map<String, dynamic> json) {
+  ServiceModelData.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
-    providerId = json['provider_id'];
+    providerId = json['provider_id'].toString();
     nameAr = json['name_ar'];
     nameEn = json['name_en'];
     address = json['address'];
     description = json['description'];
-    image = kBaseImageUrl + json['image'];
+    image = json['image'] == null ? "" : kBaseImageUrl + json['image'];
     // price = json['price'];
-    rating = json['rating'];
+    rating = json['rating'].toString();
     overview = json['overview'];
     video = json['video'];
-    countryId = json['country_id'];
+    countryId = json['country_id'].toString();
     countryNameAr = json['country_name_ar'];
     countryNameEn = json['country_name_en'];
-    governmentsId = json['governments_id'];
+    governmentsId = json['governments_id'].toString();
     governmentNameAr = json['government_name_ar'];
     governmentNameEn = json['government_name_en'];
-    specializationId = json['specialization_id'];
+    specializationId = json['specialization_id'].toString();
     specializationNameAr = json['specialization_name_ar'];
     specializationNameEn = json['specialization_name_en'];
-    subSpecializationId = json['sub_specialization_id'];
+    subSpecializationId = json['sub_specialization_id'].toString();
     subSpecializationNameAr = json['sub_specialization_name_ar'];
     subSpecializationNameEn = json['sub_specialization_name_en'];
     isFavorite = json['is_favorite'];

@@ -1,6 +1,7 @@
 import 'package:b2b_partnership_admin/controller/manage_users/client_profile_controller.dart';
 import 'package:b2b_partnership_admin/widgets/manage_users/client_profile/about_client_widget.dart';
 import 'package:b2b_partnership_admin/widgets/manage_users/client_profile/freelance_item.dart';
+import 'package:b2b_partnership_admin/widgets/manage_users/client_profile/job_list_client_widget.dart';
 
 import '/core/theme/app_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -35,10 +36,8 @@ class ClientProfileView extends StatelessWidget {
                         onPageChanged: controller.onPageChanged,
                         children: [
                           AboutClientWidget(),
+                          JobListClientWidget(),
                           FreelanceItem(services: controller.posts),
-                          // PreviousWork(),
-                          // JobListWidget(),
-                          // ReviewWidget(),
                         ],
                       ),
                     ),
@@ -85,7 +84,8 @@ class ClientProfileView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildTab("About".tr, 0, controller),
-          _buildTab("Services".tr, 1, controller),
+          _buildTab("Jobs".tr, 1, controller),
+          _buildTab("Posts".tr, 2, controller),
         ],
       ),
     );

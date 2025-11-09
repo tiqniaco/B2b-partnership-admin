@@ -82,9 +82,9 @@ class ProviderSettingEditProfileController extends GetxController {
     emailController.text = model?.email ?? '';
     phoneController.text = model?.phone ?? '';
     bioController.text = model?.bio ?? "";
-    taxCartController.text = model!.taxCard?.split('/').last ?? "";
+    taxCartController.text = model!.taxCard.split('/').last ;
     commercialController.text =
-        model?.commercialRegister?.split('/').last ?? "";
+        model?.commercialRegister.split('/').last ?? "";
 
     super.onInit();
   }

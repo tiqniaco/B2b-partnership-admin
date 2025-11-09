@@ -1,7 +1,8 @@
 import '/core/constants/app_constants.dart';
 
 class ApiConstance {
-  static const String baseUrl = 'https://tiqnia.com/Apps/b2b_partenership/api/';
+  static const String baseUrl =
+      'https://b2bpartnership.com/api/'; // 'https://tiqnia.com/Apps/b2b_partenership/api/'; //;
 
   static String token = '';
 
@@ -148,6 +149,11 @@ class ApiConstance {
   static String editDescription(id) => "store/product-description-contents/$id";
   static String deleteDescription(id) =>
       "store/product-description-contents/$id";
+  // static String deleteDescription(id) =>
+  //     "store/product-description-contents/$id";
+  static String getAllContents = "store/bag-contents";
+  static String deleteContents(id) => "store/product-bag-content/$id";
+  static String addBagContents = "store/product-bag-content";
   static String addSession = "store/product-description-titles";
   static String editSession(id) => "store/product-description-titles/$id";
   static String deleteSession(id) => "store/product-description-titles/$id";

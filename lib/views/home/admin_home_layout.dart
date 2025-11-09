@@ -51,9 +51,8 @@ class _AdminHomeLayoutState extends State<AdminHomeLayout>
               title: "Home".tr,
             ),
             TabItem(
-              icon: SvgPicture.asset(
-                "assets/svgs/cart.svg",
-                height: 20.sp,
+              icon: Icon(
+                Icons.shop_outlined,
                 color: controller.currentIndex == 1
                     ? primaryColor
                     : unSelectedBNavColor,

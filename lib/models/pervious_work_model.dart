@@ -22,7 +22,7 @@ class ProviderPerviousWorkModel {
 
   ProviderPerviousWorkModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    providerId = json['provider_id'];
+    providerId = json['provider_id'].toString();
     titleAr = json['title_ar'];
     titleEn = json['title_en'];
     description = json['description'];

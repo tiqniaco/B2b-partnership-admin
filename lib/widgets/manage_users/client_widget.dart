@@ -32,8 +32,10 @@ class ClientWidget extends StatelessWidget {
             ),
             itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Get.toNamed(AppRoutes.clientProfileView,
-                        arguments: {"id": clients[index].clientId});
+                    Get.toNamed(AppRoutes.clientProfileView, arguments: {
+                      "id": clients[index].clientId,
+                      "userId": clients[index].userId
+                    });
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -118,9 +120,6 @@ class ClientWidget extends StatelessWidget {
                                     textCancel: "No".tr,
                                     onCancel: () {},
                                   );
-                                
-                                
-                                
                                 },
                                 child: Icon(Icons.remove_circle,
                                     color: primaryColor, size: 25.sp)),

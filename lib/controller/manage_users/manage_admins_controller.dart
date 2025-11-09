@@ -98,7 +98,7 @@ class ManageAdminsController extends GetxController {
     }
   }
 
-  deleteAdmin(String id) async {
+  Future<void> deleteAdmin(String id) async {
     statusRequestAdmins = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.deleteAdmin(id),
@@ -109,6 +109,7 @@ class ManageAdminsController extends GetxController {
       statusRequestAdmins = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
+      Get.back();
       getAdmins();
     });
     update();

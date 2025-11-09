@@ -36,13 +36,13 @@ class ShopEditCategoryController extends GetxController {
     update();
   }
 
-  Future<void> addNewCategory() async {
+  Future<void> editCategory() async {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
       final result = await CustomRequest<String>(
         path: ApiConstance.updateShopCategory(model?.id.toString() ?? ''),
         data: {
-          'name_ar': nameArController.text,
+          'name_ar': nameEnController.text,
           'name_en': nameEnController.text,
         },
         files: {

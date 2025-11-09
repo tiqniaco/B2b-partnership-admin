@@ -27,10 +27,14 @@ class LoginView extends StatelessWidget {
               key: controller.loginFormKey,
               child: Column(
                 children: [
-                  Image.asset(
-                    "assets/images/logo.png",
-                    height: 130.h,
-                    fit: BoxFit.fill,
+                  Gap(100),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      height: 110.h,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(25.0),
@@ -113,19 +117,6 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                         Gap(0.02.sh),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Text(
-                        //       "Don't have account?".tr,
-                        //       style: TextStyle(
-                        //         fontSize: 12.sp,
-                        //         color: Colors.black54,
-                        //       ),
-                        //     ),
-                        //     Gap(5.w),
-                        //   ],
-                        // ),
                       ],
                     ),
                   ),

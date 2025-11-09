@@ -38,7 +38,7 @@ class ShopAddNewCategoryController extends GetxController {
       final result = await CustomRequest<String>(
         path: ApiConstance.addShopCategory,
         data: {
-          'name_ar': nameArController.text,
+          'name_ar': nameEnController.text,
           'name_en': nameEnController.text,
         },
         files: {

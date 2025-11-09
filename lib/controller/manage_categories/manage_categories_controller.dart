@@ -238,7 +238,7 @@ class ManageCategoriesController extends GetxController {
     statusRequestSubSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedCategory.id},
+        queryParameters: {"specialization_id": selectedCategory.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

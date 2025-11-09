@@ -37,22 +37,22 @@ class ClientModel {
       this.providerId});
 
   ClientModel.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
+    userId = json['user_id'].toString();
     name = json['name'];
     email = json['email'];
     countryCode = json['country_code'];
     phone = json['phone'];
     image = kBaseImageUrl + (json['image'] ?? "");
-    clientId = json['client_id'];
-    countryId = json['country_id'];
+    clientId = json['client_id'].toString();
+    countryId = json['country_id'].toString();
     countryNameAr = json['country_name_ar'];
     countryNameEn = json['country_name_en'];
-    governmentId = json['government_id'];
+    governmentId = json['government_id'].toString();
     governmentNameAr = json['government_name_ar'];
     governmentNameEn = json['government_name_en'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    providerId = json['provider_id'];
+    providerId = json['provider_id'].toString();
   }
 
   Map<String, dynamic> toJson() {

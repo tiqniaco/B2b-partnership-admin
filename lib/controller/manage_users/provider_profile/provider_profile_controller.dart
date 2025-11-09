@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:b2b_partnership_admin/models/job_details_model.dart';
+import 'package:b2b_partnership_admin/models/service_request_model.dart';
 
 import '/core/crud/custom_request.dart';
 import '/core/enums/status_request.dart';
@@ -25,17 +26,20 @@ class ProviderProfileController extends GetxController {
   ProviderModel? providerModel;
   late String provId;
   int rating = 0;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestJobs = StatusRequest.loading;
+  StatusRequest statusRequestPosts = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
   StatusRequest statusRequestPerviousWork = StatusRequest.loading;
-  List<ServiceRequestModel> providerServices = [];
+  List<ServiceModelData> providerServices = [];
   List<ProviderPerviousWorkModel> previousWork = [];
   List<ReviewModel> reviews = [];
   List<JobDetailsModel> jobs = [];
+  List<ServiceRequestModel> posts = [];
 
   @override
   onInit() async {
@@ -46,6 +50,7 @@ class ProviderProfileController extends GetxController {
     getServices();
     getPreviousWork();
     getJobs();
+    getPosts();
     getReview();
   }
 
@@ -151,7 +156,7 @@ class ProviderProfileController extends GetxController {
     statusRequestReview = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getReviewServices,
-        data: {"provider_id": provId},
+        queryParameters: {"provider_id": provId},
         fromJson: (json) {
           return json['data']
               .map<ReviewModel>((type) => ReviewModel.fromJson(type))
@@ -246,14 +251,15 @@ class ProviderProfileController extends GetxController {
   }
 
 // ---- services
+
   Future<void> getServices() async {
     statusRequestServices = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProviderServices(provId),
         fromJson: (json) {
           return json["data"]
-              .map<ServiceRequestModel>(
-                  (service) => ServiceRequestModel.fromJson(service))
+              .map<ServiceModelData>(
+                  (service) => ServiceModelData.fromJson(service))
               .toList();
         }).sendGetRequest();
     response.fold((l) {
@@ -302,7 +308,7 @@ class ProviderProfileController extends GetxController {
     statusRequestPerviousWork = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProviderPerviousWork,
-        data: {"provider_id": providerModel!.providerId},
+        queryParameters: {"provider_id": providerModel!.providerId},
         fromJson: (json) {
           return json["data"]
               .map<ProviderPerviousWorkModel>(
@@ -355,7 +361,7 @@ class ProviderProfileController extends GetxController {
   Future<void> getJobs() async {
     statusRequestJobs = StatusRequest.loading;
     final response = await CustomRequest(
-        data: {"provider_id": providerModel!.providerId},
+        queryParameters: {"provider_id": providerModel!.userId},
         path: ApiConstance.getProviderJob,
         fromJson: (json) {
           return json["data"]
@@ -401,6 +407,60 @@ class ProviderProfileController extends GetxController {
       (data) {
         Get.back();
         getJobs();
+        AppSnackBars.success(message: data);
+      },
+    );
+  }
+
+// ------ posts
+  Future<void> getPosts() async {
+    statusRequestPosts = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.getClientServiceRequest(providerModel!.userId),
+        fromJson: (json) {
+          return json["data"]
+              .map<ServiceRequestModel>(
+                  (service) => ServiceRequestModel.fromJson(service))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      Logger().e(l.errMsg);
+      statusRequestPosts = StatusRequest.error;
+    }, (r) {
+      posts.clear();
+      posts = r;
+      statusRequestPosts =
+          r.isEmpty ? StatusRequest.noData : StatusRequest.success;
+    });
+    update();
+  }
+
+  void deletePostDialog(id) {
+    Get.defaultDialog(
+        title: "Delete Post",
+        titleStyle: TextStyle(fontSize: 15.sp),
+        middleText: "Are you sure you want to\ndelete this post?",
+        textConfirm: "Yes",
+        textCancel: "No",
+        onConfirm: () {
+          _deletePost(id);
+        });
+  }
+
+  void _deletePost(id) async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.deletePost(id),
+      fromJson: (json) {
+        return json["message"];
+      },
+    ).sendDeleteRequest();
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (data) {
+        Get.back();
+        getServices();
         AppSnackBars.success(message: data);
       },
     );

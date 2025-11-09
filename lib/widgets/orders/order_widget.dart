@@ -1,5 +1,4 @@
 import 'package:b2b_partnership_admin/core/theme/text_style.dart';
-import 'package:b2b_partnership_admin/widgets/orders/print_type.dart';
 
 import '/app_routes.dart';
 import '/core/services/date_time_convertor.dart';
@@ -80,11 +79,11 @@ class OrderWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Spacer(),
-                      PrintType(
-                        type: orderModel.status,
-                      ),
-                      Gap(4.w),
+                      // Spacer(),
+                      // PrintType(
+                      //   type: orderModel.status,
+                      // ),
+                      // Gap(4.w),
                     ],
                   ),
                 ),

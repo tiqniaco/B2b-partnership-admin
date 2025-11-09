@@ -1,3 +1,5 @@
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
+
 import '/app_routes.dart';
 import '../../../controller/manage_users/provider_profile/provider_profile_controller.dart';
 import '/core/global/widgets/custom_server_status_widget.dart';
@@ -64,15 +66,24 @@ class PreviousWork extends StatelessWidget {
                             Spacer(),
                             Text(
                               controller.previousWork[index].titleEn!,
+                              textDirection: containsArabic(
+                                      controller.previousWork[index].titleEn!)
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17.sp,
+                                  fontSize: 17.r,
                                   color: whiteColor),
                             ),
                             Text(
                               controller.previousWork[index].description!,
+                              textDirection: containsArabic(
+                                controller.previousWork[index].description!,
+                              )
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
                               style:
-                                  TextStyle(fontSize: 14.sp, color: whiteColor),
+                                  TextStyle(fontSize: 14.r, color: whiteColor),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )

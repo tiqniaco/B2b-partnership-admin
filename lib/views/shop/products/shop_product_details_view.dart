@@ -28,7 +28,7 @@ class ShopProductDetailsView extends StatelessWidget {
                 IconButton(
                   icon: Icon(
                     FontAwesomeIcons.trashCan,
-                    size: 16.sp,
+                    size: 16.r,
                     color: blackColor,
                   ),
                   onPressed: () {
@@ -38,7 +38,7 @@ class ShopProductDetailsView extends StatelessWidget {
                 IconButton(
                   icon: Icon(
                     FontAwesomeIcons.penToSquare,
-                    size: 16.sp,
+                    size: 16.r,
                   ),
                   onPressed: () {
                     controller.editProduct();
@@ -46,41 +46,6 @@ class ShopProductDetailsView extends StatelessWidget {
                 ),
               ],
             ),
-            // bottomNavigationBar: Container(
-            //   padding: EdgeInsets.only(
-            //       left: 20.w, right: 20.w, bottom: 20.h, top: 15),
-            //   height: 0.11.sh,
-            //   width: 1.sw,
-            //   child: Row(
-            //     children: [
-            //       // Container(
-            //       //   padding: EdgeInsets.all(12),
-            //       //   decoration: BoxDecoration(
-            //       //       border: Border.all(color: greyColor.withAlpha(100)),
-            //       //       color: whiteColor,
-            //       //       borderRadius: BorderRadius.circular(8.r)),
-            //       //   child: Icon(
-            //       //     CupertinoIcons.cart_fill,
-            //       //     color: greenColor,
-            //       //     size: context.isTablet ? 20.w : 25.sp,
-            //       //   ),
-            //       // ),
-            //       Gap(8.w),
-            //       Expanded(
-            //         child: CustomLoadingButton(
-            //           borderRadius: 10.r,
-            //           onPressed: () {
-            //             return controller.addToCart();
-            //           },
-            //           backgroundColor: controller.descriptions.isEmpty
-            //               ? greyColor
-            //               : primaryColor,
-            //           text: "Add To Cart".tr,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             body: SafeArea(
               child: CustomServerStatusWidget(
                 statusRequest: controller.statusRequest,
@@ -97,7 +62,7 @@ class ShopProductDetailsView extends StatelessWidget {
                           english: controller.product.titleEn,
                         ),
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: 18.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -152,18 +117,53 @@ class ShopProductDetailsView extends StatelessWidget {
                               "-${controller.product.discount}%",
                               style: getRegularStyle.copyWith(
                                 color: whiteColor,
-                                fontSize: 12.sp,
+                                fontSize: 12.r,
                                 fontWeight: FontManager.boldFontWeight,
                               ),
                             ),
                           )
                         ],
                       ),
+                      Gap(20),
+                      Text(
+                        "Bag Contents".tr,
+                        style: TextStyle(
+                          fontSize: 18.r,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Gap(8),
+                      GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: context.isTablet ? 1.7 : 0.89),
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: controller.contents[index].image!,
+                              height: context.isTablet ? 140 : 100,
+                            ),
+                            Gap(8),
+                            Text(
+                                translateDatabase(
+                                    arabic: controller.contents[index].nameAr!,
+                                    english:
+                                        controller.contents[index].nameEn!),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 14.r,
+                                    fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                        shrinkWrap: true,
+                        itemCount: controller.contents.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                      ),
                       Gap(20.h),
                       Text(
                         "Training Sessions".tr,
                         style: TextStyle(
-                          fontSize: 18.sp,
+                          fontSize: 18.r,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -220,7 +220,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                                   arabic: item.titleAr!,
                                                   english: item.titleEn!),
                                               style: TextStyle(
-                                                fontSize: 16.sp,
+                                                fontSize: 15.r,
                                                 color: blackColor,
                                               ),
                                             ),
@@ -248,7 +248,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                             const EdgeInsets.only(top: 8.0),
                                         child: Icon(
                                           Icons.check_circle,
-                                          size: 17.sp,
+                                          size: 17.r,
                                           color: greenColor,
                                         ),
                                       ),
@@ -261,7 +261,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                               english:
                                                   item.contents![i].contentEn!),
                                           style: TextStyle(
-                                            fontSize: 16.sp,
+                                            fontSize: 14.r,
                                             color: blackColor,
                                           ),
                                         ),
@@ -281,9 +281,9 @@ class ShopProductDetailsView extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Training bag Price : ".tr,
+                              "${"Training bag Price".tr} : ".tr,
                               style: TextStyle(
-                                  fontSize: 15.sp,
+                                  fontSize: 15.r,
                                   fontWeight: FontWeight.bold,
                                   color: whiteColor),
                             ),
@@ -327,7 +327,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                 Text(
                                   "About the training bag".tr,
                                   style: TextStyle(
-                                    fontSize: 18.sp,
+                                    fontSize: 18.r,
                                     fontWeight: FontManager.semiBoldFontWeight,
                                   ),
                                 ),
@@ -341,7 +341,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                   ) +
                                   " ",
                               style: TextStyle(
-                                  fontSize: 15.sp,
+                                  fontSize: 15.r,
                                   fontWeight: FontWeight.normal,
                                   color:
                                       const Color.fromARGB(255, 101, 101, 108)),
@@ -357,7 +357,7 @@ class ShopProductDetailsView extends StatelessWidget {
                         child: Text(
                           "Terms and condition".tr,
                           style: TextStyle(
-                              fontSize: 15.sp,
+                              fontSize: 15.r,
                               fontWeight: FontWeight.bold,
                               color: whiteColor),
                         ),
@@ -369,7 +369,7 @@ class ShopProductDetailsView extends StatelessWidget {
                           english: controller.product.termsAndConditionsEn,
                         ),
                         style: TextStyle(
-                            fontSize: 15.sp,
+                            fontSize: 15.r,
                             fontWeight: FontWeight.normal,
                             color: blackColor),
                       ),
