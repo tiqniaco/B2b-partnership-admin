@@ -197,6 +197,9 @@ const Map<String, String> en = {
   'edit content': 'edit content',
   'Enter description': 'Enter description',
   "account not found": "account not found",
+  'The description cannot be empty': 'The description cannot be empty',
+  'The Bag file is required': 'The Bag file is required',
+  'The the bag demo file is required': 'The the bag demo file is required',
 
   // orders
   "Order": "Order",

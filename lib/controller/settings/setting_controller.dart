@@ -23,6 +23,7 @@ class SettingController extends GetxController {
   Future<void> getMenuModel() async {
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
+    //print(Get.find<AppPreferences>().getUserRoleId());
     statusRequest = StatusRequest.loading;
     update();
     final result = await CustomRequest<AdminMenuModel>(

@@ -1,5 +1,5 @@
 import 'package:b2b_partnership_admin/controller/manage_users/manage_providers_controller.dart';
-import 'package:b2b_partnership_admin/widgets/manage_users/provider_widget.dart';
+import 'package:b2b_partnership_admin/widgets/manage_users/manage_provider_widget.dart';
 
 import '/core/global/widgets/custom_server_status_widget.dart';
 import '/core/theme/app_color.dart';
@@ -53,7 +53,7 @@ class _ManageProviderViewState extends State<ManageProviderView>
               Gap(18),
               CustomServerStatusWidget(
                 statusRequest: controller.statusRequest,
-                child: ProviderWidget(
+                child: ManageProviderWidget(
                   providers: controller.providers,
                 ),
               ),

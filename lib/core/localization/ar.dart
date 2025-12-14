@@ -169,6 +169,9 @@ const Map<String, String> ar = {
   "delete": "حذف",
   "enter name": "ادخل الاسم",
   "account not found": "الحساب غير موجود",
+  'The description cannot be empty': 'لا يمكن ان يكون الوصف فارغ',
+  'The Bag file is required': 'ملف الحقيبة مطلوب',
+  'The the bag demo file is required': 'ملف المعاينة للحقيبة مطلوب',
 
   // orders
   "Order": "الطلب",

@@ -1,3 +1,4 @@
+import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/shop/products/shop_add_new_product_controller.dart';
 import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
@@ -7,6 +8,7 @@ import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
@@ -45,6 +47,18 @@ class ShopAddNewProductView extends StatelessWidget {
                       key: controller.formKey,
                       child: Column(
                         children: [
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.test);
+                            },
+                            child: Text(
+                              "test editor".tr,
+                              style: getLightStyle.copyWith(
+                                color: greyColor,
+                                fontWeight: FontManager.semiBoldFontWeight,
+                              ),
+                            ),
+                          ),
                           InkWell(
                             onTap: () => controller.selectImage(),
                             child: Container(
@@ -311,21 +325,39 @@ class ShopAddNewProductView extends StatelessWidget {
                             },
                           ),
                           Gap(24),
-                          TextFormField(
-                            minLines: null,
-                            maxLines: null,
-                            controller: controller.descriptionEnController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Description".tr,
-                              hintText: "enter description".tr,
+                          Container(
+                            height: 400.h,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[50],
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: borderColor)),
+                            child: Column(
+                              children: [
+                                QuillSimpleToolbar(
+                                  controller: controller.descriptionController,
+                                  config: const QuillSimpleToolbarConfig(
+                                      showSearchButton: false,
+                                      showLink: false,
+                                      showCodeBlock: false,
+                                      showAlignmentButtons: true),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18.0),
+                                  child: Divider(),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: QuillEditor.basic(
+                                      controller:
+                                          controller.descriptionController,
+                                      config: const QuillEditorConfig(),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter description".tr;
-                              }
-                              return null;
-                            },
                           ),
                           Gap(24),
                           TextFormField(
@@ -385,7 +417,7 @@ class ShopAddNewProductView extends StatelessWidget {
                                   children: [
                                     Image.network(
                                       controller.allContents[index].image!,
-                                      height: 80,
+                                      height: 75,
                                     ),
                                     Gap(8),
                                     Text(
@@ -665,8 +697,9 @@ class ShopAddNewProductView extends StatelessWidget {
                                                           const EdgeInsets.only(
                                                               top: 8.0),
                                                       child: Icon(
-                                                        Icons.settings,
-                                                        size: 15.sp,
+                                                        Icons.close,
+                                                        color: primaryColor,
+                                                        size: 16.r,
                                                       ),
                                                     ))
                                               ],

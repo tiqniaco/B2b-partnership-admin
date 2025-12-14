@@ -14,7 +14,8 @@ class WaitingProviderView extends StatelessWidget {
           backgroundColor: whiteColor, title: Text("Waiting providers".tr)),
       body: RefreshIndicator(
         onRefresh: () {
-          return Get.put(WaitingProvidersController()).getProvider();
+          return Get.put(WaitingProvidersController())
+              .getProviders(refresh: true);
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),

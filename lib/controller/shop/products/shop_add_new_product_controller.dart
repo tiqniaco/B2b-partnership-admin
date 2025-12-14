@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -10,6 +11,8 @@ import 'package:b2b_partnership_admin/models/product_description_content_model.d
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,12 +23,13 @@ class ShopAddNewProductController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final titleArController = TextEditingController();
   final titleEnController = TextEditingController();
-  final descriptionEnController = TextEditingController();
-  final descriptionArController = TextEditingController();
+  // final descriptionEnController = TextEditingController();
+  // final descriptionArController = TextEditingController();
   final priceController = TextEditingController();
   final discountController = TextEditingController();
   final termsAndConditionsEnController = TextEditingController();
   final termsAndConditionsArController = TextEditingController();
+  late final QuillController descriptionController;
   File? image;
   File? file;
   File? bagFile;
@@ -40,7 +44,11 @@ class ShopAddNewProductController extends GetxController {
 
   @override
   void onInit() {
+    descriptionController = QuillController.basic();
     categoryId = Get.arguments["categoryId"] ?? "";
+    // descriptionController.addListener(() {
+    //   update();
+    // });
     getBagContents();
     super.onInit();
   }
@@ -259,14 +267,97 @@ class ShopAddNewProductController extends GetxController {
       AppSnackBars.warning(message: "Please select an image and a file");
       return;
     }
+
+    if (descriptionController.document.isEmpty()) {
+      Get.defaultDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.error, color: Colors.red, size: 48.r),
+              const SizedBox(height: 8),
+              Text(
+                'The description cannot be empty'.tr,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18.r, fontWeight: FontWeight.normal),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+
+    if (file == null) {
+      Get.defaultDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.error, color: Colors.red, size: 48.r),
+              const SizedBox(height: 8),
+              Text(
+                'The Bag file is required'.tr,
+                style: TextStyle(fontSize: 18.r, fontWeight: FontWeight.normal),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+    if (bagFile == null) {
+      Get.defaultDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.error, color: Colors.red, size: 48.r),
+              const SizedBox(height: 8),
+              Text(
+                'The the bag demo file is required'.tr,
+                style: TextStyle(fontSize: 18.r, fontWeight: FontWeight.normal),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+
+    final delta = descriptionController.document.toDelta();
+    final jsonString = jsonEncode(delta.toJson());
+
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
       Map<String, dynamic> data = {
         'category_id': categoryId,
         'title_ar': titleEnController.text,
         'title_en': titleEnController.text,
-        'description_ar': descriptionEnController.text,
-        'description_en': descriptionEnController.text,
+        'description_ar': jsonString,
+        'description_en': jsonString,
         'price': double.parse(priceController.text),
         'discount': double.parse(discountController.text),
         "terms_and_conditions_en": termsAndConditionsEnController.text,
@@ -318,8 +409,8 @@ class ShopAddNewProductController extends GetxController {
   void onClose() {
     titleArController.dispose();
     titleEnController.dispose();
-    descriptionEnController.dispose();
-    descriptionArController.dispose();
+    //descriptionController.dispose();
+
     priceController.dispose();
     discountController.dispose();
     super.onClose();

@@ -22,64 +22,57 @@ class SellerWidget extends StatelessWidget {
         child: Column(
           children: [
             Gap(20),
-            InkWell(
-              // onTap: () {
-              //   Get.toNamed(AppRoutes.providerProfile, arguments: {
-              //     'id': controller.service!.provider!.providerId
-              //   });
-              // },
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey[200],
-                    radius: 27.r,
-                    backgroundImage: CachedNetworkImageProvider(
-                        controller.service!.provider!.image),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.service!.provider!.name,
-                        style: getMediumStyle.copyWith(
-                          fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.grey[200],
+                  radius: 27.r,
+                  backgroundImage: CachedNetworkImageProvider(
+                      controller.service!.provider!.image),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      controller.service!.provider!.name,
+                      style: getMediumStyle.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Gap(8),
+                    Row(
+                      children: [
+                        Text(
+                          'Seller Rating'.tr,
+                          style: getLightStyle.copyWith(
+                            color: Colors.black54,
+                          ),
                         ),
-                      ),
-                      Gap(8),
-                      Row(
-                        children: [
-                          Text(
-                            'Seller Rating'.tr,
-                            style: getLightStyle.copyWith(
-                              color: Colors.black54,
-                            ),
-                          ),
-                          Gap(10),
-                          Text(
-                            controller.service!.provider!.rating,
-                            style: getMediumStyle.copyWith(
-                                color: Colors.orange,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Gap(3),
-                          Icon(
-                            Icons.circle,
-                            size: 3.r,
-                            color: greyColor,
-                          ),
-                          Gap(3),
-                          Icon(
-                            Icons.star,
-                            size: 15.r,
-                            color: Colors.orange,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                        Gap(10),
+                        Text(
+                          controller.service!.provider!.rating.toString(),
+                          style: getMediumStyle.copyWith(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Gap(3),
+                        Icon(
+                          Icons.circle,
+                          size: 3.r,
+                          color: greyColor,
+                        ),
+                        Gap(3),
+                        Icon(
+                          Icons.star,
+                          size: 15.r,
+                          color: Colors.orange,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
             Gap(20),
             Container(
@@ -127,7 +120,7 @@ class SellerWidget extends StatelessWidget {
                       titleWidget("Seller Since".tr),
                       Gap(10),
                       valueWidget(
-                          getYear(controller.service!.provider!.createdAt)
+                          getYear(controller.service!.provider!.createdAt.toString())
                               .toString()),
                     ],
                   )

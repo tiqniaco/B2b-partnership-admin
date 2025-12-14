@@ -81,6 +81,7 @@ class ShopProductDetailsController extends GetxController {
     Get.back();
     isLoading = true;
     update();
+    print(product.id.toString());
     final result = await CustomRequest(
         path: ApiConstance.deleteProduct(product.id.toString()),
         fromJson: (json) {

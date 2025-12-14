@@ -6,7 +6,7 @@ class ApiConstance {
 
   static String token = '';
 
-  // global
+  /// global
 
   /// Auth
   static const String login = 'auth/login';
@@ -80,7 +80,8 @@ class ApiConstance {
   static String deleteJob(String id) => 'jobs/$id';
   static String deleteReview(int id) => 'provider-service-reviews/$id';
   static String getProviderJob = 'provider-jobs';
-  static String getWaitingProvider = 'admin/waiting-providers';
+  static String getWaitingProvider(String page) =>
+      'admin/waiting-providers/?page=$page';
   static String approveProviderProvider = 'admin/accept-provider';
 
   //-admins
@@ -108,8 +109,12 @@ class ApiConstance {
   static const String getAllPendingServices = 'request-services';
 
   //provider
-  static String getProviderProfileDetails(String id) => 'providers/$id';
-  static String getProviderServices(String id) => 'providers/$id/services';
+  static String getProviderProfileDetailsWaiting(String id) =>
+      'providers/?user_id=$id';
+
+    static String getProviderProfileDetails(String id) =>
+      'providers/$id';
+  static String getProviderServices(id) => 'providers/$id/services';
   // static String getJobsInProvider(String ) => 'providers/$id/services';
   static String getProviderMenu(String id) => 'providers/$id';
   static String getServicesInCategory(String id) =>

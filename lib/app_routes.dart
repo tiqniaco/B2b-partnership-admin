@@ -10,6 +10,7 @@ import 'package:b2b_partnership_admin/views/manage_users/provider_profile/paper_
 import 'package:b2b_partnership_admin/views/settings/edit_whatsapp.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_product_details_view.dart';
+import 'package:b2b_partnership_admin/views/shop/products/test_add.dart';
 
 import '/views/auth/forget_password_email_view.dart';
 import '/views/auth/forget_password_reset_view.dart';
@@ -130,11 +131,18 @@ class AppRoutes {
   static const String jobs = '/jobs';
   static const String jobDetails = '/jobDetails';
 
+   static const String test = '/test';
+
   static final List<GetPage<dynamic>> pages = [
     // base
     GetPage(
       name: initial,
       page: () => const SplashView(),
+    ),
+
+     GetPage(
+      name: test,
+      page: () => const TextEditorPage(),
     ),
     // auth
     GetPage(

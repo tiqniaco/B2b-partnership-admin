@@ -11,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ProviderWidget extends StatelessWidget {
-  ProviderWidget({super.key, required this.providers});
+class ManageProviderWidget extends StatelessWidget {
+  ManageProviderWidget({super.key, required this.providers});
   final List<ProviderModel> providers;
 
   final controller = Get.put(ManageProviderController());
@@ -83,8 +83,8 @@ class ProviderWidget extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   PannableRatingBar(
-                                    rate:
-                                        double.parse(providers[index].rating),
+                                    rate: double.parse(
+                                        providers[index].rating.toString()),
                                     items: List.generate(
                                         5,
                                         (index) => RatingWidget(
@@ -118,7 +118,7 @@ class ProviderWidget extends StatelessWidget {
                                       ),
                                     ),
                                     onConfirm: () => controller.deleteProvider(
-                                        providers[index].providerId),
+                                        providers[index].providerId.toString()),
                                     textConfirm: "Yes".tr,
                                     textCancel: "No".tr,
                                     onCancel: () {},

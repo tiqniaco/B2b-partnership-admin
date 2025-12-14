@@ -1,5 +1,6 @@
 import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
+import 'package:b2b_partnership_admin/core/functions/get_text_direction.dart';
 import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
@@ -67,15 +68,6 @@ class ShopView extends StatelessWidget {
             ),
             backgroundColor: whiteColor,
             actions: [
-              // IconButton(
-              //   onPressed: () {
-              //     controller.getShopProducts(firstTime: true);
-              //   },
-              //   icon: Icon(
-              //     CupertinoIcons.search,
-              //     color: blackColor,
-              //   ),
-              // ),
               Container(
                 margin: EdgeInsetsDirectional.only(end: 8.w),
                 child: IconButton(
@@ -294,6 +286,20 @@ class ShopView extends StatelessWidget {
                                                       .shopCategories[index - 1]
                                                       .nameEn,
                                                 ),
+                                                textDirection: containsArabic(
+                                                  translateDatabase(
+                                                    arabic: controller
+                                                        .shopCategories[
+                                                            index - 1]
+                                                        .nameAr,
+                                                    english: controller
+                                                        .shopCategories[
+                                                            index - 1]
+                                                        .nameEn,
+                                                  ),
+                                                )
+                                                    ? TextDirection.rtl
+                                                    : TextDirection.ltr,
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(

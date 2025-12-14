@@ -5,7 +5,8 @@ import 'app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/constants/app_constants.dart';
 import 'core/localization/localization.dart';
 
@@ -21,6 +22,12 @@ class B2BApp extends StatelessWidget {
       builder: (context, child) {
         ScreenUtil.init(context);
         return GetMaterialApp(
+          localizationsDelegates: const [
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    FlutterQuillLocalizations.delegate,
+  ],
           debugShowCheckedModeBanner: false,
           locale: Get.locale ?? kDefaultLocale,
           defaultTransition: kDefaultAppTransitionAnimation,

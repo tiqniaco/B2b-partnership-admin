@@ -84,7 +84,7 @@ class ProviderProfileView extends StatelessWidget {
                       TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold)),
               Row(
                 children: [
-                  Text(controller.providerModel!.rating,
+                  Text(controller.providerModel!.rating.toString(),
                       style: TextStyle(
                           color: greyColor,
                           fontSize: 15.sp,
@@ -96,7 +96,7 @@ class ProviderProfileView extends StatelessWidget {
                     ignoreGestures: true,
                     itemSize: 17.sp,
                     initialRating:
-                        double.parse(controller.providerModel!.rating),
+                        double.parse(controller.providerModel!.rating.toString()),
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: false,

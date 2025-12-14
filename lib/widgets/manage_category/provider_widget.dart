@@ -1,5 +1,4 @@
 import '/app_routes.dart';
-import '/core/theme/app_color.dart';
 import '/models/provider_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class ProviderWidgetItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(AppRoutes.providerProfile,
-            arguments: {"id": provider.providerId.toString()});
+            arguments: {"id": provider.providerId});
       },
       child: Container(
         width: 145.h,
@@ -55,7 +54,7 @@ class ProviderWidgetItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     PannableRatingBar(
-                      rate: double.parse(provider.rating),
+                      rate: double.parse(provider.rating.toString()),
                       items: List.generate(
                           5,
                           (index) => RatingWidget(
@@ -89,31 +88,6 @@ class ProviderWidgetItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey[200]!)),
-                        padding: EdgeInsets.all(10),
-                        child: provider.isFavorite == "1"
-                            ? InkWell(
-                                onTap: toggleFavorite,
-                                child: Icon(
-                                  size: 20.sp,
-                                  Icons.bookmarks,
-                                  color: primaryColor,
-                                ),
-                              )
-                            : InkWell(
-                                onTap: toggleFavorite,
-                                child: Icon(
-                                  size: 20.sp,
-                                  Icons.bookmarks_outlined,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                      ),
-                    ),
                     Gap(15),
                     SizedBox(
                       width: 80.w,

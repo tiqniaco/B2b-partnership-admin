@@ -21,7 +21,7 @@ class ManageClientsController extends GetxController {
     super.onInit();
   }
 
-  deleteClient(String id) async {
+  Future<void> deleteClient(String id) async {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.deleteClient(id),

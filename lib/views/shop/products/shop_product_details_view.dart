@@ -301,7 +301,7 @@ class ShopProductDetailsView extends StatelessWidget {
                             Gap(10.w),
                             Text(
                               controller.product.discount != "0"
-                                  ? "${double.parse(controller.product.price) - (double.parse(controller.product.discount) / 100 * double.parse(controller.product.price))}\$"
+                                  ? "${(double.parse(controller.product.price) - (double.parse(controller.product.discount) / 100 * double.parse(controller.product.price))).toStringAsFixed(2)}\$"
                                   : "${controller.product.price}\$",
                               style: getRegularStyle.copyWith(
                                   fontWeight: FontManager.boldFontWeight,

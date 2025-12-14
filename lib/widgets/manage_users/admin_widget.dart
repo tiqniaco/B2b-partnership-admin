@@ -67,7 +67,7 @@ class AdminWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  admins[index].name!,
+                                  admins[index].name,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 16.sp,
@@ -76,7 +76,7 @@ class AdminWidget extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  admins[index].phone!,
+                                  admins[index].phone,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 10.sp,
@@ -86,7 +86,7 @@ class AdminWidget extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  admins[index].email!,
+                                  admins[index].email,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 12.sp,
@@ -116,7 +116,7 @@ class AdminWidget extends StatelessWidget {
                                     ),
                                   ),
                                   onConfirm: () => controller
-                                      .deleteAdmin(admins[index].adminId!),
+                                      .deleteAdmin(admins[index].adminId.toString()),
                                   textConfirm: "Yes".tr,
                                   textCancel: "No".tr,
                                   onCancel: () {},

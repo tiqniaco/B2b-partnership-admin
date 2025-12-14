@@ -40,7 +40,7 @@ class _AdminHomeViewState extends State<AdminHomeView>
                   style: TextStyle(fontSize: 13.sp, color: greyColor),
                 ),
                 Text(
-                  settingController.menuModel?.data?.name ?? "",
+                  settingController.menuModel?.data.name ?? "",
                   style: TextStyle(fontSize: 16.sp),
                 ),
               ],
@@ -55,7 +55,7 @@ class _AdminHomeViewState extends State<AdminHomeView>
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
-                    imageUrl: settingController.menuModel?.data?.image ?? "",
+                    imageUrl: settingController.menuModel?.data.image ?? "",
                     errorWidget: (context, error, stackTrace) {
                       return Container(
                         color: Colors.grey[200],

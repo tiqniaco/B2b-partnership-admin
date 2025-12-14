@@ -1,74 +1,73 @@
 import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
 
 class AdminModel {
-  String? userId;
-  String? name;
-  String? email;
-  String? countryCode;
-  String? phone;
-  String? image;
-  String? adminId;
-  String? countryId;
-  String? countryNameAr;
-  String? countryNameEn;
-  String? governmentId;
-  String? governmentNameAr;
-  String? governmentNameEn;
-  String? createdAt;
-  String? updatedAt;
+  int userId;
+  String name;
+  String email;
+  String countryCode;
+  String phone;
+  dynamic image;
+  int adminId;
+  dynamic countryId;
+  dynamic countryNameAr;
+  dynamic countryNameEn;
+  int governmentId;
+  String governmentNameAr;
+  String governmentNameEn;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-  AdminModel(
-      {this.userId,
-      this.name,
-      this.email,
-      this.countryCode,
-      this.phone,
-      this.image,
-      this.adminId,
-      this.countryId,
-      this.countryNameAr,
-      this.countryNameEn,
-      this.governmentId,
-      this.governmentNameAr,
-      this.governmentNameEn,
-      this.createdAt,
-      this.updatedAt});
+  AdminModel({
+    required this.userId,
+    required this.name,
+    required this.email,
+    required this.countryCode,
+    required this.phone,
+    required this.image,
+    required this.adminId,
+    required this.countryId,
+    required this.countryNameAr,
+    required this.countryNameEn,
+    required this.governmentId,
+    required this.governmentNameAr,
+    required this.governmentNameEn,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-  AdminModel.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'].toString();
-    name = json['name'];
-    email = json['email'];
-    countryCode = json['country_code'];
-    phone = json['phone'];
-    image = kBaseImageUrl + (json['image'] ?? "");
-    adminId = json['admin_id'].toString();
-    countryId = json['country_id'].toString();
-    countryNameAr = json['country_name_ar'];
-    countryNameEn = json['country_name_en'];
-    governmentId = json['government_id'].toString();
-    governmentNameAr = json['government_name_ar'];
-    governmentNameEn = json['government_name_en'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
+  factory AdminModel.fromJson(Map<String, dynamic> json) => AdminModel(
+        userId: json["user_id"] ?? 0,
+        name: json["name"] ?? '',
+        email: json["email"] ?? '',
+        countryCode: json["country_code"] ?? '',
+        phone: json["phone"] ?? '',
+        image: json["image"] == null ? "" : kBaseImageUrl + json["image"],
+        adminId: json["admin_id"] ?? 0,
+        countryId: json["country_id"] ?? 0,
+        countryNameAr: json["country_name_ar"] ?? '_',
+        countryNameEn: json["country_name_en"] ?? '_',
+        governmentId: json["government_id"] ?? 0,
+        governmentNameAr: json["government_name_ar"] ?? '',
+        governmentNameEn: json["government_name_en"] ?? '',
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user_id'] = userId;
-    data['name'] = name;
-    data['email'] = email;
-    data['country_code'] = countryCode;
-    data['phone'] = phone;
-    data['image'] = image;
-    data['admin_id'] = adminId;
-    data['country_id'] = countryId;
-    data['country_name_ar'] = countryNameAr;
-    data['country_name_en'] = countryNameEn;
-    data['government_id'] = governmentId;
-    data['government_name_ar'] = governmentNameAr;
-    data['government_name_en'] = governmentNameEn;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "name": name,
+        "email": email,
+        "country_code": countryCode,
+        "phone": phone,
+        "image": image,
+        "admin_id": adminId,
+        "country_id": countryId,
+        "country_name_ar": countryNameAr,
+        "country_name_en": countryNameEn,
+        "government_id": governmentId,
+        "government_name_ar": governmentNameAr,
+        "government_name_en": governmentNameEn,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

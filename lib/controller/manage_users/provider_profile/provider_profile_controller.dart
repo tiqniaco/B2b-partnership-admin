@@ -24,9 +24,9 @@ class ProviderProfileController extends GetxController {
   late PageController pageController;
   int selectedIndex = 0;
   ProviderModel? providerModel;
-  late String provId;
+  late int provId;
   int rating = 0;
-
+  bool fromWaitingProviders = false;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
@@ -46,12 +46,16 @@ class ProviderProfileController extends GetxController {
     super.onInit();
     pageController = PageController(initialPage: selectedIndex);
     provId = Get.arguments['id'];
+    fromWaitingProviders = Get.arguments['page'] == "waiting" ? true : false;
+    print("====================");
+    print(provId);
+    print("====================");
     await getProvider();
-    getServices();
-    getPreviousWork();
-    getJobs();
-    getPosts();
-    getReview();
+    // getServices();
+    // getPreviousWork();
+    // getJobs();
+    // getPosts();
+    // getReview();
   }
 
   void addReviewDialog() {
@@ -136,7 +140,9 @@ class ProviderProfileController extends GetxController {
   Future<void> getProvider() async {
     statusRequest = StatusRequest.loading;
     final result = await CustomRequest<ProviderModel>(
-      path: ApiConstance.getProviderProfileDetails(provId),
+      path: fromWaitingProviders
+          ? ApiConstance.getProviderProfileDetailsWaiting(provId.toString())
+          : ApiConstance.getProviderProfileDetails(provId.toString()),
       fromJson: (json) {
         return ProviderModel.fromJson(json['data']);
       },
@@ -253,6 +259,7 @@ class ProviderProfileController extends GetxController {
 // ---- services
 
   Future<void> getServices() async {
+    print("++++++++++++++++++++++${provId}+++++++++++++++++++++++");
     statusRequestServices = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProviderServices(provId),
@@ -361,7 +368,7 @@ class ProviderProfileController extends GetxController {
   Future<void> getJobs() async {
     statusRequestJobs = StatusRequest.loading;
     final response = await CustomRequest(
-        queryParameters: {"provider_id": providerModel!.userId},
+        queryParameters: {"provider_id": providerModel!.providerId},
         path: ApiConstance.getProviderJob,
         fromJson: (json) {
           return json["data"]
@@ -416,7 +423,8 @@ class ProviderProfileController extends GetxController {
   Future<void> getPosts() async {
     statusRequestPosts = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getClientServiceRequest(providerModel!.userId),
+        path: ApiConstance.getClientServiceRequest(
+            providerModel!.providerId.toString()),
         fromJson: (json) {
           return json["data"]
               .map<ServiceRequestModel>(

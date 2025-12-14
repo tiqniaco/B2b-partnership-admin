@@ -22,7 +22,7 @@ class SubCategoryWidget extends StatelessWidget {
           runSpacing: 10.h,
           children: subSpecializations.map((subSpecialization) {
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(10),
@@ -31,16 +31,20 @@ class SubCategoryWidget extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    translateDatabase(
-                      arabic: subSpecialization.nameAr!,
-                      english: subSpecialization.nameEn!,
-                    ),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: blackColor,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w300,
+                  Expanded(
+                    child: Text(
+                      translateDatabase(
+                        arabic: subSpecialization.nameAr!,
+                        english: subSpecialization.nameEn!,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
                   ),
                   Gap(10.w),

@@ -1,51 +1,60 @@
+// To parse this JSON data, do
+//
+//     final providerModel = providerModelFromJson(jsonString);
+
+import 'dart:convert';
+
 import 'package:b2b_partnership_admin/core/constants/app_constants.dart';
-import 'package:equatable/equatable.dart';
 
-class ProviderModel extends Equatable {
-  final String userId;
-  final String name;
-  final String email;
-  final String countryCode;
-  final String phone;
-  final String image;
-  final String status;
-  final String providerId;
-  final String commercialRegister;
-  final String taxCard;
-  final String commercialRegisterNumber;
-  final String taxCardNumber;
-  final String vat;
-  final String bio;
-  final String rating;
-  final String providerVerifiedCode;
-  final String providerTypeId;
-  final String providerTypeNameAr;
-  final String providerTypeNameEn;
-  final String specializationId;
-  final String specializationNameAr;
-  final String specializationNameEn;
-  final String subSpecializationId;
-  final String subSpecializationNameAr;
-  final String subSpecializationNameEn;
-  final String countryId;
-  final String countryNameAr;
-  final String countryNameEn;
-  final String governmentId;
-  final String governmentNameAr;
-  final String governmentNameEn;
-  final String contactPhone;
-  final String contactEmail;
-  final String contactWhatsapp;
-  final String contactTelegram;
-  final String contactInstagram;
-  final String contactFacebook;
-  final String contactLinkedin;
-  final String contactWebsite;
-  final String createdAt;
-  final String updatedAt;
-  final String isFavorite;
+ProviderModel providerModelFromJson(String str) =>
+    ProviderModel.fromJson(json.decode(str));
 
-  const ProviderModel({
+String providerModelToJson(ProviderModel data) => json.encode(data.toJson());
+
+class ProviderModel {
+  int userId;
+  String name;
+  String email;
+  String countryCode;
+  String phone;
+  String image;
+  String status;
+  int providerId;
+  String commercialRegister;
+  String taxCard;
+  String bio;
+  int rating;
+  dynamic providerVerifiedCode;
+  String commercialRegisterNumber;
+  String taxCardNumber;
+  String vat;
+  int providerTypeId;
+  String providerTypeNameAr;
+  String providerTypeNameEn;
+  int specializationId;
+  String specializationNameAr;
+  String specializationNameEn;
+  int subSpecializationId;
+  String subSpecializationNameAr;
+  String subSpecializationNameEn;
+  int countryId;
+  String countryNameAr;
+  String countryNameEn;
+  int governmentId;
+  String governmentNameAr;
+  String governmentNameEn;
+  dynamic contactPhone;
+  dynamic contactEmail;
+  dynamic contactWhatsapp;
+  dynamic contactTelegram;
+  dynamic contactInstagram;
+  dynamic contactFacebook;
+  dynamic contactLinkedin;
+  dynamic contactWebsite;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  ProviderModel({
     required this.userId,
     required this.name,
     required this.email,
@@ -56,12 +65,12 @@ class ProviderModel extends Equatable {
     required this.providerId,
     required this.commercialRegister,
     required this.taxCard,
-    required this.commercialRegisterNumber,
-    required this.taxCardNumber,
-    required this.vat,
     required this.bio,
     required this.rating,
     required this.providerVerifiedCode,
+    required this.commercialRegisterNumber,
+    required this.taxCardNumber,
+    required this.vat,
     required this.providerTypeId,
     required this.providerTypeNameAr,
     required this.providerTypeNameEn,
@@ -87,55 +96,53 @@ class ProviderModel extends Equatable {
     required this.contactWebsite,
     required this.createdAt,
     required this.updatedAt,
-    required this.isFavorite,
   });
 
   factory ProviderModel.fromJson(Map<String, dynamic> json) => ProviderModel(
-        userId: json["user_id"].toString(),
-        name: json["name"] ?? "",
-        email: json["email"] ?? "",
-        countryCode: json["country_code"] ?? "",
-        phone: json["phone"] ?? "",
-        image: json["image"] == null ? "" : kBaseImageUrl + json["image"],
-        status: json["status"] ?? "",
-        providerId: json["provider_id"].toString(),
+        userId: json["user_id"] ?? 0,
+        name: json["name"] ?? '',
+        email: json["email"] ?? '',
+        countryCode: json["country_code"] ?? '',
+        phone: json["phone"] ?? '',
+        image: json["image"] == null ? '' : kBaseImageUrl + json["image"],
+        status: json["status"] ?? '',
+        providerId: json["provider_id"] ?? 0,
         commercialRegister: json["commercial_register"] == null
-            ? ""
+            ? ''
             : kBaseImageUrl + json["commercial_register"],
         taxCard:
-            json["tax_card"] == null ? "" : kBaseImageUrl + json["tax_card"],
-        commercialRegisterNumber: json["commercial_register_number"] ?? "",
-        taxCardNumber: json["tax_card_number"] ?? "",
-        vat: json["vat"] ?? "",
-        bio: json["bio"] ?? "",
-        rating: json["rating"].toString(),
-        providerVerifiedCode: json["provider_verified_code"] ?? "",
-        providerTypeId: json["provider_type_id"].toString(),
-        providerTypeNameAr: json["provider_type_name_ar"] ?? "",
-        providerTypeNameEn: json["provider_type_name_en"] ?? "",
-        specializationId: json["specialization_id"].toString(),
-        specializationNameAr: json["specialization_name_ar"] ?? "",
-        specializationNameEn: json["specialization_name_en"] ?? "",
-        subSpecializationId: json["sub_specialization_id"].toString(),
-        subSpecializationNameAr: json["sub_specialization_name_ar"] ?? "",
-        subSpecializationNameEn: json["sub_specialization_name_en"] ?? "",
-        countryId: json["country_id"].toString(),
-        countryNameAr: json["country_name_ar"] ?? "",
-        countryNameEn: json["country_name_en"] ?? "",
-        governmentId: json["government_id"].toString(),
-        governmentNameAr: json["government_name_ar"] ?? "",
-        governmentNameEn: json["government_name_en"] ?? "",
-        contactPhone: json["contact_phone"] ?? "",
-        contactEmail: json["contact_email"] ?? "",
-        contactWhatsapp: json["contact_whatsapp"] ?? "",
-        contactTelegram: json["contact_telegram"] ?? "",
-        contactInstagram: json["contact_instagram"] ?? "",
-        contactFacebook: json["contact_facebook"] ?? "",
-        contactLinkedin: json["contact_linkedin"] ?? "",
-        contactWebsite: json["contact_website"] ?? "",
-        createdAt: json["created_at"] ?? "",
-        updatedAt: json["updated_at"] ?? "",
-        isFavorite: json["is_favorite"] ?? "",
+            json["tax_card"] == null ? '' : kBaseImageUrl + json["tax_card"],
+        bio: json["bio"] ?? '',
+        rating: json["rating"] ?? 0,
+        providerVerifiedCode: json["provider_verified_code"] ?? '',
+        commercialRegisterNumber: json["commercial_register_number"] ?? '',
+        taxCardNumber: json["tax_card_number"] ?? '',
+        vat: json["vat"] ?? '',
+        providerTypeId: json["provider_type_id"] ?? 0,
+        providerTypeNameAr: json["provider_type_name_ar"] ?? '',
+        providerTypeNameEn: json["provider_type_name_en"] ?? '',
+        specializationId: json["specialization_id"] ?? 0,
+        specializationNameAr: json["specialization_name_ar"] ?? '',
+        specializationNameEn: json["specialization_name_en"] ?? '',
+        subSpecializationId: json["sub_specialization_id"] ?? 0,
+        subSpecializationNameAr: json["sub_specialization_name_ar"] ?? '',
+        subSpecializationNameEn: json["sub_specialization_name_en"] ?? '',
+        countryId: json["country_id"] ?? 0,
+        countryNameAr: json["country_name_ar"] ?? '',
+        countryNameEn: json["country_name_en"] ?? '',
+        governmentId: json["government_id"] ?? 0,
+        governmentNameAr: json["government_name_ar"] ?? '',
+        governmentNameEn: json["government_name_en"] ?? '',
+        contactPhone: json["contact_phone"] ?? '',
+        contactEmail: json["contact_email"] ?? '',
+        contactWhatsapp: json["contact_whatsapp"] ?? '',
+        contactTelegram: json["contact_telegram"] ?? '',
+        contactInstagram: json["contact_instagram"] ?? '',
+        contactFacebook: json["contact_facebook"] ?? '',
+        contactLinkedin: json["contact_linkedin"] ?? '',
+        contactWebsite: json["contact_website"] ?? '',
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -149,12 +156,12 @@ class ProviderModel extends Equatable {
         "provider_id": providerId,
         "commercial_register": commercialRegister,
         "tax_card": taxCard,
-        "commercial_register_number": commercialRegisterNumber,
-        "tax_card_number": taxCardNumber,
-        "vat": vat,
         "bio": bio,
         "rating": rating,
         "provider_verified_code": providerVerifiedCode,
+        "commercial_register_number": commercialRegisterNumber,
+        "tax_card_number": taxCardNumber,
+        "vat": vat,
         "provider_type_id": providerTypeId,
         "provider_type_name_ar": providerTypeNameAr,
         "provider_type_name_en": providerTypeNameEn,
@@ -178,51 +185,7 @@ class ProviderModel extends Equatable {
         "contact_facebook": contactFacebook,
         "contact_linkedin": contactLinkedin,
         "contact_website": contactWebsite,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-        "is_favorite": isFavorite,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
-
-  @override
-  List<Object?> get props => [
-        userId,
-        name,
-        email,
-        countryCode,
-        phone,
-        image,
-        status,
-        providerId,
-        commercialRegister,
-        taxCard,
-        commercialRegisterNumber,
-        taxCardNumber,
-        vat,
-        bio,
-        rating,
-        providerVerifiedCode,
-        providerTypeId,
-        providerTypeNameAr,
-        providerTypeNameEn,
-        specializationId,
-        specializationNameAr,
-        specializationNameEn,
-        subSpecializationId,
-        subSpecializationNameAr,
-        subSpecializationNameEn,
-        countryId,
-        countryNameAr,
-        countryNameEn,
-        governmentId,
-        governmentNameAr,
-        governmentNameEn,
-        contactPhone,
-        contactEmail,
-        contactWhatsapp,
-        contactTelegram,
-        contactInstagram,
-        contactFacebook,
-        contactLinkedin,
-        contactWebsite,
-      ];
 }

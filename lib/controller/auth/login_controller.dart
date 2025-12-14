@@ -78,10 +78,9 @@ class LoginController extends GetxController {
           Get.find<AppPreferences>().setUserRole(r['role']);
           ApiConstance.token = r['token'];
           Get.offAllNamed(AppRoutes.adminHomeLayout);
-        }else{
-           AppSnackBars.error(message: "account not found".tr);
+        } else {
+          AppSnackBars.error(message: "account not found".tr);
         }
-
 
         update();
       });

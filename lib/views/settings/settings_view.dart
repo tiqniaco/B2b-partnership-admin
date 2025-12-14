@@ -60,7 +60,7 @@ class SettingsView extends StatelessWidget {
                                                     BorderRadius.circular(8),
                                                 child: Image.network(
                                                   controller
-                                                      .menuModel!.data!.image!,
+                                                      .menuModel!.data.image,
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error,
                                                       stackTrace) {
@@ -108,13 +108,13 @@ class SettingsView extends StatelessWidget {
                                     ),
                                     Gap(10),
                                     Text(
-                                      controller.menuModel!.data!.name!,
+                                      controller.menuModel?.data.name ?? '',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15.sp),
                                     ),
                                     Text(
-                                      "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
+                                      "+${controller.menuModel!.data.countryCode}${controller.menuModel!.data.phone}",
                                       style: TextStyle(
                                           color: greyColor, fontSize: 15.sp),
                                     ),
@@ -193,7 +193,7 @@ class SettingsView extends StatelessWidget {
                                         ),
                                         Gap(20),
                                         rowWidget("Email".tr,
-                                            controller.menuModel!.data!.email!),
+                                            controller.menuModel!.data.email),
                                         FractionallySizedBox(
                                           widthFactor: 10,
                                           child: Divider(
@@ -204,9 +204,9 @@ class SettingsView extends StatelessWidget {
                                             "City".tr,
                                             translateDatabase(
                                                 arabic: controller.menuModel!
-                                                    .data!.governmentNameAr!,
+                                                    .data.governmentNameAr,
                                                 english: controller.menuModel!
-                                                    .data!.governmentNameEn!)),
+                                                    .data.governmentNameEn)),
                                         FractionallySizedBox(
                                           widthFactor: 10,
                                           child: Divider(
@@ -217,9 +217,9 @@ class SettingsView extends StatelessWidget {
                                             "Country".tr,
                                             translateDatabase(
                                                 arabic: controller.menuModel!
-                                                    .data!.countryNameAr!,
+                                                    .data.countryNameAr,
                                                 english: controller.menuModel!
-                                                    .data!.countryNameEn!)),
+                                                    .data.countryNameEn)),
                                         Gap(30),
                                         FractionallySizedBox(
                                           widthFactor: 10,
