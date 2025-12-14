@@ -1,4 +1,3 @@
-import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/shop/products/shop_add_new_product_controller.dart';
 import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_loading_button.dart';
@@ -7,7 +6,6 @@ import 'package:b2b_partnership_admin/core/theme/text_style.dart';
 import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,18 +45,18 @@ class ShopAddNewProductView extends StatelessWidget {
                       key: controller.formKey,
                       child: Column(
                         children: [
-                          TextButton(
-                            onPressed: () {
-                              Get.toNamed(AppRoutes.test);
-                            },
-                            child: Text(
-                              "test editor".tr,
-                              style: getLightStyle.copyWith(
-                                color: greyColor,
-                                fontWeight: FontManager.semiBoldFontWeight,
-                              ),
-                            ),
-                          ),
+                          // TextButton(
+                          //   onPressed: () {
+                          //     Get.toNamed(AppRoutes.test);
+                          //   },
+                          //   child: Text(
+                          //     "test editor".tr,
+                          //     style: getLightStyle.copyWith(
+                          //       color: greyColor,
+                          //       fontWeight: FontManager.semiBoldFontWeight,
+                          //     ),
+                          //   ),
+                          // ),
                           InkWell(
                             onTap: () => controller.selectImage(),
                             child: Container(

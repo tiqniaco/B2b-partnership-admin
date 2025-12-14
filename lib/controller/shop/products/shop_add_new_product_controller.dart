@@ -10,7 +10,6 @@ import 'package:b2b_partnership_admin/models/bag_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

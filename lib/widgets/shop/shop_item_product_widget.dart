@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:b2b_partnership_admin/core/functions/translate_database.dart';
 import 'package:b2b_partnership_admin/core/global/widgets/custom_network_image.dart';
@@ -7,7 +6,6 @@ import 'package:b2b_partnership_admin/core/theme/text_style.dart';
 import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
 import 'package:b2b_partnership_admin/models/shop_product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:gap/gap.dart';
@@ -25,11 +23,11 @@ class ShopProductItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final document = Document.fromJson(jsonDecode(product.descriptionEn));
-    final controller = QuillController(
-      document: document,
-      selection: const TextSelection.collapsed(offset: 0),
-    )..readOnly = true;
+    // final document = Document.fromJson(jsonDecode(product.descriptionEn));
+    // final controller = QuillController(
+    //   document: document,
+    //   selection: const TextSelection.collapsed(offset: 0),
+    // )..readOnly = true;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -74,13 +72,13 @@ class ShopProductItemWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    child: SizedBox(
-                      height: 60,
-                      child: QuillEditor.basic(
-                        controller: controller,
-                        config: const QuillEditorConfig(),
-                      ),
-                    ),
+                    // child: SizedBox(
+                    //   height: 60,
+                    //   child: QuillEditor.basic(
+                    //     controller: controller,
+                    //     config: const QuillEditorConfig(),
+                    //   ),
+                    // ),
                   ),
                   if (product.discount != "0")
                     PositionedDirectional(

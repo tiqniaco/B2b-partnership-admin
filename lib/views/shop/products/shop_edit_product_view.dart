@@ -7,7 +7,7 @@ import 'package:b2b_partnership_admin/core/utils/font_manager.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
@@ -169,6 +169,97 @@ class ShopEditProductView extends StatelessWidget {
                             ),
                           ),
                           Gap(12.h),
+                          InkWell(
+                            onTap: () => controller.selectBagFile(),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: whiteColor,
+                                border: Border.all(color: greyColor),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.w,
+                                vertical: 10.h,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (controller.mainBagFile == null)
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Upload Bag".tr,
+                                                style: getLightStyle.copyWith(
+                                                  color: greyColor,
+                                                  fontWeight: FontManager
+                                                      .semiBoldFontWeight,
+                                                ),
+                                              ),
+                                              Gap(8.w),
+                                              Icon(
+                                                Icons.cloud_upload,
+                                                size: 20.r,
+                                                color: greyColor,
+                                              ),
+                                            ],
+                                          ),
+                                          Gap(8.h),
+                                          Text(
+                                            "${"Accepted files".tr}: pdf, doc, docx, xls, xlsx, csv, txt, zip, rar, ppt, pptx, jpg, jpeg, png, gif, svg",
+                                            style: getLightStyle.copyWith(
+                                              color: greyColor,
+                                              fontWeight:
+                                                  FontManager.regularFontWeight,
+                                              fontSize: 10.sp,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 3,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  else ...[
+                                    Expanded(
+                                      child: Text(
+                                        controller.mainBagFile?.path
+                                                .split('/')
+                                                .last ??
+                                            '',
+                                        style: getLightStyle.copyWith(
+                                          color: greyColor,
+                                          fontWeight:
+                                              FontManager.mediumFontWeight,
+                                        ),
+                                      ),
+                                    ),
+                                    Gap(8.w),
+                                    IconButton(
+                                      onPressed: () {
+                                        controller.deleteFile();
+                                      },
+                                      icon: Icon(
+                                        FontAwesomeIcons.xmark,
+                                        size: 20.sp,
+                                        color: redColor,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                          Gap(12.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -217,7 +308,7 @@ class ShopEditProductView extends StatelessWidget {
                                             controller.contents[index].nameEn!),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        fontSize: 14.r,
+                                        fontSize: 13.r,
                                         fontWeight: FontWeight.bold))
                               ],
                             ),
@@ -243,13 +334,6 @@ class ShopEditProductView extends StatelessWidget {
                           Gap(20.h),
                           TextFormField(
                             controller: controller.priceController,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(
-                                  r'^\d+\.?\d{0,2}',
-                                ),
-                              )
-                            ],
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               labelText: "Price".tr,
@@ -266,13 +350,6 @@ class ShopEditProductView extends StatelessWidget {
                           TextFormField(
                             controller: controller.discountController,
                             keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(
-                                  r'^\d{1,3}',
-                                ),
-                              ),
-                            ],
                             decoration: InputDecoration(
                               labelText: "Discount %".tr,
                               hintText: "enter discount".tr,
@@ -285,6 +362,41 @@ class ShopEditProductView extends StatelessWidget {
                             },
                           ),
                           Gap(20.h),
+                          Container(
+                            height: 400.h,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[50],
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: borderColor)),
+                            child: Column(
+                              children: [
+                                QuillSimpleToolbar(
+                                  controller: controller.descriptionController,
+                                  config: const QuillSimpleToolbarConfig(
+                                      showSearchButton: false,
+                                      showLink: false,
+                                      showCodeBlock: false,
+                                      showAlignmentButtons: true),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18.0),
+                                  child: Divider(),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: QuillEditor.basic(
+                                      controller:
+                                          controller.descriptionController,
+                                      config: const QuillEditorConfig(),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Gap(24),
                           TextFormField(
                             minLines: null,
                             maxLines: null,
@@ -319,7 +431,6 @@ class ShopEditProductView extends StatelessWidget {
                               return null;
                             },
                           ),
-
                           Gap(20.h),
                           Container(
                             width: double.infinity,
@@ -642,7 +753,7 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
-  onTapAddBagContent() {
+  Future<dynamic> onTapAddBagContent() {
     return Get.defaultDialog(
       title: 'Click to Add new Content'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -689,7 +800,7 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
-  onTapAddSession() {
+  Future<dynamic> onTapAddSession() {
     return Get.defaultDialog(
       title: 'Add new Session'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -742,7 +853,7 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
-  onTapEditSession(stepId) {
+  Future<dynamic> onTapEditSession(stepId) {
     return Get.defaultDialog(
       title: 'Session title'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -795,7 +906,7 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
-  onTapAddDescription(stepId) {
+  Future<dynamic> onTapAddDescription(stepId) {
     return Get.defaultDialog(
       title: 'Add Content'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -842,7 +953,7 @@ class ShopEditProductView extends StatelessWidget {
     );
   }
 
-  onTapEditDescription(contentId) {
+  Future<dynamic> onTapEditDescription(contentId) {
     return Get.defaultDialog(
       title: 'edit content'.tr,
       titlePadding: const EdgeInsets.only(top: 20, bottom: 10),

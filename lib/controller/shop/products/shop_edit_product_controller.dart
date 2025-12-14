@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -12,6 +13,8 @@ import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:b2b_partnership_admin/models/shop_product_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,8 +34,10 @@ class ShopEditProductController extends GetxController {
   final descriptionFormKeyAdd = GlobalKey<FormState>();
   final stepFormKey = GlobalKey<FormState>();
   late final String bagFile;
+  late final String mainBagFileString;
   late final String bagImage;
   final titleArController = TextEditingController();
+  QuillController descriptionController = QuillController.basic();
   final titleEnController = TextEditingController();
   final descriptionEnController = TextEditingController();
   final descriptionArController = TextEditingController();
@@ -44,12 +49,21 @@ class ShopEditProductController extends GetxController {
   final sessionDescriptionEnController = TextEditingController();
   final sessionTitleArController = TextEditingController();
   final sessionTitleEnController = TextEditingController();
+
   File? image;
   File? file;
+  File? mainBagFile;
 
   @override
   void onInit() {
     productModel = Get.arguments['product'];
+
+    final document = buildQuillDocument(productModel?.descriptionEn);
+
+    descriptionController = QuillController(
+      document: document,
+      selection: const TextSelection.collapsed(offset: 0),
+    );
 
     titleArController.text = productModel?.titleAr ?? "";
     titleEnController.text = productModel?.titleEn ?? "";
@@ -64,6 +78,97 @@ class ShopEditProductController extends GetxController {
     getProductDetails();
     getBagContents();
     super.onInit();
+  }
+
+  Document buildQuillDocument(String? description) {
+    if (description == null || description.isEmpty) {
+      return Document();
+    }
+
+    try {
+      // نجرب نفكه كـ Quill JSON
+      final decoded = jsonDecode(description);
+
+      if (decoded is List) {
+        return Document.fromJson(decoded);
+      }
+    } catch (e) {
+      // مش JSON → نكمل عادي
+    }
+
+    // هنا معناها نص عادي
+    return Document()..insert(0, description);
+  }
+
+  Future<void> editProduct() async {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
+      if (descriptionController.document.isEmpty()) {
+        Get.defaultDialog(
+          backgroundColor: Colors.transparent,
+          content: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.error, color: Colors.red, size: 48.r),
+                const SizedBox(height: 8),
+                Text(
+                  'The description cannot be empty'.tr,
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(fontSize: 18.r, fontWeight: FontWeight.normal),
+                ),
+                const SizedBox(height: 4),
+              ],
+            ),
+          ),
+        );
+        return;
+      }
+
+      final delta = descriptionController.document.toDelta();
+      final jsonString = jsonEncode(delta.toJson());
+      final result = await CustomRequest<String>(
+        path: ApiConstance.updateProduct(productModel?.id.toString() ?? ''),
+        data: {
+          'title_ar': titleEnController.text,
+          'title_en': titleEnController.text,
+          'description_ar': jsonString,
+          'description_en': jsonString,
+          'price': double.parse(priceController.text),
+          'discount': double.parse(discountController.text),
+          "terms_and_conditions_en": termsAndConditionsEnController.text,
+          "terms_and_conditions_ar": termsAndConditionsEnController.text
+        },
+        files: {
+          if (image != null) "image": image!.path,
+          if (file != null) "file": file!.path,
+          if (mainBagFile != null) "bag": mainBagFile!.path
+        },
+        fromJson: (json) {
+          return json['message'];
+        },
+      ).sendPostRequest();
+
+      result.fold(
+        (error) {
+          AppSnackBars.error(message: error.errMsg);
+          log(error.errMsg);
+        },
+        (response) {
+          Get.back();
+          Get.back();
+          AppSnackBars.success(message: "Product updated successfully");
+          Get.put(ShopController()).getShopProducts(firstTime: true);
+        },
+      );
+    }
   }
 
   void selectImage() async {
@@ -106,6 +211,35 @@ class ShopEditProductController extends GetxController {
     update();
   }
 
+  Future<void> selectBagFile() async {
+    final filePicker = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'pdf',
+        'doc',
+        'docx',
+        'xls',
+        'xlsx',
+        'csv',
+        'txt',
+        'zip',
+        'rar',
+        'ppt',
+        'pptx',
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'svg',
+      ],
+    );
+
+    if (filePicker != null && filePicker.files.isNotEmpty) {
+      mainBagFile = File(filePicker.files.single.path ?? '');
+    }
+    update();
+  }
+
   Future<void> getProductDetails() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -144,52 +278,6 @@ class ShopEditProductController extends GetxController {
   callBackFun(int index, bool isExpanded) {
     descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
     update();
-  }
-
-  Future<void> editProduct() async {
-    if (formKey.currentState?.validate() ?? false) {
-      formKey.currentState!.save();
-
-      print(titleEnController.text);
-      print(descriptionEnController.text);
-      print(priceController.text);
-      print(discountController.text);
-      
-
-      final result = await CustomRequest<String>(
-        path: ApiConstance.updateProduct(productModel?.id.toString() ?? ''),
-        data: {
-          'title_ar': titleEnController.text,
-          'title_en': titleEnController.text,
-          'description_ar': descriptionEnController.text,
-          'description_en': descriptionEnController.text,
-          'price': double.parse(priceController.text),
-          'discount': double.parse(discountController.text),
-          "terms_and_conditions_en": termsAndConditionsEnController.text,
-          "terms_and_conditions_ar": termsAndConditionsEnController.text
-        },
-        files: {
-          if (image != null) "image": image!.path,
-          if (file != null) "file": file!.path,
-        },
-        fromJson: (json) {
-          return json['message'];
-        },
-      ).sendPostRequest();
-
-      result.fold(
-        (error) {
-          AppSnackBars.error(message: error.errMsg);
-          log(error.errMsg);
-        },
-        (response) {
-          Get.back();
-          Get.back();
-          AppSnackBars.success(message: "Product updated successfully");
-          Get.put(ShopController()).getShopProducts(firstTime: true);
-        },
-      );
-    }
   }
 
   ///====================================================

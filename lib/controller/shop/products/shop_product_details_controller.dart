@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:b2b_partnership_admin/app_routes.dart';
 import 'package:b2b_partnership_admin/controller/shop/shop_controller.dart';
 import 'package:b2b_partnership_admin/core/crud/custom_request.dart';
@@ -7,6 +9,7 @@ import 'package:b2b_partnership_admin/core/utils/app_snack_bars.dart';
 import 'package:b2b_partnership_admin/models/bag_content_model.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/controller/shop/shop_cart_controller.dart';
@@ -19,10 +22,17 @@ class ShopProductDetailsController extends GetxController {
   List<BagContentModel> contents = [];
   late ShopProductModel product;
   bool isLoading = false;
+    QuillController controller = QuillController.basic();
+
 
   @override
   void onInit() {
     product = Get.arguments['product'] as ShopProductModel;
+    //  final document = Document.fromJson(jsonDecode(product.descriptionEn));
+    //  controller = QuillController(
+    //   document: document,
+    //   selection: const TextSelection.collapsed(offset: 0),
+    // )..readOnly = true;
     getProductDetails();
     super.onInit();
   }

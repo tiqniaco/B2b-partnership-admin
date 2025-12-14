@@ -1,6 +1,7 @@
 import 'package:b2b_partnership_admin/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partnership_admin/models/product_description_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../controller/shop/products/shop_product_details_controller.dart';
@@ -151,8 +152,8 @@ class ShopProductDetailsView extends StatelessWidget {
                                         controller.contents[index].nameEn!),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 14.r,
-                                    fontWeight: FontWeight.bold))
+                                    fontSize: 12.r,
+                                    fontWeight: FontWeight.normal))
                           ],
                         ),
                         shrinkWrap: true,
@@ -334,18 +335,27 @@ class ShopProductDetailsView extends StatelessWidget {
                               ],
                             ),
                             Gap(10.h),
-                            Text(
-                              translateDatabase(
-                                    arabic: controller.product.descriptionAr,
-                                    english: controller.product.descriptionEn,
-                                  ) +
-                                  " ",
-                              style: TextStyle(
-                                  fontSize: 15.r,
-                                  fontWeight: FontWeight.normal,
-                                  color:
-                                      const Color.fromARGB(255, 101, 101, 108)),
-                            ),
+                            // Text(
+                            //   translateDatabase(
+                            //         arabic: controller.product.descriptionAr,
+                            //         english: controller.product.descriptionEn,
+                            //       ) +
+                            //       " ",
+                            //   style: TextStyle(
+                            //       fontSize: 15.r,
+                            //       fontWeight: FontWeight.normal,
+                            //       color:
+                            //           const Color.fromARGB(255, 101, 101, 108)),
+                            // ),
+                            //--------------------------
+                            // QuillEditor.basic(
+                            //   controller: controller.controller,
+                            //   config: const QuillEditorConfig(
+                            //     scrollable: false, // 🔥 المهم
+                            //     autoFocus: false,
+                            //     expands: false,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
