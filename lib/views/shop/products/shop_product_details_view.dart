@@ -348,14 +348,14 @@ class ShopProductDetailsView extends StatelessWidget {
                             //           const Color.fromARGB(255, 101, 101, 108)),
                             // ),
                             //--------------------------
-                            // QuillEditor.basic(
-                            //   controller: controller.controller,
-                            //   config: const QuillEditorConfig(
-                            //     scrollable: false, // 🔥 المهم
-                            //     autoFocus: false,
-                            //     expands: false,
-                            //   ),
-                            // ),
+                            QuillEditor.basic(
+                              controller: controller.controller,
+                              config: const QuillEditorConfig(
+                                scrollable: false, 
+                                autoFocus: false,
+                                expands: false,
+                              ),
+                            ),
                           ],
                         ),
                       ),

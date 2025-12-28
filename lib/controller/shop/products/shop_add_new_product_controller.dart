@@ -22,8 +22,6 @@ class ShopAddNewProductController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final titleArController = TextEditingController();
   final titleEnController = TextEditingController();
-  // final descriptionEnController = TextEditingController();
-  // final descriptionArController = TextEditingController();
   final priceController = TextEditingController();
   final discountController = TextEditingController();
   final termsAndConditionsEnController = TextEditingController();
@@ -260,7 +258,6 @@ class ShopAddNewProductController extends GetxController {
   }
 
   Future<void> addProduct() async {
-    print('file path:                  ${bagFile?.path}');
     if (image == null) {
       formKey.currentState?.validate();
       AppSnackBars.warning(message: "Please select an image and a file");
@@ -320,6 +317,7 @@ class ShopAddNewProductController extends GetxController {
       );
       return;
     }
+    
     if (bagFile == null) {
       Get.defaultDialog(
         backgroundColor: Colors.transparent,

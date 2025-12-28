@@ -385,7 +385,11 @@ class ShopEditProductView extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 12.0,
+                                        right: 12,
+                                        top: 12,
+                                        bottom: 16),
                                     child: QuillEditor.basic(
                                       controller:
                                           controller.descriptionController,
@@ -397,23 +401,23 @@ class ShopEditProductView extends StatelessWidget {
                             ),
                           ),
                           Gap(24),
-                          TextFormField(
-                            minLines: null,
-                            maxLines: null,
-                            controller: controller.descriptionEnController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Description".tr,
-                              hintText: "enter description".tr,
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter description".tr;
-                              }
-                              return null;
-                            },
-                          ),
-                          Gap(20.h),
+                          // TextFormField(
+                          //   minLines: null,
+                          //   maxLines: null,
+                          //   controller: controller.descriptionEnController,
+                          //   keyboardType: TextInputType.text,
+                          //   decoration: InputDecoration(
+                          //     labelText: "Description".tr,
+                          //     hintText: "enter description".tr,
+                          //   ),
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return "Please enter description".tr;
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
+                          // Gap(20.h),
                           TextFormField(
                             minLines: null,
                             maxLines: null,

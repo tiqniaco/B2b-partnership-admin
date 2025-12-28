@@ -258,6 +258,23 @@ class SettingsView extends StatelessWidget {
                                         ),
                                         Gap(8),
                                         rowWithArrow(
+                                          CupertinoIcons.creditcard,
+                                          "Manage Payment Methods".tr,
+                                          () {
+                                            Get.toNamed(
+                                              AppRoutes.paymentMethod,
+                                            );
+                                          },
+                                        ),
+                                        Gap(8),
+                                        FractionallySizedBox(
+                                          widthFactor: 10,
+                                          child: Divider(
+                                            color: borderColor,
+                                          ),
+                                        ),
+                                        Gap(8),
+                                        rowWithArrow(
                                           CupertinoIcons.person,
                                           "Edit Profile".tr,
                                           () {

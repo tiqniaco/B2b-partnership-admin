@@ -28,11 +28,11 @@ class ShopProductDetailsController extends GetxController {
   @override
   void onInit() {
     product = Get.arguments['product'] as ShopProductModel;
-    //  final document = Document.fromJson(jsonDecode(product.descriptionEn));
-    //  controller = QuillController(
-    //   document: document,
-    //   selection: const TextSelection.collapsed(offset: 0),
-    // )..readOnly = true;
+     final document = Document.fromJson(jsonDecode(product.descriptionEn));
+     controller = QuillController(
+      document: document,
+      selection: const TextSelection.collapsed(offset: 0),
+    )..readOnly = true;
     getProductDetails();
     super.onInit();
   }

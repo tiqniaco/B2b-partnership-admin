@@ -7,7 +7,10 @@ import 'package:b2b_partnership_admin/views/manage_location/manage_location_view
 import 'package:b2b_partnership_admin/views/manage_provider_types/manage_provider_types_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/manage_provider_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/provider_profile/paper_pdf_view.dart';
+import 'package:b2b_partnership_admin/views/settings/add_payment_method.dart';
+import 'package:b2b_partnership_admin/views/settings/edit_payment_method.dart';
 import 'package:b2b_partnership_admin/views/settings/edit_whatsapp.dart';
+import 'package:b2b_partnership_admin/views/settings/manage_payment.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_add_new_product_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/shop_product_details_view.dart';
 import 'package:b2b_partnership_admin/views/shop/products/test_add.dart';
@@ -131,7 +134,13 @@ class AppRoutes {
   static const String jobs = '/jobs';
   static const String jobDetails = '/jobDetails';
 
-   static const String test = '/test';
+// payment method
+  static const String paymentMethod = '/paymentMethod';
+  static const String addPaymentMethod = '/addPaymentMethod';
+  static const String editPaymentMethod = '/editPaymentMethod';
+
+// test
+  static const String test = '/test';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -140,7 +149,7 @@ class AppRoutes {
       page: () => const SplashView(),
     ),
 
-     GetPage(
+    GetPage(
       name: test,
       page: () => const TextEditorPage(),
     ),
@@ -324,23 +333,18 @@ class AppRoutes {
       page: () => const JobDetailsView(),
     ),
 
-    // Edit Provider Profile
-    // GetPage(
-    //   name: editProviderProfile,
-    //   page: () => const EditProviderProfileView(),
-    // ),
-    // GetPage(
-    //   name: addProviderService,
-    //   page: () => const AddProviderServiceView(),
-    // ),
-    // GetPage(
-    //   name: editProviderService,
-    //   page: () => const EditProviderServiceView(),
-    // ),
-
-    // GetPage(
-    //   name: providerContacts,
-    //   page: () => const ProviderContactsView(),
-    // ),
+    // payment method
+    GetPage(
+      name: paymentMethod,
+      page: () => const ManagePayment(),
+    ),
+    GetPage(
+      name: addPaymentMethod,
+      page: () => AddPaymentMethod(),
+    ),
+    GetPage(
+      name: editPaymentMethod,
+      page: () =>  EditPaymentMethod(),
+    ),
   ];
 }

@@ -112,10 +112,8 @@ class ApiConstance {
   static String getProviderProfileDetailsWaiting(String id) =>
       'providers/?user_id=$id';
 
-    static String getProviderProfileDetails(String id) =>
-      'providers/$id';
+  static String getProviderProfileDetails(String id) => 'providers/$id';
   static String getProviderServices(id) => 'providers/$id/services';
-  // static String getJobsInProvider(String ) => 'providers/$id/services';
   static String getProviderMenu(String id) => 'providers/$id';
   static String getServicesInCategory(String id) =>
       'specializations/$id/services';
@@ -154,8 +152,7 @@ class ApiConstance {
   static String editDescription(id) => "store/product-description-contents/$id";
   static String deleteDescription(id) =>
       "store/product-description-contents/$id";
-  // static String deleteDescription(id) =>
-  //     "store/product-description-contents/$id";
+
   static String getAllContents = "store/bag-contents";
   static String deleteContents(id) => "store/product-bag-content/$id";
   static String addBagContents = "store/product-bag-content";
@@ -183,19 +180,24 @@ class ApiConstance {
 
   // Notifications
   static String getNotifications = 'notifications';
-
   static String updateProviderProfile(String id) => "providers/$id/update";
-
   static String deleteProviderService(String id) => "provider-service/$id";
 
   // provider-service-features
   static const String addProviderServiceFeatures = "provider-service-features";
   static String deleteProviderServiceFeature(String id) =>
       "provider-service-features/$id";
-
   static String getProviderContacts(String providerId) =>
       "provider/$providerId/contacts";
   static const String addOrUpdateProviderContacts = "provider-contacts";
-
   static const String jobs = "jobs";
+
+  // payment methods
+  static const String getPaymentMethods = "packages";
+  static const String addPaymentPackage = 'packages';
+  static String editPaymentPackage(id) => 'packages/$id';
+  static String deletePaymentPackage(id) => 'packages/$id';
+  static const String getPaymentMonths = "months-plans";
+  static const String addPaymentMonths = "months-plans";
+  static String deletePaymentMonth(id) => 'months-plans/$id';
 }

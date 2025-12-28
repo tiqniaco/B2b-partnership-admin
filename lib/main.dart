@@ -17,7 +17,6 @@ void main() async {
       );
     }
   }
-
   await initialServices();
   tz.initializeTimeZones();
   runApp(const B2BApp());

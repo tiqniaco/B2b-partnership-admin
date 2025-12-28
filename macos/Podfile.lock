@@ -223,15 +223,15 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
-  audioplayers_darwin: 4f9ca89d92d3d21cec7ec580e78ca888e5fb68bd
-  awesome_notifications: 7818a3dbad4836238a68df439c06981d9f0b276c
-  connectivity_plus: 4adf20a405e25b42b9c9f87feff8f4b6fde18a4e
-  file_picker: 7584aae6fa07a041af2b36a2655122d42f578c1a
-  file_selector_macos: 6280b52b459ae6c590af5d78fc35c7267a3c4b31
+  audioplayers_darwin: 4027b33a8f471d996c13f71cb77f0b1583b5d923
+  awesome_notifications: 428f5c15a700b117418aed09e29c21c5806fcf69
+  connectivity_plus: 0a976dfd033b59192912fa3c6c7b54aab5093802
+  file_picker: e716a70a9fe5fd9e09ebc922d7541464289443af
+  file_selector_macos: cc3858c981fe6889f364731200d6232dac1d812d
   Firebase: f07b15ae5a6ec0f93713e30b923d9970d144af3e
-  firebase_auth: 87ea88759d0282ccf1e2afe96f88ff3c07547938
-  firebase_core: e054894ab56033ef9bcbe2d9eac9395e5306e2fc
-  firebase_messaging: b963381167870c720103dbc1473284f9af44fefd
+  firebase_auth: f7f3fc5330acb24faf314a400d5814c91d90aaa9
+  firebase_core: bab38c0ca089203d6012b1ab19d744c30923b96e
+  firebase_messaging: 1bca1f444f7453ba4a1dcf5cf8ffc6474a178d4b
   FirebaseAppCheckInterop: f734c802f21fe1da0837708f0f9a27218c8a4ed0
   FirebaseAuth: 4a2aed737c84114a9d9b33d11ae1b147d6b94889
   FirebaseAuthInterop: 858e6b754966e70740a4370dd1503dfffe6dbb49
@@ -240,22 +240,22 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: d7f5a043c2cd01a08103ab586587c1468047bca6
   FirebaseInstallations: ae9f4902cb5bf1d0c5eaa31ec1f4e5495a0714e2
   FirebaseMessaging: d33971b7bb252745ea6cd31ab190d1a1df4b8ed5
-  flutter_local_notifications: 4bf37a31afde695b56091b4ae3e4d9c7a7e6cda0
+  flutter_local_notifications: 4ccab5b7a22835214a6672e3f9c5e8ae207dab36
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  google_sign_in_ios: 205742c688aea0e64db9da03c33121694a365109
+  google_sign_in_ios: 4bb0e529b167cadc6ac785b6ed943c0a0a4cc1c9
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleSignIn: c7f09cfbc85a1abf69187be091997c317cc33b77
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMAppAuth: 217a876b249c3c585a54fd6f73e6b58c4f5c4238
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  quill_native_bridge_macos: 2b005cb56902bb740e0cd9620aa399dfac6b4882
-  record_macos: 43194b6c06ca6f8fa132e2acea72b202b92a0f5b
-  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
-  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
-  url_launcher_macos: 0fba8ddabfc33ce0a9afe7c5fef5aab3d8d2d673
+  quill_native_bridge_macos: 3a5f378bc757eb92825193853020b759b56cbb2c
+  record_macos: 4440ca269ad3b870ebb1965297a365d558f0c520
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
+  url_launcher_macos: c82c93949963e55b228a30115bd219499a6fe404
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
 

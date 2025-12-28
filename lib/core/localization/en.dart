@@ -237,6 +237,7 @@ const Map<String, String> en = {
       'Are you sure you want to logout?': 'Are you sure you want to logout?',
   "Close": "Close",
   "Call": "Call",
+  "Manage Payment Methods": "Manage Payment Methods",
 
   // edit profile
   "uploading image is optional": "uploading image is optional",

@@ -215,6 +215,7 @@ const Map<String, String> ar = {
   'Session title': 'عنوان الجلسة',
   'edit content': 'تعديل المحتوى',
   'Enter description': 'ادخل الوصف',
+  "Manage Payment Methods": "ادارة طرق الدفع",
 
   // auth
   "Welcome Back!": "مرحبا بعودتك!",
