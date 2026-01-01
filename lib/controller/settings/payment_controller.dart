@@ -37,6 +37,7 @@ class PaymentController extends GetxController {
   // New boolean variables for switches
   bool isTrial = false;
   bool isActive = true;
+  bool isPopular = false;
 
   List<PaymentPackage> packages = [];
   List<PaymentMonths> monthsList = [];
@@ -86,6 +87,11 @@ class PaymentController extends GetxController {
 
   void toggleActive(bool value) {
     isActive = value;
+    update();
+  }
+
+  void togglePopular(bool value) {
+    isPopular = value;
     update();
   }
 
@@ -147,6 +153,7 @@ class PaymentController extends GetxController {
             "is_trial": isTrial ? 1 : 0,
             "trial_days": trailsDaysController.text,
             "is_active": isActive ? 1 : 0,
+            "is_popular": isPopular ? 1 : 0,
           },
           path: ApiConstance.addPaymentPackage,
           fromJson: (json) {

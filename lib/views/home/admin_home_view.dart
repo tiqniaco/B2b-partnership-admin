@@ -112,6 +112,10 @@ class _AdminHomeViewState extends State<AdminHomeView>
                       Colors.teal, "Locations".tr, CupertinoIcons.map_fill, () {
                     Get.toNamed(AppRoutes.manageLocations);
                   }),
+                  blockWidget(Colors.orange, "ISO".tr, CupertinoIcons.globe,
+                      () {
+                    Get.toNamed(AppRoutes.isoCertifications);
+                  }),
                 ],
               ),
               Gap(50)

@@ -200,4 +200,12 @@ class ApiConstance {
   static const String getPaymentMonths = "months-plans";
   static const String addPaymentMonths = "months-plans";
   static String deletePaymentMonth(id) => 'months-plans/$id';
+
+  // iso
+  static const String iso = "iso";
+  static const String isoIncluded = "iso-includeds";
+  static const String isoBenefits = "iso-benfits";
+  static String isoWithId(id) => "iso/$id";
+  static String isoIncludedWithId(id) => "iso-includeds/$id";
+  static String isoBenefitsWithId(id) => "iso-benfits/$id";
 }

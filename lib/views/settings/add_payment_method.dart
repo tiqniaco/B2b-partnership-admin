@@ -59,7 +59,7 @@ class AddPaymentMethod extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Gap(12),
+                      Gap(16),
                       PaymentMonthsWidget(
                         months: controller.monthsList,
                       ),
@@ -202,6 +202,31 @@ class AddPaymentMethod extends StatelessWidget {
                           ),
                         ],
                       ),
+                      Gap(16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Is Popular".tr,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.sp,
+                            ),
+                          ),
+                          Switch(
+                            value: controller.isPopular,
+                            onChanged: (value) {
+                              controller.togglePopular(value);
+                            },
+                            inactiveThumbColor: Colors.grey,
+                            trackOutlineColor:
+                                WidgetStatePropertyAll(Colors.grey),
+                            trackOutlineWidth: WidgetStatePropertyAll(1),
+                            activeColor: Colors.indigo,
+                          ),
+                        ],
+                      ),
+
                       Gap(24),
 
                       CustomLoadingButton(

@@ -1,3 +1,7 @@
+import 'package:b2b_partnership_admin/views/iso/add_iso_view.dart';
+import 'package:b2b_partnership_admin/views/iso/certification_details_view.dart';
+import 'package:b2b_partnership_admin/views/iso/edit_iso_view.dart';
+import 'package:b2b_partnership_admin/views/iso/iso_certifications_view.dart';
 import 'package:b2b_partnership_admin/views/jobs/jobs_view.dart';
 import 'package:b2b_partnership_admin/views/manage_categories/manage_categories_view.dart';
 import 'package:b2b_partnership_admin/views/manage_users/client_profile_view.dart';
@@ -138,6 +142,12 @@ class AppRoutes {
   static const String paymentMethod = '/paymentMethod';
   static const String addPaymentMethod = '/addPaymentMethod';
   static const String editPaymentMethod = '/editPaymentMethod';
+
+  //iso
+  static const String isoCertifications = '/isoCertifications';
+  static const String isoCertificationDetails = '/isoCertificationDetails';
+  static const String addIso = '/addIso';
+  static const String editIso = '/editIso';
 
 // test
   static const String test = '/test';
@@ -344,7 +354,25 @@ class AppRoutes {
     ),
     GetPage(
       name: editPaymentMethod,
-      page: () =>  EditPaymentMethod(),
+      page: () => EditPaymentMethod(),
+    ),
+
+    // iso
+    GetPage(
+      name: isoCertifications,
+      page: () => const IsoCertificationsView(),
+    ),
+    GetPage(
+      name: isoCertificationDetails,
+      page: () => CertificationDetailsScreen(),
+    ),
+    GetPage(
+      name: addIso,
+      page: () => AddCertificationScreen(),
+    ),
+    GetPage(
+      name: editIso,
+      page: () => EditIsoView(),
     ),
   ];
 }

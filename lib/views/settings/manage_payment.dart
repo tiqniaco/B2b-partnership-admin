@@ -19,7 +19,7 @@ class _ManagePaymentState extends State<ManagePayment> {
     Get.put(PaymentController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Choose Your Plan'),
+        title: const Text('Manage Package'),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
